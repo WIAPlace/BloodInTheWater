@@ -15,7 +15,7 @@ public class PlayerLook : MonoBehaviour
     [SerializeField] [Tooltip("Insert the Scriptable Object Input Reader")]
     private InputReader input;
 
-    [SerializeField] [Tooltip("Mouse Sensitivity")]
+    [SerializeField] [Tooltip("Mouse Sensitivity")] [Range(0f, 300f)]
     private float sensitivity;
 
     private Vector2 mouseInput; // will store the inputs of the mouse

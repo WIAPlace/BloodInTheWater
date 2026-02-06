@@ -201,7 +201,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""id"": ""aee8fec1-ed95-4e0f-beab-aead9dd07c88"",
                     ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""ScaleVector2(x=100,y=100)"",
                     ""groups"": "";Gamepad"",
                     ""action"": ""Look"",
                     ""isComposite"": false,
@@ -209,11 +209,11 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""4c9dfc8d-09d5-4b02-93d8-e4d4516f1b85"",
+                    ""id"": ""db0da561-0921-419f-a529-f0cbc7baf14a"",
                     ""path"": ""<Pointer>/delta"",
                     ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse;Touch"",
+                    ""processors"": ""DeltaTimeScale,ScaleVector2(x=0.1,y=0.1)"",
+                    ""groups"": "";Keyboard&Mouse"",
                     ""action"": ""Look"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
