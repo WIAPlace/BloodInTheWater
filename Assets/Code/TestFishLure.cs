@@ -21,21 +21,30 @@ public class TestFishLure : MonoBehaviour
     private GameObject lurePrefab; // The Prefab for the lure object.
     // make sure not to destroy this.
 
-    //private GameObject lureInstance; 
-    // this will be used to hold the lure in world space, 
-    // its a seprate object from prefab so we can check if it is existing, if so we will delete it on click,
-    // if not we will create on in the location the player is looking.
+    [Header("Rod Variables")]
+    [SerializeField] [Tooltip("Max Cast Distance")]
+    private float castRange;
+
+    [SerializeField] [Tooltip("Cast Variance Range")]
+    private float castVary;
+
+    [SerializeField] [Tooltip("Cast Ping Pong Speed")]
+    private float pongSpeed;
+
+    private bool holdToCast = false; // This bool will tell if the player is holding down the cast trigger, used to see if the cast has occured or not yet.
+
+    private Vector3 castLocation; // worldspace of where the lure will be put at that moment.
 
     private void Start()
     {
         input.InteractEvent += HandleInteract;
+        input.InteractCancelledEvent += HandleInteractCancelled;
         lurePrefab.SetActive(false); // 
     }
 
-
     
-    private void HandleInteract() // When you click the left mouse button
-    { 
+    private void HoldCasting() // While cast trigger is down, this will be activating. 
+    {
         if(lurePrefab.activeSelf)
         { // This will asume the lure has no childern.
             lurePrefab.SetActive(false); // disable Lure
@@ -51,5 +60,22 @@ public class TestFishLure : MonoBehaviour
             lurePrefab.SetActive(true); // activate the lure.
             lurePrefab.transform.position = hit.point; // move the lure to the point that the raycast hit.
         }
+    }
+
+
+    private void CastLure() 
+    {
+        
+    }
+
+    
+    private void HandleInteract() // When you click the left mouse button
+    { 
+        holdToCast = true;
+    }
+    private void HandleInteractCancelled() // when release left mouse
+    {
+        holdToCast = false;
+        CastLure();
     }
 }

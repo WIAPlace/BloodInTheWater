@@ -53,6 +53,7 @@ public class InputReader : ScriptableObject, GameInput.IGamePlayActions, GameInp
     public event Action<Vector2> MoveEvent;
     public event Action<Vector2> LookEvent;
     public event Action InteractEvent;
+    public event Action InteractCancelledEvent;
 
     public event Action PauseEvent;
     public event Action ResumeEvent;
@@ -66,6 +67,10 @@ public class InputReader : ScriptableObject, GameInput.IGamePlayActions, GameInp
         if (context.phase == InputActionPhase.Performed)
         {
             InteractEvent?.Invoke();
+        }
+        if (context.phase == InputActionPhase.Canceled)
+        {
+            InteractCancelledEvent?.Invoke();
         }
     }
 
