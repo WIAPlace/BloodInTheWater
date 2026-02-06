@@ -15,6 +15,7 @@ using UnityEngine.InputSystem;
 /// Edit Purpose:
 /// 
 
+[CreateAssetMenu(menuName = "InputReader")]
 public class InputReader : ScriptableObject, GameInput.IGamePlayActions, GameInput.IUIActions
 {
     private GameInput gameInput;
@@ -26,6 +27,8 @@ public class InputReader : ScriptableObject, GameInput.IGamePlayActions, GameInp
             gameInput=new GameInput();
             gameInput.GamePlay.SetCallbacks(this);
             gameInput.UI.SetCallbacks(this);
+
+            SetGameplay();
         }
     }
     void OnDisable()
@@ -48,13 +51,16 @@ public class InputReader : ScriptableObject, GameInput.IGamePlayActions, GameInp
     }
 
     public event Action<Vector2> MoveEvent;
+    public event Action<Vector2> LookEvent;
     public event Action InteractEvent;
 
     public event Action PauseEvent;
     public event Action ResumeEvent;
 
 
-
+    ///////////////////////////////////////////////////////////////////////////////////////// OnX Methods 
+    /// Called when An input occurs. They should Invoke their related events. 
+    /// Will likley need to be added to when adding more inputs.
     public void OnInteract(InputAction.CallbackContext context)
     { // Interact
         if (context.phase == InputActionPhase.Performed)
@@ -84,5 +90,60 @@ public class InputReader : ScriptableObject, GameInput.IGamePlayActions, GameInp
             ResumeEvent?.Invoke();
             SetGameplay(); // Make it so that only gameplay controls are able to be done.
         }
+    }
+
+    public void OnLook(InputAction.CallbackContext context)
+    {
+        LookEvent?.Invoke(context.ReadValue<Vector2>());
+    }
+
+    public void OnNavigate(InputAction.CallbackContext context)
+    {
+        //throw new NotImplementedException();
+    }
+
+    public void OnSubmit(InputAction.CallbackContext context)
+    {
+        //throw new NotImplementedException();
+    }
+
+    public void OnCancel(InputAction.CallbackContext context)
+    {
+        //throw new NotImplementedException();
+    }
+
+    public void OnPoint(InputAction.CallbackContext context)
+    {
+        //throw new NotImplementedException();
+    }
+
+    public void OnClick(InputAction.CallbackContext context)
+    {
+        //throw new NotImplementedException();
+    }
+
+    public void OnScrollWheel(InputAction.CallbackContext context)
+    {
+        //throw new NotImplementedException();
+    }
+
+    public void OnMiddleClick(InputAction.CallbackContext context)
+    {
+        //throw new NotImplementedException();
+    }
+
+    public void OnRightClick(InputAction.CallbackContext context)
+    {
+        //throw new NotImplementedException();
+    }
+
+    public void OnTrackedDevicePosition(InputAction.CallbackContext context)
+    {
+        //throw new NotImplementedException();
+    }
+
+    public void OnTrackedDeviceOrientation(InputAction.CallbackContext context)
+    {
+        //throw new NotImplementedException();
     }
 }
