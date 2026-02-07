@@ -26,9 +26,6 @@ public class TestFishLure : MonoBehaviour
     [SerializeField] [Tooltip("The Prefab for the Cast Spot Indicator")]
     private GameObject castSpotPrefab; 
 
-    [SerializeField] [Tooltip("Line For Line Rendering under the casting bit")]
-    private LineRenderer lineIndicatior;
-
     [SerializeField] [Tooltip("Layer for Water")]
     private LayerMask waterMask;
 
@@ -73,8 +70,6 @@ public class TestFishLure : MonoBehaviour
             {// if lure is not already activated
                 castSpotPrefab.SetActive(true); // activate the lure.
             }
-            lineIndicatior.enabled = true; // set the line indicator true so it can be seen.
-
             
             //float castVaryRelRange = castVary/2 * (hit.distance/testDivRange); //Cast variance relative range, used for -1/2 itself to posative 1/2 itself.
             float numInRange = Mathf.PingPong(Time.time * pongSpeed, castVary); // return a number between 0 and cast range
@@ -88,7 +83,7 @@ public class TestFishLure : MonoBehaviour
             castSpotPrefab.transform.position = hit.point + forward2D * currentCastValue; 
             // Originating from where raycast was hit, in the direction that is forward to the player, along the line.
         }
-    }
+    } // Need to at some point force this so that the bobber indicator cant exist within a certain range of the player. so its not too close to the boat.
 
 
     private void CastLure() 
@@ -121,7 +116,6 @@ public class TestFishLure : MonoBehaviour
         { // if the cast indicator is around.
             holdToCast = false;
             castSpotPrefab.SetActive(false);
-            lineIndicatior.enabled = false; // set the line indicator false so it cant be seen.
             CastLure();
         }
     }
