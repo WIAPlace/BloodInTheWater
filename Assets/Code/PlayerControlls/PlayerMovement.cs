@@ -62,6 +62,6 @@ public class PlayerMovement : MonoBehaviour
     private void HandleMove(Vector2 dir)
     { // Move direction is = to the movement input
         moveDir = dir;
-        Debug.Log(dir);
+        //Debug.Log(dir); was used to check if we were actualy moving.
     }
 }
