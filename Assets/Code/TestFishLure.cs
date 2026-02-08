@@ -37,8 +37,7 @@ public class TestFishLure : MonoBehaviour
     
 
     private bool holdToCast = false; // This bool will tell if the player is holding down the cast trigger, used to see if the cast has occured or not yet.
-    private bool inRange = false; // checks for if the indicator is in range, if not the bobber wont be placed when left click is let go.
-
+    private bool getInRange = false; // checks for if the indicator is in range, if not the bobber wont be placed when left click is let go.
     private float currentCastValue; // the value of the cast at a certain point
 
     private void Start()
@@ -67,6 +66,7 @@ public class TestFishLure : MonoBehaviour
             if(!castSpotPrefab.activeSelf)
             {// if lure is not already activated
                 castSpotPrefab.SetActive(true); // activate the lure.
+                getInRange=true;
             }
             
             float numInRange = Mathf.PingPong(Time.time * pongSpeed, castVary); // return a number between 0 and cast range
@@ -84,20 +84,20 @@ public class TestFishLure : MonoBehaviour
         else if(castSpotPrefab.activeSelf)
         {
             castSpotPrefab.SetActive(false);
+            getInRange=false;
         }
     } // Need to at some point force this so that the bobber indicator cant exist within a certain range of the player. so its not too close to the boat.
 
 
     private void CastLure() 
     {
-        if (inRange)
+        if (getInRange)
         { 
             lurePrefab.SetActive(true); 
             lurePrefab.transform.position = castSpotPrefab.transform.position; 
             // set the lure position to the position that the indicator used to be.
         }
     }
-
     
     private void HandleInteract() // When you click the left mouse button
     {
@@ -107,13 +107,6 @@ public class TestFishLure : MonoBehaviour
             return;
         }
         holdToCast = true;
-
-        if(castSpotPrefab.activeSelf)
-        { // This will asume the lure has no childern.
-            castSpotPrefab.SetActive(false); // disable Lure
-            return; // End here cause we dont need to do the rest of the script.
-        }// possibly look into Object pooling, might not be usefull now since i decided against just destroying and remaking it every time.
-        castSpotPrefab.SetActive(true);
     }
     private void HandleInteractCancelled() // when release left mouse
     {
@@ -122,6 +115,7 @@ public class TestFishLure : MonoBehaviour
             holdToCast = false;
             castSpotPrefab.SetActive(false);
             CastLure();
+            getInRange = false; // since lure is cast the the get in range is no longer necisarry.
         }
     }
 }

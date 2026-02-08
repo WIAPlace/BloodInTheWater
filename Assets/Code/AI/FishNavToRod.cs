@@ -16,6 +16,8 @@ public class FishNavToRod : MonoBehaviour
     [SerializeField] [Tooltip("The target to move twoards")]
     private Transform target;
 
+    private bool inLureRange; // This will be used to check if the the fish is in the lure range
+
     private NavMeshAgent agent; // the part that makes this AI.
 
     // Start is called before the first frame update
@@ -28,11 +30,17 @@ public class FishNavToRod : MonoBehaviour
     {
         
     }
-    void OnTriggerStay(Collider other)
-    { 
-        //Debug.Log("Stayed");
-        if (target != null) { // move twoards target if it exists.
+    void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("entered");
+        if (target != null)
+        {
             agent.SetDestination(target.position);
         }
+    }
+    void OnTriggerExit(Collider other)
+    {
+        Debug.Log("exited");
+        agent.SetDestination(transform.position);
     }
 }
