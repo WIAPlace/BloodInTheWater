@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.AI;
 /// 
 /// Author: Weston Tollette
 /// Created: 2/6/26
@@ -38,6 +34,7 @@ public class TestFishLure : MonoBehaviour
 
     [SerializeField] [Tooltip("Cast Ping Pong Speed")]
     private float pongSpeed;
+    
 
     private bool holdToCast = false; // This bool will tell if the player is holding down the cast trigger, used to see if the cast has occured or not yet.
 
@@ -71,10 +68,9 @@ public class TestFishLure : MonoBehaviour
                 castSpotPrefab.SetActive(true); // activate the lure.
             }
             
-            //float castVaryRelRange = castVary/2 * (hit.distance/testDivRange); //Cast variance relative range, used for -1/2 itself to posative 1/2 itself.
             float numInRange = Mathf.PingPong(Time.time * pongSpeed, castVary); // return a number between 0 and cast range
             
-            currentCastValue = -castVary/2+numInRange; // Adds the offset for to the number in the range.
+            currentCastValue = -castVary/2 + numInRange; // Adds the offset for to the number in the range.
 
             Vector3 forward3D = transform.forward; // get the forward direction
             Vector3 forward2D = new Vector3 (forward3D.x, 0f, forward3D.z); // Change it so that it is only important on the flat plane
@@ -82,6 +78,7 @@ public class TestFishLure : MonoBehaviour
 
             castSpotPrefab.transform.position = hit.point + forward2D * currentCastValue; 
             // Originating from where raycast was hit, in the direction that is forward to the player, along the line.
+            //Debug.Log(hit.point);
         }
     } // Need to at some point force this so that the bobber indicator cant exist within a certain range of the player. so its not too close to the boat.
 

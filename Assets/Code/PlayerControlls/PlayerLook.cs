@@ -6,43 +6,17 @@ using UnityEngine;
 /// Created: 2/5/26
 /// Purpose: Player Look Controlls (should be attached to a camera)
 /// 
-/// Edited:
-/// Edited By:
-/// Edit Purpose:
+/// Edited: 2/7
+/// Edited By: Weston Tollette
+/// Edit Purpose: the acctual controlls of this were redundent since we have the imput axis controller, and they were causing issues 
+/// so that part has been deleted and now only the mouse erase and lock remain. 
+/// later on this will likley be used for sensitivity settings to change the gain/pits of the input axis stuff.
 /// 
 public class PlayerLook : MonoBehaviour
 {
-    [SerializeField] [Tooltip("Insert the Scriptable Object Input Reader")]
-    private InputReader input;
-
-    [SerializeField] [Tooltip("Mouse Sensitivity")] [Range(0f, 300f)]
-    private float sensitivity;
-
-    private Vector2 mouseInput; // will store the inputs of the mouse
-
-    private float pitch;
-
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-
-        input.LookEvent += HandleLook;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        transform.Rotate(Vector3.up, mouseInput.x * sensitivity * Time.deltaTime); // rotates the objects transform
-
-        pitch -= mouseInput.y * sensitivity * Time.deltaTime; // pitch is for the y axis
-        pitch = Mathf.Clamp(pitch, -80f, 80f); // forces range of look for up and down so you dont do a back flip.
-        transform.localEulerAngles = new Vector3(pitch, transform.localEulerAngles.y, 0f);
-    }
-
-
-    private void HandleLook(Vector2 mouse)
-    {
-        mouseInput = mouse;
     }
 }
