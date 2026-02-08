@@ -6,9 +6,9 @@ using UnityEngine;
 ///     Definitly not final, mainly this will just spawn and despawn it 
 ///     This should be attached to the camera for now
 /// 
-/// Edited:
-/// Edited By:
-/// Edit Purpose:
+/// Edited: 2/8/26
+/// Edited By: Weston Tollette
+/// Edit Purpose: Adding in functionality so that the bobber indicator wont show up if up if raycast hits nothing when it was previously down.
 /// 
 public class TestFishLure : MonoBehaviour
 {
@@ -37,6 +37,7 @@ public class TestFishLure : MonoBehaviour
     
 
     private bool holdToCast = false; // This bool will tell if the player is holding down the cast trigger, used to see if the cast has occured or not yet.
+    private bool inRange = false; // checks for if the indicator is in range, if not the bobber wont be placed when left click is let go.
 
     private float currentCastValue; // the value of the cast at a certain point
 
@@ -80,14 +81,21 @@ public class TestFishLure : MonoBehaviour
             // Originating from where raycast was hit, in the direction that is forward to the player, along the line.
             //Debug.Log(hit.point);
         }
+        else if(castSpotPrefab.activeSelf)
+        {
+            castSpotPrefab.SetActive(false);
+        }
     } // Need to at some point force this so that the bobber indicator cant exist within a certain range of the player. so its not too close to the boat.
 
 
     private void CastLure() 
     {
-        lurePrefab.SetActive(true); 
-        lurePrefab.transform.position = castSpotPrefab.transform.position; 
-        // set the lure position to the position that the indicator used to be.
+        if (inRange)
+        { 
+            lurePrefab.SetActive(true); 
+            lurePrefab.transform.position = castSpotPrefab.transform.position; 
+            // set the lure position to the position that the indicator used to be.
+        }
     }
 
     
