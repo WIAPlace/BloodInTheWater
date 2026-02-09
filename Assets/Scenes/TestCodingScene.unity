@@ -189,6 +189,9 @@ MonoBehaviour:
   waterMask:
     serializedVersion: 2
     m_Bits: 16
+  fishMask:
+    serializedVersion: 2
+    m_Bits: 256
   castRange: 37
   castVary: 13
   pongSpeed: 13
@@ -493,6 +496,7 @@ GameObject:
   - component: {fileID: 96638499}
   - component: {fileID: 96638498}
   - component: {fileID: 96638500}
+  - component: {fileID: 96638502}
   - component: {fileID: 96638501}
   m_Layer: 8
   m_Name: TestFish
@@ -572,7 +576,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ef15b464bdeec5418064918526ed6ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &96638502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 96638497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4975413a8cbb294b898df24acbc3cb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   target: {fileID: 1206339166}
+  lureMask:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1 &243757227
 GameObject:
   m_ObjectHideFlags: 0

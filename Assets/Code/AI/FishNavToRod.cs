@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 /// 
 /// Author: Weston Tollette
-/// Created: 2/7/26
+/// Created: 2/8/26
 /// Purpose: Fish should move twoards the bobber when it is in range.
 /// 
 /// Edited:
@@ -13,8 +13,7 @@ using UnityEngine.AI;
 ///
 public class FishNavToRod : MonoBehaviour
 {
-    [SerializeField] [Tooltip("The target to move twoards")]
-    private Transform target;
+    
 
     private bool inLureRange; // This will be used to check if the the fish is in the lure range
 
@@ -30,17 +29,21 @@ public class FishNavToRod : MonoBehaviour
     {
         
     }
-    void OnTriggerEnter(Collider other)
+    
+    public void InLureZone(Transform targetLure) // utilized by: fish state tracker script to pass the lures transform.
     {
-        Debug.Log("entered");
-        if (target != null)
-        {
-            agent.SetDestination(target.position);
+        if (agent != null && agent.enabled)
+        { // checks to make sure agent exists
+            agent.isStopped = false; // reactivates the agent if its stoped.
+            agent.SetDestination(targetLure.position);
         }
     }
-    void OnTriggerExit(Collider other)
+    public void LureReeledIn()
     {
-        Debug.Log("exited");
-        agent.SetDestination(transform.position);
+        if (agent != null && agent.enabled)
+        { // checks to make sure agent exists
+            agent.isStopped = true; // reactivates the agent if its stoped.
+            agent.SetDestination(transform.position);
+        }
     }
 }
