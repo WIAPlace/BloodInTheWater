@@ -13,7 +13,8 @@ using UnityEngine;
 /// 
 /// Edited: 2/9/26
 /// Edited By: Weston Tollette
-/// Edit Purpose: 
+/// Edit Purpose: This might be dumb, but i would rather not have to do code a second time and am going to change the retrive lure script to work with
+///  the whole fish run if to close thing, its basicly the same with just two diffrences.
 public class TestFishLure : MonoBehaviour
 {
     [SerializeField] [Tooltip("Insert the Scriptable Object Input Reader")]
@@ -41,6 +42,8 @@ public class TestFishLure : MonoBehaviour
 
     [SerializeField] [Tooltip("Cast Ping Pong Speed")]
     private float pongSpeed;
+    [SerializeField] [Tooltip("Max Cast Distance")]
+    private float fearRadius;
     
 
     private bool holdToCast = false; // This bool will tell if the player is holding down the cast trigger, used to see if the cast has occured or not yet.
@@ -105,15 +108,16 @@ public class TestFishLure : MonoBehaviour
         { 
             lurePrefab.SetActive(true); 
             lurePrefab.transform.position = castSpotPrefab.transform.position; 
+            RetrieveLure(lurePrefab.transform.position, fearRadius); // this isnt retriving it thats just what the name was before i modifired stuff.
             // set the lure position to the position that the indicator used to be.
         }
     }
 
-    private void RetrieveLure(Vector3 currentLurePosition) // this will let the fish know they are no longer in lure zone
+    private void RetrieveLure(Vector3 currentLurePosition, float radius) // this will let the fish know they are no longer in lure zone
     {   
         Vector3 lurePos = currentLurePosition; 
         // Get all colliders within the sphere radius at this object's position
-        Collider[] hitColliders = Physics.OverlapSphere(lurePos, lureRadius, fishMask);
+        Collider[] hitColliders = Physics.OverlapSphere(lurePos, radius, fishMask);
         // might want to make this non alloc version.
         
         int i = 0;
@@ -123,7 +127,12 @@ public class TestFishLure : MonoBehaviour
             // Try to get the TargetScript component from the hit object
             FishStateController target = hitColliders[i].GetComponent<FishStateController>();
             
-            if (target != null)
+            if (lurePrefab.activeSelf && target != null) // this should probably be traded out for some kind of event thing
+            {
+                target.BobberSpooked(lurePos); 
+                
+            }
+            else if (target != null)
             {
                 target.LureReeledIn(); 
                 //Debug.Log("Lure Retrived");
@@ -140,7 +149,7 @@ public class TestFishLure : MonoBehaviour
             // will be used to get the lures position right before it is deactivated.
 
             lurePrefab.SetActive(false);
-            RetrieveLure(currentLurePosition); // this will let the fish know they are no longer in lure zone
+            RetrieveLure(currentLurePosition, lureRadius); // this will let the fish know they are no longer in lure zone
             
             return;
         }
