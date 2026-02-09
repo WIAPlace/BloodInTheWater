@@ -11,6 +11,9 @@ using UnityEngine;
 /// Edit Purpose: Adding in functionality so that the bobber indicator wont show up if up if raycast hits nothing when it was previously down.
 ///  Also adding an event cordinator to tell fish within the radius when the bobber is gone.
 /// 
+/// Edited: 2/9/26
+/// Edited By: Weston Tollette
+/// Edit Purpose: 
 public class TestFishLure : MonoBehaviour
 {
     [SerializeField] [Tooltip("Insert the Scriptable Object Input Reader")]
@@ -127,7 +130,6 @@ public class TestFishLure : MonoBehaviour
             }
             i++;
         }
-
     }
     
     private void HandleInteract() // When you click the left mouse button
