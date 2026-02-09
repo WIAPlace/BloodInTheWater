@@ -24,6 +24,8 @@ public class FishStateController : MonoBehaviour
     // though that could likely change if the script gets more complicated.
     // so this will probably work better as a prefab.
 
+    private FishIdleMove idle; // used for fish just wandering around
+
     private enum FishState
     { // helps in knowing what state the fish ought to be in.
         Idle, // Just hanging out doing its thing
@@ -35,6 +37,7 @@ public class FishStateController : MonoBehaviour
     void Start()
     {
         rodNav = GetComponent<FishNavToRod>();
+        idle = GetComponent<FishIdleMove>();
     }
 
     // Update is called once per frame
@@ -55,8 +58,13 @@ public class FishStateController : MonoBehaviour
     {
         if (target != null)
         {
+            if(currentState == FishState.Idle)
+            {
+                idle.IdleStateInactive();
+            }
             currentState = FishState.LureNav;
             rodNav.InLureZone(target); // activates the FishNavToRod script that sets the agents destination
+            
         }
     }
     
@@ -66,6 +74,7 @@ public class FishStateController : MonoBehaviour
         { 
             currentState = FishState.Idle; // change the state back to idle;
             rodNav.LureReeledIn(); // force nav agent to turn of for the moment.
+            idle.IdleStateActive();
         }
     }
 }
