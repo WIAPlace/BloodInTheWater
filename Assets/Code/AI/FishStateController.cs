@@ -71,7 +71,7 @@ public class FishStateController : MonoBehaviour
         if (currentState == FishState.Spooked && ((1 << other.gameObject.layer) & lureMask.value) != 0)
         {
             otherHolder = null; // set this to nothing if they leave the holder.
-            Debug.Log("Exited");
+            //Debug.Log("Exited");
         }
     }
 

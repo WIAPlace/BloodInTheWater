@@ -17,6 +17,6 @@ public class ExitGame : MonoBehaviour
     {
         Application.Quit();
         // testing to make sure it works in the editor.
-        Debug.Log("Game is exiting");  
+        //Debug.Log("Game is exiting");  
     }
 }
