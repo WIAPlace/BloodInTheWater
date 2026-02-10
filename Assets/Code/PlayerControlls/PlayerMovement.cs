@@ -23,8 +23,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] [Tooltip("First Person Camera attached to this so the body moves with the camera")]
     private Transform playerView;
 
+    private float gravity = -9.81f; 
+
     private CharacterController controller;
     private Vector2 moveDir; // Direction the Player is moving at any given time
+    private Vector3 velocity; // speed 
 
     void Start()
     {
@@ -36,7 +39,7 @@ public class PlayerMovement : MonoBehaviour
     {
         RotateToView();
         Move();
-
+        Gravity();
     }
 
     //Movement Method 
@@ -63,5 +66,19 @@ public class PlayerMovement : MonoBehaviour
     { // Move direction is = to the movement input
         moveDir = dir;
         //Debug.Log(dir); was used to check if we were actualy moving.
+    }
+
+    //Gravity
+    private void Gravity()
+    {
+        // Reset velocity when on the ground
+        if (controller.isGrounded && velocity.y < 0) {
+            velocity.y = -2f; // Small downward force to keep grounded
+        }
+
+        // Apply gravity
+        velocity.y += gravity * Time.deltaTime;
+        // Move the controller
+        controller.Move(velocity * Time.deltaTime);
     }
 }
