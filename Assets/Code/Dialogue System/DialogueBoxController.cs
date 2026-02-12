@@ -1,0 +1,87 @@
+using System.Collections;
+using System;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+/// 
+/// Author: Marsahll Turner
+/// Created: 2/12/26
+/// Purpose: Controls the Dialogue Box
+/// 
+/// Edited:
+/// Edited By:
+/// Edit Purpose:
+///
+public class DialogueBoxController : MonoBehaviour
+{
+    public static DialogueBoxController instance;
+
+    [SerializeField] TextMeshProUGUI dialogueText;
+    [SerializeField] TextMeshProUGUI nameText;
+    [SerializeField] CanvasGroup dialogueBox;
+
+    public static event Action OnDialogueStarted;
+    public static event Action OnDialogueEnded;
+    bool skipLineTriggered;
+    public bool OnStart;
+    public string startName;
+    public DialogueAsset startDialogue;
+
+    private void Start() //If OnStart is true, there would be a starting dialogue on Scene start using the startName and startDialogue variables
+    {
+        if (OnStart)
+        {
+            StartDialogue(startDialogue.dialogue, 0, startName);
+        }
+        else
+        {
+            dialogueBox.gameObject.SetActive(false);
+        }
+        
+    }
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+    }
+    // The dialogue
+    public void StartDialogue(string[] dialogue, int startPosition, string name)
+    {
+        nameText.text = name;
+        dialogueBox.gameObject.SetActive(true);
+        StopAllCoroutines();
+        StartCoroutine(RunDialogue(dialogue, startPosition));
+    }
+    //Prints the lines
+    IEnumerator RunDialogue(string[] dialogue, int startPosition)
+    {
+        skipLineTriggered = false;
+        OnDialogueStarted?.Invoke();
+
+        for (int i = startPosition; i < dialogue.Length; i++)
+        {
+            dialogueText.text = dialogue[i];
+            while (skipLineTriggered == false)
+            {
+                // Wait for the current line to be skipped
+                yield return null;
+            }
+            skipLineTriggered = false;
+        }
+
+        OnDialogueEnded?.Invoke();
+        dialogueBox.gameObject.SetActive(false); //Hides box once done
+    }
+
+    public void SkipLine()
+    {
+        skipLineTriggered = true;
+    }
+}

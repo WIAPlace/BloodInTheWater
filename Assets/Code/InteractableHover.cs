@@ -1,6 +1,14 @@
 using UnityEngine;
 using UnityEngine.UI;
-
+/// 
+/// Author: Marsahll Turner
+/// Created: 2/12/26
+/// Purpose: Have a Crosshair Appear When Hovering Over Interactables
+/// 
+/// Edited:
+/// Edited By:
+/// Edit Purpose:
+///
 public class InteractableHover : MonoBehaviour
 {
     public Image crosshairImage;
