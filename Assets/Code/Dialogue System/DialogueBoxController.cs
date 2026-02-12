@@ -51,6 +51,7 @@ public class DialogueBoxController : MonoBehaviour
             Destroy(this);
         }
     }
+
     // The dialogue
     public void StartDialogue(string[] dialogue, int startPosition, string name)
     {
@@ -59,6 +60,7 @@ public class DialogueBoxController : MonoBehaviour
         StopAllCoroutines();
         StartCoroutine(RunDialogue(dialogue, startPosition));
     }
+
     //Prints the lines
     IEnumerator RunDialogue(string[] dialogue, int startPosition)
     {

@@ -54,6 +54,8 @@ public class InputReader : ScriptableObject, GameInput.IGamePlayActions, GameInp
     public event Action<Vector2> LookEvent;
     public event Action InteractEvent;
     public event Action InteractCancelledEvent;
+    public event Action ActivateEvent;
+    public event Action ActivateUIEvent;
 
     public event Action PauseEvent;
     public event Action ResumeEvent;
@@ -94,6 +96,21 @@ public class InputReader : ScriptableObject, GameInput.IGamePlayActions, GameInp
         {
             ResumeEvent?.Invoke();
             SetGameplay(); // Make it so that only gameplay controls are able to be done.
+        }
+    }
+    
+    public void OnActivate(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            ActivateEvent?.Invoke();
+        }
+    }
+    public void OnActivateUI(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            ActivateUIEvent?.Invoke();
         }
     }
 
@@ -151,4 +168,6 @@ public class InputReader : ScriptableObject, GameInput.IGamePlayActions, GameInp
     {
         //throw new NotImplementedException();
     }
+
+    
 }

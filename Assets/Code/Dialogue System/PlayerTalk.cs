@@ -1,24 +1,30 @@
+using System.Runtime.InteropServices;
 using UnityEngine;
 /// 
 /// Author: Marsahll Turner
 /// Created: 2/12/26
 /// Purpose: Allows the Player to start Dialogue with Objects
 /// 
-/// Edited:
-/// Edited By:
-/// Edit Purpose:
+/// Edited: 2/12/26
+/// Edited By: Weston Tollette
+/// Edit Purpose: added input system reader stuff.
 ///
 public class PlayerTalk : MonoBehaviour
 {
+    [SerializeField] [Tooltip("Insert the Scriptable Object Input Reader")]
+    private InputReader input; // used for input reader stuff.
     [SerializeField] float talkDistance = 2.6f; //Should be the same distance as the interactable hover
     bool inConversation;
 
+    private void Start()
+    {
+        input.ActivateEvent += HandleActivate;
+        input.ActivateEvent += HandleActivate;
+    }
+
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            Interact();
-        }
+        
     }
 
     void Interact()
@@ -42,11 +48,13 @@ public class PlayerTalk : MonoBehaviour
     void JoinConversation()
     {
         inConversation = true;
+        input.SetUI();
     }
 
     void LeaveConversation()
     {
         inConversation = false;
+        input.SetGameplay();
     }
 
     private void OnEnable()
@@ -59,5 +67,10 @@ public class PlayerTalk : MonoBehaviour
     {
         DialogueBoxController.OnDialogueStarted -= JoinConversation;
         DialogueBoxController.OnDialogueEnded -= LeaveConversation;
+    }
+
+    private void HandleActivate() // on activate (press E) something will be interacted with.
+    {
+        Interact();
     }
 }
