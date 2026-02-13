@@ -11,7 +11,7 @@ using UnityEngine;
 /// Edited By:
 /// Edit Purpose:
 /// 
-public abstract class QuickTime_Abstract : MonoBehaviour
+public abstract class QuickTimeData_Abstract : MonoBehaviour
 {
     [SerializeField] [Tooltip("Length of the Bar")]
     protected float barLength;
@@ -21,9 +21,13 @@ public abstract class QuickTime_Abstract : MonoBehaviour
     protected float QTSpeed;
     [SerializeField] [Tooltip("How long should the allowable time be for this")]
     protected float QTLength;
-    protected float playerPoint; // indicator for where the player will hit.
 
-    protected bool InZone;
-
+    public QuickTimeData_Abstract(QuickTimeData_Abstract other)
+    {
+        this.barLength=other.barLength;
+        this.hitZone = other.hitZone;
+        this.QTSpeed = other.QTSpeed;
+        this.QTLength = other.QTLength;
+    }
 
 }

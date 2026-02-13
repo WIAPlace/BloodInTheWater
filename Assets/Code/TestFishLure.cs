@@ -134,8 +134,7 @@ public class TestFishLure : MonoBehaviour
             }
             else if (target != null)
             {
-                target.LureReeledIn(); 
-                //Debug.Log("Lure Retrived");
+                target.LureReeledIn();  // we should get the data here
             }
             i++;
         }

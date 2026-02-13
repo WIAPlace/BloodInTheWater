@@ -10,7 +10,10 @@ using UnityEngine;
 /// Edited By:
 /// Edit Purpose:
 /// 
-public class QuickTime_Basic : QuickTime_Abstract
+public class QuickTimeData_Basic : QuickTimeData_Abstract
 {
-    
+    public QuickTimeData_Basic(QuickTimeData_Abstract other) : base(other)
+    {
+        
+    }
 }

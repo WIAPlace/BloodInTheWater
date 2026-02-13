@@ -23,6 +23,7 @@ public class FishStateController : MonoBehaviour
     // we could just add it via script if it this becomes a hassle. 
     // though that could likely change if the script gets more complicated.
     // so this will probably work better as a prefab.
+    private QuickTimeData_Abstract fishData;
 
     private FishIdleMove idle; // used for fish just wandering around
     private ScaredFish scare; // used for the spooked state of fish.
@@ -33,7 +34,8 @@ public class FishStateController : MonoBehaviour
     { // helps in knowing what state the fish ought to be in.
         Idle, // Just hanging out doing its thing
         LureNav, // On the move going after the lure.
-        Spooked
+        Spooked, // scared away
+        Hooked // fish is on the line
     }
 
     private FishState currentState = FishState.Idle; // starts off in idle.
@@ -43,6 +45,7 @@ public class FishStateController : MonoBehaviour
         rodNav = GetComponent<FishNavToRod>();
         idle = GetComponent<FishIdleMove>();
         scare = GetComponent<ScaredFish>();
+        fishData = GetComponent<QuickTimeData_Abstract>();
     }
 
     // Update is called once per frame
@@ -60,7 +63,7 @@ public class FishStateController : MonoBehaviour
                 LureNavState(); // keeping this seprate cause i expect i might use it outside of this. wes 2/8
             }
             else // if current state is = spooked
-            {
+            { // save the holder to be refrenced after it is done being scared.
                 otherHolder = other;
                 //Debug.Log("Entered");
             }
@@ -72,6 +75,14 @@ public class FishStateController : MonoBehaviour
         {
             otherHolder = null; // set this to nothing if they leave the holder.
             //Debug.Log("Exited");
+        }
+    }
+    // on contact with bobber.
+    void OnCollisionEnter(Collision collision)
+    {
+        if (((1 << collision.gameObject.layer) & lureMask.value) != 0)
+        {
+            currentState = FishState.Hooked;
         }
     }
 
@@ -95,8 +106,15 @@ public class FishStateController : MonoBehaviour
         { 
             rodNav.LureReeledIn(); // force nav agent to turn of for the moment.
         }
+        if(currentState == FishState.Hooked)
+        {
+            // return the fish qt data some how.
+        }
+        else
+        {
         currentState = FishState.Idle; // change the state back to idle;
         idle.IdleStateActive();
+        }
         
     }
 
