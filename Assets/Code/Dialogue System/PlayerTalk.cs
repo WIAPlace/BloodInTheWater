@@ -19,7 +19,7 @@ public class PlayerTalk : MonoBehaviour
     private void Start()
     {
         input.ActivateEvent += HandleActivate;
-        input.ActivateEvent += HandleActivate;
+        input.ActivateUIEvent += HandleActivate;
     }
 
     void Update()

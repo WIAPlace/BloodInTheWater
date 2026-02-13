@@ -43,11 +43,13 @@ public class InputReader : ScriptableObject, GameInput.IGamePlayActions, GameInp
     {
         gameInput.GamePlay.Enable();
         gameInput.UI.Disable();
+        //Debug.Log("Gameplay");
     }
     public void SetUI()
     {
         gameInput.GamePlay.Disable();
         gameInput.UI.Enable();
+        //Debug.Log("UI");
     }
 
     public event Action<Vector2> MoveEvent;
