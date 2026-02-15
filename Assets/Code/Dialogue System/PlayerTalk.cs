@@ -39,7 +39,7 @@ public class PlayerTalk : MonoBehaviour
             {
                 if (hitInfo.collider.gameObject.TryGetComponent(out DialogueObject npc))
                 {
-                    DialogueBoxController.instance.StartDialogue(npc.dialogueAsset.dialogue, npc.StartPosition, npc.npcName);
+                    DialogueBoxController.instance.StartDialogue(npc.dialogueAsset.dialogue,npc.dialogueAsset.audioclip, npc.StartPosition, npc.npcName);
                 }
             }
         }

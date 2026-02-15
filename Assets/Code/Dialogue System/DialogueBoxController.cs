@@ -8,9 +8,9 @@ using UnityEngine.UI;
 /// Created: 2/12/26
 /// Purpose: Controls the Dialogue Box
 /// 
-/// Edited:
-/// Edited By:
-/// Edit Purpose:
+/// Edited: Marshall Turner
+/// Edited By: 2/15/2026
+/// Edit Purpose: Adding typewriter text and audio
 ///
 public class DialogueBoxController : MonoBehaviour
 {
@@ -27,11 +27,15 @@ public class DialogueBoxController : MonoBehaviour
     public string startName;
     public DialogueAsset startDialogue;
 
+    public AudioSource audioSource;
+    //Typing Speed
+    float charactersPerSecond = 25;
+
     private void Start() //If OnStart is true, there would be a starting dialogue on Scene start using the startName and startDialogue variables
     {
         if (OnStart)
         {
-            StartDialogue(startDialogue.dialogue, 0, startName);
+            StartDialogue(startDialogue.dialogue,startDialogue.audioclip, 0, startName);
         }
         else
         {
@@ -53,23 +57,30 @@ public class DialogueBoxController : MonoBehaviour
     }
 
     // The dialogue
-    public void StartDialogue(string[] dialogue, int startPosition, string name)
+    public void StartDialogue(string[] dialogue,AudioClip[] audioclip, int startPosition, string name)
     {
         nameText.text = name;
         dialogueBox.gameObject.SetActive(true);
         StopAllCoroutines();
-        StartCoroutine(RunDialogue(dialogue, startPosition));
+        StartCoroutine(RunDialogue(dialogue,audioclip, startPosition));
     }
 
     //Prints the lines
-    IEnumerator RunDialogue(string[] dialogue, int startPosition)
+    IEnumerator RunDialogue(string[] dialogue,AudioClip[] audioclip, int startPosition)
     {
         skipLineTriggered = false;
         OnDialogueStarted?.Invoke();
 
         for (int i = startPosition; i < dialogue.Length; i++)
         {
+            //Text
             dialogueText.text = dialogue[i];
+            StartCoroutine(TypeTextUncapped(dialogueText.text));
+
+            //Audio
+            audioSource.clip = audioclip[i];
+            audioSource.Play();
+
             while (skipLineTriggered == false)
             {
                 // Wait for the current line to be skipped
@@ -85,5 +96,30 @@ public class DialogueBoxController : MonoBehaviour
     public void SkipLine()
     {
         skipLineTriggered = true;
+    }
+    //Typewriter Text
+    IEnumerator TypeTextUncapped(string line)
+    {
+        float timer = 0;
+        float interval = 1 / charactersPerSecond;
+        string textBuffer = null;
+        char[] chars = line.ToCharArray();
+        int i = 0;
+
+        while (i < chars.Length)
+        {
+            if (timer < Time.deltaTime)
+            {
+                textBuffer += chars[i];
+                dialogueText.text = textBuffer;
+                timer += interval;
+                i++;
+            }
+            else
+            {
+                timer -= Time.deltaTime;
+                yield return null;
+            }
+        }
     }
 }
