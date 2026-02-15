@@ -10,10 +10,11 @@ using UnityEngine;
 /// Edited By:
 /// Edit Purpose:
 /// 
-public class QuickTimeData_Basic : QuickTimeData_Abstract
+public class QuickTimeData_BasicFish : QuickTimeData_Abstract
 {
-    public QuickTimeData_Basic(QuickTimeData_Abstract other) : base(other)
+    private float fishLength;
+    public QuickTimeData_BasicFish(QuickTimeData_BasicFish other) : base(other)
     {
-        
+        this.fishLength = other.fishLength; 
     }
 }

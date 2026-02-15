@@ -106,15 +106,10 @@ public class FishStateController : MonoBehaviour
         { 
             rodNav.LureReeledIn(); // force nav agent to turn of for the moment.
         }
-        if(currentState == FishState.Hooked)
-        {
-            // return the fish qt data some how.
-        }
-        else
-        {
+        
         currentState = FishState.Idle; // change the state back to idle;
         idle.IdleStateActive();
-        }
+        
         
     }
 
