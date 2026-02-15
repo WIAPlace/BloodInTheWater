@@ -92,7 +92,26 @@ public class QuickTimeController_Player : MonoBehaviour
     private void Hooked() // activated when the fish is hooked.
     {
         // (set off some animation for the rod).
-        timeStarted = true;
-        inHit = qte.CheckInRange(currentQTData.GetHitZoneMin(0),currentQTData.GetHitZoneMax(0),playerPoint);
+
+        // Set controls to Minigame State
+
+        timeStarted = true; // keep track of time.
+        
+        // set up minigame bar
+        qte.InstanceUI(); // makes ui seeable on screen
+        qte.SetRedArea(currentQTData.GetBarLength()); // sets the red area to bar length of the fish data 
+        qte.SetHitZone(currentQTData.GetHitZoneMin(0),currentQTData.GetHitZoneMax(0));
+        
+
+        // begin minigame
+
+        //Start corutine for the time elapsed
+
+
     }
+
+
+
+
+    //inHit = qte.CheckInRange(currentQTData.GetHitZoneMin(0),currentQTData.GetHitZoneMax(0),playerPoint);
 }   

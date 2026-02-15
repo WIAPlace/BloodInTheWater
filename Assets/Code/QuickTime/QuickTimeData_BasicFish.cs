@@ -17,4 +17,9 @@ public class QuickTimeData_BasicFish : QuickTimeData_Abstract
     {
         this.fishLength = other.fishLength; 
     }
+
+    public override void SendData() // sends the data to the Rod scipt.
+    {
+        qtcPlayer.SetData(this);
+    }
 }

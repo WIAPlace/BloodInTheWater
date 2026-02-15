@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 701674220553937572}
   - component: {fileID: 6055549306306161453}
   - component: {fileID: 555607246259464934}
+  - component: {fileID: 1407686103430132817}
   m_Layer: 8
   m_Name: TestFish
   m_TagString: Untagged
@@ -137,6 +138,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FearTimer: 8
   testlocation: {fileID: 0}
+--- !u!114 &1407686103430132817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2540850831461931456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9ed717cec850d6478044773965b719c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  qtcPlayer: {fileID: 0}
+  barLength: 400
+  hitZoneMin:
+  - 20
+  hitZoneMax:
+  - 50
+  qtSpeed: 1
+  qtLength: 100
+  type: 0
 --- !u!1001 &6870379017648183807
 PrefabInstance:
   m_ObjectHideFlags: 0

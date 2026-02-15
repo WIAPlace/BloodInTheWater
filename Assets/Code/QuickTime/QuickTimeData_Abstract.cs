@@ -46,7 +46,7 @@ public abstract class QuickTimeData_Abstract : MonoBehaviour
     {
         qtcPlayer.SetType(type); // set it to the current type
     }
-    public void SendData() // sends the data to the Rod scipt.
+    public virtual void SendData() // sends the data to the Rod scipt.
     {
         qtcPlayer.SetData(this);
     }
@@ -65,6 +65,10 @@ public abstract class QuickTimeData_Abstract : MonoBehaviour
     public float GetHitZoneMax(int i)
     {
         return hitZoneMax[i];
+    }
+    public float GetBarLength()
+    {
+        return barLength;
     }
 
 }

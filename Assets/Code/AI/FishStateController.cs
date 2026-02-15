@@ -83,6 +83,7 @@ public class FishStateController : MonoBehaviour
         if (((1 << collision.gameObject.layer) & lureMask.value) != 0)
         {
             currentState = FishState.Hooked;
+            fishData.SendData();
         }
     }
 

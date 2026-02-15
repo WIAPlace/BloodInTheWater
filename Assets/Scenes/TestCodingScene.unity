@@ -347,7 +347,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   input: {fileID: 11400000, guid: 23c146efed111744088e5a06907694b3, type: 2}
-  lure: {fileID: 0}
+  lure: {fileID: 23582701}
+  qte: {fileID: 11400000, guid: f2e9601c6ba308b43a2a58e1f874297d, type: 2}
 --- !u!1 &48970549
 GameObject:
   m_ObjectHideFlags: 0
@@ -656,6 +657,11 @@ PrefabInstance:
       propertyPath: testlocation
       value: 
       objectReference: {fileID: 787570451}
+    - target: {fileID: 1407686103430132817, guid: 678002f5792ac714a9b2bbfb7eb50514,
+        type: 3}
+      propertyPath: qtcPlayer
+      value: 
+      objectReference: {fileID: 23582706}
     - target: {fileID: 2540850831461931456, guid: 678002f5792ac714a9b2bbfb7eb50514,
         type: 3}
       propertyPath: m_Name
@@ -734,6 +740,11 @@ PrefabInstance:
       propertyPath: testlocation
       value: 
       objectReference: {fileID: 787570451}
+    - target: {fileID: 1407686103430132817, guid: 678002f5792ac714a9b2bbfb7eb50514,
+        type: 3}
+      propertyPath: qtcPlayer
+      value: 
+      objectReference: {fileID: 23582706}
     - target: {fileID: 2540850831461931456, guid: 678002f5792ac714a9b2bbfb7eb50514,
         type: 3}
       propertyPath: m_Name
@@ -975,31 +986,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1364786901}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &981032987 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2540850831461931456, guid: 678002f5792ac714a9b2bbfb7eb50514,
-    type: 3}
-  m_PrefabInstance: {fileID: 6431999584610546080}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &981032988
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 981032987}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9ed717cec850d6478044773965b719c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  qtcPlayer: {fileID: 0}
-  barLength: 0
-  hitZoneMin: []
-  hitZoneMax: []
-  qtSpeed: 0
-  qtLength: 0
-  type: 0
 --- !u!1 &1126632185
 GameObject:
   m_ObjectHideFlags: 0
@@ -1370,6 +1356,11 @@ PrefabInstance:
       propertyPath: testlocation
       value: 
       objectReference: {fileID: 787570451}
+    - target: {fileID: 1407686103430132817, guid: 678002f5792ac714a9b2bbfb7eb50514,
+        type: 3}
+      propertyPath: qtcPlayer
+      value: 
+      objectReference: {fileID: 23582706}
     - target: {fileID: 2540850831461931456, guid: 678002f5792ac714a9b2bbfb7eb50514,
         type: 3}
       propertyPath: m_Name
@@ -1909,6 +1900,11 @@ PrefabInstance:
       propertyPath: testlocation
       value: 
       objectReference: {fileID: 787570451}
+    - target: {fileID: 1407686103430132817, guid: 678002f5792ac714a9b2bbfb7eb50514,
+        type: 3}
+      propertyPath: qtcPlayer
+      value: 
+      objectReference: {fileID: 23582706}
     - target: {fileID: 2540850831461931456, guid: 678002f5792ac714a9b2bbfb7eb50514,
         type: 3}
       propertyPath: m_Name
@@ -1987,6 +1983,11 @@ PrefabInstance:
       propertyPath: testlocation
       value: 
       objectReference: {fileID: 787570451}
+    - target: {fileID: 1407686103430132817, guid: 678002f5792ac714a9b2bbfb7eb50514,
+        type: 3}
+      propertyPath: qtcPlayer
+      value: 
+      objectReference: {fileID: 23582706}
     - target: {fileID: 2540850831461931456, guid: 678002f5792ac714a9b2bbfb7eb50514,
         type: 3}
       propertyPath: m_Name
@@ -2532,6 +2533,11 @@ PrefabInstance:
       propertyPath: testlocation
       value: 
       objectReference: {fileID: 787570451}
+    - target: {fileID: 1407686103430132817, guid: 678002f5792ac714a9b2bbfb7eb50514,
+        type: 3}
+      propertyPath: qtcPlayer
+      value: 
+      objectReference: {fileID: 23582706}
     - target: {fileID: 2540850831461931456, guid: 678002f5792ac714a9b2bbfb7eb50514,
         type: 3}
       propertyPath: m_Name
@@ -2673,6 +2679,11 @@ PrefabInstance:
       propertyPath: testlocation
       value: 
       objectReference: {fileID: 787570451}
+    - target: {fileID: 1407686103430132817, guid: 678002f5792ac714a9b2bbfb7eb50514,
+        type: 3}
+      propertyPath: qtcPlayer
+      value: 
+      objectReference: {fileID: 23582706}
     - target: {fileID: 2540850831461931456, guid: 678002f5792ac714a9b2bbfb7eb50514,
         type: 3}
       propertyPath: m_Name
@@ -2736,11 +2747,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2540850831461931456, guid: 678002f5792ac714a9b2bbfb7eb50514,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 981032988}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 678002f5792ac714a9b2bbfb7eb50514, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
