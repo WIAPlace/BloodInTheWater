@@ -12,41 +12,27 @@ using UnityEngine.UI;
 [CreateAssetMenu(menuName = "QTE_Basic")]
 public class QuickTimeEvent_Basic : ScriptableObject
 {
-    [SerializeField] [Tooltip("Quick Time User Interface Prefab")]
-    GameObject qtUI;
+    // will need to figure out how to keep this working with screen size.
 
-    public Image redArea;
-    private Image hitZone;
-    private Image playerPoint;
 
-    void OnEnable()
-    { // the odd way of instantiateing these when its in a prefab.
-        Transform redAreaT = qtUI.transform.Find("RedArea");
-        Transform hitZoneT = qtUI.transform.Find("HitZone");
-        Transform playerPointT = qtUI.transform.Find("PlayerPoint");
-        //Debug.Log(redArea);
-        redArea = redAreaT.GetComponent<Image>();
-        hitZone = hitZoneT.GetComponent<Image>();
-        playerPoint = playerPointT.GetComponent<Image>();
-    }
-    public void InstanceUI()
+    public void SetPlayerPoint(float position, Image playerPoint, Image maxBar)
     {
-        Instantiate(qtUI);
+        playerPoint.rectTransform.anchoredPosition = maxBar.rectTransform.anchoredPosition + Vector2.right*position;
     }
 
-    public void SetRedArea(float max)
+    public void SetRedArea(float max, Image redBar)
     {
-        SetBarLength(0,max,redArea);
+        SetBarLength(0,max,redBar);
+        redBar.rectTransform.anchoredPosition = Vector2.left*(max/2) + Vector2.down*Screen.height/2;
     }
 
     // set the are of the hit zone then move it to be between the min and max.
-    public void SetHitZone(float min, float max)
+    public void SetHitZone(float min, float max, Image hitBar, Image maxBar)
     {
-        SetBarLength(min,max,hitZone);
+        SetBarLength(min,max,hitBar);
         float origin = (min+max)/2;
-        hitZone.transform.position = new Vector3(origin,hitZone.transform.position.y,hitZone.transform.position.z);
+        hitBar.rectTransform.anchoredPosition = maxBar.rectTransform.anchoredPosition + Vector2.right*min;
     }
-
 
     private void SetBarLength(float min, float max, Image bar)
     {

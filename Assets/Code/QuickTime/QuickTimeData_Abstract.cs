@@ -25,7 +25,7 @@ public abstract class QuickTimeData_Abstract : MonoBehaviour
     protected float[] hitZoneMin;
     [SerializeField] [Tooltip("Area within that the player will need to hit, Maximum")]
     protected float[] hitZoneMax;
-    [SerializeField] [Tooltip("How fast the player hit indicator should move")]
+    [SerializeField] [Tooltip("How fast the player hit indicator should move. Pixels per Second.")]
     protected float qtSpeed;
     [SerializeField] [Tooltip("How long should the allowable time be for this")]
     protected float qtLength ;

@@ -2,14 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using QuickTime;
+using UnityEngine.UI;
 /// 
 /// Author: Weston Tollette
 /// Created: 2/14/26
 /// Purpose: The thing in the player that will actualy play the minigame.
 /// 
-/// Edited: 
-/// Edited By:
-/// Edit Purpose:
+/// Edited: 2/15/26
+/// Edited By: Weston Tollette
+/// Edit Purpose: Moving the UI to this instead of the Scriptable Object.
 /// 
 public class QuickTimeController_Player : MonoBehaviour
 {
@@ -19,6 +20,13 @@ public class QuickTimeController_Player : MonoBehaviour
     private TestFishLure lure;
     [SerializeField] [Tooltip("Quick Time Event")]
     QuickTimeEvent_Basic qte;
+    [SerializeField] [Tooltip("The quick time mini game bar")]
+    private GameObject qtUI;
+
+    // Quick Time UI
+    private Image redArea;
+    private Image hitZone;
+    private Image playerPointUI;
 
 
     // Time Variables //
@@ -26,7 +34,8 @@ public class QuickTimeController_Player : MonoBehaviour
     private bool timeStarted = false; // should time be going.
     private float playerPoint; // used for determining where the player's  point is. 
     private float currentQTSpeed;
-    private float currentQTLength;
+    private float currentQTLength; // how long the game will last before force quiting
+    private float currentQTBarLength;
     
     
     private bool inHit=false;
@@ -40,20 +49,30 @@ public class QuickTimeController_Player : MonoBehaviour
         {
             lure = GetComponent<TestFishLure>();
         }
-    }  
+        qtUI = Instantiate(qtUI); // Instantiate and alter the instantiated version in scene
+        Transform redAreaT = qtUI.transform.Find("RedArea");
+        Transform hitZoneT = qtUI.transform.Find("HitZone");
+        Transform playerPointT = qtUI.transform.Find("PlayerPoint");
+        //Debug.Log(redArea);
+        redArea = redAreaT.GetComponent<Image>();
+        hitZone = hitZoneT.GetComponent<Image>();
+        playerPointUI = playerPointT.GetComponent<Image>();
+        qtUI.SetActive(false); // dont have it on screen imedietly.
+    }   
 
     void Update()
     {
         if (timeStarted)
         {
             KeepingTime();
+            qte.SetPlayerPoint(timeKeeper,playerPointUI,redArea);
         }
     }
 
     // Quick Time Keeping;
     private void KeepingTime() // This is basicly the Player point position during the minigame. 
     {                           // playerpoint variable only used for when the player hits the button.
-        timeKeeper = Mathf.PingPong(Time.time * currentQTSpeed, currentQTLength);
+        timeKeeper = Mathf.PingPong(Time.time * currentQTSpeed, currentQTBarLength);
     }
 
     public void SetType(QuickTimeType_Enum qtType) // determins what type this is
@@ -66,6 +85,8 @@ public class QuickTimeController_Player : MonoBehaviour
     {   
         currentQTSpeed = currentQTData.GetQTSpeed();
         currentQTLength = currentQTData.GetQTLength();
+        currentQTBarLength = currentQTData.GetBarLength();
+
     }
     public void SetData(QuickTimeData_Abstract data) // Abstract
     {
@@ -98,9 +119,11 @@ public class QuickTimeController_Player : MonoBehaviour
         timeStarted = true; // keep track of time.
         
         // set up minigame bar
-        qte.InstanceUI(); // makes ui seeable on screen
-        qte.SetRedArea(currentQTData.GetBarLength()); // sets the red area to bar length of the fish data 
-        qte.SetHitZone(currentQTData.GetHitZoneMin(0),currentQTData.GetHitZoneMax(0));
+        qtUI.SetActive(true);
+        qte.SetRedArea(currentQTData.GetBarLength(),redArea); // sets the red area to bar length of the fish data 
+        qte.SetHitZone(currentQTData.GetHitZoneMin(0),currentQTData.GetHitZoneMax(0),hitZone,redArea);
+        //qte.SetHitZone(20,100,hitZone,redArea); used for debugging
+        
         
 
         // begin minigame

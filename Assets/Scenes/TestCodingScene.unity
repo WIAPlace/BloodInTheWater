@@ -349,6 +349,7 @@ MonoBehaviour:
   input: {fileID: 11400000, guid: 23c146efed111744088e5a06907694b3, type: 2}
   lure: {fileID: 23582701}
   qte: {fileID: 11400000, guid: f2e9601c6ba308b43a2a58e1f874297d, type: 2}
+  qtUI: {fileID: 7719177798364701187, guid: 184b0163f19e76543b339e2e0f01d71e, type: 3}
 --- !u!1 &48970549
 GameObject:
   m_ObjectHideFlags: 0
@@ -740,6 +741,11 @@ PrefabInstance:
       propertyPath: testlocation
       value: 
       objectReference: {fileID: 787570451}
+    - target: {fileID: 1407686103430132817, guid: 678002f5792ac714a9b2bbfb7eb50514,
+        type: 3}
+      propertyPath: barLength
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 1407686103430132817, guid: 678002f5792ac714a9b2bbfb7eb50514,
         type: 3}
       propertyPath: qtcPlayer
@@ -1358,9 +1364,29 @@ PrefabInstance:
       objectReference: {fileID: 787570451}
     - target: {fileID: 1407686103430132817, guid: 678002f5792ac714a9b2bbfb7eb50514,
         type: 3}
+      propertyPath: qtSpeed
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 1407686103430132817, guid: 678002f5792ac714a9b2bbfb7eb50514,
+        type: 3}
+      propertyPath: barLength
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 1407686103430132817, guid: 678002f5792ac714a9b2bbfb7eb50514,
+        type: 3}
       propertyPath: qtcPlayer
       value: 
       objectReference: {fileID: 23582706}
+    - target: {fileID: 1407686103430132817, guid: 678002f5792ac714a9b2bbfb7eb50514,
+        type: 3}
+      propertyPath: hitZoneMax.Array.data[0]
+      value: 390
+      objectReference: {fileID: 0}
+    - target: {fileID: 1407686103430132817, guid: 678002f5792ac714a9b2bbfb7eb50514,
+        type: 3}
+      propertyPath: hitZoneMin.Array.data[0]
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2540850831461931456, guid: 678002f5792ac714a9b2bbfb7eb50514,
         type: 3}
       propertyPath: m_Name
@@ -1607,7 +1633,6 @@ GameObject:
   - component: {fileID: 1364786901}
   - component: {fileID: 1364786902}
   - component: {fileID: 1364786903}
-  - component: {fileID: 1364786904}
   m_Layer: 0
   m_Name: TestPlayer
   m_TagString: Untagged
@@ -1674,19 +1699,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1364786904
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1364786896}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b2d17d97287484488b876ee252c3abe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  input: {fileID: 11400000, guid: 23c146efed111744088e5a06907694b3, type: 2}
 --- !u!1 &1369801241
 GameObject:
   m_ObjectHideFlags: 0
@@ -2533,6 +2545,11 @@ PrefabInstance:
       propertyPath: testlocation
       value: 
       objectReference: {fileID: 787570451}
+    - target: {fileID: 1407686103430132817, guid: 678002f5792ac714a9b2bbfb7eb50514,
+        type: 3}
+      propertyPath: qtSpeed
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 1407686103430132817, guid: 678002f5792ac714a9b2bbfb7eb50514,
         type: 3}
       propertyPath: qtcPlayer
