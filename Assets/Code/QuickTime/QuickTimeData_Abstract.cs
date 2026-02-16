@@ -42,6 +42,8 @@ public abstract class QuickTimeData_Abstract : MonoBehaviour
         this.qtcPlayer = other.qtcPlayer;
     }
 
+    public abstract void OnHit(); // when you win the minigame this occurs.
+
     public void SendType() // Sends the Enum to the Rod Script for use in switch statement;
     {
         qtcPlayer.SetType(type); // set it to the current type
@@ -70,5 +72,7 @@ public abstract class QuickTimeData_Abstract : MonoBehaviour
     {
         return barLength;
     }
+    
+    
 
 }

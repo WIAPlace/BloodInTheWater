@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 /// 
 /// Author: Weston Tollette
@@ -21,5 +22,10 @@ public class QuickTimeData_BasicFish : QuickTimeData_Abstract
     public override void SendData() // sends the data to the Rod scipt.
     {
         qtcPlayer.SetData(this);
+    }
+
+    public override  void OnHit()
+    {
+        gameObject.SetActive(false);
     }
 }

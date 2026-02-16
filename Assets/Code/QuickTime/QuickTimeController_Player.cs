@@ -143,7 +143,16 @@ public class QuickTimeController_Player : MonoBehaviour
     {
         timeStarted = false; // turn of time keeping for the moment
         playerPoint = timeKeeper; // this will be used to check if its in range.
-        CheckInRange(0);       
+        CheckInRange(0);
+        if (inHit)
+        {
+            // shit, would be nice if we had the fish object.
+            // maybe do a event thing?
+            currentQTData.OnHit();
+            
+        }   
+
+        StartCoroutine(EndQTE(.4f));
     }
 
     private void CheckInRange(int i) // i will be used for array indexing later on
@@ -155,8 +164,18 @@ public class QuickTimeController_Player : MonoBehaviour
         {
             inHit = true;
         }
-        // im not doing an else false for 
+        // im not doing an else false cause it will be easier to just check all then see if its true. maybe?
     }
+
+    private IEnumerator EndQTE(float x) // turns off the qte after a number of seconds.
+    {
+        lure.AutoHandled();
+        yield return new WaitForSeconds(x);
+        qtUI.SetActive(false);
+        input.SetGameplay();
+        
+    }
+
 
 
     //inHit = qte.CheckInRange(currentQTData.GetHitZoneMin(0),currentQTData.GetHitZoneMax(0),playerPoint);

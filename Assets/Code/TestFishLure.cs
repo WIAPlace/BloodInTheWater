@@ -1,5 +1,6 @@
 using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
+using UnityEngine.Rendering;
 /// 
 /// Author: Weston Tollette
 /// Created: 2/6/26
@@ -145,6 +146,10 @@ public class TestFishLure : MonoBehaviour
             i++;
         }
     }
+    public void AutoHandled() // used by QT Controller to bring in the lure;
+    {
+        HandleInteract();
+    }
     
     private void HandleInteract() // When you click the left mouse button
     {
@@ -168,10 +173,10 @@ public class TestFishLure : MonoBehaviour
             castSpotPrefab.SetActive(false);
             CastLure();
             getInRange = false; // since lure is cast the the get in range is no longer necisarry.
-            CastAnim();
+            //CastAnim();
         }
     }
-    
+    /*
     // Animation ////
     void CastAnim()
     {
@@ -180,5 +185,6 @@ public class TestFishLure : MonoBehaviour
             animator.SetTrigger("Cast");
         }
     }
+    */
     
 }

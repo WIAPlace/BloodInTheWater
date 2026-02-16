@@ -42,7 +42,7 @@ public class QuickTimeEvent_Basic : ScriptableObject
     }
 
 
-
+    /* // i think it be more usefull to have this in the main code so that we dont have to return false.
     // Checks if the the player pointer is in the ranger
     public bool CheckInRange(float min, float max, float value)
     { 
@@ -55,4 +55,5 @@ public class QuickTimeEvent_Basic : ScriptableObject
             return false;
         }
     }
+    */
 }
