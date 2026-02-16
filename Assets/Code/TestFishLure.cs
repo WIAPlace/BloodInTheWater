@@ -43,8 +43,13 @@ public class TestFishLure : MonoBehaviour
 
     [SerializeField] [Tooltip("Cast Ping Pong Speed")]
     private float pongSpeed;
+
     [SerializeField] [Tooltip("Max Cast Distance")]
     private float fearRadius;
+
+    [SerializeField] [Tooltip("Fishing rod")]
+    private Animator animator; // might need to be changed depending on how the fishing rod works. 
+    // we can probably just disable the game object instead of destroying it when we put it down. idk might be an idea.
     
 
     private bool holdToCast = false; // This bool will tell if the player is holding down the cast trigger, used to see if the cast has occured or not yet.
@@ -163,8 +168,17 @@ public class TestFishLure : MonoBehaviour
             castSpotPrefab.SetActive(false);
             CastLure();
             getInRange = false; // since lure is cast the the get in range is no longer necisarry.
+            CastAnim();
         }
     }
-
+    
+    // Animation ////
+    void CastAnim()
+    {
+        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Cast"))
+        {
+            animator.SetTrigger("Cast");
+        }
+    }
     
 }

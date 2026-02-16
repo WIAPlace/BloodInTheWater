@@ -58,7 +58,11 @@ public class QuickTimeController_Player : MonoBehaviour
         hitZone = hitZoneT.GetComponent<Image>();
         playerPointUI = playerPointT.GetComponent<Image>();
         qtUI.SetActive(false); // dont have it on screen imedietly.
-    }   
+    }
+    void Start()
+    {
+        input.InteractEventQT += HandelInteractQT;
+    }
 
     void Update()
     {
@@ -112,9 +116,11 @@ public class QuickTimeController_Player : MonoBehaviour
     // On Hook ////////////////////////////////////////////////////////////////////////////////////////////////////
     private void Hooked() // activated when the fish is hooked.
     {
+        inHit=false; // set this to false for the moment, just in case.
         // (set off some animation for the rod).
 
         // Set controls to Minigame State
+        input.SetQuickTime();
 
         timeStarted = true; // keep track of time.
         
@@ -133,7 +139,24 @@ public class QuickTimeController_Player : MonoBehaviour
 
     }
 
+    private void HandelInteractQT()
+    {
+        timeStarted = false; // turn of time keeping for the moment
+        playerPoint = timeKeeper; // this will be used to check if its in range.
+        CheckInRange(0);       
+    }
 
+    private void CheckInRange(int i) // i will be used for array indexing later on
+    {
+        float min = currentQTData.GetHitZoneMin(i);
+        float max = currentQTData.GetHitZoneMax(i);
+
+        if(playerPoint > min && playerPoint < max)
+        {
+            inHit = true;
+        }
+        // im not doing an else false for 
+    }
 
 
     //inHit = qte.CheckInRange(currentQTData.GetHitZoneMin(0),currentQTData.GetHitZoneMax(0),playerPoint);

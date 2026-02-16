@@ -16,7 +16,7 @@ using UnityEngine.InputSystem;
 /// 
 
 [CreateAssetMenu(menuName = "InputReader")]
-public class InputReader : ScriptableObject, GameInput.IGamePlayActions, GameInput.IUIActions
+public class InputReader : ScriptableObject, GameInput.IGamePlayActions, GameInput.IUIActions, GameInput.IQuickTimeActions
 {
     private GameInput gameInput;
 
@@ -27,6 +27,7 @@ public class InputReader : ScriptableObject, GameInput.IGamePlayActions, GameInp
             gameInput=new GameInput();
             gameInput.GamePlay.SetCallbacks(this);
             gameInput.UI.SetCallbacks(this);
+            gameInput.QuickTime.SetCallbacks(this);
 
             SetGameplay();
         }
@@ -43,13 +44,21 @@ public class InputReader : ScriptableObject, GameInput.IGamePlayActions, GameInp
     {
         gameInput.GamePlay.Enable();
         gameInput.UI.Disable();
+        gameInput.QuickTime.Disable();
         //Debug.Log("Gameplay");
     }
     public void SetUI()
     {
         gameInput.GamePlay.Disable();
         gameInput.UI.Enable();
+        gameInput.QuickTime.Disable();
         //Debug.Log("UI");
+    }
+    public void SetQuickTime()
+    {
+        gameInput.GamePlay.Disable();
+        gameInput.UI.Disable();
+        gameInput.QuickTime.Enable();
     }
 
     public event Action<Vector2> MoveEvent;
@@ -58,6 +67,8 @@ public class InputReader : ScriptableObject, GameInput.IGamePlayActions, GameInp
     public event Action InteractCancelledEvent;
     public event Action ActivateEvent;
     public event Action ActivateUIEvent;
+
+    public event Action InteractEventQT; // quick time click
 
     public event Action PauseEvent;
     public event Action ResumeEvent;
@@ -113,6 +124,13 @@ public class InputReader : ScriptableObject, GameInput.IGamePlayActions, GameInp
         if (context.phase == InputActionPhase.Performed)
         {
             ActivateUIEvent?.Invoke();
+        }
+    }
+    public void OnInteractQT(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            InteractEventQT?.Invoke();
         }
     }
 

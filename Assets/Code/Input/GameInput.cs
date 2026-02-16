@@ -894,6 +894,45 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""QuickTime"",
+            ""id"": ""7e8fda5c-874c-4c93-b177-47fced2b7219"",
+            ""actions"": [
+                {
+                    ""name"": ""InteractQT"",
+                    ""type"": ""Button"",
+                    ""id"": ""a6b86a9f-5a2a-4084-b5e7-9e21dfa644e9"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""dd4b01d7-75b1-4822-aeef-07573b4ba27e"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""InteractQT"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9a37989f-59cb-4753-b5b4-b335ce90fbcb"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""InteractQT"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -919,12 +958,16 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
         m_UI_Resume = m_UI.FindAction("Resume", throwIfNotFound: true);
         m_UI_ActivateUI = m_UI.FindAction("ActivateUI", throwIfNotFound: true);
+        // QuickTime
+        m_QuickTime = asset.FindActionMap("QuickTime", throwIfNotFound: true);
+        m_QuickTime_InteractQT = m_QuickTime.FindAction("InteractQT", throwIfNotFound: true);
     }
 
     ~@GameInput()
     {
         UnityEngine.Debug.Assert(!m_GamePlay.enabled, "This will cause a leak and performance issues, GameInput.GamePlay.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_UI.enabled, "This will cause a leak and performance issues, GameInput.UI.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_QuickTime.enabled, "This will cause a leak and performance issues, GameInput.QuickTime.Disable() has not been called.");
     }
 
     /// <summary>
@@ -1353,6 +1396,102 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     /// Provides a new <see cref="UIActions" /> instance referencing this action map.
     /// </summary>
     public UIActions @UI => new UIActions(this);
+
+    // QuickTime
+    private readonly InputActionMap m_QuickTime;
+    private List<IQuickTimeActions> m_QuickTimeActionsCallbackInterfaces = new List<IQuickTimeActions>();
+    private readonly InputAction m_QuickTime_InteractQT;
+    /// <summary>
+    /// Provides access to input actions defined in input action map "QuickTime".
+    /// </summary>
+    public struct QuickTimeActions
+    {
+        private @GameInput m_Wrapper;
+
+        /// <summary>
+        /// Construct a new instance of the input action map wrapper class.
+        /// </summary>
+        public QuickTimeActions(@GameInput wrapper) { m_Wrapper = wrapper; }
+        /// <summary>
+        /// Provides access to the underlying input action "QuickTime/InteractQT".
+        /// </summary>
+        public InputAction @InteractQT => m_Wrapper.m_QuickTime_InteractQT;
+        /// <summary>
+        /// Provides access to the underlying input action map instance.
+        /// </summary>
+        public InputActionMap Get() { return m_Wrapper.m_QuickTime; }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
+        public void Enable() { Get().Enable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
+        public void Disable() { Get().Disable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
+        public bool enabled => Get().enabled;
+        /// <summary>
+        /// Implicitly converts an <see ref="QuickTimeActions" /> to an <see ref="InputActionMap" /> instance.
+        /// </summary>
+        public static implicit operator InputActionMap(QuickTimeActions set) { return set.Get(); }
+        /// <summary>
+        /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <param name="instance">Callback instance.</param>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
+        /// </remarks>
+        /// <seealso cref="QuickTimeActions" />
+        public void AddCallbacks(IQuickTimeActions instance)
+        {
+            if (instance == null || m_Wrapper.m_QuickTimeActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_QuickTimeActionsCallbackInterfaces.Add(instance);
+            @InteractQT.started += instance.OnInteractQT;
+            @InteractQT.performed += instance.OnInteractQT;
+            @InteractQT.canceled += instance.OnInteractQT;
+        }
+
+        /// <summary>
+        /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <remarks>
+        /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
+        /// </remarks>
+        /// <seealso cref="QuickTimeActions" />
+        private void UnregisterCallbacks(IQuickTimeActions instance)
+        {
+            @InteractQT.started -= instance.OnInteractQT;
+            @InteractQT.performed -= instance.OnInteractQT;
+            @InteractQT.canceled -= instance.OnInteractQT;
+        }
+
+        /// <summary>
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="QuickTimeActions.UnregisterCallbacks(IQuickTimeActions)" />.
+        /// </summary>
+        /// <seealso cref="QuickTimeActions.UnregisterCallbacks(IQuickTimeActions)" />
+        public void RemoveCallbacks(IQuickTimeActions instance)
+        {
+            if (m_Wrapper.m_QuickTimeActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        /// <summary>
+        /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
+        /// </summary>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
+        /// </remarks>
+        /// <seealso cref="QuickTimeActions.AddCallbacks(IQuickTimeActions)" />
+        /// <seealso cref="QuickTimeActions.RemoveCallbacks(IQuickTimeActions)" />
+        /// <seealso cref="QuickTimeActions.UnregisterCallbacks(IQuickTimeActions)" />
+        public void SetCallbacks(IQuickTimeActions instance)
+        {
+            foreach (var item in m_Wrapper.m_QuickTimeActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_QuickTimeActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    /// <summary>
+    /// Provides a new <see cref="QuickTimeActions" /> instance referencing this action map.
+    /// </summary>
+    public QuickTimeActions @QuickTime => new QuickTimeActions(this);
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "GamePlay" which allows adding and removing callbacks.
     /// </summary>
@@ -1487,5 +1626,20 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnActivateUI(InputAction.CallbackContext context);
+    }
+    /// <summary>
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "QuickTime" which allows adding and removing callbacks.
+    /// </summary>
+    /// <seealso cref="QuickTimeActions.AddCallbacks(IQuickTimeActions)" />
+    /// <seealso cref="QuickTimeActions.RemoveCallbacks(IQuickTimeActions)" />
+    public interface IQuickTimeActions
+    {
+        /// <summary>
+        /// Method invoked when associated input action "InteractQT" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnInteractQT(InputAction.CallbackContext context);
     }
 }
