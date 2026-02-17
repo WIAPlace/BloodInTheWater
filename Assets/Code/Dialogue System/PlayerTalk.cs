@@ -42,7 +42,7 @@ public class PlayerTalk : MonoBehaviour
         {
             if (Physics.Raycast(new Ray(transform.position, transform.forward), out RaycastHit hitInfo, talkDistance))
             {
-                Debug.Log("Hit");
+                //Debug.Log("Hit");
                 if (hitInfo.collider.gameObject.TryGetComponent(out DialogueObject npc))
                 {
                     DialogueBoxController.instance.StartDialogue(npc.dialogueAsset.dialogue,npc.dialogueAsset.audioclip, npc.StartPosition, npc.npcName);
