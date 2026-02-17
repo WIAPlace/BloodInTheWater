@@ -23,7 +23,7 @@ public class QuickTimeEvent_Basic : ScriptableObject
     public void SetRedArea(float max, Image redBar)
     {
         SetBarLength(0,max,redBar);
-        redBar.rectTransform.anchoredPosition = Vector2.left*(max/2) + Vector2.down*Screen.height/2;
+        redBar.rectTransform.anchoredPosition = Vector2.left*(max/2) + Vector2.down*Screen.height/4;
     }
 
     // set the are of the hit zone then move it to be between the min and max.

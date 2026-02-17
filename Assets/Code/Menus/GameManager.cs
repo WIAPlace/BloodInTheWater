@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     {
         input.PauseEvent += HandlePause;
         input.ResumeEvent += HandleResume;
+        pauseMenu.SetActive(false);
     }
 
     void OnDestroy()
