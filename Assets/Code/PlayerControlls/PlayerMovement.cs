@@ -34,6 +34,10 @@ public class PlayerMovement : MonoBehaviour
         controller = GetComponent<CharacterController>();
         input.MoveEvent += HandleMove;
     }
+    void OnDestroy()
+    {
+        input.MoveEvent -= HandleMove;
+    }
 
     void Update()
     {

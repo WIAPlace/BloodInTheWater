@@ -66,6 +66,11 @@ public class TestFishLure : MonoBehaviour
         castSpotPrefab.SetActive(false); // Set inactive at the start cause why not
         lureRadius = lurePrefab.GetComponent<SphereCollider>().radius; // insures the lure radius is the same as the radius that lure trigger is.
     }
+    private void OnDestroy()
+    {
+        input.InteractEvent -= HandleInteract;
+        input.InteractCancelledEvent -= HandleInteractCancelled;
+    }
 
     void Update()
     {

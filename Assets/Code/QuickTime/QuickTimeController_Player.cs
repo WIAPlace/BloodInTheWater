@@ -63,6 +63,10 @@ public class QuickTimeController_Player : MonoBehaviour
     {
         input.InteractEventQT += HandelInteractQT;
     }
+    void OnDestroy()
+    {
+        input.InteractEventQT -= HandelInteractQT;
+    }
 
     void Update()
     {
