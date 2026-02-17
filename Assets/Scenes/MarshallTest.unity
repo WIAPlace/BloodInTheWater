@@ -921,7 +921,7 @@ Transform:
   m_GameObject: {fileID: 206259760}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.2899817, z: -0, w: 0.9570322}
-  m_LocalPosition: {x: -7.42, y: 11.09, z: 59.54}
+  m_LocalPosition: {x: -7.42, y: 10.91, z: 59.54}
   m_LocalScale: {x: 10, y: 6, z: 6}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4225,7 +4225,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3ce11676336d844459d4902508733224,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1218211256}
+      addedObject: {fileID: 1218211258}
   m_SourcePrefab: {fileID: 100100000, guid: 3ce11676336d844459d4902508733224, type: 3}
 --- !u!1 &1218211253 stripped
 GameObject:
@@ -4249,8 +4249,8 @@ MonoBehaviour:
   repeatStartPosition: 4
   npcName: Lighthouse?
   dialogueAsset: {fileID: 11400000, guid: 6ccb3234a0cb40446a2ac1ea27f885c1, type: 2}
---- !u!64 &1218211256
-MeshCollider:
+--- !u!136 &1218211258
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -4267,10 +4267,11 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
+  serializedVersion: 2
+  m_Radius: 6.7
+  m_Height: 17.6
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: -28.73}
 --- !u!1 &1231117249 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 2eb13ea8b6b494f458ccee6bb9718849,
