@@ -18,7 +18,6 @@ public class ScaredFish : MonoBehaviour
     private NavMeshAgent agent;
     private float fleeDistance = 20f;
     private FishStateController fishState;
-    public GameObject testlocation;
 
     void Start()
     {
@@ -40,7 +39,6 @@ public class ScaredFish : MonoBehaviour
                 // Set the agent's destination to the valid point on the NavMesh
                 agent.SetDestination(hit.position);
                 //Debug.Log(hit.position);
-                testlocation.transform.position = hit.position;
             }
         }
         yield return new WaitForSeconds(FearTimer);

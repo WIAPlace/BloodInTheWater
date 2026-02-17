@@ -1,4 +1,5 @@
 using System.Runtime.InteropServices;
+using UnityEditor.SearchService;
 using UnityEngine;
 /// 
 /// Author: Marsahll Turner
@@ -21,6 +22,11 @@ public class PlayerTalk : MonoBehaviour
         input.ActivateEvent += HandleActivate;
         input.ActivateUIEvent += HandleActivate;
     }
+    void OnDestroy()
+    {
+        input.ActivateEvent -= HandleActivate;
+        input.ActivateUIEvent -= HandleActivate;
+    }
 
     void Update()
     {
@@ -37,9 +43,15 @@ public class PlayerTalk : MonoBehaviour
         {
             if (Physics.Raycast(new Ray(transform.position, transform.forward), out RaycastHit hitInfo, talkDistance))
             {
+                Debug.Log("Hit");
                 if (hitInfo.collider.gameObject.TryGetComponent(out DialogueObject npc))
                 {
                     DialogueBoxController.instance.StartDialogue(npc.dialogueAsset.dialogue,npc.dialogueAsset.audioclip, npc.StartPosition, npc.npcName);
+                }
+                else
+                {
+                    SwapScene swapScene = hitInfo.transform.gameObject.GetComponent<SwapScene>();
+                    swapScene.ChangeScene();
                 }
             }
         }
@@ -62,13 +74,13 @@ public class PlayerTalk : MonoBehaviour
         DialogueBoxController.OnDialogueStarted += JoinConversation;
         DialogueBoxController.OnDialogueEnded += LeaveConversation;
     }
-
+    
     private void OnDisable()
     {
         DialogueBoxController.OnDialogueStarted -= JoinConversation;
         DialogueBoxController.OnDialogueEnded -= LeaveConversation;
     }
-
+    
     private void HandleActivate() // on activate (press E) something will be interacted with.
     {
         Interact();
