@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 /// 
 /// Author: Weston Tollette
@@ -30,7 +31,7 @@ public class FishStateController : MonoBehaviour
 
     private Collider otherHolder; // will be used to store other in on trigger enter if the scared fish is activated.
 
-    private enum FishState
+    public enum FishState
     { // helps in knowing what state the fish ought to be in.
         Idle, // Just hanging out doing its thing
         LureNav, // On the move going after the lure.
@@ -133,5 +134,9 @@ public class FishStateController : MonoBehaviour
         {
             LureReeledIn(); // lure is gone or the fish has left its range, either way forget about him.
         }
+    }
+    public FishState GetFishState()
+    {
+        return currentState;
     }
 }
