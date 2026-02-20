@@ -81,7 +81,7 @@ public class FishStateController : MonoBehaviour
     // on contact with bobber.
     void OnCollisionEnter(Collision collision)
     {
-        if (((1 << collision.gameObject.layer) & lureMask.value) != 0)
+        if (((1 << collision.gameObject.layer) & lureMask.value) != 0 && currentState!=FishState.Spooked)
         {
             currentState = FishState.Hooked;
             fishData.SendData();
