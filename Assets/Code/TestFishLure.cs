@@ -61,15 +61,15 @@ public class TestFishLure : MonoBehaviour
 
     private void Start()
     {
-        input.InteractEvent += HandleInteract;
-        input.InteractCancelledEvent += HandleInteractCancelled;
+        input.UseEvent += HandleUse;
+        input.UseCancelledEvent += HandleUseCancelled;
         castSpotPrefab.SetActive(false); // Set inactive at the start cause why not
         lureRadius = lurePrefab.GetComponent<SphereCollider>().radius; // insures the lure radius is the same as the radius that lure trigger is.
     }
     private void OnDestroy()
     {
-        input.InteractEvent -= HandleInteract;
-        input.InteractCancelledEvent -= HandleInteractCancelled;
+        input.UseEvent -= HandleUse;
+        input.UseCancelledEvent -= HandleUseCancelled;
     }
 
     void Update()
@@ -153,10 +153,10 @@ public class TestFishLure : MonoBehaviour
     }
     public void AutoHandled() // used by QT Controller to bring in the lure;
     {
-        HandleInteract();
+        HandleUse();
     }
     
-    private void HandleInteract() // When you click the left mouse button
+    private void HandleUse() // When you click the left mouse button
     {
         if (lurePrefab.activeSelf)
         {// if there is a lure already out only get rid of it, dont start the cast process again.
@@ -170,7 +170,7 @@ public class TestFishLure : MonoBehaviour
         }
         holdToCast = true;
     }
-    private void HandleInteractCancelled() // when release left mouse
+    private void HandleUseCancelled() // when release left mouse
     {
         if(holdToCast)
         { // if the cast indicator is around.

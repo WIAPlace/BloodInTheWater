@@ -18,13 +18,13 @@ public class PlayerTalk : MonoBehaviour
 
     private void Start()
     {
-        input.ActivateEvent += HandleActivate;
-        input.ActivateUIEvent += HandleActivate;
+        input.InteractEvent += HandleInteract;
+        input.InteractUIEvent += HandleInteract;
     }
     void OnDestroy()
     {
-        input.ActivateEvent -= HandleActivate;
-        input.ActivateUIEvent -= HandleActivate;
+        input.InteractEvent -= HandleInteract;
+        input.InteractUIEvent -= HandleInteract;
     }
 
     void Update()
@@ -80,7 +80,7 @@ public class PlayerTalk : MonoBehaviour
         DialogueBoxController.OnDialogueEnded -= LeaveConversation;
     }
     
-    private void HandleActivate() // on activate (press E) something will be interacted with.
+    private void HandleInteract() // on Interact (press E) something will be interacted with.
     {
         Interact();
     }

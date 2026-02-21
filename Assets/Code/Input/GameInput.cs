@@ -111,7 +111,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Interact"",
+                    ""name"": ""Use"",
                     ""type"": ""Button"",
                     ""id"": ""5fcb08d7-b3f8-4875-b7b9-bfaa7a01d575"",
                     ""expectedControlType"": """",
@@ -129,7 +129,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Activate"",
+                    ""name"": ""Interact"",
                     ""type"": ""Button"",
                     ""id"": ""b0e63d05-d7c9-4782-b168-87c7103aca4b"",
                     ""expectedControlType"": """",
@@ -245,7 +245,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Interact"",
+                    ""action"": ""Use"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -256,7 +256,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Interact"",
+                    ""action"": ""Use"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -300,7 +300,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Activate"",
+                    ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -311,7 +311,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Activate"",
+                    ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -421,7 +421,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""ActivateUI"",
+                    ""name"": ""InteractUI"",
                     ""type"": ""Button"",
                     ""id"": ""c44e43b3-8957-4da3-bc53-f6bc24e48d65"",
                     ""expectedControlType"": """",
@@ -702,7 +702,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""ActivateUI"",
+                    ""action"": ""InteractUI"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -713,7 +713,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""ActivateUI"",
+                    ""action"": ""InteractUI"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -911,7 +911,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             ""id"": ""7e8fda5c-874c-4c93-b177-47fced2b7219"",
             ""actions"": [
                 {
-                    ""name"": ""InteractQT"",
+                    ""name"": ""UseQT"",
                     ""type"": ""Button"",
                     ""id"": ""a6b86a9f-5a2a-4084-b5e7-9e21dfa644e9"",
                     ""expectedControlType"": """",
@@ -928,7 +928,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""InteractQT"",
+                    ""action"": ""UseQT"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -939,7 +939,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""InteractQT"",
+                    ""action"": ""UseQT"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -952,9 +952,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         m_GamePlay = asset.FindActionMap("GamePlay", throwIfNotFound: true);
         m_GamePlay_Move = m_GamePlay.FindAction("Move", throwIfNotFound: true);
         m_GamePlay_Look = m_GamePlay.FindAction("Look", throwIfNotFound: true);
-        m_GamePlay_Interact = m_GamePlay.FindAction("Interact", throwIfNotFound: true);
+        m_GamePlay_Use = m_GamePlay.FindAction("Use", throwIfNotFound: true);
         m_GamePlay_Pause = m_GamePlay.FindAction("Pause", throwIfNotFound: true);
-        m_GamePlay_Activate = m_GamePlay.FindAction("Activate", throwIfNotFound: true);
+        m_GamePlay_Interact = m_GamePlay.FindAction("Interact", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -968,10 +968,10 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         m_UI_TrackedDevicePosition = m_UI.FindAction("TrackedDevicePosition", throwIfNotFound: true);
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
         m_UI_Resume = m_UI.FindAction("Resume", throwIfNotFound: true);
-        m_UI_ActivateUI = m_UI.FindAction("ActivateUI", throwIfNotFound: true);
+        m_UI_InteractUI = m_UI.FindAction("InteractUI", throwIfNotFound: true);
         // QuickTime
         m_QuickTime = asset.FindActionMap("QuickTime", throwIfNotFound: true);
-        m_QuickTime_InteractQT = m_QuickTime.FindAction("InteractQT", throwIfNotFound: true);
+        m_QuickTime_UseQT = m_QuickTime.FindAction("UseQT", throwIfNotFound: true);
     }
 
     ~@GameInput()
@@ -1056,9 +1056,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     private List<IGamePlayActions> m_GamePlayActionsCallbackInterfaces = new List<IGamePlayActions>();
     private readonly InputAction m_GamePlay_Move;
     private readonly InputAction m_GamePlay_Look;
-    private readonly InputAction m_GamePlay_Interact;
+    private readonly InputAction m_GamePlay_Use;
     private readonly InputAction m_GamePlay_Pause;
-    private readonly InputAction m_GamePlay_Activate;
+    private readonly InputAction m_GamePlay_Interact;
     /// <summary>
     /// Provides access to input actions defined in input action map "GamePlay".
     /// </summary>
@@ -1079,17 +1079,17 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @Look => m_Wrapper.m_GamePlay_Look;
         /// <summary>
-        /// Provides access to the underlying input action "GamePlay/Interact".
+        /// Provides access to the underlying input action "GamePlay/Use".
         /// </summary>
-        public InputAction @Interact => m_Wrapper.m_GamePlay_Interact;
+        public InputAction @Use => m_Wrapper.m_GamePlay_Use;
         /// <summary>
         /// Provides access to the underlying input action "GamePlay/Pause".
         /// </summary>
         public InputAction @Pause => m_Wrapper.m_GamePlay_Pause;
         /// <summary>
-        /// Provides access to the underlying input action "GamePlay/Activate".
+        /// Provides access to the underlying input action "GamePlay/Interact".
         /// </summary>
-        public InputAction @Activate => m_Wrapper.m_GamePlay_Activate;
+        public InputAction @Interact => m_Wrapper.m_GamePlay_Interact;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1122,15 +1122,15 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Look.started += instance.OnLook;
             @Look.performed += instance.OnLook;
             @Look.canceled += instance.OnLook;
-            @Interact.started += instance.OnInteract;
-            @Interact.performed += instance.OnInteract;
-            @Interact.canceled += instance.OnInteract;
+            @Use.started += instance.OnUse;
+            @Use.performed += instance.OnUse;
+            @Use.canceled += instance.OnUse;
             @Pause.started += instance.OnPause;
             @Pause.performed += instance.OnPause;
             @Pause.canceled += instance.OnPause;
-            @Activate.started += instance.OnActivate;
-            @Activate.performed += instance.OnActivate;
-            @Activate.canceled += instance.OnActivate;
+            @Interact.started += instance.OnInteract;
+            @Interact.performed += instance.OnInteract;
+            @Interact.canceled += instance.OnInteract;
         }
 
         /// <summary>
@@ -1148,15 +1148,15 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Look.started -= instance.OnLook;
             @Look.performed -= instance.OnLook;
             @Look.canceled -= instance.OnLook;
-            @Interact.started -= instance.OnInteract;
-            @Interact.performed -= instance.OnInteract;
-            @Interact.canceled -= instance.OnInteract;
+            @Use.started -= instance.OnUse;
+            @Use.performed -= instance.OnUse;
+            @Use.canceled -= instance.OnUse;
             @Pause.started -= instance.OnPause;
             @Pause.performed -= instance.OnPause;
             @Pause.canceled -= instance.OnPause;
-            @Activate.started -= instance.OnActivate;
-            @Activate.performed -= instance.OnActivate;
-            @Activate.canceled -= instance.OnActivate;
+            @Interact.started -= instance.OnInteract;
+            @Interact.performed -= instance.OnInteract;
+            @Interact.canceled -= instance.OnInteract;
         }
 
         /// <summary>
@@ -1205,7 +1205,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_TrackedDevicePosition;
     private readonly InputAction m_UI_TrackedDeviceOrientation;
     private readonly InputAction m_UI_Resume;
-    private readonly InputAction m_UI_ActivateUI;
+    private readonly InputAction m_UI_InteractUI;
     /// <summary>
     /// Provides access to input actions defined in input action map "UI".
     /// </summary>
@@ -1262,9 +1262,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @Resume => m_Wrapper.m_UI_Resume;
         /// <summary>
-        /// Provides access to the underlying input action "UI/ActivateUI".
+        /// Provides access to the underlying input action "UI/InteractUI".
         /// </summary>
-        public InputAction @ActivateUI => m_Wrapper.m_UI_ActivateUI;
+        public InputAction @InteractUI => m_Wrapper.m_UI_InteractUI;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1324,9 +1324,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Resume.started += instance.OnResume;
             @Resume.performed += instance.OnResume;
             @Resume.canceled += instance.OnResume;
-            @ActivateUI.started += instance.OnActivateUI;
-            @ActivateUI.performed += instance.OnActivateUI;
-            @ActivateUI.canceled += instance.OnActivateUI;
+            @InteractUI.started += instance.OnInteractUI;
+            @InteractUI.performed += instance.OnInteractUI;
+            @InteractUI.canceled += instance.OnInteractUI;
         }
 
         /// <summary>
@@ -1371,9 +1371,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Resume.started -= instance.OnResume;
             @Resume.performed -= instance.OnResume;
             @Resume.canceled -= instance.OnResume;
-            @ActivateUI.started -= instance.OnActivateUI;
-            @ActivateUI.performed -= instance.OnActivateUI;
-            @ActivateUI.canceled -= instance.OnActivateUI;
+            @InteractUI.started -= instance.OnInteractUI;
+            @InteractUI.performed -= instance.OnInteractUI;
+            @InteractUI.canceled -= instance.OnInteractUI;
         }
 
         /// <summary>
@@ -1411,7 +1411,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     // QuickTime
     private readonly InputActionMap m_QuickTime;
     private List<IQuickTimeActions> m_QuickTimeActionsCallbackInterfaces = new List<IQuickTimeActions>();
-    private readonly InputAction m_QuickTime_InteractQT;
+    private readonly InputAction m_QuickTime_UseQT;
     /// <summary>
     /// Provides access to input actions defined in input action map "QuickTime".
     /// </summary>
@@ -1424,9 +1424,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         /// </summary>
         public QuickTimeActions(@GameInput wrapper) { m_Wrapper = wrapper; }
         /// <summary>
-        /// Provides access to the underlying input action "QuickTime/InteractQT".
+        /// Provides access to the underlying input action "QuickTime/UseQT".
         /// </summary>
-        public InputAction @InteractQT => m_Wrapper.m_QuickTime_InteractQT;
+        public InputAction @UseQT => m_Wrapper.m_QuickTime_UseQT;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1453,9 +1453,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_QuickTimeActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_QuickTimeActionsCallbackInterfaces.Add(instance);
-            @InteractQT.started += instance.OnInteractQT;
-            @InteractQT.performed += instance.OnInteractQT;
-            @InteractQT.canceled += instance.OnInteractQT;
+            @UseQT.started += instance.OnUseQT;
+            @UseQT.performed += instance.OnUseQT;
+            @UseQT.canceled += instance.OnUseQT;
         }
 
         /// <summary>
@@ -1467,9 +1467,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         /// <seealso cref="QuickTimeActions" />
         private void UnregisterCallbacks(IQuickTimeActions instance)
         {
-            @InteractQT.started -= instance.OnInteractQT;
-            @InteractQT.performed -= instance.OnInteractQT;
-            @InteractQT.canceled -= instance.OnInteractQT;
+            @UseQT.started -= instance.OnUseQT;
+            @UseQT.performed -= instance.OnUseQT;
+            @UseQT.canceled -= instance.OnUseQT;
         }
 
         /// <summary>
@@ -1525,12 +1525,12 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnLook(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "Interact" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "Use" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnInteract(InputAction.CallbackContext context);
+        void OnUse(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "Pause" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
@@ -1539,12 +1539,12 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnPause(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "Activate" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "Interact" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnActivate(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.
@@ -1631,12 +1631,12 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnResume(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "ActivateUI" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "InteractUI" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnActivateUI(InputAction.CallbackContext context);
+        void OnInteractUI(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "QuickTime" which allows adding and removing callbacks.
@@ -1646,11 +1646,11 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     public interface IQuickTimeActions
     {
         /// <summary>
-        /// Method invoked when associated input action "InteractQT" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "UseQT" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnInteractQT(InputAction.CallbackContext context);
+        void OnUseQT(InputAction.CallbackContext context);
     }
 }

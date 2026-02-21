@@ -61,11 +61,11 @@ public class QuickTimeController_Player : MonoBehaviour
     }
     void Start()
     {
-        input.InteractEventQT += HandelInteractQT;
+        input.UseEventQT += HandelUseQT;
     }
     void OnDestroy()
     {
-        input.InteractEventQT -= HandelInteractQT;
+        input.UseEventQT -= HandelUseQT;
     }
 
     void Update()
@@ -143,7 +143,7 @@ public class QuickTimeController_Player : MonoBehaviour
 
     }
 
-    private void HandelInteractQT()
+    private void HandelUseQT()
     {
         timeStarted = false; // turn of time keeping for the moment
         playerPoint = timeKeeper; // this will be used to check if its in range.

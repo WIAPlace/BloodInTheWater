@@ -63,12 +63,12 @@ public class InputReader : ScriptableObject, GameInput.IGamePlayActions, GameInp
 
     public event Action<Vector2> MoveEvent;
     public event Action<Vector2> LookEvent;
+    public event Action UseEvent;
+    public event Action UseCancelledEvent;
     public event Action InteractEvent;
-    public event Action InteractCancelledEvent;
-    public event Action ActivateEvent;
-    public event Action ActivateUIEvent;
+    public event Action InteractUIEvent;
 
-    public event Action InteractEventQT; // quick time click
+    public event Action UseEventQT; // quick time click
 
     public event Action PauseEvent;
     public event Action ResumeEvent;
@@ -77,15 +77,15 @@ public class InputReader : ScriptableObject, GameInput.IGamePlayActions, GameInp
     ///////////////////////////////////////////////////////////////////////////////////////// OnX Methods 
     /// Called when An input occurs. They should Invoke their related events. 
     /// Will likley need to be added to when adding more inputs.
-    public void OnInteract(InputAction.CallbackContext context)
-    { // Interact
+    public void OnUse(InputAction.CallbackContext context)
+    { // Use
         if (context.phase == InputActionPhase.Performed)
         {
-            InteractEvent?.Invoke();
+            UseEvent?.Invoke();
         }
         if (context.phase == InputActionPhase.Canceled)
         {
-            InteractCancelledEvent?.Invoke();
+            UseCancelledEvent?.Invoke();
         }
     }
 
@@ -112,25 +112,25 @@ public class InputReader : ScriptableObject, GameInput.IGamePlayActions, GameInp
         }
     }
     
-    public void OnActivate(InputAction.CallbackContext context)
+    public void OnInteract(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Performed)
         {
-            ActivateEvent?.Invoke();
+            InteractEvent?.Invoke();
         }
     }
-    public void OnActivateUI(InputAction.CallbackContext context)
+    public void OnInteractUI(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Performed)
         {
-            ActivateUIEvent?.Invoke();
+            InteractUIEvent?.Invoke();
         }
     }
-    public void OnInteractQT(InputAction.CallbackContext context)
+    public void OnUseQT(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Performed)
         {
-            InteractEventQT?.Invoke();
+            UseEventQT?.Invoke();
         }
     }
 
