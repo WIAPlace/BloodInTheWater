@@ -12,11 +12,17 @@ using UnityEngine;
 /// 
 public class PlayerHolding : MonoBehaviour
 {
+    [Header("Game Object Refrences")]
     [SerializeField][Tooltip("Fishing Rod Game Object")]
     private GameObject fishingRod;
 
+    [Header("Script Refrences")]
+    [SerializeField][Tooltip("Useable Item Refrences. Make sure these are in the same order as the objects they represent. 0 is nothing")]
+    private UseableItems_Abstract[] usableItems;
+
     private List<GameObject> heldItems = new List<GameObject>();
     private int holdingsLength=0;
+    private bool checkingActive = false; // used for comunicating between placeAble Spots and See Placeable Areas.
 
 
     //private int currentIndex=0; // possibly used for checking what the current index should be at any given time.
@@ -31,6 +37,8 @@ public class PlayerHolding : MonoBehaviour
         holdingsLength = heldItems.Count;
     }
 
+    
+
 
     public int CheckInHand() // chedk what the index is in hand
     {
@@ -42,6 +50,7 @@ public class PlayerHolding : MonoBehaviour
                 index = i;
             }
         }
+        //Debug.Log(index); shows what is active
         return index;
     }
 
@@ -51,17 +60,31 @@ public class PlayerHolding : MonoBehaviour
         if(heldItems[index]!=null)
         {
             heldItems[index].SetActive(true); // if the object is not null.
+            usableItems[index].enabled = true;
         }
     } 
 
     private void EmptyHand() // disable any hand items if they are on.
     {
-        foreach(GameObject obj in heldItems)
-        { // ? : if item is null do nothing else do the set active thing.
-            if (obj != null && obj.activeSelf)
+        for(int i = 0; i < holdingsLength; i++)
+        { // checking null cause 0 is nothing.
+            if(heldItems[i] != null && heldItems[i].activeSelf)
             {
-                obj.SetActive(false);
+                heldItems[i].SetActive(false);
+                usableItems[i].enabled = false;
             }
         }
     }
+
+    // Communicators between placeable Spot and See Placeable Areas Scritps
+    // this is needed because if you press on an active indicator it should disapear if no longer holding down Q 
+    public bool CheckIfChecking()
+    { // check if Q(/other equivilent) is down
+        return checkingActive;
+    }
+    public void SetChecking(bool checking)
+    { // set checking active in see placeable Areas.
+        checkingActive = checking;
+    }
+
 }

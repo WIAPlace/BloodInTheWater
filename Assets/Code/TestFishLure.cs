@@ -1,4 +1,3 @@
-using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.Rendering;
 /// 
@@ -17,11 +16,13 @@ using UnityEngine.Rendering;
 /// Edited By: Weston Tollette
 /// Edit Purpose: This might be dumb, but i would rather not have to do code a second time and am going to change the retrive lure script to work with
 ///  the whole fish run if to close thing, its basicly the same with just two diffrences.
-public class TestFishLure : MonoBehaviour
+/// 
+/// Edited: 2/22/26
+/// Edited By: Weston Tollette
+/// Edit Purpose: Changing this to a child of an abstract for use in dealing with Player Holding script stuff.
+/// 
+public class TestFishLure : UseableItems_Abstract
 {
-    [SerializeField] [Tooltip("Insert the Scriptable Object Input Reader")]
-    private InputReader input;
-
     [SerializeField] [Tooltip("The Prefab For the Lure")]
     private GameObject lurePrefab; // The Prefab for the lure object.
     // make sure not to destroy this.
@@ -60,16 +61,9 @@ public class TestFishLure : MonoBehaviour
     
 
     private void Start()
-    {
-        input.UseEvent += HandleUse;
-        input.UseCancelledEvent += HandleUseCancelled;
+    {        
         castSpotPrefab.SetActive(false); // Set inactive at the start cause why not
         lureRadius = lurePrefab.GetComponent<SphereCollider>().radius; // insures the lure radius is the same as the radius that lure trigger is.
-    }
-    private void OnDestroy()
-    {
-        input.UseEvent -= HandleUse;
-        input.UseCancelledEvent -= HandleUseCancelled;
     }
 
     void Update()
@@ -156,7 +150,7 @@ public class TestFishLure : MonoBehaviour
         HandleUse();
     }
     
-    private void HandleUse() // When you click the left mouse button
+    protected override void HandleUse() // When you click the left mouse button
     {
         if (lurePrefab.activeSelf)
         {// if there is a lure already out only get rid of it, dont start the cast process again.
@@ -170,7 +164,7 @@ public class TestFishLure : MonoBehaviour
         }
         holdToCast = true;
     }
-    private void HandleUseCancelled() // when release left mouse
+    protected override void HandleUseCancelled() // when release left mouse
     {
         if(holdToCast)
         { // if the cast indicator is around.
