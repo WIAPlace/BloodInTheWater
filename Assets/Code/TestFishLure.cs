@@ -66,6 +66,15 @@ public class TestFishLure : UseableItems_Abstract
         lureRadius = lurePrefab.GetComponent<SphereCollider>().radius; // insures the lure radius is the same as the radius that lure trigger is.
     }
 
+    private void OnDisable()
+    { // if this is disabled and the lure is out call it back in. might be changed later on
+        
+        if (lurePrefab != null && lurePrefab.activeSelf)
+        {
+            AutoHandled();
+        }
+    }
+
     void Update()
     {
         if (holdToCast)
@@ -145,6 +154,7 @@ public class TestFishLure : UseableItems_Abstract
             i++;
         }
     }
+    
     public void AutoHandled() // used by QT Controller to bring in the lure;
     {
         HandleUse();
@@ -175,6 +185,11 @@ public class TestFishLure : UseableItems_Abstract
             //CastAnim();
         }
     }
+
+
+
+
+
     /*
     // Animation ////
     void CastAnim()
