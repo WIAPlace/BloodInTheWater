@@ -43,7 +43,7 @@ public class InteractSystem : MonoBehaviour
         {
             DialogueBoxController.instance.SkipLine();
         }
-        else //Starts dialogue
+        else //Starts interact
         {
             if (Physics.Raycast(new Ray(transform.position, transform.forward), out RaycastHit hitInfo, interactDistance))
             {

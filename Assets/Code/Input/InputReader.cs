@@ -67,6 +67,8 @@ public class InputReader : ScriptableObject, GameInput.IGamePlayActions, GameInp
     public event Action UseCancelledEvent;
     public event Action InteractEvent;
     public event Action InteractUIEvent;
+    public event Action PlaceEvent;
+    public event Action PlaceCancelledEvent;
 
     public event Action UseEventQT; // quick time click
 
@@ -138,6 +140,20 @@ public class InputReader : ScriptableObject, GameInput.IGamePlayActions, GameInp
     {
         LookEvent?.Invoke(context.ReadValue<Vector2>());
     }
+    
+    public void OnPlace(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            PlaceEvent?.Invoke();
+        }
+        if (context.phase == InputActionPhase.Canceled)
+        {
+            PlaceCancelledEvent?.Invoke();
+        }
+    }
+
+    /////////////////////////////////////////////////////////////////////////// Unimplemented 
 
     public void OnNavigate(InputAction.CallbackContext context)
     {
