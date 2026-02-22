@@ -21,12 +21,14 @@ public class GameManager : MonoBehaviour
     void HandlePause()
     {
         pauseMenu.SetActive(true);
+        Time.timeScale=0f;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
     void HandleResume()
     {
         pauseMenu.SetActive(false);
+        Time.timeScale=1f;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
