@@ -122,6 +122,83 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &348802062
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 348802063}
+  m_Layer: 0
+  m_Name: Rod
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &348802063
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 348802062}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.23, y: 0, z: -4.75}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 458042724}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &458042723 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: d63bff36dd6d198408e392f9966eaa02,
+    type: 3}
+  m_PrefabInstance: {fileID: 2003187174}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &458042724 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d63bff36dd6d198408e392f9966eaa02,
+    type: 3}
+  m_PrefabInstance: {fileID: 2003187174}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &458042725
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 458042723}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 17bc4828695db2e40834aa55bc4d9eb3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &458042726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 458042723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 897bf22fc5bf5504f935f89a694e71f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &501055275
 GameObject:
   m_ObjectHideFlags: 0
@@ -308,6 +385,37 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ffd1f6c112f29614b877bb144b8d61d6, type: 3}
+--- !u!1 &764048766
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 764048769}
+  m_Layer: 0
+  m_Name: 'Fishingrod '
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &764048769
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 764048766}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.47, y: 0, z: -5.05}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &923521640 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3781980293508839565, guid: 9f017ac6880fbfb4295ba707d70a55ca,
@@ -665,6 +773,92 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1001 &2003187174
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 348802063}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: d63bff36dd6d198408e392f9966eaa02,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d63bff36dd6d198408e392f9966eaa02,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d63bff36dd6d198408e392f9966eaa02,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d63bff36dd6d198408e392f9966eaa02,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d63bff36dd6d198408e392f9966eaa02,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d63bff36dd6d198408e392f9966eaa02,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d63bff36dd6d198408e392f9966eaa02,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d63bff36dd6d198408e392f9966eaa02,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d63bff36dd6d198408e392f9966eaa02,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d63bff36dd6d198408e392f9966eaa02,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d63bff36dd6d198408e392f9966eaa02,
+        type: 3}
+      propertyPath: m_Name
+      value: Fishing_Rod_Rig_UVUpdate
+      objectReference: {fileID: 0}
+    - target: {fileID: 4178849687228509467, guid: d63bff36dd6d198408e392f9966eaa02,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a7921a875e638f74982c190f695dce12, type: 2}
+    - target: {fileID: 4746265378675328668, guid: d63bff36dd6d198408e392f9966eaa02,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a7921a875e638f74982c190f695dce12, type: 2}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d63bff36dd6d198408e392f9966eaa02,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 458042726}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d63bff36dd6d198408e392f9966eaa02,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 458042725}
+  m_SourcePrefab: {fileID: 100100000, guid: d63bff36dd6d198408e392f9966eaa02, type: 3}
 --- !u!1001 &2131367084
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -773,7 +967,7 @@ PrefabInstance:
     - target: {fileID: 4555280688004162103, guid: 9f017ac6880fbfb4295ba707d70a55ca,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.76
+      value: -2.04
       objectReference: {fileID: 0}
     - target: {fileID: 4555280688004162103, guid: 9f017ac6880fbfb4295ba707d70a55ca,
         type: 3}
@@ -783,7 +977,7 @@ PrefabInstance:
     - target: {fileID: 4555280688004162103, guid: 9f017ac6880fbfb4295ba707d70a55ca,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -7.11
+      value: -3.81
       objectReference: {fileID: 0}
     - target: {fileID: 4555280688004162103, guid: 9f017ac6880fbfb4295ba707d70a55ca,
         type: 3}
@@ -885,3 +1079,5 @@ SceneRoots:
   - {fileID: 1010110417}
   - {fileID: 2231388877861060401}
   - {fileID: 741990044}
+  - {fileID: 764048769}
+  - {fileID: 348802063}
