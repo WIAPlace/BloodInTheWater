@@ -1,5 +1,6 @@
-using System.Collections;
 using System;
+using System.Collections;
+using System.Threading;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,6 +21,7 @@ public class DialogueBoxController : MonoBehaviour
     [SerializeField] TextMeshProUGUI nameText;
     [SerializeField] CanvasGroup dialogueBox;
 
+    public Image crosshairImageSmall;
     public static event Action OnDialogueStarted;
     public static event Action OnDialogueEnded;
     bool skipLineTriggered;
@@ -61,8 +63,10 @@ public class DialogueBoxController : MonoBehaviour
     {
         nameText.text = name;
         dialogueBox.gameObject.SetActive(true);
+        crosshairImageSmall.gameObject.SetActive(false); //Hides crosshair
         StopAllCoroutines();
         StartCoroutine(RunDialogue(dialogue,audioclip, startPosition));
+        
     }
 
     //Prints the lines
@@ -70,6 +74,7 @@ public class DialogueBoxController : MonoBehaviour
     {
         skipLineTriggered = false;
         OnDialogueStarted?.Invoke();
+        
 
         for (int i = startPosition; i < dialogue.Length; i++)
         {
@@ -91,6 +96,8 @@ public class DialogueBoxController : MonoBehaviour
 
         OnDialogueEnded?.Invoke();
         dialogueBox.gameObject.SetActive(false); //Hides box once done
+        crosshairImageSmall.gameObject.SetActive(true); //Brings back the croshair
+
     }
 
     public void SkipLine()

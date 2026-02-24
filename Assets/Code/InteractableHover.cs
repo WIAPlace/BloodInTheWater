@@ -1,3 +1,4 @@
+using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
 /// 
@@ -12,6 +13,7 @@ using UnityEngine.UI;
 public class InteractableHover : MonoBehaviour
 {
     public Image crosshairImage;
+    public Image crosshairImageSmall;
     public float detectionRange = 100f;
     public LayerMask interactableLayer;
 
@@ -25,6 +27,7 @@ public class InteractableHover : MonoBehaviour
             if (!crosshairImage.enabled)
             {
                 crosshairImage.enabled = true;
+                crosshairImageSmall.enabled = false;
             }
         }
         else
@@ -32,6 +35,7 @@ public class InteractableHover : MonoBehaviour
             if (crosshairImage.enabled)
             {
                 crosshairImage.enabled = false;
+                crosshairImageSmall.enabled = true;
             }
         }
     }
