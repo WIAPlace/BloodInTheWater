@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 /// 
 /// Author: Weston Tollette
@@ -18,21 +19,28 @@ public class TimeKeeper : MonoBehaviour
     [SerializeField] [Tooltip("Time Between Each checkign of the timer")]
     float waitInterval=5f; // we are doing it like this because we dont need to have this update every frame.
 
+    private float sceneTime = 0;
     private float timePassed=0;
     private float penaltyTime=0;
 
     void Start()
     {
+        GameState.Instance.ChangeTime(GetTimeLeft());
         StartCoroutine(TickTock());
+    }
+    void Update()
+    {
+        sceneTime += Time.deltaTime;
     }
 
     IEnumerator TickTock()
     {
         while(timePassed<secondsAllocated){
             yield return new WaitForSeconds(waitInterval);
-            timePassed = Time.time + penaltyTime;
-            //Debug.Log(timePassed);
+            timePassed = sceneTime + penaltyTime;
+            GameState.Instance.ChangeTime(GetTimeLeft());
         }
+        GameState.Instance.LooseState();
     }
     public void AddPenaltyTime(float seconds)
     {

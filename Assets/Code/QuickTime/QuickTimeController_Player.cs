@@ -167,6 +167,7 @@ public class QuickTimeController_Player : MonoBehaviour
         if(playerPoint > min && playerPoint < max)
         {
             inHit = true;
+            GameState.Instance.CheckWin();
         }
         // im not doing an else false cause it will be easier to just check all then see if its true. maybe?
     }

@@ -27,6 +27,11 @@ public abstract class UseableItems_Abstract : MonoBehaviour
         input.UseEvent -= HandleUse;
         input.UseCancelledEvent -= HandleUseCancelled;
     }
+    void OnDestroy()
+    {
+        input.UseEvent -= HandleUse;
+        input.UseCancelledEvent -= HandleUseCancelled;
+    }
 
     protected abstract void HandleUse();
     protected abstract void HandleUseCancelled();

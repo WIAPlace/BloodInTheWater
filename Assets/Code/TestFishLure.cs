@@ -73,7 +73,10 @@ public class TestFishLure : UseableItems_Abstract
         {
             AutoHandled();
         }
+
     }
+
+
 
     void Update()
     {
@@ -169,10 +172,13 @@ public class TestFishLure : UseableItems_Abstract
 
             lurePrefab.SetActive(false);
             RetrieveLure(currentLurePosition, lureRadius); // this will let the fish know they are no longer in lure zone
-            
+            //Debug.Log(holdToCast);
+
             return;
         }
-        holdToCast = true;
+        else {
+            holdToCast = true;
+        }
     }
     protected override void HandleUseCancelled() // when release left mouse
     {
