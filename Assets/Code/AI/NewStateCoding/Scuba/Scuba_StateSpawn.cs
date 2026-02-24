@@ -16,16 +16,18 @@ public class Scuba_StateSpawn : IBoatStomperState
 
     private void Spawning(Scuba_Controller scubaGuy) // choose a random spot to spawn.
     {
-        int spots = scubaGuy.GetNumberOfSpots();
-        int rando = Random.Range(0, spots);
+        int spots = scubaGuy.GetNumberOfSpots(); // get number of spots
+        int rando = Random.Range(0, spots); // picks a spot out of the avalible options
         scubaGuy.transform.position = scubaGuy.GetScubaSpots(rando).transform.position;
-        Debug.Log("Spawned At: "+rando);
+        //Debug.Log("Spawned At: "+rando);
     }   
 
 
     public IBoatStomperState DoState(Scuba_Controller SC)
-    {
+    { 
         Spawning(SC);
+        SC.gameObject.SetActive(true);
+        //Debug.Log("Active");
         //Spawing animation and stuff.
         return  SC.MoveState;
     }

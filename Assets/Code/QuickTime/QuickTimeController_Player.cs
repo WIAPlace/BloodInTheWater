@@ -108,6 +108,12 @@ public class QuickTimeController_Player : MonoBehaviour
         SetNeededData();
         Hooked();
     }
+    public void SetData(QuickTimeData_Scuba data)
+    {
+        currentQTData = data; 
+        SetNeededData();
+        Hooked();
+    }
 
 
     // On LuredIn /////////////////////////////////////////////////////////////////////////////////////////////////
