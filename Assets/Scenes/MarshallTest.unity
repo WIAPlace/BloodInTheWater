@@ -3321,7 +3321,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
   NoiseModule:
-    enabled: 0
+    enabled: 1
     strength:
       serializedVersion: 2
       minMaxState: 0
@@ -3482,10 +3482,10 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     separateAxes: 0
-    frequency: 0.5
+    frequency: 1
     damping: 1
-    octaves: 1
-    octaveMultiplier: 0.5
+    octaves: 2
+    octaveMultiplier: 1
     octaveScale: 2
     quality: 1
     scrollSpeed:
@@ -9494,7 +9494,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
   NoiseModule:
-    enabled: 0
+    enabled: 1
     strength:
       serializedVersion: 2
       minMaxState: 0
@@ -9655,10 +9655,10 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     separateAxes: 0
-    frequency: 0.5
+    frequency: 1
     damping: 1
-    octaves: 1
-    octaveMultiplier: 0.5
+    octaves: 2
+    octaveMultiplier: 1
     octaveScale: 2
     quality: 1
     scrollSpeed:
@@ -11654,6 +11654,79 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 61adde75becf4d041a96acacf1a2528d, type: 3}
+--- !u!1001 &185367036
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: e65accd77c9a40d409e54a69b1952bda,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -31.88
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e65accd77c9a40d409e54a69b1952bda,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.54
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e65accd77c9a40d409e54a69b1952bda,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 11.698029
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e65accd77c9a40d409e54a69b1952bda,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e65accd77c9a40d409e54a69b1952bda,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071067
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e65accd77c9a40d409e54a69b1952bda,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e65accd77c9a40d409e54a69b1952bda,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e65accd77c9a40d409e54a69b1952bda,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e65accd77c9a40d409e54a69b1952bda,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e65accd77c9a40d409e54a69b1952bda,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: e65accd77c9a40d409e54a69b1952bda,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f36333e967486b7428fc8135112a3589, type: 2}
+    - target: {fileID: 919132149155446097, guid: e65accd77c9a40d409e54a69b1952bda,
+        type: 3}
+      propertyPath: m_Name
+      value: Starfish_Model
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e65accd77c9a40d409e54a69b1952bda, type: 3}
 --- !u!1001 &202681891
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14481,7 +14554,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
   NoiseModule:
-    enabled: 0
+    enabled: 1
     strength:
       serializedVersion: 2
       minMaxState: 0
@@ -14642,10 +14715,10 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     separateAxes: 0
-    frequency: 0.5
+    frequency: 1
     damping: 1
-    octaves: 1
-    octaveMultiplier: 0.5
+    octaves: 2
+    octaveMultiplier: 1
     octaveScale: 2
     quality: 1
     scrollSpeed:
@@ -16671,6 +16744,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firstInteraction: 1
+  noRepeat: 1
   repeatStartPosition: 4
   npcName: THE CUBE
   dialogueAsset: {fileID: 11400000, guid: f664eaa24edd5d340be356489b01e00e, type: 2}
@@ -19439,7 +19513,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
   NoiseModule:
-    enabled: 0
+    enabled: 1
     strength:
       serializedVersion: 2
       minMaxState: 0
@@ -19600,10 +19674,10 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     separateAxes: 0
-    frequency: 0.5
+    frequency: 1
     damping: 1
-    octaves: 1
-    octaveMultiplier: 0.5
+    octaves: 2
+    octaveMultiplier: 1
     octaveScale: 2
     quality: 1
     scrollSpeed:
@@ -25177,7 +25251,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
   NoiseModule:
-    enabled: 0
+    enabled: 1
     strength:
       serializedVersion: 2
       minMaxState: 0
@@ -25338,10 +25412,10 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     separateAxes: 0
-    frequency: 0.5
+    frequency: 1
     damping: 1
-    octaves: 1
-    octaveMultiplier: 0.5
+    octaves: 2
+    octaveMultiplier: 1
     octaveScale: 2
     quality: 1
     scrollSpeed:
@@ -30832,12 +30906,12 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
   NoiseModule:
-    enabled: 0
+    enabled: 1
     strength:
       serializedVersion: 2
       minMaxState: 0
       scalar: 1
-      minScalar: 1
+      minScalar: 5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -30993,10 +31067,10 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     separateAxes: 0
-    frequency: 0.5
+    frequency: 1
     damping: 1
-    octaves: 1
-    octaveMultiplier: 0.5
+    octaves: 2
+    octaveMultiplier: 1
     octaveScale: 2
     quality: 1
     scrollSpeed:
@@ -35674,7 +35748,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
   NoiseModule:
-    enabled: 0
+    enabled: 1
     strength:
       serializedVersion: 2
       minMaxState: 0
@@ -35835,10 +35909,10 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     separateAxes: 0
-    frequency: 0.5
+    frequency: 1
     damping: 1
-    octaves: 1
-    octaveMultiplier: 0.5
+    octaves: 2
+    octaveMultiplier: 1
     octaveScale: 2
     quality: 1
     scrollSpeed:
@@ -40660,7 +40734,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
   NoiseModule:
-    enabled: 0
+    enabled: 1
     strength:
       serializedVersion: 2
       minMaxState: 0
@@ -40821,10 +40895,10 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     separateAxes: 0
-    frequency: 0.5
+    frequency: 1
     damping: 1
-    octaves: 1
-    octaveMultiplier: 0.5
+    octaves: 2
+    octaveMultiplier: 1
     octaveScale: 2
     quality: 1
     scrollSpeed:
@@ -47357,7 +47431,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
   NoiseModule:
-    enabled: 0
+    enabled: 1
     strength:
       serializedVersion: 2
       minMaxState: 0
@@ -47518,10 +47592,10 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     separateAxes: 0
-    frequency: 0.5
+    frequency: 1
     damping: 1
-    octaves: 1
-    octaveMultiplier: 0.5
+    octaves: 2
+    octaveMultiplier: 1
     octaveScale: 2
     quality: 1
     scrollSpeed:
@@ -52523,7 +52597,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
   NoiseModule:
-    enabled: 0
+    enabled: 1
     strength:
       serializedVersion: 2
       minMaxState: 0
@@ -52684,10 +52758,10 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     separateAxes: 0
-    frequency: 0.5
+    frequency: 1
     damping: 1
-    octaves: 1
-    octaveMultiplier: 0.5
+    octaves: 2
+    octaveMultiplier: 1
     octaveScale: 2
     quality: 1
     scrollSpeed:
@@ -54606,6 +54680,79 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 300414612}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &580393500
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: ea688ff06c08141429138af5664730e2,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -29.805439
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ea688ff06c08141429138af5664730e2,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.46
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ea688ff06c08141429138af5664730e2,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 23.00835
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ea688ff06c08141429138af5664730e2,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ea688ff06c08141429138af5664730e2,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ea688ff06c08141429138af5664730e2,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ea688ff06c08141429138af5664730e2,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ea688ff06c08141429138af5664730e2,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ea688ff06c08141429138af5664730e2,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ea688ff06c08141429138af5664730e2,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: ea688ff06c08141429138af5664730e2,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e16ed81ab1264a94ebe9b20dfacc4548, type: 2}
+    - target: {fileID: 919132149155446097, guid: ea688ff06c08141429138af5664730e2,
+        type: 3}
+      propertyPath: m_Name
+      value: Buoy
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ea688ff06c08141429138af5664730e2, type: 3}
 --- !u!1001 &590396575
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -58178,7 +58325,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
   NoiseModule:
-    enabled: 0
+    enabled: 1
     strength:
       serializedVersion: 2
       minMaxState: 0
@@ -58339,10 +58486,10 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     separateAxes: 0
-    frequency: 0.5
+    frequency: 1
     damping: 1
-    octaves: 1
-    octaveMultiplier: 0.5
+    octaves: 2
+    octaveMultiplier: 1
     octaveScale: 2
     quality: 1
     scrollSpeed:
@@ -65111,7 +65258,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
   NoiseModule:
-    enabled: 0
+    enabled: 1
     strength:
       serializedVersion: 2
       minMaxState: 0
@@ -65272,10 +65419,10 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     separateAxes: 0
-    frequency: 0.5
+    frequency: 1
     damping: 1
-    octaves: 1
-    octaveMultiplier: 0.5
+    octaves: 2
+    octaveMultiplier: 1
     octaveScale: 2
     quality: 1
     scrollSpeed:
@@ -67490,6 +67637,51 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1506396920}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &880506596 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: a958fd271173f304ab8be6f50d91ee93,
+    type: 3}
+  m_PrefabInstance: {fileID: 1611578964}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &880506600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 880506596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91ba47435bc07644080a4d4b141a3c5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firstInteraction: 1
+  noRepeat: 0
+  repeatStartPosition: 1
+  npcName: Keeper John
+  dialogueAsset: {fileID: 11400000, guid: 99ae5717dd401374eae5b3dd79cc3653, type: 2}
+--- !u!64 &880506601
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 880506596}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -1202910717718968129, guid: a958fd271173f304ab8be6f50d91ee93, type: 3}
 --- !u!1 &882776130
 GameObject:
   m_ObjectHideFlags: 0
@@ -70249,7 +70441,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
   NoiseModule:
-    enabled: 0
+    enabled: 1
     strength:
       serializedVersion: 2
       minMaxState: 0
@@ -70410,10 +70602,10 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     separateAxes: 0
-    frequency: 0.5
+    frequency: 1
     damping: 1
-    octaves: 1
-    octaveMultiplier: 0.5
+    octaves: 2
+    octaveMultiplier: 1
     octaveScale: 2
     quality: 1
     scrollSpeed:
@@ -75546,7 +75738,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
   NoiseModule:
-    enabled: 0
+    enabled: 1
     strength:
       serializedVersion: 2
       minMaxState: 0
@@ -75707,10 +75899,10 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     separateAxes: 0
-    frequency: 0.5
+    frequency: 1
     damping: 1
-    octaves: 1
-    octaveMultiplier: 0.5
+    octaves: 2
+    octaveMultiplier: 1
     octaveScale: 2
     quality: 1
     scrollSpeed:
@@ -80666,7 +80858,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
   NoiseModule:
-    enabled: 0
+    enabled: 1
     strength:
       serializedVersion: 2
       minMaxState: 0
@@ -80827,10 +81019,10 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     separateAxes: 0
-    frequency: 0.5
+    frequency: 1
     damping: 1
-    octaves: 1
-    octaveMultiplier: 0.5
+    octaves: 2
+    octaveMultiplier: 1
     octaveScale: 2
     quality: 1
     scrollSpeed:
@@ -87392,7 +87584,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
   NoiseModule:
-    enabled: 0
+    enabled: 1
     strength:
       serializedVersion: 2
       minMaxState: 0
@@ -87553,10 +87745,10 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     separateAxes: 0
-    frequency: 0.5
+    frequency: 1
     damping: 1
-    octaves: 1
-    octaveMultiplier: 0.5
+    octaves: 2
+    octaveMultiplier: 1
     octaveScale: 2
     quality: 1
     scrollSpeed:
@@ -92468,7 +92660,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
   NoiseModule:
-    enabled: 0
+    enabled: 1
     strength:
       serializedVersion: 2
       minMaxState: 0
@@ -92629,10 +92821,10 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     separateAxes: 0
-    frequency: 0.5
+    frequency: 1
     damping: 1
-    octaves: 1
-    octaveMultiplier: 0.5
+    octaves: 2
+    octaveMultiplier: 1
     octaveScale: 2
     quality: 1
     scrollSpeed:
@@ -95771,6 +95963,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firstInteraction: 1
+  noRepeat: 1
   repeatStartPosition: 4
   npcName: Lighthouse?
   dialogueAsset: {fileID: 11400000, guid: 6ccb3234a0cb40446a2ac1ea27f885c1, type: 2}
@@ -98568,7 +98761,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
   NoiseModule:
-    enabled: 0
+    enabled: 1
     strength:
       serializedVersion: 2
       minMaxState: 0
@@ -98729,10 +98922,10 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     separateAxes: 0
-    frequency: 0.5
+    frequency: 1
     damping: 1
-    octaves: 1
-    octaveMultiplier: 0.5
+    octaves: 2
+    octaveMultiplier: 1
     octaveScale: 2
     quality: 1
     scrollSpeed:
@@ -105156,7 +105349,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
   NoiseModule:
-    enabled: 0
+    enabled: 1
     strength:
       serializedVersion: 2
       minMaxState: 0
@@ -105317,10 +105510,10 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     separateAxes: 0
-    frequency: 0.5
+    frequency: 1
     damping: 1
-    octaves: 1
-    octaveMultiplier: 0.5
+    octaves: 2
+    octaveMultiplier: 1
     octaveScale: 2
     quality: 1
     scrollSpeed:
@@ -109986,7 +110179,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
   NoiseModule:
-    enabled: 0
+    enabled: 1
     strength:
       serializedVersion: 2
       minMaxState: 0
@@ -110147,10 +110340,10 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     separateAxes: 0
-    frequency: 0.5
+    frequency: 1
     damping: 1
-    octaves: 1
-    octaveMultiplier: 0.5
+    octaves: 2
+    octaveMultiplier: 1
     octaveScale: 2
     quality: 1
     scrollSpeed:
@@ -112235,6 +112428,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firstInteraction: 1
+  noRepeat: 1
   repeatStartPosition: 0
   npcName: 
   dialogueAsset: {fileID: 11400000, guid: 99ae5717dd401374eae5b3dd79cc3653, type: 2}
@@ -116079,7 +116273,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
   NoiseModule:
-    enabled: 0
+    enabled: 1
     strength:
       serializedVersion: 2
       minMaxState: 0
@@ -116240,10 +116434,10 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     separateAxes: 0
-    frequency: 0.5
+    frequency: 1
     damping: 1
-    octaves: 1
-    octaveMultiplier: 0.5
+    octaves: 2
+    octaveMultiplier: 1
     octaveScale: 2
     quality: 1
     scrollSpeed:
@@ -118864,6 +119058,87 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1332056084}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1611578964
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: a958fd271173f304ab8be6f50d91ee93,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -6.9127717
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a958fd271173f304ab8be6f50d91ee93,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.5119677
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a958fd271173f304ab8be6f50d91ee93,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 19.679764
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a958fd271173f304ab8be6f50d91ee93,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a958fd271173f304ab8be6f50d91ee93,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a958fd271173f304ab8be6f50d91ee93,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a958fd271173f304ab8be6f50d91ee93,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a958fd271173f304ab8be6f50d91ee93,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a958fd271173f304ab8be6f50d91ee93,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a958fd271173f304ab8be6f50d91ee93,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a958fd271173f304ab8be6f50d91ee93,
+        type: 3}
+      propertyPath: m_Name
+      value: Keeper
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a958fd271173f304ab8be6f50d91ee93,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a958fd271173f304ab8be6f50d91ee93,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 880506600}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a958fd271173f304ab8be6f50d91ee93,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 880506601}
+  m_SourcePrefab: {fileID: 100100000, guid: a958fd271173f304ab8be6f50d91ee93, type: 3}
 --- !u!1001 &1625467005
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -122148,7 +122423,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
   NoiseModule:
-    enabled: 0
+    enabled: 1
     strength:
       serializedVersion: 2
       minMaxState: 0
@@ -122309,10 +122584,10 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     separateAxes: 0
-    frequency: 0.5
+    frequency: 1
     damping: 1
-    octaves: 1
-    octaveMultiplier: 0.5
+    octaves: 2
+    octaveMultiplier: 1
     octaveScale: 2
     quality: 1
     scrollSpeed:
@@ -127157,7 +127432,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
   NoiseModule:
-    enabled: 0
+    enabled: 1
     strength:
       serializedVersion: 2
       minMaxState: 0
@@ -127318,10 +127593,10 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     separateAxes: 0
-    frequency: 0.5
+    frequency: 1
     damping: 1
-    octaves: 1
-    octaveMultiplier: 0.5
+    octaves: 2
+    octaveMultiplier: 1
     octaveScale: 2
     quality: 1
     scrollSpeed:
@@ -133186,7 +133461,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
   NoiseModule:
-    enabled: 0
+    enabled: 1
     strength:
       serializedVersion: 2
       minMaxState: 0
@@ -133347,10 +133622,10 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     separateAxes: 0
-    frequency: 0.5
+    frequency: 1
     damping: 1
-    octaves: 1
-    octaveMultiplier: 0.5
+    octaves: 2
+    octaveMultiplier: 1
     octaveScale: 2
     quality: 1
     scrollSpeed:
@@ -136299,6 +136574,7 @@ MonoBehaviour:
   dialogueText: {fileID: 507769638}
   nameText: {fileID: 307109038}
   dialogueBox: {fileID: 1873277904}
+  crosshairImage: {fileID: 2062115484}
   crosshairImageSmall: {fileID: 1721842581}
   OnStart: 0
   startName: Intro
@@ -139716,7 +139992,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
   NoiseModule:
-    enabled: 0
+    enabled: 1
     strength:
       serializedVersion: 2
       minMaxState: 0
@@ -139877,10 +140153,10 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     separateAxes: 0
-    frequency: 0.5
+    frequency: 1
     damping: 1
-    octaves: 1
-    octaveMultiplier: 0.5
+    octaves: 2
+    octaveMultiplier: 1
     octaveScale: 2
     quality: 1
     scrollSpeed:
@@ -144875,7 +145151,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
   NoiseModule:
-    enabled: 0
+    enabled: 1
     strength:
       serializedVersion: 2
       minMaxState: 0
@@ -145036,10 +145312,10 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     separateAxes: 0
-    frequency: 0.5
+    frequency: 1
     damping: 1
-    octaves: 1
-    octaveMultiplier: 0.5
+    octaves: 2
+    octaveMultiplier: 1
     octaveScale: 2
     quality: 1
     scrollSpeed:
@@ -150439,7 +150715,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
   NoiseModule:
-    enabled: 0
+    enabled: 1
     strength:
       serializedVersion: 2
       minMaxState: 0
@@ -150600,10 +150876,10 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     separateAxes: 0
-    frequency: 0.5
+    frequency: 1
     damping: 1
-    octaves: 1
-    octaveMultiplier: 0.5
+    octaves: 2
+    octaveMultiplier: 1
     octaveScale: 2
     quality: 1
     scrollSpeed:
@@ -156078,7 +156354,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
   NoiseModule:
-    enabled: 0
+    enabled: 1
     strength:
       serializedVersion: 2
       minMaxState: 0
@@ -156239,10 +156515,10 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     separateAxes: 0
-    frequency: 0.5
+    frequency: 1
     damping: 1
-    octaves: 1
-    octaveMultiplier: 0.5
+    octaves: 2
+    octaveMultiplier: 1
     octaveScale: 2
     quality: 1
     scrollSpeed:
@@ -158297,6 +158573,31 @@ PrefabInstance:
       propertyPath: prewarm
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8788985762903573712, guid: c940f8ebdeba31240ae5cda8cafad6c5,
+        type: 3}
+      propertyPath: NoiseModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8788985762903573712, guid: c940f8ebdeba31240ae5cda8cafad6c5,
+        type: 3}
+      propertyPath: NoiseModule.octaves
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8788985762903573712, guid: c940f8ebdeba31240ae5cda8cafad6c5,
+        type: 3}
+      propertyPath: NoiseModule.frequency
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8788985762903573712, guid: c940f8ebdeba31240ae5cda8cafad6c5,
+        type: 3}
+      propertyPath: NoiseModule.octaveScale
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8788985762903573712, guid: c940f8ebdeba31240ae5cda8cafad6c5,
+        type: 3}
+      propertyPath: NoiseModule.octaveMultiplier
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -158445,6 +158746,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8731906430745084178, guid: 0056a1656e41e3a4c9f46d4286b6b987,
         type: 3}
+      propertyPath: NoiseModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8731906430745084178, guid: 0056a1656e41e3a4c9f46d4286b6b987,
+        type: 3}
+      propertyPath: NoiseModule.octaves
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8731906430745084178, guid: 0056a1656e41e3a4c9f46d4286b6b987,
+        type: 3}
+      propertyPath: NoiseModule.frequency
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8731906430745084178, guid: 0056a1656e41e3a4c9f46d4286b6b987,
+        type: 3}
+      propertyPath: NoiseModule.octaveScale
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8731906430745084178, guid: 0056a1656e41e3a4c9f46d4286b6b987,
+        type: 3}
+      propertyPath: NoiseModule.octaveMultiplier
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8731906430745084178, guid: 0056a1656e41e3a4c9f46d4286b6b987,
+        type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
       value: 100
       objectReference: {fileID: 0}
@@ -158494,3 +158820,6 @@ SceneRoots:
   - {fileID: 1710489271}
   - {fileID: 1531334483}
   - {fileID: 803011117}
+  - {fileID: 1611578964}
+  - {fileID: 185367036}
+  - {fileID: 580393500}

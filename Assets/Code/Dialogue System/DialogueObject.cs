@@ -13,6 +13,7 @@ using UnityEngine;
 public class DialogueObject : MonoBehaviour, IInteractable
 {
     [SerializeField] bool firstInteraction = true;
+    [SerializeField] bool noRepeat = true;
     [SerializeField] int repeatStartPosition;
 
     public string npcName;
@@ -26,7 +27,10 @@ public class DialogueObject : MonoBehaviour, IInteractable
             if (firstInteraction)
             {
                 firstInteraction = false;
-                gameObject.layer = LayerMask.NameToLayer("Default"); //Changes the layer to hide the crosshair hover
+                if (noRepeat)
+                {
+                    gameObject.layer = LayerMask.NameToLayer("Default"); //Changes the layer to hide the crosshair hover
+                }
                 return 0;
             }
             else

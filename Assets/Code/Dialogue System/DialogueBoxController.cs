@@ -21,6 +21,7 @@ public class DialogueBoxController : MonoBehaviour
     [SerializeField] TextMeshProUGUI nameText;
     [SerializeField] CanvasGroup dialogueBox;
 
+    public Image crosshairImage;
     public Image crosshairImageSmall;
     public static event Action OnDialogueStarted;
     public static event Action OnDialogueEnded;
@@ -63,6 +64,7 @@ public class DialogueBoxController : MonoBehaviour
     {
         nameText.text = name;
         dialogueBox.gameObject.SetActive(true);
+        crosshairImage.gameObject.SetActive(false); //Hides crosshair
         crosshairImageSmall.gameObject.SetActive(false); //Hides crosshair
         StopAllCoroutines();
         StartCoroutine(RunDialogue(dialogue,audioclip, startPosition));
@@ -96,6 +98,7 @@ public class DialogueBoxController : MonoBehaviour
 
         OnDialogueEnded?.Invoke();
         dialogueBox.gameObject.SetActive(false); //Hides box once done
+        crosshairImage.gameObject.SetActive(true); //Brings back the croshair
         crosshairImageSmall.gameObject.SetActive(true); //Brings back the croshair
 
     }
