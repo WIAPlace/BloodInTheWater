@@ -53,7 +53,7 @@ public class Scuba_Controller : MonoBehaviour
     {
         if(((1 << other.gameObject.layer) & playerMask.value) != 0 && currentState != StunnedState)
         {
-            Debug.Log("Hit Collider");
+            //Debug.Log("Hit Collider");
             currentState = ContactState; // data is being transfered;
         }
     }

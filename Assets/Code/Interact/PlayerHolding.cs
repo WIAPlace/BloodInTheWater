@@ -18,7 +18,7 @@ public class PlayerHolding : MonoBehaviour
 
     [Header("Script Refrences")]
     [SerializeField][Tooltip("Useable Item Refrences. Make sure these are in the same order as the objects they represent. 0 is nothing")]
-    private UseableItems_Abstract[] usableItems;
+    private UseableItem_Abstract[] usableItems;
 
     private List<GameObject> heldItems = new List<GameObject>();
     private int holdingsLength=0;
@@ -60,7 +60,7 @@ public class PlayerHolding : MonoBehaviour
         if(heldItems[index]!=null)
         {
             heldItems[index].SetActive(true); // if the object is not null.
-            usableItems[index].enabled = true;
+            //usableItems[index].enabled = true;
         }
     } 
 
@@ -71,7 +71,7 @@ public class PlayerHolding : MonoBehaviour
             if(heldItems[i] != null && heldItems[i].activeSelf)
             {
                 heldItems[i].SetActive(false);
-                usableItems[i].enabled = false;
+                //usableItems[i].enabled = false;
             }
         }
     }
