@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 /// 
 /// Author: Weston Tollette
 /// Created: 2/25/26
@@ -10,7 +7,11 @@ using UnityEngine;
 /// Edited By:
 /// Edit Purpose:
 ///
-public abstract class Abs_StateUseItem : IUsableState
+public abstract class Abs_StateItemUse : IUsableState
 {
+    public abstract void DoEnter();
+
+    public abstract void DoExit();
+
     abstract public IUsableState DoState(Usables_Controller controller); // will be implemented in the States themselves.
 }

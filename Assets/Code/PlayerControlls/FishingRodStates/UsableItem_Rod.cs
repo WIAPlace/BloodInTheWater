@@ -1,18 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class UsableItem_Rod : MonoBehaviour
+/// 
+/// Author: Weston Tollette
+/// Created: 2/25/26
+/// Purpose: Abstract for all UseItem States
+/// 
+/// Edited:
+/// Edited By:
+/// Edit Purpose:
+///
+public class UsableItem_Rod : UseableItem_Abstract
 {
-    // Start is called before the first frame update
-    void Start()
+    private void OnEnable()
     {
-        
+        UseItem = new Rod_StateUseItem();
     }
-
-    // Update is called once per frame
-    void Update()
+    public override IUsableState DoState(Usables_Controller controller)
     {
-        
+        return controller.currentState.DoState(controller);
     }
 }

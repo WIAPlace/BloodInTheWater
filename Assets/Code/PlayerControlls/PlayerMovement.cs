@@ -61,7 +61,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void RotateToView()
-    {
+    { // the object / player turns to where the camera is looking
         transform.rotation = Quaternion.Euler(transform.eulerAngles.x, playerView.eulerAngles.y, transform.eulerAngles.z);
     }
 

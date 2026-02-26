@@ -4,16 +4,27 @@ using UnityEngine;
 /// 
 /// Author: Weston Tollette
 /// Created: 2/25/26
-/// Purpose: UseItem States for Fishing Rod
+/// Purpose: UseItem States for Harpoon
 /// 
 /// Edited:
 /// Edited By:
 /// Edit Purpose:
 ///
-public class Rod_StateUseItem : Abs_StateUseItem
+public class Harp_StateUseItem : Abs_StateItemUse
 {
+
     public override IUsableState DoState(Usables_Controller controller)
     {
         return null;
+    }
+
+    public override void DoEnter()
+    {
+        
+    }
+
+    public override void DoExit()
+    {
+        
     }
 }

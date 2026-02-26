@@ -14,7 +14,7 @@ public class Scuba_StateContact : IBoatStomperState
 {
     public IBoatStomperState DoState(Scuba_Controller SC)
     {
-        Debug.Log("Hit");
+        //Debug.Log("Hit");
         SC.scubaData.SendData();
         return null;
     }
