@@ -7,13 +7,13 @@
 /// Edited By:
 /// Edit Purpose:
 ///
-public class UsableItem_Harp : UseableItem_Abstract
+public class UseableItem_Harp : UseableItem_Abstract
 {
     private void OnEnable()
     {
         UseItem = new Harp_StateUseItem();
     }
-    public override IUsableState DoState(Usables_Controller controller)
+    public override IUseableState DoState(Useable_Controller controller)
     {
         return null;
     }

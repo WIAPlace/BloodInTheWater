@@ -1,4 +1,3 @@
-
 using UnityEngine;
 /// 
 /// Author: Weston Tollette
@@ -9,10 +8,10 @@ using UnityEngine;
 /// Edited By:
 /// Edit Purpose:
 /// 
-public abstract class UseableItem_Abstract
+public abstract class UseableItem_Abstract : MonoBehaviour
 {
     [Tooltip("Game Object of the thing being used")]
-    public GameObject usableMesh;
+    public GameObject useableMesh;
 
     // States:
     public Abs_StateItemIdle Idle; // no contact in between action states.
@@ -20,5 +19,5 @@ public abstract class UseableItem_Abstract
     public Abs_StateItemIsReady IsReady; // finished readying, if let go it will do its thing
     public Abs_StateItemUse UseItem; // If Ready On release, the object will do its thing
 
-    public abstract IUsableState DoState(Usables_Controller controller);
+    public abstract IUseableState DoState(Useable_Controller controller);
 }

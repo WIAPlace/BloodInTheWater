@@ -11,20 +11,24 @@ using UnityEngine;
 /// Edited By:
 /// Edit Purpose:
 ///
-public class Usables_Controller : MonoBehaviour
+public class Useable_Controller : MonoBehaviour
 {
     [SerializeField] [Tooltip("Insert the Scriptable Object Input Reader.")]
     private InputReader input;
 
-    [SerializeField] [Tooltip("Array for the avalible items of use")]
-    private UseableItem_Abstract[] UsableItem;
+    public UseableItem_Rod rod;
+    public UseableItem_Harp harp;
+
+    [field: SerializeField] [Tooltip("Array for the avalible items of use")]
+    public UseableItem_Abstract[] UsableItem { get; private set; }
     // 0 = null
     // 1 = fishing rod
-    // 2 = harpoon
-    
+    // 2 = harpoon    
 
     public UseableItem_Abstract currentItem; // used to hold what the current item in use is
-    public IUsableState currentState; // will just be swaped out for whatever is needed at that point
+    public IUseableState currentState; // will just be swaped out for whatever is needed at that point
+
+    public float readyTime; // used for how long the readying state will last
 
     // States:
     //public Abs_StateItemIdle Idle; // no contact in between action states.
@@ -41,11 +45,11 @@ public class Usables_Controller : MonoBehaviour
     }
     
 
-    public void ChangeState(IUsableState newState)
+    public void ChangeState(IUseableState newState)
     {
-        currentState.DoExit(); // leave the prevvious state
+        currentState.DoExit(this); // leave the prevvious state
         currentState = newState;
-        currentState.DoEnter(); // enter the new state
+        currentState.DoEnter(this); // enter the new state
     }
     public void ChangeItem(int num)
     {
@@ -57,8 +61,20 @@ public class Usables_Controller : MonoBehaviour
 
 
 
+    void OnValidate()
+    {
+        TryGetComponent(out UseableItem_Rod rod);
+        TryGetComponent(out UseableItem_Harp harp);
+    }
+    void Start()
+    {
+        currentItem = rod;
+        currentState = currentItem.Idle;
 
-
+        UsableItem[0] = null;
+        UsableItem[1] = rod;
+        UsableItem[2] = harp;
+    }
 
     // On thing happens
     void OnEnable()
@@ -103,6 +119,5 @@ public class Usables_Controller : MonoBehaviour
             // this is mainly used to handle simple clicks not setting off the items
             ChangeState(currentItem.Idle);
         }
-
     }
 }

@@ -14,8 +14,11 @@ using UnityEngine.AI;
 public class Scuba_StateMove : IBoatStomperState
 {
     public IBoatStomperState DoState(Scuba_Controller SC)
-    {
-        SC.agent.isStopped = false; // turns the man into an able bodied individual
+    { 
+        if (SC.agent.isStopped)
+        {   // this doesnt need to be going off every frame.
+            SC.agent.isStopped = false; // turns the man into an able bodied individual
+        }
         SC.agent.SetDestination(SC.GetTarget().transform.position);
         return SC.MoveState;
     }
