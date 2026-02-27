@@ -59,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
         Vector3 movement = directionalMovement * speed * Time.deltaTime;
         controller.Move(movement);
     }
-
+    
     private void RotateToView()
     {
         transform.rotation = Quaternion.Euler(transform.eulerAngles.x, playerView.eulerAngles.y, transform.eulerAngles.z);
