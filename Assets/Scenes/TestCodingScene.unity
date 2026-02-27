@@ -137,10 +137,13 @@ GameObject:
   - component: {fileID: 23582703}
   - component: {fileID: 23582702}
   - component: {fileID: 23582700}
-  - component: {fileID: 23582701}
   - component: {fileID: 23582706}
   - component: {fileID: 23582707}
   - component: {fileID: 23582708}
+  - component: {fileID: 23582711}
+  - component: {fileID: 23582710}
+  - component: {fileID: 23582709}
+  - component: {fileID: 23582712}
   m_Layer: 0
   m_Name: FirstPersonCamera
   m_TagString: Untagged
@@ -178,32 +181,6 @@ MonoBehaviour:
   inputController: {fileID: 23582702}
   mouseSensitivityX: 1
   mouseSensitivityY: -1
---- !u!114 &23582701
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 23582697}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4552868a63dd1b4479eaeea2fb98bcfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  input: {fileID: 11400000, guid: 23c146efed111744088e5a06907694b3, type: 2}
-  lurePrefab: {fileID: 1206339162}
-  castSpotPrefab: {fileID: 1774718265}
-  waterMask:
-    serializedVersion: 2
-    m_Bits: 16
-  fishMask:
-    serializedVersion: 2
-    m_Bits: 256
-  castRange: 34
-  castVary: 13
-  pongSpeed: 13
-  fearRadius: 2
-  animator: {fileID: 0}
 --- !u!114 &23582702
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -354,7 +331,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   input: {fileID: 11400000, guid: 23c146efed111744088e5a06907694b3, type: 2}
-  lure: {fileID: 23582701}
+  lure: {fileID: 0}
   qte: {fileID: 11400000, guid: f2e9601c6ba308b43a2a58e1f874297d, type: 2}
   qtUI: {fileID: 7719177798364701187, guid: 184b0163f19e76543b339e2e0f01d71e, type: 3}
 --- !u!114 &23582707
@@ -383,10 +360,80 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8e86fcc112a2b042832a180e0b5f434, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fishingRod: {fileID: 1599294401}
-  usableItems:
-  - {fileID: 0}
-  - {fileID: 23582701}
+--- !u!114 &23582709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 23582697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39404bbfccd74354a8fc8376cdfebdf1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useableMesh: {fileID: 1599294401}
+  <LurePrefab>k__BackingField: {fileID: 1206339162}
+  <CastSpotPrefab>k__BackingField: {fileID: 1774718265}
+  <WaterMask>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 16
+  <FishMask>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 256
+  <CastRange>k__BackingField: 34
+  <CastVary>k__BackingField: 13
+  <PongSpeed>k__BackingField: 13
+  <FearRadius>k__BackingField: 2
+  GetInRange: 0
+  CurrentCastValue: 0
+--- !u!114 &23582710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 23582697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87e5f1e6c893eb8488ede827c19d2be3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useableMesh: {fileID: 206660679}
+--- !u!114 &23582711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 23582697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09d59dd9fb0928e4aa58e7d7d7427303, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  input: {fileID: 11400000, guid: 23c146efed111744088e5a06907694b3, type: 2}
+  empty: {fileID: 23582712}
+  rod: {fileID: 23582709}
+  harp: {fileID: 23582710}
+  currentItemIndex: 0
+  currentItem: {fileID: 0}
+  readyTime: 0.3
+  placeTime: 0
+  debugCurrentStateName: 
+--- !u!114 &23582712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 23582697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0397b37bd6326cd468684274d3e35c96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useableMesh: {fileID: 153753289}
 --- !u!1 &48970549
 GameObject:
   m_ObjectHideFlags: 0
@@ -454,6 +501,37 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &153753289
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 153753290}
+  m_Layer: 9
+  m_Name: Empty
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &153753290
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 153753289}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1364786901}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &176858655
 GameObject:
   m_ObjectHideFlags: 0
@@ -693,6 +771,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 199005376}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &206660679
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 206660680}
+  m_Layer: 0
+  m_Name: TestHarpoon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &206660680
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 206660679}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.5824909, y: -7.662157, z: -12.659467}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1364786901}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &208115099
 GameObject:
   m_ObjectHideFlags: 0
@@ -1092,7 +1201,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &353911573
 Transform:
   m_ObjectHideFlags: 0
@@ -4511,6 +4620,8 @@ Transform:
   - {fileID: 1525710126}
   - {fileID: 874443327}
   - {fileID: 1204610864}
+  - {fileID: 206660680}
+  - {fileID: 153753290}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1364786902

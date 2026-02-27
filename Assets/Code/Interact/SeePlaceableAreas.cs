@@ -18,6 +18,7 @@ public class SeePlaceableAreas : MonoBehaviour
     private PlayerHolding holdings;
     [SerializeField] [Tooltip("PlaceableArea Script")]
     private PlaceableAreas areas;
+    
 
 
 
@@ -39,13 +40,14 @@ public class SeePlaceableAreas : MonoBehaviour
     {// on holding down place button allow them to see
         //Debug.Log("Showing Areas");
         int currentHolding = 0; // check what the player is currently holding.
-        currentHolding = holdings.CheckInHand(); 
+        currentHolding = holdings.CheckInHand();
 
         areas.TurnOffAllIndicators(); // just in case
         areas.TurnOnIndicator(currentHolding); // turns on the indicators related to what is currently being held
 
         holdings.SetChecking(true); // communication for placeable spots
     }
+
     private void HandlePlaceCancelled()
     {// on letting go of place button turn off ability to see.
         areas.TurnOffAllIndicators(); // we only want to see indicators if the button is down.
