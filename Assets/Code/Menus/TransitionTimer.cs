@@ -16,14 +16,9 @@ public class TransitionTimer : MonoBehaviour
     public GameObject loadingScreen;
     public CanvasGroup canvasGroup;
     public float time;
-    IEnumerator SceneWait()
-    {
-        yield return new WaitForSeconds(time);
-    }
 
     void Start()
     {
-        //StartCoroutine(SceneWait());
         StartCoroutine(StartLoad());
     }
 
