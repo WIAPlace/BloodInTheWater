@@ -17,7 +17,7 @@ public class QuickTimeController_Player : MonoBehaviour
     [SerializeField] [Tooltip("Insert the Scriptable Object Input Reader")]
     private InputReader input;
     [SerializeField] [Tooltip("Refrence to the Fishing Rod Script")]
-    private TestFishLure lure;
+    private Useable_Controller useControl;
     [SerializeField] [Tooltip("Quick Time Event")]
     QuickTimeEvent_Basic qte;
     [SerializeField] [Tooltip("The quick time mini game bar")]
@@ -45,9 +45,9 @@ public class QuickTimeController_Player : MonoBehaviour
     private QuickTimeType_Enum currentType; // holder of what the current type of game is playing.
     void Awake()
     {
-        if (lure == null)
+        if (useControl == null)
         {
-            lure = GetComponent<TestFishLure>();
+            useControl = GetComponent<Useable_Controller>();
         }
         qtUI = Instantiate(qtUI); // Instantiate and alter the instantiated version in scene
         Transform redAreaT = qtUI.transform.Find("RedArea");
@@ -180,7 +180,7 @@ public class QuickTimeController_Player : MonoBehaviour
 
     private IEnumerator EndQTE(float x) // turns off the qte after a number of seconds.
     {
-        lure.AutoHandled();
+        useControl.ChangeState(useControl.currentItem.IsReady);
         yield return new WaitForSeconds(x);
         qtUI.SetActive(false);
         input.SetGameplay();
