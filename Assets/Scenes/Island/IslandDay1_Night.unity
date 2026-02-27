@@ -4441,7 +4441,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &307109037
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13701,10 +13701,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firstInteraction: 1
-  noRepeat: 0
-  repeatStartPosition: 1
-  npcName: Keeper John
-  dialogueAsset: {fileID: 11400000, guid: 99ae5717dd401374eae5b3dd79cc3653, type: 2}
+  noRepeat: 1
+  repeatStartPosition: 10
+  npcName: Keeper
+  dialogueAsset: {fileID: 11400000, guid: 3976ebf04e744674eb7013cc6358261e, type: 2}
 --- !u!64 &880506601
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -15421,7 +15421,6 @@ GameObject:
   - component: {fileID: 1035026497}
   - component: {fileID: 1035026496}
   - component: {fileID: 1035026495}
-  - component: {fileID: 1035026494}
   m_Layer: 12
   m_Name: TransistionDoor
   m_TagString: Untagged
@@ -15429,19 +15428,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1035026494
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1035026493}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 194a759474662694da50b1ff96be150b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  transistion: {fileID: 1718153714}
 --- !u!65 &1035026495
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15471,7 +15457,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1035026493}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
@@ -24653,7 +24639,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadingScreen: {fileID: 919178782}
-  sceneToLoad: TransitionDaysLater
+  targetScene: 
+  transitionType: 
   canvasGroup: {fileID: 760141496}
 --- !u!4 &1718153715
 Transform:
@@ -26648,9 +26635,9 @@ MonoBehaviour:
   dialogueBox: {fileID: 1873277904}
   crosshairImage: {fileID: 2062115484}
   crosshairImageSmall: {fileID: 1721842581}
-  OnStart: 0
-  startName: Intro
-  startDialogue: {fileID: 11400000, guid: 99ae5717dd401374eae5b3dd79cc3653, type: 2}
+  OnStart: 1
+  startName: Keeper
+  startDialogue: {fileID: 11400000, guid: d79abcaf6baee8a44bdddedbae650341, type: 2}
   audioSource: {fileID: 715931321}
 --- !u!225 &1873277904
 CanvasGroup:

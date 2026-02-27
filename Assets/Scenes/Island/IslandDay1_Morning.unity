@@ -4440,7 +4440,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &307109037
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13582,10 +13582,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firstInteraction: 1
-  noRepeat: 0
-  repeatStartPosition: 1
-  npcName: Keeper John
-  dialogueAsset: {fileID: 11400000, guid: 99ae5717dd401374eae5b3dd79cc3653, type: 2}
+  noRepeat: 1
+  repeatStartPosition: 10
+  npcName: Keeper
+  dialogueAsset: {fileID: 11400000, guid: 85b18f9ff7c4b13488fac8486f9a4b54, type: 2}
 --- !u!64 &880506601
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -24416,7 +24416,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadingScreen: {fileID: 919178782}
-  sceneToLoad: TransitionDaysLater
+  targetScene: IslandDay3_Night
+  transitionType: TransitionDay
   canvasGroup: {fileID: 760141496}
 --- !u!4 &1718153715
 Transform:

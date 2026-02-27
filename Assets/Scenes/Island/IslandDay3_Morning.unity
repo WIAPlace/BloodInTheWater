@@ -4440,7 +4440,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &307109037
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7606,6 +7606,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8312941797347602485, guid: 0ee158d2dd8c67d4284a5c09241e8f4f,
         type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8312941797347602485, guid: 0ee158d2dd8c67d4284a5c09241e8f4f,
+        type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -7662,7 +7667,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8312941797347602485, guid: 0ee158d2dd8c67d4284a5c09241e8f4f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 521783179}
   m_SourcePrefab: {fileID: 100100000, guid: 0ee158d2dd8c67d4284a5c09241e8f4f, type: 3}
 --- !u!1001 &496825772
 PrefabInstance:
@@ -8077,6 +8086,29 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1860613634}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &521783178 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8312941797347602485, guid: 0ee158d2dd8c67d4284a5c09241e8f4f,
+    type: 3}
+  m_PrefabInstance: {fileID: 494286988}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &521783179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 521783178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91ba47435bc07644080a4d4b141a3c5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firstInteraction: 1
+  noRepeat: 1
+  repeatStartPosition: 3
+  npcName: 
+  dialogueAsset: {fileID: 11400000, guid: a5605a879c0048143a18183578fb2f48, type: 2}
 --- !u!1001 &526021350
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13655,10 +13687,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firstInteraction: 1
-  noRepeat: 0
-  repeatStartPosition: 1
-  npcName: Keeper John
-  dialogueAsset: {fileID: 11400000, guid: 99ae5717dd401374eae5b3dd79cc3653, type: 2}
+  noRepeat: 1
+  repeatStartPosition: 10
+  npcName: Keeper
+  dialogueAsset: {fileID: 11400000, guid: 91a65ecf765ad6e49864bcdc9a068be6, type: 2}
 --- !u!64 &880506601
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -24489,7 +24521,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadingScreen: {fileID: 919178782}
-  sceneToLoad: TransitionDaysLater
+  targetScene: IslandDay7_Night
+  transitionType: TransitionDay
   canvasGroup: {fileID: 760141496}
 --- !u!4 &1718153715
 Transform:

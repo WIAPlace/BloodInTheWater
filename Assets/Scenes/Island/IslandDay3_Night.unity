@@ -4364,7 +4364,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &307109037
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13227,10 +13227,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firstInteraction: 1
-  noRepeat: 0
-  repeatStartPosition: 1
-  npcName: Keeper John
-  dialogueAsset: {fileID: 11400000, guid: 99ae5717dd401374eae5b3dd79cc3653, type: 2}
+  noRepeat: 1
+  repeatStartPosition: 10
+  npcName: Keeper
+  dialogueAsset: {fileID: 11400000, guid: 9e386bf6ebbe6174797cf153ee7125e1, type: 2}
 --- !u!64 &880506601
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -14947,7 +14947,6 @@ GameObject:
   - component: {fileID: 1035026497}
   - component: {fileID: 1035026496}
   - component: {fileID: 1035026495}
-  - component: {fileID: 1035026494}
   m_Layer: 12
   m_Name: TransistionDoor
   m_TagString: Untagged
@@ -14955,19 +14954,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1035026494
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1035026493}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 194a759474662694da50b1ff96be150b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  transistion: {fileID: 1718153714}
 --- !u!65 &1035026495
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -24760,7 +24746,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadingScreen: {fileID: 919178782}
-  sceneToLoad: TransitionDaysLater
+  targetScene: 
+  transitionType: 
   canvasGroup: {fileID: 760141496}
 --- !u!4 &1718153715
 Transform:
@@ -26876,7 +26863,7 @@ MonoBehaviour:
   OnStart: 0
   startName: Intro
   startDialogue: {fileID: 11400000, guid: 99ae5717dd401374eae5b3dd79cc3653, type: 2}
-  audioSource: {fileID: 0}
+  audioSource: {fileID: 1488259323}
 --- !u!225 &1873277904
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -27265,6 +27252,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8312941797347602485, guid: 0ee158d2dd8c67d4284a5c09241e8f4f,
         type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8312941797347602485, guid: 0ee158d2dd8c67d4284a5c09241e8f4f,
+        type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -27321,8 +27313,35 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8312941797347602485, guid: 0ee158d2dd8c67d4284a5c09241e8f4f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1900417500}
   m_SourcePrefab: {fileID: 100100000, guid: 0ee158d2dd8c67d4284a5c09241e8f4f, type: 3}
+--- !u!1 &1900417499 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8312941797347602485, guid: 0ee158d2dd8c67d4284a5c09241e8f4f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1900417498}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1900417500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1900417499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91ba47435bc07644080a4d4b141a3c5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firstInteraction: 1
+  noRepeat: 1
+  repeatStartPosition: 10
+  npcName: 
+  dialogueAsset: {fileID: 11400000, guid: 9e386bf6ebbe6174797cf153ee7125e1, type: 2}
 --- !u!4 &1906810103 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2257572121989869071, guid: 24b12f89cdd155046bcac0e4507f9bf6,

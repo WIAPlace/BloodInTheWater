@@ -4440,7 +4440,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &307109037
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13581,11 +13581,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91ba47435bc07644080a4d4b141a3c5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstInteraction: 1
+  firstInteraction: 0
   noRepeat: 0
-  repeatStartPosition: 1
-  npcName: Keeper John
-  dialogueAsset: {fileID: 11400000, guid: 99ae5717dd401374eae5b3dd79cc3653, type: 2}
+  repeatStartPosition: 2
+  npcName: Keeper
+  dialogueAsset: {fileID: 11400000, guid: 5334f57803e821a44b11616175bea353, type: 2}
 --- !u!64 &880506601
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -24416,7 +24416,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadingScreen: {fileID: 919178782}
-  sceneToLoad: TransitionDaysLater
+  targetScene: IslandDay1_Night
+  transitionType: TransitionDaysLater
   canvasGroup: {fileID: 760141496}
 --- !u!4 &1718153715
 Transform:
@@ -24640,6 +24641,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4391370871656460080, guid: 3598aa3f55e6f50489fdee72d471301e,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5560721666515895054, guid: 3598aa3f55e6f50489fdee72d471301e,
         type: 3}
@@ -26416,9 +26422,9 @@ MonoBehaviour:
   dialogueBox: {fileID: 1873277904}
   crosshairImage: {fileID: 2062115484}
   crosshairImageSmall: {fileID: 1721842581}
-  OnStart: 0
-  startName: Intro
-  startDialogue: {fileID: 11400000, guid: 99ae5717dd401374eae5b3dd79cc3653, type: 2}
+  OnStart: 1
+  startName: Keeper
+  startDialogue: {fileID: 11400000, guid: 5334f57803e821a44b11616175bea353, type: 2}
   audioSource: {fileID: 715931321}
 --- !u!225 &1873277904
 CanvasGroup:

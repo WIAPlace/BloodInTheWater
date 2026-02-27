@@ -7,18 +7,20 @@ using UnityEngine.SceneManagement;
 /// Created: 2/25/26
 /// Purpose: Swaps the scenes but with a fade in
 /// 
-/// Edited: 
-/// Edited By: 
-/// Edit Purpose: 
+/// Edited: 2/26/2026
+/// Edited By: Marshall Turner
+/// Edit Purpose: To reduce required transistion scenes
 ///
 public class TransistionScene : MonoBehaviour
 {
     public GameObject loadingScreen;
-    public string sceneToLoad;
+    public string targetScene;
+    public string transitionType;
     public CanvasGroup canvasGroup;
 
     public void StartGame()
     {
+        TransitionData.sceneToLoad = targetScene; // changes the scene tied to TransitionData
         StartCoroutine(StartLoad());
     }
 
@@ -27,7 +29,7 @@ public class TransistionScene : MonoBehaviour
         loadingScreen.SetActive(true); //Turns on the fade image
         yield return StartCoroutine(FadeLoadingScreen(1, 1)); //The speed of the fade in
 
-        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneToLoad);
+        AsyncOperation operation = SceneManager.LoadSceneAsync(transitionType);
         while (!operation.isDone)
         {
             yield return null;
