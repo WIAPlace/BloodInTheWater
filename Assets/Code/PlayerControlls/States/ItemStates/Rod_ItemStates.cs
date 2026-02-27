@@ -10,7 +10,7 @@ using UnityEngine.Animations;
 /// Edit Purpose:
 ///
 
-
+////////////////////////////////////////////////////// Idle /////////////////////////////////////////////
 public class Rod_StateItemIdle : Abs_StateItemIdle
 {
     public override void DoEnter(Useable_Controller controller)
@@ -55,20 +55,23 @@ public class Rod_StateItemIsReady : Abs_StateItemIsReady
     private UseableItem_Rod rod; // rod item script
     public override void DoEnter(Useable_Controller controller)
     {
+        //Debug.Log("Entered Ready");
         obj = controller.gameObject;
         rod = controller.rod;
         if (rod.CheckIfFishing())
         {
+            //Debug.Log("Entered Reel In");
             controller.ChangeState(controller.currentItem.UseItem);
         }
     }
 
     public override void DoExit(Useable_Controller controller)
     {
-        
+        //Debug.Log("Exited Ready");
     }
     public override IUseableState DoState(Useable_Controller controller)
     {
+        
         if(!rod.CheckIfFishing())
         {
             HoldCasting(controller);
@@ -114,7 +117,7 @@ public class Rod_StateItemIsReady : Abs_StateItemIsReady
 
 
 ////////////////////////////////////////////////////// Use Item /////////////////////////////////////////////
-public class Rod_StateUseItem : Abs_StateItemUse
+public class Rod_StateItemUse : Abs_StateItemUse
 { // using the item from the rod state class
 
     private GameObject obj; // controllers game object
@@ -195,3 +198,22 @@ public class Rod_StateUseItem : Abs_StateItemUse
         }
     }
 }
+
+////////////////////////////////////////////////////// Place Item /////////////////////////////////////////////
+public class Rod_StateItemPlace : Abs_StateItemPlace
+{
+
+    public override void DoEnter(Useable_Controller controller)
+    {
+        // start animation to place or pickup something
+        controller.currentItem.useableMesh.SetActive(false); // turn of the game object 
+        base.DoEnter(controller);
+
+    }
+
+    public override void DoExit(Useable_Controller controller)
+    {
+        base.DoExit(controller);
+    }    
+}
+

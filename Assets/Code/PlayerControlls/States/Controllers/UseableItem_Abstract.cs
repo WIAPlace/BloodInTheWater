@@ -18,6 +18,7 @@ public abstract class UseableItem_Abstract : MonoBehaviour
     public Abs_StateItemReadying Readying; // The process of setting up to do the thing. //press held down 
     public Abs_StateItemIsReady IsReady; // finished readying, if let go it will do its thing
     public Abs_StateItemUse UseItem; // If Ready On release, the object will do its thing
+    public Abs_StateItemPlace Place; // state for placeing something down
 
     public abstract IUseableState DoState(Useable_Controller controller);
 }

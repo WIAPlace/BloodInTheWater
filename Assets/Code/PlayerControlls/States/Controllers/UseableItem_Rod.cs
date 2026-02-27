@@ -43,7 +43,9 @@ public class UseableItem_Rod : UseableItem_Abstract
         Idle = new Rod_StateItemIdle();
         Readying = new Rod_StateItemReadying();
         IsReady = new Rod_StateItemIsReady();
-        UseItem = new Rod_StateUseItem();
+        UseItem = new Rod_StateItemUse();
+        Place = new Rod_StateItemPlace();
+
 
         LurePrefab.SetActive(false);
         CastSpotPrefab.SetActive(false); // Set inactive at the start cause why not
