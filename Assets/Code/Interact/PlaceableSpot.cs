@@ -82,11 +82,14 @@ public class PlaceableSpot : MonoBehaviour, IInteractable
     // interface implementation
     public void Interact()
     {
-        SetPlaced(!itemPlaced);
+        if(holding.CheckInHand() == typeIndex || holding.CheckInHand() == 0)
+        {
+            SetPlaced(!itemPlaced);
 
-        if (!holding.CheckIfChecking())
-        { //if we arnt checking dont keep this game object around
-            gameObject.SetActive(false);
+            if (!holding.CheckIfChecking())
+            { //if we arnt checking dont keep this game object around
+                gameObject.SetActive(false);
+            }
         }
     }
 }

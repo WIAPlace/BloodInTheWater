@@ -71,8 +71,8 @@ public class Harp_StateItemPlace : Abs_StateItemPlace // place is pickup for an 
     public override void DoEnter(Useable_Controller controller)
     {
         // do some kind of animation to pick up
-        base.DoEnter(controller);
         controller.currentItem.useableMesh.SetActive(false); // turn on the game object 
+        base.DoEnter(controller);
     }
 
     public override void DoExit(Useable_Controller controller)
