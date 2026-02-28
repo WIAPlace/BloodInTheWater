@@ -25,6 +25,7 @@ public class Scuba_Controller : MonoBehaviour, IMonster
     [SerializeField][Tooltip("Player StateController script")]
     private Useable_Controller useControl;
 
+    
     public QuickTimeData_Scuba scubaData; // stuff for data minigame
 
     public NavMeshAgent agent; // the part that does the AI.
@@ -33,7 +34,10 @@ public class Scuba_Controller : MonoBehaviour, IMonster
     
     [HideInInspector]
     public Vector3 hitDir;
-    
+    [HideInInspector]
+    public Rigidbody rb;
+    public Coroutine stun;
+
     // All of the States
     public Scuba_StateSpawn SpawnState = new Scuba_StateSpawn(); // when called spawn at a random spot out of avalible ones
     public Scuba_StateMove MoveState = new Scuba_StateMove(); // move twoards player
@@ -48,6 +52,7 @@ public class Scuba_Controller : MonoBehaviour, IMonster
     {
         agent = GetComponent<NavMeshAgent>(); // set agent to this part of the component.
         scubaData = GetComponent<QuickTimeData_Scuba>();
+        rb = GetComponent<Rigidbody>(); // rigid body for the scuba being hit
         //gameObject.SetActive(false); // start out false because he will be activated in spawn state.
         currentState = SpawnState; 
         // scuba will have to be activated by something outside itself, because the update wont run if it is disabled
@@ -62,19 +67,27 @@ public class Scuba_Controller : MonoBehaviour, IMonster
     }
     void OnTriggerEnter(Collider other)
     {
-        if(((1 << other.gameObject.layer) & playerMask.value) != 0 && currentState != StunnedState)
+        if(((1 << other.gameObject.layer) & playerMask.value) != 0 )
         {
-            currentState = ContactState; // data is being transfered;
-            
-            useControl.ChangeState(useControl.currentItem.UnderAtk);
-            // change player's state to hit
+            if(currentState != StunnedState)
+            {
+                currentState = ContactState; // data is being transfered;
+                
+                useControl.ChangeState(useControl.currentItem.UnderAtk);
+                // change player's state to hit
+            }
+            else
+            {
+                rb.isKinematic = true; // player can no longer push my mans around
+            }
         }
+        
     }
     void OnCollisionEnter(Collision collision)
     {
         if(((1 << collision.gameObject.layer) & edgeMask.value) != 0 && currentState == StunnedState)
         {
-            gameObject.SetActive(false);
+            currentState = SpawnState;
         }
     }
 

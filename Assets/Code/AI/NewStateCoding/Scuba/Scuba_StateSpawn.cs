@@ -16,6 +16,7 @@ public class Scuba_StateSpawn : IBoatStomperState
 
     private void Spawning(Scuba_Controller scubaGuy) // choose a random spot to spawn.
     {
+        
         int spots = scubaGuy.GetNumberOfSpots(); // get number of spots
         int rando = Random.Range(0, spots); // picks a spot out of the avalible options
         scubaGuy.transform.position = scubaGuy.GetScubaSpots(rando).transform.position;
@@ -24,7 +25,14 @@ public class Scuba_StateSpawn : IBoatStomperState
 
 
     public IBoatStomperState DoState(Scuba_Controller SC)
-    { 
+    {   
+        if(SC.stun != null) // clean up if he has been here before
+        { // stops a corunie if its already playing
+            SC.StopCoroutine(SC.stun);
+        }
+        SC.rb.isKinematic = true;
+        SC.agent.enabled = true;
+
         Spawning(SC);
         SC.gameObject.SetActive(true);
         //Debug.Log("Active");

@@ -15,11 +15,11 @@ public class Scuba_StateHit : IBoatStomperState
     public IBoatStomperState DoState(Scuba_Controller SC)
     {
         //Debug.Log("Hit State Entered");
-        if (SC.gameObject.TryGetComponent(out Rigidbody rb)){
-            //Debug.Log("force added");
+        
+        SC.rb.isKinematic = false;
             
-            rb.AddForce(SC.hitDir*SC.hitForce);
-        }
+        SC.rb.AddForce(SC.rb.mass * SC.hitForce * SC.hitDir);
+        
         return SC.BreakOffState;
     }
 }
