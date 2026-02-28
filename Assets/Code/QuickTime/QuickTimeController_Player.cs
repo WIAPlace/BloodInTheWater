@@ -180,7 +180,7 @@ public class QuickTimeController_Player : MonoBehaviour
 
     private IEnumerator EndQTE(float x) // turns off the qte after a number of seconds.
     {
-        useControl.ChangeState(useControl.currentItem.Idle);
+        useControl.ChangeState(useControl.currentItem.Readying);
         yield return new WaitForSeconds(x);
         qtUI.SetActive(false);
         input.SetGameplay();

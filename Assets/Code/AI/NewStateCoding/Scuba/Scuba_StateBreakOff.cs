@@ -11,9 +11,14 @@ using UnityEngine;
 ///
 public class Scuba_StateBreakOff : IBoatStomperState
 {
+    private Coroutine stun;
     public IBoatStomperState DoState(Scuba_Controller SC)
     {
-        SC.StartCoroutine(StunTimer(SC));
+        if(stun != null)
+        { // stops a corunie if its already playing
+            SC.StopCoroutine(stun);
+        }
+        stun = SC.StartCoroutine(StunTimer(SC));
         return SC.StunnedState; // or some kind of pause state
     }
     public IEnumerator StunTimer(Scuba_Controller SC)

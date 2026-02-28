@@ -56,6 +56,11 @@ public abstract class Abs_StateItemReadying : IUseableState
 
     public virtual void DoEnter(Useable_Controller controller)
     { // on enter play this to start the corutine to be ready
+        if(controller.previousState == controller.currentItem.UnderAtk) // catch for if attack just occured
+        {
+            controller.ChangeState(controller.currentItem.Idle);
+            return;
+        }
         controller.StartWaitToChange(controller.currentItem.IsReady, controller.readyTime);
         controller.WindUpOn(controller.readyTime); // turns on the wind up indicator
         

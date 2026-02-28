@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.AI;
+using Unity.VisualScripting;
 /// 
 /// Author: Weston Tollette
 /// Created: 2/24/26
@@ -19,6 +20,8 @@ public class Scuba_Controller : MonoBehaviour, IMonster
     private IBoatStomperState currentState;
     [SerializeField][Tooltip("Player layer")]
     private LayerMask playerMask;
+    [SerializeField][Tooltip("Boat Edge layer")]
+    private LayerMask edgeMask;
     [SerializeField][Tooltip("Player StateController script")]
     private Useable_Controller useControl;
 
@@ -26,6 +29,10 @@ public class Scuba_Controller : MonoBehaviour, IMonster
 
     public NavMeshAgent agent; // the part that does the AI.
     public float secondsStunned;
+    public float hitForce;
+    
+    [HideInInspector]
+    public Vector3 hitDir;
     
     // All of the States
     public Scuba_StateSpawn SpawnState = new Scuba_StateSpawn(); // when called spawn at a random spot out of avalible ones
@@ -33,6 +40,8 @@ public class Scuba_Controller : MonoBehaviour, IMonster
     public Scuba_StateContact ContactState = new Scuba_StateContact(); // on contact start the minigame
     public Scuba_StateBreakOff BreakOffState = new Scuba_StateBreakOff(); // Activated after breaking out of minigame.
     public Scuba_StateStunned StunnedState = new Scuba_StateStunned(); // After breaking out of minigame he will go into stunned for a moment
+    public Scuba_StateHit HitState = new Scuba_StateHit(); // activated once the mans is hit
+
 
 
     private void Start()
@@ -61,6 +70,13 @@ public class Scuba_Controller : MonoBehaviour, IMonster
             // change player's state to hit
         }
     }
+    void OnCollisionEnter(Collision collision)
+    {
+        if(((1 << collision.gameObject.layer) & edgeMask.value) != 0 && currentState == StunnedState)
+        {
+            gameObject.SetActive(false);
+        }
+    }
 
 
 
@@ -87,6 +103,7 @@ public class Scuba_Controller : MonoBehaviour, IMonster
     // Monster Interface
     public void MonsterHit(Vector3 hitDir) // on hit by harpoon
     {
-        Debug.Log("MonsterHit");
+        this.hitDir = -hitDir;
+        currentState = HitState;
     }
 }   

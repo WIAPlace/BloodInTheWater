@@ -79,7 +79,7 @@ public class Rod_StateItemIsReady : Abs_StateItemIsReady
     public override IUseableState DoState(Useable_Controller controller)
     {
         
-        if(!rod.CheckIfFishing() && controller.previousState != controller.currentItem.UnderAtk)
+        if(!rod.CheckIfFishing())
         {
             HoldCasting(controller);
         }
@@ -142,7 +142,7 @@ public class Rod_StateItemUse : Abs_StateItemUse
             rod.CastSpotPrefab.SetActive(false);
             CastLure();
             rod.SetIfFishing(true);
-            
+            //Debug.Log("Hit");
         }
         else
         { // if fishing  bring in lure
@@ -152,7 +152,6 @@ public class Rod_StateItemUse : Abs_StateItemUse
             rod.LurePrefab.SetActive(false);
             rod.RetrieveLure(currentLurePosition, rod.LureRadius); // this will let the fish know they are no longer in lure zone
             rod.SetIfFishing(false);
-            //Debug.Log(holdToCast);
         }
 
         
@@ -216,6 +215,7 @@ public class Rod_StateItemUnderAttack : Abs_StateItemUnderAttack
         { // bring in cast spot
             rod.CastSpotPrefab.SetActive(false); // either it stays out or not.
         }
+        rod.SetIfFishing(false);
         
     }
 
