@@ -48,11 +48,14 @@ public abstract class Abs_StateItemReadying : IUseableState
     public virtual void DoEnter(Useable_Controller controller)
     { // on enter play this to start the corutine to be ready
         controller.StartWaitToChange(controller.currentItem.IsReady, controller.readyTime);
+        controller.WindUpOn(controller.readyTime); // turns on the wind up indicator
+        
     }
 
     public virtual void DoExit(Useable_Controller controller)
     { // if the corutine is happening stop it.
-        controller.StopRunning(); 
+        controller.WindUpOff(); // turns of the wind up indicator
+        controller.StopCo(controller.running); 
     }
 }
 
@@ -76,12 +79,14 @@ public abstract class Abs_StateItemPlace : IUseableState
         controller.DisableControlls(); // turn the controlls off 
         controller.ChangeItem(controller.currentItemIndex); // changes current item to whatever player holding changed it to
         controller.StartWaitToChange(controller.currentItem.Idle, controller.placeTime);
+        controller.WindUpOn(controller.placeTime); // turns on the wind up indicator
 
     }
 
     public virtual void DoExit(Useable_Controller controller)
     {
-        controller.StopRunning(); // stop running the corutine if its playing
+        controller.WindUpOff(); // turns of the wind up indicator
+        controller.StopCo(controller.running); // stop running the corutine if its playing
         controller.EnableControlls(); // turn the controlls back on
     }
 

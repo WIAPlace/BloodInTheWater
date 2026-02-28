@@ -37,6 +37,7 @@ public class Useable_Controller : MonoBehaviour
     public float readyTime; // used for how long the readying state will last
     public float placeTime; // used in a corutine for how long it will take to place a thing
     public Coroutine running; // if not null the corutine is running
+    public Coroutine windUp; // corutine for wind up indicator
 
     [SerializeField] [Tooltip("used to see what state we are in")]
     private string debugCurrentStateName = "";
@@ -86,15 +87,27 @@ public class Useable_Controller : MonoBehaviour
         ChangeState(newState);
     }
 
-    ///////////////////////////////////////////////////////////////////////// Stop anything running.
-    public void StopRunning()
+    ///////////////////////////////////////////////////////////////////////// Stop a corutine from running.
+    public void StopCo(Coroutine activeCo)
     {
-        if(running != null)
+        if(activeCo != null)
         {
             //Debug.Log("stoped corutine");
-            StopCoroutine(running);
-            running = null;
+            StopCoroutine(activeCo);
+            activeCo = null;
         }
+    }
+
+    ////////////////////////////////////////////////////////////////////////// Wind Up Cross Hair
+    public void WindUpOn(float duration) // wind up on
+    {
+        GameManager.Instance.ActiveIndicator(true);
+        windUp = StartCoroutine(GameManager.Instance.EaseIndicator(duration));
+    }
+    public void WindUpOff() // wind up off
+    {
+        StopCo(windUp);
+        GameManager.Instance.ActiveIndicator(false);
     }
 
 

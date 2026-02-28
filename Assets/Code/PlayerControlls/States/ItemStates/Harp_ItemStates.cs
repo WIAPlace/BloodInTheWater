@@ -1,3 +1,4 @@
+using UnityEngine;
 /// 
 /// Author: Weston Tollette
 /// Created: 2/26/26
@@ -13,12 +14,12 @@ public class Harp_StateItemIdle : Abs_StateItemIdle
 {
     public override void DoEnter(Useable_Controller controller)
     {
-        //throw new System.NotImplementedException();
+        // statrt corutine for idle animation
     }
 
     public override void DoExit(Useable_Controller controller)
     {
-        //throw new System.NotImplementedException();
+        // stop corutine for idle animation
     }
 }
 

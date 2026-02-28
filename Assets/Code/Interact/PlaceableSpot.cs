@@ -36,7 +36,7 @@ public class PlaceableSpot : MonoBehaviour, IInteractable
     }
     
 
-    private void Start()
+    private void Awake()
     {
         // fire these two off just to make sure its all going as planned;
         OffPlaced();
