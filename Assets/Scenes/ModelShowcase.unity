@@ -1948,7 +1948,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   input: {fileID: 11400000, guid: 23c146efed111744088e5a06907694b3, type: 2}
+  interactMask:
+    serializedVersion: 2
+    m_Bits: 4096
   interactDistance: 3.2
+  radius: 1
 --- !u!114 &2025164108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1979,7 +1983,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4552868a63dd1b4479eaeea2fb98bcfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  input: {fileID: 11400000, guid: 23c146efed111744088e5a06907694b3, type: 2}
   lurePrefab: {fileID: 0}
   castSpotPrefab: {fileID: 0}
   waterMask:
@@ -1993,6 +1996,7 @@ MonoBehaviour:
   pongSpeed: 13
   fearRadius: 2
   animator: {fileID: 0}
+  input: {fileID: 11400000, guid: 23c146efed111744088e5a06907694b3, type: 2}
 --- !u!114 &2025164110
 MonoBehaviour:
   m_ObjectHideFlags: 0

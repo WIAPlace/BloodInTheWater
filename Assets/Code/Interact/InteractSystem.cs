@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 /// 
 /// Author: Marsahll Turner
@@ -18,8 +20,12 @@ public class InteractSystem : MonoBehaviour
 {
     [SerializeField] [Tooltip("Insert the Scriptable Object Input Reader")]
     private InputReader input; // used for input reader stuff.
+    [SerializeField] private LayerMask interactMask; // mask for what will be hit by raycast
     [SerializeField] float interactDistance = 2.6f; //Should be the same distance as the interactable hover
+    [SerializeField] private float radius=1f; // radius of spherecast
     bool inConversation;
+    
+    
 
     private void Start()
     {
@@ -45,7 +51,7 @@ public class InteractSystem : MonoBehaviour
         }
         else //Starts interact
         {
-            if (Physics.Raycast(new Ray(transform.position, transform.forward), out RaycastHit hitInfo, interactDistance))
+            if (Physics.SphereCast(new Ray(transform.position, transform.forward),radius, out RaycastHit hitInfo, interactDistance,interactMask,QueryTriggerInteraction.Collide))
             {
                 if(hitInfo.collider.TryGetComponent(out IInteractable interactable))
                 {
