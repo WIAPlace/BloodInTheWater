@@ -1,8 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
-using UnityEditor.EditorTools;
 using UnityEngine;
 /// 
 /// Author: Weston Tollette

@@ -30,6 +30,7 @@ public class DialogueBoxController : MonoBehaviour
     public string startName;
     public DialogueAsset startDialogue;
 
+    private Coroutine typing;
     public AudioSource audioSource;
     //Typing Speed
     float charactersPerSecond = 25;
@@ -82,7 +83,7 @@ public class DialogueBoxController : MonoBehaviour
         {
             //Text
             dialogueText.text = dialogue[i];
-            StartCoroutine(TypeTextUncapped(dialogueText.text));
+            typing = StartCoroutine(TypeTextUncapped(dialogueText.text));
 
             //Audio
             audioSource.clip = audioclip[i];
@@ -105,6 +106,7 @@ public class DialogueBoxController : MonoBehaviour
 
     public void SkipLine()
     {
+        StopCoroutine(typing);
         skipLineTriggered = true;
     }
     //Typewriter Text

@@ -25,7 +25,7 @@ public class TimeKeeper : MonoBehaviour
 
     void Start()
     {
-        GameState.Instance.ChangeTime(GetTimeLeft());
+        //GameState.Instance.ChangeTime(GetTimeLeft());
         StartCoroutine(TickTock());
     }
     void Update()
@@ -38,9 +38,9 @@ public class TimeKeeper : MonoBehaviour
         while(timePassed<secondsAllocated){
             yield return new WaitForSeconds(waitInterval);
             timePassed = sceneTime + penaltyTime;
-            GameState.Instance.ChangeTime(GetTimeLeft());
+            //GameState.Instance.ChangeTime(GetTimeLeft());
         }
-        GameState.Instance.LooseState();
+       // GameState.Instance.LooseState();
     }
     public void AddPenaltyTime(float seconds)
     {

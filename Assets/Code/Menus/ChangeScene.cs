@@ -15,6 +15,8 @@ public class ChangeScene : MonoBehaviour
 {
     public void LoadSceneByName(string sceneName)
     { // change scene to string name. Scene must be registered by the editor.
+        //Debug.Log("Hit");
         SceneManager.LoadScene(sceneName);
+        Time.timeScale = 1; // jsut to make sure the time is working as it should
     }
 }
