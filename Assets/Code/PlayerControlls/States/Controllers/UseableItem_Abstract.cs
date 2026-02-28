@@ -19,6 +19,7 @@ public abstract class UseableItem_Abstract : MonoBehaviour
     public Abs_StateItemIsReady IsReady; // finished readying, if let go it will do its thing
     public Abs_StateItemUse UseItem; // If Ready On release, the object will do its thing
     public Abs_StateItemPlace Place; // state for placeing something down
+    public Abs_StateItemUnderAttack UnderAtk; // state for when under attack by the scuba guy
 
     public abstract IUseableState DoState(Useable_Controller controller);
 }

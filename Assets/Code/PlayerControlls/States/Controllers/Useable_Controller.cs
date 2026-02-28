@@ -31,6 +31,8 @@ public class Useable_Controller : MonoBehaviour
 
     public UseableItem_Abstract currentItem; // used to hold what the current item in use is
     public IUseableState currentState; // will just be swaped out for whatever is needed at that point
+    public IUseableState previousState; // used for if we need to know the state that came before another.
+    
 
 
     
@@ -41,6 +43,8 @@ public class Useable_Controller : MonoBehaviour
 
     [SerializeField] [Tooltip("used to see what state we are in")]
     private string debugCurrentStateName = "";
+    [SerializeField] [Tooltip("used to see what state we are in")]
+    private string debugPreviousStateName = "";
 
     // States:
     //public Abs_StateItemIdle Idle; // no contact in between action states.
@@ -52,8 +56,14 @@ public class Useable_Controller : MonoBehaviour
     {
         if(currentState != null)
         {
-            currentState = currentItem.DoState(this);
+            IUseableState holder = currentItem.DoState(this);
+            if(currentState != holder) 
+            { // using this as a of being able to utilize change state instead of just changing current state dirrectly
+                ChangeState(holder);
+            }
+
             debugCurrentStateName = currentState.GetType().Name; //used for debuging to see name
+            debugPreviousStateName = previousState?.GetType().Name; //used for debuging to see name
         }
     }
     
@@ -62,15 +72,16 @@ public class Useable_Controller : MonoBehaviour
     /////////////////////////////////////////////////////////////////////////// Change State
     public void ChangeState(IUseableState newState)
     {
-        currentState.DoExit(this); // leave the prevvious state
+        previousState = currentState;
+        currentState?.DoExit(this); // leave the prevvious state
         currentState = newState;
-        currentState.DoEnter(this); // enter the new state
+        currentState?.DoEnter(this); // enter the new state   
     }
     /////////////////////////////////////////////////////////////////////////// Change Item
     public void ChangeItem(int num)
     {
         if(num<UseableItem.Length) // bounds checker
-        { 
+        {
             currentItem = UseableItem[num];
         }
     }
@@ -177,7 +188,7 @@ public class Useable_Controller : MonoBehaviour
         ChangeState(currentItem.Readying);
     }
 
-    ////////////////////////////////////////////////////////////////////////// On Use Cancled
+    ////////////////////////////////////////////////////////////////////////// On Use Cancelled
     private void HandleUseCancelled()
     { // on let go of trigger for use
         //Debug.Log("UsedCancelled");
@@ -188,6 +199,7 @@ public class Useable_Controller : MonoBehaviour
 
         if(currentState == currentItem.IsReady)
         {   // If the windup has occured and we are ready to inact
+            //Debug.Log("hit");
             ChangeState(currentItem.UseItem);
         }
         else if(currentState == currentItem.Readying)
@@ -196,4 +208,5 @@ public class Useable_Controller : MonoBehaviour
             ChangeState(currentItem.Idle);
         }
     }
+
 }

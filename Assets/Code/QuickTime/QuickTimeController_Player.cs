@@ -173,14 +173,14 @@ public class QuickTimeController_Player : MonoBehaviour
         if(playerPoint > min && playerPoint < max)
         {
             inHit = true;
-            GameState.Instance.CheckWin();
+            //GameState.Instance.CheckWin();
         }
         // im not doing an else false cause it will be easier to just check all then see if its true. maybe?
     }
 
     private IEnumerator EndQTE(float x) // turns off the qte after a number of seconds.
     {
-        useControl.ChangeState(useControl.currentItem.IsReady);
+        useControl.ChangeState(useControl.currentItem.Idle);
         yield return new WaitForSeconds(x);
         qtUI.SetActive(false);
         input.SetGameplay();

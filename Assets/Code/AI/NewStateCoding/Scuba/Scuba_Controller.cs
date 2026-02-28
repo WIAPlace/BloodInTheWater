@@ -10,7 +10,7 @@ using UnityEngine.AI;
 /// Edited By:
 /// Edit Purpose:
 ///
-public class Scuba_Controller : MonoBehaviour
+public class Scuba_Controller : MonoBehaviour, IMonster
 {
     [SerializeField][Tooltip("The places he can spawn")]
     private GameObject[] scubaSpots;
@@ -19,6 +19,8 @@ public class Scuba_Controller : MonoBehaviour
     private IBoatStomperState currentState;
     [SerializeField][Tooltip("Player layer")]
     private LayerMask playerMask;
+    [SerializeField][Tooltip("Player StateController script")]
+    private Useable_Controller useControl;
 
     public QuickTimeData_Scuba scubaData; // stuff for data minigame
 
@@ -53,8 +55,10 @@ public class Scuba_Controller : MonoBehaviour
     {
         if(((1 << other.gameObject.layer) & playerMask.value) != 0 && currentState != StunnedState)
         {
-            //Debug.Log("Hit Collider");
             currentState = ContactState; // data is being transfered;
+            
+            useControl.ChangeState(useControl.currentItem.UnderAtk);
+            // change player's state to hit
         }
     }
 
@@ -76,5 +80,13 @@ public class Scuba_Controller : MonoBehaviour
     public void SetCurrentState(IBoatStomperState newState) // set state to something else.
     { // transition used to change state to new state.
         currentState = newState;
+    }
+
+
+
+    // Monster Interface
+    public void MonsterHit(Vector3 hitDir) // on hit by harpoon
+    {
+        Debug.Log("MonsterHit");
     }
 }   

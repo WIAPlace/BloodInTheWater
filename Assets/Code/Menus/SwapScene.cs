@@ -14,6 +14,7 @@ public class SwapScene : MonoBehaviour, IInteractable
 {
     [SerializeField] private string sceneName;
     [SerializeField] private ChangeScene sceneChange;
+    [SerializeField] private bool toMenu=false;
 
     public void ChangeScene()
     {
@@ -22,6 +23,10 @@ public class SwapScene : MonoBehaviour, IInteractable
 
     public void Interact()
     {
+        if(toMenu) // if door is for some reason to a menu that needs the game to be in the paused state
+        {
+            GameManager.Instance.SetPause(true); // sets it to the pause menu with time scale on
+        }
         ChangeScene();
     }
 }

@@ -28,6 +28,10 @@ public class Empty_StateItemIdle : Abs_StateItemIdle
 ////////////////////////////////////////////////////// Readying /////////////////////////////////////////////
 public class Empty_StateItemReadying : Abs_StateItemReadying
 {
+    public override void DoEnter(Useable_Controller controller)
+    {
+        // do nothing 
+    }
     public override IUseableState DoState(Useable_Controller controller)
     {
         return controller.currentItem.Idle;
@@ -84,6 +88,18 @@ public class Empty_StateItemPlace : Abs_StateItemPlace // place is pickup for an
     public override void DoExit(Useable_Controller controller)
     {
         base.DoExit(controller);
+        
+    }
+}
+public class Empty_StateItemUnderAttack : Abs_StateItemUnderAttack
+{
+    public override void DoEnter(Useable_Controller controller)
+    {
+        controller.ChangeState(controller.currentItem.Idle);
+    }
+
+    public override void DoExit(Useable_Controller controller)
+    {
         
     }
 }

@@ -45,6 +45,7 @@ public class UseableItem_Rod : UseableItem_Abstract
         IsReady = new Rod_StateItemIsReady();
         UseItem = new Rod_StateItemUse();
         Place = new Rod_StateItemPlace();
+        UnderAtk = new Rod_StateItemUnderAttack();
 
 
         LurePrefab.SetActive(false);
@@ -64,6 +65,33 @@ public class UseableItem_Rod : UseableItem_Abstract
     public bool CheckIfFishing()
     {
         return isFishing;
+    }
+
+    public void RetrieveLure(Vector3 currentLurePosition, float radius) // this will let the fish know they are no longer in lure zone
+    {   
+        Vector3 lurePos = currentLurePosition; 
+        // Get all colliders within the sphere radius at this object's position
+        Collider[] hitColliders = Physics.OverlapSphere(lurePos, radius, FishMask);
+        // might want to make this non alloc version.
+        
+        int i = 0;
+        
+        while (i < hitColliders.Length)
+        {
+            // Try to get the TargetScript component from the hit object
+            FishStateController target = hitColliders[i].GetComponent<FishStateController>();
+            
+            if (LurePrefab.activeSelf && target != null) // this should probably be traded out for some kind of event thing
+            {
+                target.BobberSpooked(lurePos); 
+                
+            }
+            else if (target != null)
+            {
+                target.LureReeledIn();  // we should get the data here
+            }
+            i++;
+        }
     }
 
 }

@@ -71,6 +71,16 @@ public class GameManager : MonoBehaviour
     }
 
 
+    public void SetPause(bool timeOn) // pause for doors maybe
+    {
+        HandlePause();
+        pauseMenu.SetActive(false);
+        if (timeOn)
+        {
+            Time.timeScale=1f;
+        }
+    }
+
     //////// singleton stuff ////////////////////////////////////
     public static GameManager Instance // accesor for the game manager singleton
     {

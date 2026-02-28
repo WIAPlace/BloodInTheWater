@@ -208,7 +208,6 @@ public class InputReader : ScriptableObject, GameInput.IGamePlayActions, GameInp
     /////////////////////////////////////////////////////////////////////////////// Extra stuff
     public bool CheckIfGameplay()
     {
-        return gameInput.GamePlay.enabled;
-        
+        return gameInput.GamePlay.enabled;  
     }
 }

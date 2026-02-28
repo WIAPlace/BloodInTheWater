@@ -9,7 +9,20 @@ using UnityEngine;
 /// Edit Purpose:
 ///
 public class UseableItem_Harp : UseableItem_Abstract
-{
+{ 
+    [field: Header("Refrences")]
+    [field: SerializeField][Tooltip("Layer for Monsters")]
+    public LayerMask MonsterMask { get; private set; }
+
+
+    [field: Header("Variables")]
+    [field: SerializeField][Tooltip("Distanse for attack")]
+    public float AtkDistance { get; private set; }
+    [field: SerializeField][Tooltip("Harpoon's thickness / leniency for hits")]
+    public float AtkRadius { get; private set; }
+
+
+
     private void Start()
     {
         Idle = new Harp_StateItemIdle();
@@ -17,6 +30,7 @@ public class UseableItem_Harp : UseableItem_Abstract
         IsReady = new Harp_StateItemIsReady();
         UseItem = new Harp_StateItemUse();
         Place = new Harp_StateItemPlace();
+        
     }
     
     public override IUseableState DoState(Useable_Controller controller)

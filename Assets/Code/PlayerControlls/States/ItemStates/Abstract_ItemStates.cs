@@ -13,7 +13,13 @@ using UnityEngine;
 ////////////////////////////////////////////////////// Idle ////////////////////////////////////////////
 public abstract class Abs_StateItemIdle : IUseableState
 {
-    public abstract void DoEnter(Useable_Controller controller);
+    public virtual void DoEnter(Useable_Controller controller)
+    {
+        if(controller.previousState == controller.currentItem.Readying)
+        { // turns off the wind up if it is canclled before it is completed.
+            controller.WindUpOff();
+        }
+    }
 
     public abstract void DoExit(Useable_Controller controller);
 
@@ -28,7 +34,10 @@ public abstract class Abs_StateItemIsReady : IUseableState
 {
     public abstract void DoEnter(Useable_Controller controller);
 
-    public abstract void DoExit(Useable_Controller controller);
+    public virtual void DoExit(Useable_Controller controller)
+    {
+        controller.WindUpOff(); // turns of the wind up indicator
+    }
 
     public virtual IUseableState DoState(Useable_Controller controller)
     { // much like idle this is a buffer state.
@@ -54,7 +63,6 @@ public abstract class Abs_StateItemReadying : IUseableState
 
     public virtual void DoExit(Useable_Controller controller)
     { // if the corutine is happening stop it.
-        controller.WindUpOff(); // turns of the wind up indicator
         controller.StopCo(controller.running); 
     }
 }
@@ -93,5 +101,23 @@ public abstract class Abs_StateItemPlace : IUseableState
     public virtual IUseableState DoState(Useable_Controller controller)
     {
         return this; // just keep letting them know were in place.
+    }
+}
+
+public abstract class Abs_StateItemUnderAttack : IUseableState
+{
+    public virtual void DoEnter(Useable_Controller controller)
+    {
+        //controller.ChangeState(controller.currentItem.Idle);
+    }
+
+    public virtual void DoExit(Useable_Controller controller)
+    {
+        //controller.ChangeState(controller.currentItem.Idle);
+    }
+
+    public virtual IUseableState DoState(Useable_Controller controller)
+    {
+        return this;
     }
 }

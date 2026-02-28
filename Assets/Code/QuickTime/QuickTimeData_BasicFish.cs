@@ -27,6 +27,6 @@ public class QuickTimeData_BasicFish : QuickTimeData_Abstract
     public override  void OnHit()
     {
         gameObject.SetActive(false);
-        GameState.Instance.CaughtAFish(1); // send over the caught state to the gamestate thing.
+        //GameState.Instance.CaughtAFish(1); // send over the caught state to the gamestate thing.
     }
 }

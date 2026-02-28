@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Animations;
 /// 
@@ -13,8 +14,11 @@ using UnityEngine.Animations;
 ////////////////////////////////////////////////////// Idle /////////////////////////////////////////////
 public class Rod_StateItemIdle : Abs_StateItemIdle
 {
+    private UseableItem_Rod rod;
     public override void DoEnter(Useable_Controller controller)
     {
+        rod = controller.rod;
+        base.DoEnter(controller);
         if (controller.rod.CheckIfFishing())
         { // if fishing
             // do the fishing animation
@@ -27,7 +31,10 @@ public class Rod_StateItemIdle : Abs_StateItemIdle
 
     public override void DoExit(Useable_Controller controller)
     {
-        
+        if (rod != null && rod.LurePrefab.activeSelf)
+        {
+            rod.RetrieveLure(rod.LurePrefab.transform.position, rod.LureRadius);
+        }
     }
 }
 
@@ -67,12 +74,12 @@ public class Rod_StateItemIsReady : Abs_StateItemIsReady
 
     public override void DoExit(Useable_Controller controller)
     {
-        //Debug.Log("Exited Ready");
+        base.DoExit(controller);
     }
     public override IUseableState DoState(Useable_Controller controller)
     {
         
-        if(!rod.CheckIfFishing())
+        if(!rod.CheckIfFishing() && controller.previousState != controller.currentItem.UnderAtk)
         {
             HoldCasting(controller);
         }
@@ -143,7 +150,7 @@ public class Rod_StateItemUse : Abs_StateItemUse
             // will be used to get the lures position right before it is deactivated.
 
             rod.LurePrefab.SetActive(false);
-            RetrieveLure(currentLurePosition, rod.LureRadius); // this will let the fish know they are no longer in lure zone
+            rod.RetrieveLure(currentLurePosition, rod.LureRadius); // this will let the fish know they are no longer in lure zone
             rod.SetIfFishing(false);
             //Debug.Log(holdToCast);
         }
@@ -160,32 +167,7 @@ public class Rod_StateItemUse : Abs_StateItemUse
         return controller.currentItem.Idle; // change state to idle
     }
 
-    private void RetrieveLure(Vector3 currentLurePosition, float radius) // this will let the fish know they are no longer in lure zone
-    {   
-        Vector3 lurePos = currentLurePosition; 
-        // Get all colliders within the sphere radius at this object's position
-        Collider[] hitColliders = Physics.OverlapSphere(lurePos, radius, rod.FishMask);
-        // might want to make this non alloc version.
-        
-        int i = 0;
-        
-        while (i < hitColliders.Length)
-        {
-            // Try to get the TargetScript component from the hit object
-            FishStateController target = hitColliders[i].GetComponent<FishStateController>();
-            
-            if (rod.LurePrefab.activeSelf && target != null) // this should probably be traded out for some kind of event thing
-            {
-                target.BobberSpooked(lurePos); 
-                
-            }
-            else if (target != null)
-            {
-                target.LureReeledIn();  // we should get the data here
-            }
-            i++;
-        }
-    }
+    
 
     private void CastLure() 
     {
@@ -193,7 +175,7 @@ public class Rod_StateItemUse : Abs_StateItemUse
         { 
             rod.LurePrefab.SetActive(true); 
             rod.LurePrefab.transform.position = rod.CastSpotPrefab.transform.position; 
-            RetrieveLure(rod.LurePrefab.transform.position, rod.FearRadius); // this isnt retriving it thats just what the name was before i modifired stuff.
+            rod.RetrieveLure(rod.LurePrefab.transform.position, rod.FearRadius); // this isnt retriving it thats just what the name was before i modifired stuff.
             // set the lure position to the position that the indicator used to be.
         }
     }
@@ -217,3 +199,28 @@ public class Rod_StateItemPlace : Abs_StateItemPlace
     }    
 }
 
+////////////////////////////////////////////////////// Under Attack /////////////////////////////////////////////
+public class Rod_StateItemUnderAttack : Abs_StateItemUnderAttack
+{
+    private UseableItem_Rod rod;
+    public override void DoEnter(Useable_Controller controller)
+    {
+        //Debug.Log("Hit");
+        rod = controller.rod;
+        if (rod != null && rod.LurePrefab.activeSelf)
+        { // bring in lure
+            rod.RetrieveLure(rod.LurePrefab.transform.position, rod.LureRadius);
+            rod.LurePrefab.SetActive(false); // either it stays out or not.
+        }
+        if (rod != null && rod.CastSpotPrefab.activeSelf)
+        { // bring in cast spot
+            rod.CastSpotPrefab.SetActive(false); // either it stays out or not.
+        }
+        
+    }
+
+    public override void DoExit(Useable_Controller controller)
+    {
+        base.DoExit(controller);
+    }
+}
