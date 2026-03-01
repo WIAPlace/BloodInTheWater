@@ -20,7 +20,7 @@ public class PlaceableSpot : MonoBehaviour, IInteractable
     [SerializeField][Tooltip("Place in the Placeable Area typeIndex this is. Must be Greater than 0")]
     private int typeIndex = 1;
 
-    [SerializeField][Tooltip("Bool to check if this item is placed (Make sure there is only ever one placed)")]
+    //[SerializeField][Tooltip("Bool to check if this item is placed (Make sure there is only ever one placed)")]
     private bool itemPlaced = false; // if the item is located here.
 
     void OnValidate()
@@ -40,7 +40,7 @@ public class PlaceableSpot : MonoBehaviour, IInteractable
         SetPlacedTag();
     }
 
-    private void SetPlaced(bool isPlaced) // setter for if the item has been placed.
+    public void SetPlaced(bool isPlaced) // setter for if the item has been placed.
     {
         itemPlaced = isPlaced;
         OffPlaced(); // changes either on or off based on bool of if it is or isnt

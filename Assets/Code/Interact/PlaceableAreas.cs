@@ -12,38 +12,70 @@ using UnityEngine;
 /// 
 public class PlaceableAreas : MonoBehaviour
 {
+    [SerializeField][Tooltip("Persistant Item Spot Scriptable Object")]
+    private PersistantItemSpot perSpot;
+
     private int placeableTypes=3; // nothing, rod, and spear; 
     [SerializeField][Tooltip("Array for Fishing Rod spots")]
-    private GameObject[] rodSpots;
+    private PlaceableSpot[] rodSpots;
 
     [SerializeField][Tooltip("Array for spear spots")]
-    private GameObject[] harpoonSpots;
+    private PlaceableSpot[] harpoonSpots;
 
-    private GameObject[][] placeableSpots; 
-    // an array of arrays for holding spots. will be used to cycle through enabling them.
+    private PlaceableSpot[][] placeableSpots; 
+    // an array of arrays for holding spots. will be used to cycle through enabling them. 
 
     
     void Start()
     {
-        placeableSpots = new GameObject[placeableTypes][]; // a the moment 3
+        placeableSpots = new PlaceableSpot[placeableTypes][]; // a the moment 3
 
         // instantiate the spots
         placeableSpots[0] = null;
         placeableSpots[1] = rodSpots;
         placeableSpots[2] = harpoonSpots;
 
+        SetPersistantOn(); // set certain ones as the persistants
         TurnOffAllIndicators(); // turn off all indicators cause we dont want them to be there before we press the button
+    }
+
+    private void SetPersistantOn() // at start put them here
+    {
+        for(int i = 1; i < perSpot.spots.Length; i++)
+        { // start at one cause hands dont matter
+            if(perSpot.spots[i] >= placeableSpots.Length) // Out of bounds catch
+            {
+                perSpot.spots[i] = 0;
+            }
+
+            if (perSpot.spots[i] != -1) // -1 being in hand
+            { // if the item is not in hand turn it on
+                placeableSpots[i][perSpot.spots[i]].SetPlaced(true);
+            }
+            else if(perSpot.spots[i] == -1)
+            { // place items of index -1 into the player's hand.
+                PlayerHolding.Instance.ChangeInHand(i);
+                //Debug.Log(perSpot.spots[i]);
+            }
+        }
     }
 
     public void TurnOffAllIndicators() // disable all game objects
     {
         for(int i = 1; i < placeableSpots.Length; i++)
         { // starting i at 1 because 0 is null and doesnt need to be turned off.
-            foreach(GameObject spot in placeableSpots[i])
+            perSpot.spots[i] = -1;
+            for(int x = 0; x < placeableSpots[i].Length; x++)
             {
-                if (spot != null && spot.activeSelf && spot.CompareTag("PlaceEmpty"))
+                if (placeableSpots[i][x] != null && placeableSpots[i][x].gameObject.activeSelf && placeableSpots[i][x].gameObject.CompareTag("PlaceEmpty"))
                 { // making sure it exist and is able to be active
-                    spot.SetActive(false);
+                    Debug.Log("deactivated: " + x );
+                    placeableSpots[i][x].gameObject.SetActive(false);
+                }
+                else if (placeableSpots[i][x] != null && placeableSpots[i][x].gameObject.activeSelf && placeableSpots[i][x].gameObject.CompareTag("PlaceFull"))
+                {
+                    Debug.Log("activated: " + x );
+                    perSpot.spots[i] = x;
                 }
             }
         }
@@ -56,11 +88,11 @@ public class PlaceableAreas : MonoBehaviour
             //Debug.Log("Out of Range:" + x);
             return;
         }
-        foreach(GameObject spot in placeableSpots[x])
+        foreach(PlaceableSpot spot in placeableSpots[x])
         {
-            if (spot != null && !spot.activeSelf)
+            if (spot != null && !spot.gameObject.activeSelf)
             { // check to make sure it isnt already active.
-                spot.SetActive(true);
+                spot.gameObject.SetActive(true);
             }
         }
     }

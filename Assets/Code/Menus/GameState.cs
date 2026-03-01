@@ -13,15 +13,11 @@ using TMPro;
 ///
 public class GameState : MonoBehaviour
 {
-    public static GameState Instance {get;set;}
+    public static GameState Instance {get;set;} // singleton
 
     [SerializeField][Tooltip("How many fish to catch till win")]
-    private float totalFishCount=3f;
-    private float fishCaught=0f;
-    [SerializeField][Tooltip("WinScreen")]
-    private GameObject winScreen;
-    [SerializeField][Tooltip("LooseScreen")]
-    private GameObject looseScreen;
+    private float totalLbsCount=3f;
+    private float lbsCaught=0f;
 
     public TMP_Text timeText;
 
@@ -37,39 +33,5 @@ public class GameState : MonoBehaviour
             Instance = this;
         }
     }
-    private void Start()
-    { // we want this to start out as 0
-        fishCaught = 0f;
-        winScreen.SetActive(false);
-        looseScreen.SetActive(false);
-    }
-
-    public void CaughtAFish(float weight)
-    {
-        fishCaught += weight; // fish based on the pounds of fish
-    }
-
-    public void CheckWin()
-    {
-        if(fishCaught >= totalFishCount) // if they are return true if not false
-        {
-            winScreen.SetActive(true);
-        }
-    }
-    public void LooseState()
-    {
-        looseScreen.SetActive(true);
-    }
-    public void ChangeTime(float time)
-    {
-        if (timeText != null)
-        {
-            int Tim = (int)time;
-            // Change the text value
-            timeText.text = "Seconds Left: " + Tim.ToString();
-        }
-    }
-
-
-
+    
 }

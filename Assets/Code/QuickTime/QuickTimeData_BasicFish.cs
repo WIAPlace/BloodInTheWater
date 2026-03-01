@@ -13,10 +13,15 @@ using UnityEngine;
 /// 
 public class QuickTimeData_BasicFish : QuickTimeData_Abstract
 {
+    
+
+    
     private float fishLength;
+    private float fishLbs;
     public QuickTimeData_BasicFish(QuickTimeData_BasicFish other) : base(other)
     {
         this.fishLength = other.fishLength; 
+        this.fishLbs = other.fishLbs;
     }
 
     public override void SendData() // sends the data to the Rod scipt.
