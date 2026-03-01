@@ -14,9 +14,10 @@ public class PlayerHolding : MonoBehaviour
 {
     public static PlayerHolding Instance {get;private set;} // singleton
 
+    [SerializeField]
     private Useable_Controller useControl;
 
-     private void Awake()
+    private void Awake()
     {
         // Check if an instance already exists
         if (Instance != null && Instance != this)
@@ -47,6 +48,7 @@ public class PlayerHolding : MonoBehaviour
 
     public void ChangeInHand(int index) // change what is being held.
     { 
+        //Debug.Log(index);
         useControl.currentItemIndex = index;
         useControl.ChangeState(useControl.currentItem.Place);
     } 

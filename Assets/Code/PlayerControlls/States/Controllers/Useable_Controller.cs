@@ -151,7 +151,7 @@ public class Useable_Controller : MonoBehaviour
         TryGetComponent(out UseableItem_Rod rod);
         TryGetComponent(out UseableItem_Harp harp);
     }
-    void Start()
+    void Awake()
     {
         UseableItem = new UseableItem_Abstract[3];
 

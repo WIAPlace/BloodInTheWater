@@ -60,7 +60,7 @@ MonoBehaviour:
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
-    FieldOfView: 40
+    FieldOfView: 50
     OrthographicSize: 10
     NearClipPlane: 0.1
     FarClipPlane: 5000
@@ -293,7 +293,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.4
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
@@ -694,8 +694,12 @@ MonoBehaviour:
   interactMask:
     serializedVersion: 2
     m_Bits: 4096
-  interactDistance: 3
-  radius: 1
+  hitMask:
+    serializedVersion: 2
+    m_Bits: 4160
+  interactDistance: 3.2
+  radius: 0.2
+  inConversation: 0
 --- !u!114 &116861743981614157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -710,10 +714,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   crosshairImage: {fileID: 0}
   crosshairImageSmall: {fileID: 0}
-  detectionRange: 100
+  detectionRange: 3.2
   interactableLayer:
     serializedVersion: 2
     m_Bits: 4096
+  hitMasks:
+    serializedVersion: 2
+    m_Bits: 4160
 --- !u!114 &6529884404367093058
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -824,6 +831,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8e86fcc112a2b042832a180e0b5f434, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useControl: {fileID: 2460994001563903028}
 --- !u!1 &6230055042546765170
 GameObject:
   m_ObjectHideFlags: 0
@@ -1260,7 +1268,7 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 3
   m_Height: 2
-  m_Radius: 0.5
+  m_Radius: 0.4
   m_SlopeLimit: 0
   m_StepOffset: 0
   m_SkinWidth: 0.08

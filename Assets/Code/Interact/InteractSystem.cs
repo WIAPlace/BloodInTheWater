@@ -22,6 +22,8 @@ public class InteractSystem : MonoBehaviour
     private InputReader input; // used for input reader stuff.
     [SerializeField] private GameObject FPCamera;
     [SerializeField] private LayerMask interactMask; // mask for what will be hit by raycast
+    [SerializeField][Tooltip("Interact Layer and any that would block it")]
+    private LayerMask hitMask; // Interact layer and any that could block it
     [SerializeField] float interactDistance = 2.6f; //Should be the same distance as the interactable hover
     [SerializeField] private float radius=1f; // radius of spherecast
     
@@ -53,9 +55,9 @@ public class InteractSystem : MonoBehaviour
         }
         else //Starts interact
         {
-            if (Physics.SphereCast(new Ray(FPCamera.transform.position, FPCamera.transform.forward),radius, out RaycastHit hitInfo, interactDistance,interactMask,QueryTriggerInteraction.Collide))
+            if (Physics.SphereCast(new Ray(FPCamera.transform.position, FPCamera.transform.forward),radius, out RaycastHit hitInfo, interactDistance,hitMask,QueryTriggerInteraction.Collide))
             {
-                if(hitInfo.collider.TryGetComponent(out IInteractable interactable))
+                if((((1 << hitInfo.collider.gameObject.layer) & interactMask.value) != 0) && hitInfo.collider.TryGetComponent(out IInteractable interactable))
                 {
                     interactable.Interact();
                 }

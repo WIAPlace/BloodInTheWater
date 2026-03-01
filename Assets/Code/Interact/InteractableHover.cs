@@ -16,19 +16,30 @@ public class InteractableHover : MonoBehaviour
     public Image crosshairImageSmall;
     public float detectionRange = 100f;
     public LayerMask interactableLayer;
+    public LayerMask hitMasks;
 
     void Update()
     {
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, detectionRange, interactableLayer))
+        if (Physics.Raycast(ray, out hit, detectionRange, hitMasks))
         {
-            if (!crosshairImage.enabled)
+            if ((((1 << hit.collider.gameObject.layer) & interactableLayer.value) != 0) && !crosshairImage.enabled)
+            //if (!crosshairImage.enabled )
             {
                 crosshairImage.enabled = true;
                 crosshairImageSmall.enabled = false;
+            } 
+            else
+            {
+                if (crosshairImage.enabled && !(((1 << hit.collider.gameObject.layer) & interactableLayer.value) != 0) )
+                {
+                    crosshairImage.enabled = false;
+                    crosshairImageSmall.enabled = true;
+                }
             }
+            
         }
         else
         {
