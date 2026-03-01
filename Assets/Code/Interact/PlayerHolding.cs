@@ -12,7 +12,26 @@ using UnityEngine;
 /// 
 public class PlayerHolding : MonoBehaviour
 {
+    public static PlayerHolding Instance {get;private set;} // singleton
+
     private Useable_Controller useControl;
+
+     private void Awake()
+    {
+        // Check if an instance already exists
+        if (Instance != null && Instance != this)
+        {
+            // If another instance exists, destroy this one
+            Destroy(this.gameObject);
+            return;
+        }
+
+        // If no instance exists, set this as the instance
+        Instance = this;
+
+        // DontDestroyOnLoad(this.gameObject); 
+    }
+
     private void Start()
     {
         useControl = GetComponent<Useable_Controller>();   

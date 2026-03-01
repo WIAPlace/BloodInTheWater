@@ -12,9 +12,6 @@ using UnityEngine;
 ///
 public class PlaceableSpot : MonoBehaviour, IInteractable
 {
-    [SerializeField][Tooltip("Refrence To Player Holding Script")]
-    private PlayerHolding holding;
-
     [SerializeField][Tooltip("Filled Spot")]
     private GameObject filledSpot;
     [SerializeField][Tooltip("Empty Spot")]
@@ -76,17 +73,17 @@ public class PlaceableSpot : MonoBehaviour, IInteractable
         {
             indexHolder = typeIndex;
         }
-        holding.ChangeInHand(indexHolder);
+        PlayerHolding.Instance.ChangeInHand(indexHolder);
     }
 
     // interface implementation
     public void Interact()
     {
-        if(holding.CheckInHand() == typeIndex || holding.CheckInHand() == 0)
+        if(PlayerHolding.Instance.CheckInHand() == typeIndex || PlayerHolding.Instance.CheckInHand() == 0)
         {
             SetPlaced(!itemPlaced);
 
-            if (!holding.CheckIfChecking())
+            if (!PlayerHolding.Instance.CheckIfChecking())
             { //if we arnt checking dont keep this game object around
                 gameObject.SetActive(false);
             }
