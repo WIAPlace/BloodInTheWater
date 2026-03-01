@@ -63,7 +63,7 @@ public class Rod_StateItemIsReady : Abs_StateItemIsReady
     public override void DoEnter(Useable_Controller controller)
     {
         //Debug.Log("Entered Ready");
-        obj = controller.gameObject;
+        obj = controller.FPCamera;
         rod = controller.rod;
         if (rod.CheckIfFishing())
         {
@@ -133,7 +133,7 @@ public class Rod_StateItemUse : Abs_StateItemUse
     public override void DoEnter(Useable_Controller controller)
     {   
         //Debug.Log("Entered Fishing Use");
-        obj = controller.gameObject;
+        obj = controller.FPCamera;
         rod = controller.rod;
 
         if (!controller.rod.CheckIfFishing())

@@ -55,7 +55,7 @@ public class Harp_StateItemUse : Abs_StateItemUse
 
     public override void DoEnter(Useable_Controller controller)
     {
-        obj = controller.gameObject; // set object to the controller's pobject.
+        obj = controller.FPCamera; // set object to the controller's pobject.
         harp = controller.harp; // set harp as the harpoon attached to the player.
         // play animation
 

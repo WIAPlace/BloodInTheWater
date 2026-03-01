@@ -15,6 +15,7 @@ public class Useable_Controller : MonoBehaviour
 
     [SerializeField] [Tooltip("Insert the Scriptable Object Input Reader.")]
     private InputReader input;
+    public GameObject FPCamera;
 
     public UseableItem_Empty empty;
     public UseableItem_Rod rod;
@@ -26,6 +27,8 @@ public class Useable_Controller : MonoBehaviour
     // 1 = fishing rod
     // 2 = harpoon    
 
+    [SerializeField][Tooltip("Starting Item in hand [0=nothing,1=rod,2=harpoon]")]
+    private int startingItemInHand=0;
     [HideInInspector]
     public int currentItemIndex=0; // used to check what item is in the hand
 
@@ -156,10 +159,11 @@ public class Useable_Controller : MonoBehaviour
         UseableItem[1] = rod;
         UseableItem[2] = harp;
 
-        currentItemIndex = 1;
+        currentItemIndex = startingItemInHand;
         currentItem = UseableItem[currentItemIndex];
-        currentState = currentItem.Idle;
 
+        currentItem.useableMesh.SetActive(true);
+        currentState = currentItem.Idle;
     }    
 
     ////////////////////////////////////////////////////////////////////////// On thing happens
