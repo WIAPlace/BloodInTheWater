@@ -39,7 +39,8 @@ public class DialogueBoxController : MonoBehaviour
     {
         if (OnStart)
         {
-            StartDialogue(startDialogue.dialogue,startDialogue.audioclip, 0, startName);
+            StartCoroutine(LateStart());
+            //StartDialogue(startDialogue.dialogue,startDialogue.audioclip, 0, startName);
         }
         else
         {
@@ -59,14 +60,18 @@ public class DialogueBoxController : MonoBehaviour
             Destroy(this);
         }
     }
+    IEnumerator LateStart()
+    {
+        yield return new WaitForSeconds(.4f);
+        StartDialogue(startDialogue.dialogue,startDialogue.audioclip, 0, startName);
+    }
 
     // The dialogue
     public void StartDialogue(string[] dialogue,AudioClip[] audioclip, int startPosition, string name)
     {
+        GameManager.Instance.HandleDial(false); // turn stuff off
         nameText.text = name;
         dialogueBox.gameObject.SetActive(true);
-        crosshairImage.gameObject.SetActive(false); //Hides crosshair
-        crosshairImageSmall.gameObject.SetActive(false); //Hides crosshair
         StopAllCoroutines();
         StartCoroutine(RunDialogue(dialogue,audioclip, startPosition));
         
@@ -86,8 +91,11 @@ public class DialogueBoxController : MonoBehaviour
             typing = StartCoroutine(TypeTextUncapped(dialogueText.text));
 
             //Audio
-            audioSource.clip = audioclip[i];
-            audioSource.Play();
+            if(audioSource != null)
+            {
+                audioSource.clip = audioclip[i];
+                audioSource.Play();
+            }
 
             while (skipLineTriggered == false)
             {
@@ -99,9 +107,7 @@ public class DialogueBoxController : MonoBehaviour
 
         OnDialogueEnded?.Invoke();
         dialogueBox.gameObject.SetActive(false); //Hides box once done
-        crosshairImage.gameObject.SetActive(true); //Brings back the croshair
-        crosshairImageSmall.gameObject.SetActive(true); //Brings back the croshair
-
+        GameManager.Instance.HandleDial(true); // set stuff back on.
     }
 
     public void SkipLine()

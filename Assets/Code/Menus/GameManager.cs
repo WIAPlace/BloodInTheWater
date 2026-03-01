@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject pauseMenu; // ui for the pause menu
     [SerializeField] private GameObject gameUI; // ui for the game during play
     [SerializeField] private Image windUpIndicator; // will show when u have would up and are ready to release
+    
     void Start()
     {
         input.PauseEvent += HandlePause;
@@ -50,6 +51,11 @@ public class GameManager : MonoBehaviour
         Time.timeScale=1f;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+    }
+
+    public void HandleDial(bool onoff)
+    {// called by dialoge box controll to turn off UI.
+        gameUI.SetActive(onoff);
     }
     
     /////////////// Easing Stuff for Indicator //////////////////////////////////

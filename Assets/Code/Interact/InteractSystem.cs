@@ -25,7 +25,7 @@ public class InteractSystem : MonoBehaviour
     [SerializeField] float interactDistance = 2.6f; //Should be the same distance as the interactable hover
     [SerializeField] private float radius=1f; // radius of spherecast
     
-    bool inConversation;
+    public bool inConversation;
     
     
 
