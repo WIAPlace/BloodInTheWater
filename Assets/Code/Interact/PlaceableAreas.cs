@@ -69,12 +69,12 @@ public class PlaceableAreas : MonoBehaviour
             {
                 if (placeableSpots[i][x] != null && placeableSpots[i][x].gameObject.activeSelf && placeableSpots[i][x].gameObject.CompareTag("PlaceEmpty"))
                 { // making sure it exist and is able to be active
-                    Debug.Log("deactivated: " + x );
+                    //Debug.Log("deactivated: " + x );
                     placeableSpots[i][x].gameObject.SetActive(false);
                 }
                 else if (placeableSpots[i][x] != null && placeableSpots[i][x].gameObject.activeSelf && placeableSpots[i][x].gameObject.CompareTag("PlaceFull"))
                 {
-                    Debug.Log("activated: " + x );
+                    //Debug.Log("activated: " + x );
                     perSpot.spots[i] = x;
                 }
             }
