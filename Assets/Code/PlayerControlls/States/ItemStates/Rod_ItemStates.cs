@@ -183,11 +183,17 @@ public class Rod_StateItemUse : Abs_StateItemUse
 ////////////////////////////////////////////////////// Place Item /////////////////////////////////////////////
 public class Rod_StateItemPlace : Abs_StateItemPlace
 {
-
+    private UseableItem_Rod rod;
     public override void DoEnter(Useable_Controller controller)
     {
+        rod = controller.rod;
         // start animation to place or pickup something
         controller.currentItem.useableMesh.SetActive(false); // turn of the game object 
+        if (rod != null && rod.LurePrefab.activeSelf)
+        {
+            rod.RetrieveLure(rod.LurePrefab.transform.position,rod.LureRadius); // retrive lure
+            rod.LurePrefab.SetActive(false); // either it stays out or not.
+        }
         base.DoEnter(controller);
 
     }
