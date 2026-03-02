@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Unity.Cinemachine;
+using UnityEditor.SettingsManagement;
+using UnityEditor.EditorTools;
 
 public class FOV : MonoBehaviour
 {
@@ -11,15 +13,19 @@ public class FOV : MonoBehaviour
     private CinemachineCamera virtualCamera;
     [SerializeField][Tooltip("Slider")]
     private Slider slider;
-
+    [SerializeField][Tooltip("settings object")]
+    SavedSettings settings;
     void Start()
     {
+        slider.value = settings.FOV;
         slider.onValueChanged.AddListener(delegate {ChangeFOV();});
     }
     // Public method to be called by the UI Slider
     public void ChangeFOV()
     {
+        settings.FOV = slider.value;
         // Update the FieldOfView property in the camera's Lens settings
         virtualCamera.Lens.FieldOfView = slider.value;
+        
     }
 }

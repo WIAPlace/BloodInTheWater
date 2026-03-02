@@ -380,6 +380,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   input: {fileID: 11400000, guid: 23c146efed111744088e5a06907694b3, type: 2}
+  controller: {fileID: 0}
+  playerBody: {fileID: 0}
   speed: 10
   playerView: {fileID: 715931318}
 --- !u!4 &23814713 stripped
@@ -11227,6 +11229,9 @@ MonoBehaviour:
   interactableLayer:
     serializedVersion: 2
     m_Bits: 4096
+  hitMasks:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!82 &715931321
 AudioSource:
   m_ObjectHideFlags: 0
@@ -11344,11 +11349,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   input: {fileID: 11400000, guid: 23c146efed111744088e5a06907694b3, type: 2}
+  FPCamera: {fileID: 0}
   interactMask:
     serializedVersion: 2
     m_Bits: 4096
+  hitMask:
+    serializedVersion: 2
+    m_Bits: 0
   interactDistance: 3.2
   radius: 1
+  inConversation: 0
 --- !u!1001 &718605484
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24641,6 +24651,12 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2402129002843093341, guid: 3598aa3f55e6f50489fdee72d471301e,
+        type: 3}
+      propertyPath: settings
+      value: 
+      objectReference: {fileID: 11400000, guid: d02ae3fb019eaf642a3c9ecccbd922b8,
+        type: 2}
     - target: {fileID: 5560721666515895054, guid: 3598aa3f55e6f50489fdee72d471301e,
         type: 3}
       propertyPath: m_Pivot.x
@@ -24706,6 +24722,17 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5961249925114487546, guid: 3598aa3f55e6f50489fdee72d471301e,
+        type: 3}
+      propertyPath: settings
+      value: 
+      objectReference: {fileID: 11400000, guid: d02ae3fb019eaf642a3c9ecccbd922b8,
+        type: 2}
+    - target: {fileID: 5961249925114487546, guid: 3598aa3f55e6f50489fdee72d471301e,
+        type: 3}
+      propertyPath: playerLook
+      value: 
+      objectReference: {fileID: 715931313}
     - target: {fileID: 6901927697402245435, guid: 3598aa3f55e6f50489fdee72d471301e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -24771,6 +24798,12 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7787769512992120258, guid: 3598aa3f55e6f50489fdee72d471301e,
+        type: 3}
+      propertyPath: settings
+      value: 
+      objectReference: {fileID: 11400000, guid: d02ae3fb019eaf642a3c9ecccbd922b8,
+        type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

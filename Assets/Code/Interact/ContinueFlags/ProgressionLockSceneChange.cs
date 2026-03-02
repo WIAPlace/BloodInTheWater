@@ -15,7 +15,7 @@ public class ProgressionLockSceneChange : MonoBehaviour, IInteractable
     [SerializeField] private string sceneName;
     [SerializeField] private ChangeScene sceneChange;
     [SerializeField] [Tooltip("Warning message to throw")] DialogueAsset dialogueAsset; 
-    [SerializeField] private bool toMenu=false;
+    //[SerializeField] private bool toMenu=false;
     private IProgressFlag progressFlag = new Progress_EndFishing();
 
     public void Interact()

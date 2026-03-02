@@ -12,9 +12,20 @@ public class Sensitivity : MonoBehaviour
 
     [SerializeField][Tooltip("True if this is for the x axis")]
     private bool isX;
+    [SerializeField][Tooltip("Scriptable object for settings")]
+    SavedSettings settings;
 
     void Start()
     {
+        if (isX)
+        {
+            slider.value = settings.xSensitivity;
+        }
+        else
+        {
+            slider.value = settings.ySensitivity;
+        }
+        
         slider.onValueChanged.AddListener(delegate {SensitivityChange();});
         // on change, change the sensitivity
     }
@@ -22,5 +33,13 @@ public class Sensitivity : MonoBehaviour
     {
         //Debug.Log("Changed to: "+slider.value);
         playerLook.UpdateSensitivity(isX, slider.value);
+        if (isX)
+        {
+            settings.xSensitivity = slider.value;
+        }
+        else
+        {
+            settings.ySensitivity = slider.value;
+        }
     }
 }

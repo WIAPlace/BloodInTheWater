@@ -82,7 +82,7 @@ public class DialogueBoxController : MonoBehaviour
 
     public void StartDialogue(string[] dialogue,AudioClip[] audioclip, int startPosition) // Overload for less stuff
     { // this will be used for system stuff/
-        Debug.Log("Hit");
+        //Debug.Log("Hit");
         GameManager.Instance.HandleDial(false); // turn stuff off
         nameText.text = ""; // no name
         dialogueBox.gameObject.SetActive(true);

@@ -36,6 +36,12 @@ public class UseableItem_Rod : UseableItem_Abstract
     [HideInInspector]
     public float CurrentCastValue; // the value of the cast at a certain point
 
+    // Animations
+    
+
+
+
+
     private bool isFishing = false;
 
     private void OnEnable()
