@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI; 
+using TMPro;
 /// 
 /// Author: Weston Tollette
 /// Created: 2/22/26
@@ -19,6 +20,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject pauseMenu; // ui for the pause menu
     [SerializeField] private GameObject gameUI; // ui for the game during play
     [SerializeField] private Image windUpIndicator; // will show when u have would up and are ready to release
+    [SerializeField] private TextMeshProUGUI text; // ui for temp text
     
     void Start()
     {
@@ -27,6 +29,7 @@ public class GameManager : MonoBehaviour
         pauseMenu.SetActive(false);
         gameUI.SetActive(true);
         windUpIndicator.gameObject.SetActive(false);
+        text.gameObject.SetActive(false);
     }
 
     void OnDestroy()
@@ -39,6 +42,7 @@ public class GameManager : MonoBehaviour
         gameUI.SetActive(false);
         pauseMenu.SetActive(true);
         windUpIndicator.gameObject.SetActive(false);
+        text.gameObject.SetActive(false);
         Time.timeScale=0f;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -85,6 +89,18 @@ public class GameManager : MonoBehaviour
         {
             Time.timeScale=1f;
         }
+    }
+
+    //////// Show a UI thing for measure stuff
+    public IEnumerator ShowFishLbs(string lbsText)
+    {
+        text.gameObject.SetActive(true); // see the text (love the text)
+        text.text = lbsText;
+        
+        yield return new WaitForSeconds(4f);
+
+        text.text = ""; // make it empty
+        text.gameObject.SetActive(false); // make it unseen
     }
 
     //////// singleton stuff ////////////////////////////////////

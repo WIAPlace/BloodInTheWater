@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 /// 
 /// Author: Weston Tollette
 /// Created: 2/23/26
@@ -16,10 +15,8 @@ public class GameState : MonoBehaviour
     public static GameState Instance {get;set;} // singleton
 
     [SerializeField][Tooltip("How many fish to catch till win")]
-    private float totalLbsCount=3f;
+    private float totalLbs = 20f;
     private float lbsCaught=0f;
-
-    public TMP_Text timeText;
 
 
     private void Awake()
@@ -32,6 +29,27 @@ public class GameState : MonoBehaviour
         {
             Instance = this;
         }
+    }
+
+    public bool CheckIfEnoughCaught()
+    {
+        return lbsCaught >= totalLbs;
+    }
+
+    // setter
+    public void CaughtFish(float lbs)
+    {
+        lbsCaught += Mathf.Round(lbs * 10)/10; // 1 decimal
+    }
+
+    /// getters
+    public float CheckLbs()
+    {
+        return lbsCaught;
+    }
+    public float CheckLbsNeeded()
+    {
+        return totalLbs;
     }
     
 }

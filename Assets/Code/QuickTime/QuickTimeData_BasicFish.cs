@@ -13,9 +13,6 @@ using UnityEngine;
 /// 
 public class QuickTimeData_BasicFish : QuickTimeData_Abstract
 {
-    
-
-    
     private float fishLength;
     private float fishLbs;
     public QuickTimeData_BasicFish(QuickTimeData_BasicFish other) : base(other)
@@ -24,14 +21,19 @@ public class QuickTimeData_BasicFish : QuickTimeData_Abstract
         this.fishLbs = other.fishLbs;
     }
 
+    private void OnEnable()
+    {
+        fishLbs = Random.Range(5f,15f);
+    }
+
     public override void SendData() // sends the data to the Rod scipt.
     {
         qtcPlayer.SetData(this);
     }
 
     public override  void OnHit()
-    {
+    {   // change the active state and declare that fish have been caught
         gameObject.SetActive(false);
-        //GameState.Instance.CaughtAFish(1); // send over the caught state to the gamestate thing.
+        GameState.Instance.CaughtFish(fishLbs); // send over the caught state to the gamestate thing.
     }
 }

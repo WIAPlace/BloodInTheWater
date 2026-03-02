@@ -13,6 +13,10 @@ using UnityEngine.UI;
 /// Edited By: 2/15/2026
 /// Edit Purpose: Adding typewriter text and audio
 ///
+/// Edited: Weston T
+/// Edited By: 3/1/2026
+/// Edit Purpose: Creating a overload for start dialouge
+///
 public class DialogueBoxController : MonoBehaviour
 {
     public static DialogueBoxController instance;
@@ -74,7 +78,16 @@ public class DialogueBoxController : MonoBehaviour
         dialogueBox.gameObject.SetActive(true);
         StopAllCoroutines();
         StartCoroutine(RunDialogue(dialogue,audioclip, startPosition));
-        
+    }
+
+    public void StartDialogue(string[] dialogue,AudioClip[] audioclip, int startPosition) // Overload for less stuff
+    { // this will be used for system stuff/
+        Debug.Log("Hit");
+        GameManager.Instance.HandleDial(false); // turn stuff off
+        nameText.text = ""; // no name
+        dialogueBox.gameObject.SetActive(true);
+        StopAllCoroutines();
+        StartCoroutine(RunDialogue(dialogue,audioclip, startPosition));
     }
 
     //Prints the lines
