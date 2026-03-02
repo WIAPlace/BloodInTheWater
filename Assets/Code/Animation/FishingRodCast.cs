@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class FishingRodCast : MonoBehaviour
 {
-    private Animator anim;
+    //public Animator anim;
+    //[SerializeField]public InputReader input;
+    
     // Start is called before the first frame update
-    void Start()
+    /*void Start()
     {
         anim = GetComponent<Animator>();
     }
@@ -20,4 +22,17 @@ public class FishingRodCast : MonoBehaviour
             Debug.Log("1 is pressed");
         }
     }
+    */
+    //void HandleUse()
+    //{
+        //anim.SetTrigger("Cast");
+        //Debug.Log("LMB is pressed");
+    //}
+    //void OnEnable()
+    //{
+      //  input.UseEvent += HandleUse;
+    //}
+
+
+    
 }
