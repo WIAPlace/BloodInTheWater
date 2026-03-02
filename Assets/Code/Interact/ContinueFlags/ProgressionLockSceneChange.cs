@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 /// 
 /// Author: Weston Tollette
@@ -13,14 +14,14 @@ using UnityEngine;
 public class ProgressionLockSceneChange : MonoBehaviour, IInteractable
 {
     [SerializeField] private string sceneName;
-    [SerializeField] private ChangeScene sceneChange;
+    [SerializeField] private TransistionScene transition;
     [SerializeField] [Tooltip("Warning message to throw")] DialogueAsset dialogueAsset; 
     //[SerializeField] private bool toMenu=false;
-    private IProgressFlag progressFlag = new Progress_EndFishing();
+    [SerializeField]private ProgressionBlock_Abs progress;
 
     public void Interact()
     {
-        if (progressFlag.Progress())
+        if (progress.progressFlag.Progress())
         {
             ChangeScene();
         }
@@ -32,6 +33,6 @@ public class ProgressionLockSceneChange : MonoBehaviour, IInteractable
 
     public void ChangeScene()
     {
-        sceneChange.LoadSceneByName(sceneName);
+        transition.StartGame();
     }
 }

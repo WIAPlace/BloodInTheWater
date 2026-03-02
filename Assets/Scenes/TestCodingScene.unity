@@ -2703,11 +2703,63 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8835274598145913492, guid: d582cee2b8663be43ae3058f18c1d5ca,
+        type: 3}
+      propertyPath: progress
+      value: 
+      objectReference: {fileID: 7607212556848328016}
+    - target: {fileID: 8835274598145913492, guid: d582cee2b8663be43ae3058f18c1d5ca,
+        type: 3}
+      propertyPath: transition
+      value: 
+      objectReference: {fileID: 7607212556848328017}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7293106753677781027, guid: d582cee2b8663be43ae3058f18c1d5ca,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7607212556848328016}
+    - targetCorrespondingSourceObject: {fileID: 7293106753677781027, guid: d582cee2b8663be43ae3058f18c1d5ca,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7607212556848328017}
   m_SourcePrefab: {fileID: 100100000, guid: d582cee2b8663be43ae3058f18c1d5ca, type: 3}
+--- !u!1 &7607212556848328015 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7293106753677781027, guid: d582cee2b8663be43ae3058f18c1d5ca,
+    type: 3}
+  m_PrefabInstance: {fileID: 7607212556848328014}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7607212556848328016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7607212556848328015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7a78f9b7f76fd24a9c53c302a8c5b64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7607212556848328017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7607212556848328015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5078cb139deb9fb4e8e494a5581472fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loadingScreen: {fileID: 8018427150129618412}
+  targetScene: IslandDay0
+  transitionType: IslandDay0
+  canvasGroup: {fileID: 8018427150129618413}
 --- !u!1001 &8018427150129618411
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2866,6 +2918,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3598aa3f55e6f50489fdee72d471301e, type: 3}
+--- !u!1 &8018427150129618412 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3177672203606912617, guid: 3598aa3f55e6f50489fdee72d471301e,
+    type: 3}
+  m_PrefabInstance: {fileID: 8018427150129618411}
+  m_PrefabAsset: {fileID: 0}
+--- !u!225 &8018427150129618413 stripped
+CanvasGroup:
+  m_CorrespondingSourceObject: {fileID: 1136048434583972852, guid: 3598aa3f55e6f50489fdee72d471301e,
+    type: 3}
+  m_PrefabInstance: {fileID: 8018427150129618411}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
