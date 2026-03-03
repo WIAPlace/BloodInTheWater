@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject gameUI; // ui for the game during play
     [SerializeField] private Image windUpIndicator; // will show when u have would up and are ready to release
     [SerializeField] private TextMeshProUGUI text; // ui for temp text
+
+    private Coroutine running;
     
     void Start()
     {
@@ -101,6 +103,14 @@ public class GameManager : MonoBehaviour
 
         text.text = ""; // make it empty
         text.gameObject.SetActive(false); // make it unseen
+    }
+    public void ShowUIText(string txt)
+    {
+        if (running != null)
+        {
+            StopCoroutine(running);
+        }
+        running = StartCoroutine(ShowFishLbs(txt));
     }
 
     //////// singleton stuff ////////////////////////////////////

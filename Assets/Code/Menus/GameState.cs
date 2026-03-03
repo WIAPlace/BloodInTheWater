@@ -17,6 +17,7 @@ public class GameState : MonoBehaviour
     [SerializeField][Tooltip("How many fish to catch till win")]
     private float totalLbs = 20f;
     private float lbsCaught=0f;
+    [SerializeField] private GameOver endLoose;
 
 
     private void Awake()
@@ -51,5 +52,14 @@ public class GameState : MonoBehaviour
     {
         return totalLbs;
     }
-    
+
+    public void LooseState()
+    {
+        Time.timeScale=1f;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        endLoose.GameEnd();
+    }
+
+
 }

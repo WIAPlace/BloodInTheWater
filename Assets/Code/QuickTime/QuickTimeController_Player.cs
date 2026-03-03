@@ -160,7 +160,11 @@ public class QuickTimeController_Player : MonoBehaviour
             // maybe do a event thing?
             currentQTData.OnHit();
             
-        }   
+        }
+        else
+        {
+            currentQTData.OnMiss();
+        } 
 
         StartCoroutine(EndQTE(.4f));
     }

@@ -36,4 +36,8 @@ public class QuickTimeData_BasicFish : QuickTimeData_Abstract
         gameObject.SetActive(false);
         GameState.Instance.CaughtFish(fishLbs); // send over the caught state to the gamestate thing.
     }
+    public override void OnMiss()
+    {
+        
+    }
 }

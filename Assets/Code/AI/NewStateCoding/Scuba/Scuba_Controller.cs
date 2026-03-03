@@ -87,7 +87,8 @@ public class Scuba_Controller : MonoBehaviour, IMonster
     {
         if(((1 << collision.gameObject.layer) & edgeMask.value) != 0 && currentState == StunnedState)
         {
-            currentState = SpawnState;
+            //currentState = SpawnState;
+            gameObject.SetActive(false);
         }
     }
 

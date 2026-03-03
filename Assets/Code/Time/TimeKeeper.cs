@@ -40,7 +40,7 @@ public class TimeKeeper : MonoBehaviour
             timePassed = sceneTime + penaltyTime;
             //GameState.Instance.ChangeTime(GetTimeLeft());
         }
-       // GameState.Instance.LooseState();
+       GameState.Instance.LooseState();
     }
     public void AddPenaltyTime(float seconds)
     {

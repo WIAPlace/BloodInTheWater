@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using QuickTime;
+using Unity.VisualScripting;
 /// 
 /// Author: Weston Tollette
 /// Created: 2/12/26
@@ -42,6 +43,8 @@ public abstract class QuickTimeData_Abstract : MonoBehaviour
     }
 
     public abstract void OnHit(); // when you win the minigame this occurs.
+
+    public abstract void OnMiss(); // when you miss 
 
     public void SendType() // Sends the Enum to the Rod Script for use in switch statement;
     {

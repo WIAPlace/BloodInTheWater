@@ -21,5 +21,10 @@ public class QuickTimeData_Scuba : QuickTimeData_Abstract
     {
         controller.SetCurrentState(controller.BreakOffState);
     }
+    public override void OnMiss()
+    {
+        Debug.Log("Hit");
+        GameState.Instance.LooseState();
+    }
     
 }
