@@ -8,7 +8,7 @@ public class SeeTime : MonoBehaviour, IInteractable
     public void Interact()
     {
         string txt ="Clock for keeping time";
-        if(GameState.Instance !=null){
+        if(GameState.Instance !=null&& keptTime != null){
             float timeLeft =Mathf.Round(keptTime.GetTimeLeft() * 10)/10;
             txt = timeLeft.ToString() + " : Seconds Left";
         }
