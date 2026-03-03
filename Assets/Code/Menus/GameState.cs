@@ -54,7 +54,8 @@ public class GameState : MonoBehaviour
     {
         if(lbsCaught >= totalLbs)
         {
-            if(keeperToSpawn!=null){
+            if(keeperToSpawn!=null)
+            {
                 keeperToSpawn.SetActive(true);
             }
         }

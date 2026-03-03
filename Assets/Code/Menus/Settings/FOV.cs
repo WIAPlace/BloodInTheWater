@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Unity.Cinemachine;
-using UnityEditor.SettingsManagement;
-using UnityEditor.EditorTools;
 
 public class FOV : MonoBehaviour
 {

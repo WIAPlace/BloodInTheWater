@@ -39,6 +39,7 @@ public class ProgressionLockSceneChange : MonoBehaviour, IInteractable
 
     public void ChangeScene()
     {
+        GameManager.Instance.SetPause(true);
         transition.StartGame();
     }
 }
