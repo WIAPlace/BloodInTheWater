@@ -23,7 +23,7 @@ public class QuickTimeData_Scuba : QuickTimeData_Abstract
     }
     public override void OnMiss()
     {
-        Debug.Log("Hit");
+        //Debug.Log("Hit");
         GameState.Instance.LooseState();
     }
     
