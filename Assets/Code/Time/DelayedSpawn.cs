@@ -9,6 +9,7 @@ public class DelayedSpawn : MonoBehaviour
     public void Start()
     {
         StartCoroutine(delayedSpawnEnemies());
+        thingToSpawn.SetActive(false);
     } 
     private IEnumerator delayedSpawnEnemies()
     {

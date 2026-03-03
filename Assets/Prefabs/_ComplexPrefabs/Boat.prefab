@@ -783,6 +783,7 @@ Transform:
   - {fileID: 1088739586054380916}
   - {fileID: 7636914419152695506}
   - {fileID: 4477804620300635287}
+  - {fileID: 1343607470739225509}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &969575551984435527
@@ -1176,6 +1177,52 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &2836979835179077471
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1343607470739225509}
+  - component: {fileID: 7649224506158107205}
+  m_Layer: 0
+  m_Name: HumpDay
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1343607470739225509
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2836979835179077471}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8677599621833833279}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7649224506158107205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2836979835179077471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82f19f30a6ef02148aece7228b83e57b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thingToSpawn: {fileID: 0}
+  afterSeconds: 15
 --- !u!1 &3267641705813245326
 GameObject:
   m_ObjectHideFlags: 0
@@ -3467,7 +3514,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a98323117a349744385081eb93d7a99b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: _StartScreen
+  sceneName: IslandDay1_Morning
   transition: {fileID: 462693389088423982}
   dialogueAsset: {fileID: 11400000, guid: 54c915f0cc06d9a43811afe6ebe631f4, type: 2}
   progress: {fileID: 5972278779837596069}
@@ -3496,8 +3543,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadingScreen: {fileID: 0}
-  targetScene: IslandDay0
-  transitionType: IslandDay0
+  targetScene: IslandDay1_Morning
+  transitionType: TransitionToIsland
   canvasGroup: {fileID: 0}
 --- !u!1001 &1003474641062977227
 PrefabInstance:
