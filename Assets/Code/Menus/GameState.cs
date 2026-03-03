@@ -60,6 +60,7 @@ public class GameState : MonoBehaviour
         Cursor.visible = true;
         endLoose.GameEnd();
     }
+    
 
 
 }

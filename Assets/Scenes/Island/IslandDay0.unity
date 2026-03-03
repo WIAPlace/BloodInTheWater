@@ -16622,13 +16622,20 @@ PrefabInstance:
         type: 3}
       propertyPath: progress
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1166853550}
     - target: {fileID: 8835274598145913492, guid: d582cee2b8663be43ae3058f18c1d5ca,
         type: 3}
       propertyPath: sceneName
       value: Fishing Day0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8835274598145913492, guid: d582cee2b8663be43ae3058f18c1d5ca,
+        type: 3}
+      propertyPath: dialogueAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 14c8b24599408cb45942b0544b8d4a4b,
+        type: 2}
+    m_RemovedComponents:
+    - {fileID: 5972278779837596069, guid: d582cee2b8663be43ae3058f18c1d5ca, type: 3}
     m_RemovedGameObjects:
     - {fileID: 8076286164541647316, guid: d582cee2b8663be43ae3058f18c1d5ca, type: 3}
     m_AddedGameObjects:
@@ -16636,7 +16643,11 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1872325977}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7293106753677781027, guid: d582cee2b8663be43ae3058f18c1d5ca,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1166853550}
   m_SourcePrefab: {fileID: 100100000, guid: d582cee2b8663be43ae3058f18c1d5ca, type: 3}
 --- !u!4 &1166853548 stripped
 Transform:
@@ -16644,6 +16655,24 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1166853547}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1166853549 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7293106753677781027, guid: d582cee2b8663be43ae3058f18c1d5ca,
+    type: 3}
+  m_PrefabInstance: {fileID: 1166853547}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1166853550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1166853549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a63b1f54a83eb24ca4bd18270e42a82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1167451922
 GameObject:
   m_ObjectHideFlags: 0
@@ -23556,6 +23585,12 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1754961527840138785, guid: 3598aa3f55e6f50489fdee72d471301e,
+        type: 3}
+      propertyPath: itemSpot
+      value: 
+      objectReference: {fileID: 11400000, guid: 4d8cf1a49418c554d8423e285bd6b9b6,
+        type: 2}
     - target: {fileID: 2402129002843093341, guid: 3598aa3f55e6f50489fdee72d471301e,
         type: 3}
       propertyPath: virtualCamera

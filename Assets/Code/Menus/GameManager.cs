@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject gameUI; // ui for the game during play
     [SerializeField] private Image windUpIndicator; // will show when u have would up and are ready to release
     [SerializeField] private TextMeshProUGUI text; // ui for temp text
+    [SerializeField] PersistantItemSpot itemSpot;
 
     private Coroutine running;
     
@@ -145,5 +146,11 @@ public class GameManager : MonoBehaviour
 
             // DontDestroyOnLoad(this.gameObject); 
         }
+    }
+
+
+    public int GetItemInSpot()
+    {
+        return itemSpot.spots[2];
     }
 }

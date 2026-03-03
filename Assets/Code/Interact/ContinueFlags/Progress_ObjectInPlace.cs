@@ -4,13 +4,20 @@ using UnityEngine;
 
 public class Progress_ObjectInPlace : IProgressFlag
 {
-    [SerializeField] PersistantItemSpot itemSpot;
+    
     public bool Progress()
     {
         bool returnBool = true;
-        if (itemSpot!=null && itemSpot.spots[2] == 4)
+        
+        if (GameManager.Instance!=null)
         {
-            returnBool = false;
+            int spot = 0;
+            spot = GameManager.Instance.GetItemInSpot();
+        
+            if (spot == 3)
+            {
+                returnBool = false;
+            }
         }
         return returnBool;
     }
