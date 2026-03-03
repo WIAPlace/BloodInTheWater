@@ -15,7 +15,7 @@ RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
   m_Fog: 1
-  m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_FogColor: {r: 0.08235294, g: 0.09019608, b: 0.09411766, a: 1}
   m_FogMode: 3
   m_FogDensity: 0.015
   m_LinearFogStart: 0
@@ -23,10 +23,10 @@ RenderSettings:
   m_AmbientSkyColor: {r: 0.053266283, g: 0.069086, b: 0.084905654, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
-  m_AmbientIntensity: 1
-  m_AmbientMode: 3
-  m_SubtractiveShadowColor: {r: 0.15272339, g: 0.17357951, b: 0.2264151, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: f7b639bd2b25e84439a4ecb9619cf624, type: 2}
+  m_AmbientIntensity: 2
+  m_AmbientMode: 0
+  m_SubtractiveShadowColor: {r: 0.35686275, g: 0.35686275, b: 0.35686275, a: 1}
+  m_SkyboxMaterial: {fileID: 2100000, guid: a843fe682cb590242aecc96d2563f53e, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -96,7 +96,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: b8c4174ced8ff394aa81cccba3ad3936,
+  m_LightingDataAsset: {fileID: 112000000, guid: 98813c099dc9d434db5bec88d80efaf8,
     type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
@@ -2261,6 +2261,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   totalLbs: 25
+  endLoose: {fileID: 0}
 --- !u!1 &2015569080 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 685244710973780160, guid: d582cee2b8663be43ae3058f18c1d5ca,
@@ -2648,6 +2649,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 462693389088423982, guid: d582cee2b8663be43ae3058f18c1d5ca,
+        type: 3}
+      propertyPath: canvasGroup
+      value: 
+      objectReference: {fileID: 8018427150129618412}
+    - target: {fileID: 462693389088423982, guid: d582cee2b8663be43ae3058f18c1d5ca,
+        type: 3}
+      propertyPath: targetScene
+      value: IslandDay3_Morning
+      objectReference: {fileID: 0}
+    - target: {fileID: 462693389088423982, guid: d582cee2b8663be43ae3058f18c1d5ca,
+        type: 3}
+      propertyPath: loadingScreen
+      value: 
+      objectReference: {fileID: 8018427150129618413}
+    - target: {fileID: 462693389088423982, guid: d582cee2b8663be43ae3058f18c1d5ca,
+        type: 3}
+      propertyPath: transitionType
+      value: TransitionToIsland
+      objectReference: {fileID: 0}
     - target: {fileID: 1673383433939416933, guid: d582cee2b8663be43ae3058f18c1d5ca,
         type: 3}
       propertyPath: m_Name
@@ -2702,6 +2723,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8835274598145913492, guid: d582cee2b8663be43ae3058f18c1d5ca,
+        type: 3}
+      propertyPath: sceneName
+      value: IslandDay3_Morning
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2866,6 +2892,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3598aa3f55e6f50489fdee72d471301e, type: 3}
+--- !u!225 &8018427150129618412 stripped
+CanvasGroup:
+  m_CorrespondingSourceObject: {fileID: 1136048434583972852, guid: 3598aa3f55e6f50489fdee72d471301e,
+    type: 3}
+  m_PrefabInstance: {fileID: 8018427150129618411}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8018427150129618413 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3177672203606912617, guid: 3598aa3f55e6f50489fdee72d471301e,
+    type: 3}
+  m_PrefabInstance: {fileID: 8018427150129618411}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
