@@ -43,7 +43,7 @@ public class PlaceableAreas : MonoBehaviour
     {
         for(int i = 1; i < perSpot.spots.Length; i++)
         { // start at one cause hands dont matter
-            if(perSpot.spots[i] >= placeableSpots.Length) // Out of bounds catch
+            if(perSpot.spots[i] >= placeableSpots[i].Length) // Out of bounds catch
             {
                 perSpot.spots[i] = 0;
             }
