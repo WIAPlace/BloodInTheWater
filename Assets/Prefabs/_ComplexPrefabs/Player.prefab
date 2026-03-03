@@ -456,7 +456,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1988678381302577397
 Transform:
   m_ObjectHideFlags: 0
@@ -472,6 +472,7 @@ Transform:
   m_Children:
   - {fileID: 3634205464325406359}
   - {fileID: 5803972105368230184}
+  - {fileID: 6364482960804609208}
   m_Father: {fileID: 7921088312164371653}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3502617810108090627
@@ -757,7 +758,7 @@ MonoBehaviour:
   startingItemInHand: 0
   currentItemIndex: 0
   currentItem: {fileID: 0}
-  readyTime: 3
+  readyTime: 1
   placeTime: 0
   debugCurrentStateName: 
   debugPreviousStateName: 
@@ -850,7 +851,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5803972105368230184
 Transform:
   m_ObjectHideFlags: 0
@@ -1411,6 +1412,80 @@ Transform:
   - {fileID: 7144622496679856645}
   m_Father: {fileID: 1805401416884928113}
   m_LocalEulerAnglesHint: {x: -22.783, y: 74.011, z: -84.563}
+--- !u!1001 &6906717483490974547
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1988678381302577397}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 600024bac5317ea488e0edb0f1d3f9df,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 600024bac5317ea488e0edb0f1d3f9df,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.78
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 600024bac5317ea488e0edb0f1d3f9df,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 600024bac5317ea488e0edb0f1d3f9df,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 600024bac5317ea488e0edb0f1d3f9df,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 600024bac5317ea488e0edb0f1d3f9df,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 600024bac5317ea488e0edb0f1d3f9df,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 600024bac5317ea488e0edb0f1d3f9df,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 600024bac5317ea488e0edb0f1d3f9df,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 600024bac5317ea488e0edb0f1d3f9df,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 600024bac5317ea488e0edb0f1d3f9df,
+        type: 3}
+      propertyPath: m_Name
+      value: Blood_In_Water_Bobber
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 600024bac5317ea488e0edb0f1d3f9df, type: 3}
+--- !u!4 &6364482960804609208 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 600024bac5317ea488e0edb0f1d3f9df,
+    type: 3}
+  m_PrefabInstance: {fileID: 6906717483490974547}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6951989844929213580
 PrefabInstance:
   m_ObjectHideFlags: 0
