@@ -21,13 +21,19 @@ public class ProgressionLockSceneChange : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        if (progress.progressFlag.Progress())
-        {
-            ChangeScene();
+        if(progress != null){
+            if (progress.progressFlag.Progress())
+            {
+                ChangeScene();
+            }
+            else
+            {
+                DialogueBoxController.instance.StartDialogue(dialogueAsset.dialogue,dialogueAsset.audioclip, 0);
+            }
         }
         else
         {
-            DialogueBoxController.instance.StartDialogue(dialogueAsset.dialogue,dialogueAsset.audioclip, 0);
+            ChangeScene();
         }
     }
 
