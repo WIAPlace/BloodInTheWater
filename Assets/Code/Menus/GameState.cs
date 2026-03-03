@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 /// 
 /// Author: Weston Tollette
@@ -18,6 +19,7 @@ public class GameState : MonoBehaviour
     private float totalLbs = 20f;
     private float lbsCaught=0f;
     [SerializeField] private GameOver endLoose;
+    [SerializeField] private GameObject keeperToSpawn;
 
 
     private void Awake()
@@ -30,7 +32,11 @@ public class GameState : MonoBehaviour
         {
             Instance = this;
         }
+        if(keeperToSpawn!=null){
+            keeperToSpawn.SetActive(false);
+        }
     }
+    
 
     public bool CheckIfEnoughCaught()
     {
@@ -46,6 +52,12 @@ public class GameState : MonoBehaviour
     /// getters
     public float CheckLbs()
     {
+        if(lbsCaught >= totalLbs)
+        {
+            if(keeperToSpawn!=null){
+                keeperToSpawn.SetActive(true);
+            }
+        }
         return lbsCaught;
     }
     public float CheckLbsNeeded()
@@ -60,6 +72,7 @@ public class GameState : MonoBehaviour
         Cursor.visible = true;
         endLoose.GameEnd();
     }
+
     
 
 

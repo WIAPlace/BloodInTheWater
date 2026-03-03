@@ -14,6 +14,7 @@ using UnityEngine;
 public class CheckWeight : MonoBehaviour, IInteractable
 { // on interact check how much fish lbs you have caught
     private string lbsText;
+    
 
     public void Interact()
     {

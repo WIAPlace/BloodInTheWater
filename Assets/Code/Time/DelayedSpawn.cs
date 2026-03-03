@@ -8,8 +8,11 @@ public class DelayedSpawn : MonoBehaviour
     [SerializeField]float afterSeconds;
     public void Start()
     {
-        StartCoroutine(delayedSpawnEnemies());
-        thingToSpawn.SetActive(false);
+        if(thingToSpawn!=null)
+        {
+            StartCoroutine(delayedSpawnEnemies());
+            thingToSpawn.SetActive(false);
+        }
     } 
     private IEnumerator delayedSpawnEnemies()
     {
