@@ -17,10 +17,11 @@ public class InteractableHover : MonoBehaviour
     public float detectionRange = 100f;
     public LayerMask interactableLayer;
     public LayerMask hitMasks;
+    public Camera UIcamera;
 
     void Update()
     {
-        Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
+        Ray ray = UIcamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit, detectionRange, hitMasks))

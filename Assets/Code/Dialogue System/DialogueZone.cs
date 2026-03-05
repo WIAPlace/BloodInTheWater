@@ -1,7 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// 
+/// Author: Marsahll Turner
+/// Created: 3/4/26
+/// Purpose: To trigger dialogue when entering a trigger object
+/// 
+/// Edited: 
+/// Edited By: 
+/// Edit Purpose: 
+/// 
 public class DialogueZone : MonoBehaviour
 {
     public GameObject thePlayer;
