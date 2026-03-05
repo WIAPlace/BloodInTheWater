@@ -55,7 +55,7 @@ public class InteractSystem : MonoBehaviour
         }
         else //Starts interact
         {
-            if (Physics.SphereCast(new Ray(FPCamera.transform.position, FPCamera.transform.forward),radius, out RaycastHit hitInfo, interactDistance,hitMask,QueryTriggerInteraction.Collide))
+            if (Physics.Raycast(new Ray(FPCamera.transform.position, FPCamera.transform.forward), out RaycastHit hitInfo, interactDistance,hitMask,QueryTriggerInteraction.Collide))
             {
                 if((((1 << hitInfo.collider.gameObject.layer) & interactMask.value) != 0) && hitInfo.collider.TryGetComponent(out IInteractable interactable))
                 {
