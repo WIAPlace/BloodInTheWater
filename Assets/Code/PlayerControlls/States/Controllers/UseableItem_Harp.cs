@@ -30,7 +30,7 @@ public class UseableItem_Harp : UseableItem_Abstract
         IsReady = new Harp_StateItemIsReady();
         UseItem = new Harp_StateItemUse();
         Place = new Harp_StateItemPlace();
-        
+        UnderAtk = new Harp_StateItemUnderAttack();
     }
     
     public override IUseableState DoState(Useable_Controller controller)

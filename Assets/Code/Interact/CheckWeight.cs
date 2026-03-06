@@ -21,7 +21,6 @@ public class CheckWeight : MonoBehaviour, IInteractable
         if(GameState.Instance != null)
         {
             lbsText = GameState.Instance.CheckLbs().ToString() + "/" + GameState.Instance.CheckLbsNeeded().ToString() + " lbs";
-            
         }
         else
         {
