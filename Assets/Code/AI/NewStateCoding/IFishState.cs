@@ -10,7 +10,9 @@ using UnityEngine;
 /// Edited By:
 /// Edit Purpose:
 ///
-public interface IFishStates 
+public interface IFishState
 {
-    IFishStates DoState(FishStateController FSC);
+    void DoEnter(Fish_Controller FSC);
+    IFishState DoState(Fish_Controller FSC);
+    void DoExit(Fish_Controller FSC);
 }

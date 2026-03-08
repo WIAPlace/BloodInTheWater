@@ -44,6 +44,7 @@ public class Useable_Controller : MonoBehaviour
     public Coroutine running; // if not null the corutine is running
     public Coroutine windUp; // corutine for wind up indicator
 
+    // used for debuging
     [SerializeField] [Tooltip("used to see what state we are in")]
     private string debugCurrentStateName = "";
     [SerializeField] [Tooltip("used to see what state we are in")]

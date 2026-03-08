@@ -25,7 +25,7 @@ public class InteractSystem : MonoBehaviour
     [SerializeField][Tooltip("Interact Layer and any that would block it")]
     private LayerMask hitMask; // Interact layer and any that could block it
     [SerializeField] float interactDistance = 2.6f; //Should be the same distance as the interactable hover
-    [SerializeField] private float radius=1f; // radius of spherecast
+    //[SerializeField] private float radius=1f; // radius of spherecast
     
     public bool inConversation;
     
