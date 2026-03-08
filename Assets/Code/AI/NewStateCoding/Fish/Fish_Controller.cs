@@ -17,8 +17,9 @@ public class Fish_Controller : MonoBehaviour
 {   
     [HideInInspector]
     public QuickTimeData_Abstract fishData; 
-    [HideInInspector]
     public LayerMask targetMask; 
+    [HideInInspector]
+    public Vector3 targetPos;
 
     public FishSC_Abstact stateController;
     public NavMeshAgent agent;
@@ -32,6 +33,13 @@ public class Fish_Controller : MonoBehaviour
     public float wanderRadius = 20f;
     public float wanderTimer = 5f;
 
+    public float fleeDistance = 20f;
+    public float fleeTimer = 5f;
+
+    [HideInInspector]
+    public bool inLureTrigger = false; //checks if in the lure trigger after fear is done
+
+    public Vector3 lurePos; // used for holding the lure position in fear state 
 
     // used for debuging
     [SerializeField] [Tooltip("used to see what state we are in")]
@@ -90,8 +98,8 @@ public class Fish_Controller : MonoBehaviour
             activeCo = null;
         }
     }
-
-    ///////////////////////////////////////////////////////////////////////// Starting Scripts
+    
+    ///////////////////////////////////////////////////////////////////////// Starting Functions
     private void OnEnable()
     { // called when enabled to do a bit of set up
         //Debug.Log("Enabled");
@@ -99,4 +107,62 @@ public class Fish_Controller : MonoBehaviour
         ChangeState(stateController.Enter); // at start enter idleing
         stateController.Enabled(this);
     }
+
+    ///////////////////////////////////////////////////////////////////////// Trigger Functions
+    void OnTriggerEnter(Collider other)
+    { // when the fish enters the lures trigerzone  
+        Debug.Log("entered");     
+        if (((1 << other.gameObject.layer) & targetMask.value) != 0)
+        { // if the trigger is the bobber's lure layermask
+            Debug.Log("entered");
+            if(currentState != stateController.Fear)
+            {
+                targetPos = other.transform.position;
+                ChangeState(stateController.Lure);   
+            }
+            else
+            {
+                inLureTrigger = true; // held for when they are out of fear
+            }
+        }
+    }
+    void OnTriggerExit(Collider other)
+    {
+        if (((1 << other.gameObject.layer) & targetMask.value) != 0)
+        {
+            inLureTrigger = false; // no longer in lure trigger
+        }
+    }
+
+    ///////////////////////////////////////////////////////////////////////// Collision Functions
+    // on contact with bobber.
+    void OnCollisionEnter(Collision collision)
+    {
+        if (((1 << collision.gameObject.layer) & targetMask.value) != 0 && currentState!=stateController.Fear)
+        {
+            currentState = stateController.Bobber;
+            fishData.SendData();
+        }
+    }
+
+    ///////////////////////////////////////////////////////////////////////// Lure Reeled In
+    public void LureReeledIn() // called when the lure has been reeled in.
+    {
+        inLureTrigger = false;
+        if(currentState == stateController.Lure) // making sure this is executing only on the ones who need it
+        { 
+            ChangeState(stateController.Idle); // change state to idle only if the current state is lure
+        }
+    }
+    ///////////////////////////////////////////////////////////////////////// Bobber Startles fish
+    public void BobberSpooked(Vector3 lurePosition)
+    {
+        if(currentState == stateController.Idle) // turns off idle.
+        {
+            ChangeState(stateController.Fear);
+            lurePos = lurePosition;
+        }
+    }
+
+
 }

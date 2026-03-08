@@ -16,7 +16,7 @@ using UnityEngine.AI;
 ////////////////////////////////////////////////////////////////// In Idle Range
 public class Basic_StateIdle : Abs_StateIdle
 {
-    private bool idleActive = false;
+    
     private Coroutine idleRun;
     public override void DoEnter(Fish_Controller FSC)
     {   
@@ -36,48 +36,13 @@ public class Basic_StateIdle : Abs_StateIdle
     {
         return this;
     }
-    private IEnumerator WanderRoutine(Fish_Controller FSC)
-    {
-        while(idleActive)
-        {
-            Vector3 newPos = RandomNavMeshLocation(FSC.transform.position, FSC.wanderRadius);
-            FSC.agent.SetDestination(newPos);
-                
-            // Wait until agent is close to destination or timer runs out
-            yield return new WaitForSeconds(FSC.wanderTimer);
-        }
-    }
-
-    // Finds a valid NavMesh point near the center point
-    private Vector3 RandomNavMeshLocation(Vector3 center, float radius)
-    {
-        Vector3 randomDirection = Random.insideUnitSphere * radius;
-        randomDirection += center;
-        NavMeshHit hit;
-        
-        // Sample position to make sure it is on the NavMesh
-        NavMesh.SamplePosition(randomDirection, out hit, radius, 1);
-        return hit.position;
-    }
+    
 }
 
 ////////////////////////////////////////////////////////////////// In Lure Range
 public class Basic_StateLure : Abs_StateLure
 {
-    public override void DoEnter(Fish_Controller FSC)
-    {
-        
-    }
-
-    public override void DoExit(Fish_Controller FSC)
-    {
-        
-    }
-
-    public override IFishState DoState(Fish_Controller FSC)
-    {
-        return this;
-    }
+    // base
 }
 
 ////////////////////////////////////////////////////////////////// In Bobber Range
@@ -102,20 +67,7 @@ public class Basic_StateBobber : Abs_StateBobber
 ////////////////////////////////////////////////////////////////// In Fear Range
 public class Basic_StateFear : Abs_StateFear
 {
-    public override void DoEnter(Fish_Controller FSC)
-    {
-        
-    }
-
-    public override void DoExit(Fish_Controller FSC)
-    {
-        
-    }
-
-    public override IFishState DoState(Fish_Controller FSC)
-    {
-        return this;
-    }
+    //base
 }
 
 ////////////////////////////////////////////////////////////////// Unique Behavior

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 /// 
@@ -16,21 +17,60 @@ namespace TLC.FishStates{
     ////////////////////////////////////////////////////////////////// In Idle Range
     public abstract class Abs_StateIdle : IFishState
     {
+        protected bool idleActive = false;
         public abstract void DoEnter(Fish_Controller FSC);
 
         public abstract void DoExit(Fish_Controller FSC);
 
-        public abstract IFishState DoState(Fish_Controller FSC);
+        public virtual IFishState DoState(Fish_Controller FSC)
+        {
+            return this;
+        }
+
+        protected IEnumerator WanderRoutine(Fish_Controller FSC)
+        {
+            while(idleActive)
+            {
+                Vector3 newPos = RandomNavMeshLocation(FSC.transform.position, FSC.wanderRadius);
+                FSC.agent.SetDestination(newPos);
+                    
+                // Wait until agent is close to destination or timer runs out
+                yield return new WaitForSeconds(FSC.wanderTimer);
+            }
+        }
+
+        // Finds a valid NavMesh point near the center point
+        private Vector3 RandomNavMeshLocation(Vector3 center, float radius)
+        {
+            Vector3 randomDirection = Random.insideUnitSphere * radius;
+            randomDirection += center;
+            NavMeshHit hit;
+            
+            // Sample position to make sure it is on the NavMesh
+            NavMesh.SamplePosition(randomDirection, out hit, radius, 1);
+            return hit.position;
+        }
     }
 
     ////////////////////////////////////////////////////////////////// In Lure Range
     public abstract class Abs_StateLure : IFishState
     {
-        public abstract void DoEnter(Fish_Controller FSC);
+        public virtual void DoEnter(Fish_Controller FSC)
+        {
+            FSC.agent.isStopped = false; // reactivates the agent if its stoped.
+            FSC.agent.SetDestination(FSC.targetPos);
+        }
 
-        public abstract void DoExit(Fish_Controller FSC);
+        public virtual void DoExit(Fish_Controller FSC)
+        {
+            FSC.agent.SetDestination(FSC.transform.position); // set destination to self
+            FSC.agent.isStopped = true; // deactivates
+        }
 
-        public abstract IFishState DoState(Fish_Controller FSC);
+        public virtual IFishState DoState(Fish_Controller FSC)
+        {
+            return this;
+        }
     }
 
     ////////////////////////////////////////////////////////////////// In Bobber Range
@@ -40,17 +80,61 @@ namespace TLC.FishStates{
 
         public abstract void DoExit(Fish_Controller FSC);
 
-        public abstract IFishState DoState(Fish_Controller FSC);
+        public virtual IFishState DoState(Fish_Controller FSC)
+        {
+            return this;
+        }
     }
 
     ////////////////////////////////////////////////////////////////// In Fear Range
     public abstract class Abs_StateFear : IFishState
     {
-        public abstract void DoEnter(Fish_Controller FSC);
 
-        public abstract void DoExit(Fish_Controller FSC);
+        public virtual void DoEnter(Fish_Controller FSC)
+        {
+            FSC.running = FSC.StartCoroutine(FearTheBobber(FSC.lurePos,FSC));
+        }
 
-        public abstract IFishState DoState(Fish_Controller FSC);
+        public virtual void DoExit(Fish_Controller FSC)
+        {
+            FSC.StopCo(FSC.running);
+        }
+
+        public virtual IFishState DoState(Fish_Controller FSC)
+        {
+            return this;
+        }
+
+        public IEnumerator FearTheBobber(Vector3 lurePosition, Fish_Controller FSC)
+        { // will run away for a bit.
+            if (FSC.agent != null && FSC.agent.enabled)
+            {
+                FSC.agent.isStopped = false;
+                    
+                Vector3 fleeDir = FSC.transform.position - lurePosition; // get the diffence of this object and 
+                Vector3 potentialFleePosition = FSC.transform.position + fleeDir.normalized * FSC.fleeDistance; // get a desired place to flee to
+                NavMeshHit hit;
+                //Sample the NavMesh to find the nearest valid point to the potential flee position
+                if (NavMesh.SamplePosition(potentialFleePosition, out hit, FSC.fleeDistance, NavMesh.AllAreas))
+                {
+                    // Set the agent's destination to the valid point on the NavMesh
+                    FSC.agent.SetDestination(hit.position);
+                    //Debug.Log(hit.position);
+                }
+            }
+            yield return new WaitForSeconds(FSC.fleeTimer);
+            
+            FSC.agent.isStopped = true;
+
+            if (FSC.inLureTrigger) // if in lure trigger zone
+            {
+                FSC.ChangeState(FSC.stateController.Lure); // in trigger zone so go back to lure
+            }
+            else
+            {
+                FSC.ChangeState(FSC.stateController.Idle); // change to idle state 
+            }
+        }
     }
 
     ////////////////////////////////////////////////////////////////// Unique Behavior
