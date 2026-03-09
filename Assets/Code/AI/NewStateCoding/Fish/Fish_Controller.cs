@@ -23,7 +23,8 @@ public class Fish_Controller : MonoBehaviour
     public Vector3 targetPos;
 
     [HideInInspector]
-    public FishSC_Abstact stateController;
+    public FishSC_Abstact SC; // state controller
+    // diffrent controllers can be added for diffrent behaviors
 
     [HideInInspector]
     public NavMeshAgent agent;
@@ -33,12 +34,23 @@ public class Fish_Controller : MonoBehaviour
 
     public Coroutine running;
 
-    
+    [field:Header("Idle")]
     public float wanderRadius = 20f;
     public float wanderTimer = 5f;
 
+    [field:Header("Fear")]
     public float fleeDistance = 20f;
     public float fleeTimer = 5f;
+
+    [field:Header("Bobber")]
+    [Tooltip("Range at which the fish will enter the tapping behavior")]
+    public float tapEnterRange = 4f; // range how far fish can enter the tapping.
+    [Tooltip("How quickly it will go back and forth between the rod")]
+    public float tapSpeed = 4f;
+    [Tooltip("Range of its tapping varriance")]
+    public float tapVary = 5f;
+    public float tapSmooth = .1f;
+    public float tapSmoothRot = 50f;
 
     [HideInInspector]
     public bool inLureTrigger = false; //checks if in the lure trigger after fear is done
@@ -58,7 +70,7 @@ public class Fish_Controller : MonoBehaviour
         if(currentState != null)
         {
             //Debug.Log("Updating"); 
-            IFishState holder = stateController.DoState(this);
+            IFishState holder = SC.DoState(this);
             if(currentState != holder) 
             { // using this as a of being able to utilize change state instead of just changing current state dirrectly
                 ChangeState(holder);
@@ -106,7 +118,7 @@ public class Fish_Controller : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        stateController = GetComponent<FishSC_Abstact>();
+        SC = GetComponent<FishSC_Abstact>();
     }
 
     ///////////////////////////////////////////////////////////////////////// Starting Functions
@@ -117,22 +129,27 @@ public class Fish_Controller : MonoBehaviour
     }
     private IEnumerator slowStart()
     {
-        yield return new WaitForSeconds(.2f);
-        stateController.Enabled(this);
-        ChangeState(stateController.Enter); // at start enter idleing
+        yield return new WaitForSeconds(.1f);
+        SC.Enabled(this);
+        ChangeState(SC.Enter); // at start enter idleing
     } 
 
     ///////////////////////////////////////////////////////////////////////// Trigger Functions
     void OnTriggerEnter(Collider other)
     { // when the fish enters the lures trigerzone  
         //Debug.Log("entered");     
-        if (stateController.Lure!=null && ((1 << other.gameObject.layer) & targetMask.value) != 0)
+        if (SC.Lure!=null && ((1 << other.gameObject.layer) & targetMask.value) != 0)
         { // if the trigger is the bobber's lure layermask and able to be lured.
             //Debug.Log("entered");
-            if(currentState != stateController.Fear)
+            if(currentState != SC.Fear)
             {
                 targetPos = other.transform.position;
-                ChangeState(stateController.Lure);   
+                ChangeState(SC.Lure);   
+            }
+            else if(currentState == SC.Lure)
+            {   
+                Debug.Log("entered Bobber");
+                ChangeState(SC.Bobber);
             }
             else
             {
@@ -150,30 +167,32 @@ public class Fish_Controller : MonoBehaviour
 
     ///////////////////////////////////////////////////////////////////////// Collision Functions
     // on contact with bobber.
+    /*
     void OnCollisionEnter(Collision collision)
     {
-        if (((1 << collision.gameObject.layer) & targetMask.value) != 0 && currentState!=stateController.Fear && stateController.Bobber!=null)
+        if (((1 << collision.gameObject.layer) & targetMask.value) != 0 && currentState!=SC.Fear && SC.Bobber!=null)
         {   // correct layer, not afraid, and able to be on the line
-            currentState = stateController.Bobber;
+            currentState = SC.Bobber;
             fishData.SendData();
         }
     }
+    */
 
     ///////////////////////////////////////////////////////////////////////// Lure Reeled In
     public void LureReeledIn() // called when the lure has been reeled in.
     {
         inLureTrigger = false;
-        if(currentState == stateController.Lure) // making sure this is executing only on the ones who need it
+        if(currentState == SC.Lure || currentState == SC.Bobber) // making sure this is executing only on the ones who need it
         { 
-            ChangeState(stateController.Idle); // change state to idle only if the current state is lure
+            ChangeState(SC.Idle); // change state to idle only if the current state is lure
         }
     }
     ///////////////////////////////////////////////////////////////////////// Bobber Startles fish
     public void BobberSpooked(Vector3 lurePosition)
     {
-        if(stateController.Fear!=null && currentState == stateController.Idle) // turns off idle.
+        if(SC.Fear!=null && currentState == SC.Idle) // turns off idle.
         {
-            ChangeState(stateController.Fear);
+            ChangeState(SC.Fear);
             lurePos = lurePosition;
         }
     }

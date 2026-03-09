@@ -128,11 +128,11 @@ namespace TLC.FishStates{
 
             if (FSC.inLureTrigger) // if in lure trigger zone
             {
-                FSC.ChangeState(FSC.stateController.Lure); // in trigger zone so go back to lure
+                FSC.ChangeState(FSC.SC.Lure); // in trigger zone so go back to lure
             }
             else
             {
-                FSC.ChangeState(FSC.stateController.Idle); // change to idle state 
+                FSC.ChangeState(FSC.SC.Idle); // change to idle state 
             }
         }
     }
@@ -153,7 +153,7 @@ namespace TLC.FishStates{
         public virtual void DoEnter(Fish_Controller FSC)
         {
             // set locaton of fish to somewhere in range
-            Vector3 randomPoint = FSC.transform.position + Random.insideUnitSphere * 50f;
+            Vector3 randomPoint = Vector3.zero + Random.insideUnitSphere * 50f;
             NavMeshHit hit;
             //Debug.Log("Running Enter");
             if (NavMesh.SamplePosition(randomPoint, out hit, 50f, -1)) 
@@ -166,7 +166,7 @@ namespace TLC.FishStates{
                 //Debug.Log("Spot was not in valid Range");
             } 
 
-            FSC.StartWaitToChange(FSC.stateController.Idle,2f); 
+            FSC.StartWaitToChange(FSC.SC.Idle,2f); 
             // in 2 seconds change to Idle
         }
 
