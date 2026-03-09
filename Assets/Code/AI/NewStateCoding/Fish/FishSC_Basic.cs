@@ -19,8 +19,9 @@ public class FishSC_Basic : FishSC_Abstact
     // public Abs_StateUnique Unique; // Uniqe behavior, probably called in idle
     // public Abs_StateEnter Enter; // on entering the scene.
 
-    void Start()
+    public void Awake()
     {
+        fishData = GetComponent<QuickTimeData_Abstract>();
         Idle = new Basic_StateIdle();
         Lure = new Basic_StateLure();
         Bobber = new Basic_StateBobber();

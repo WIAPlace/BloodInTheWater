@@ -85,7 +85,7 @@ public class UseableItem_Rod : UseableItem_Abstract
         while (i < hitColliders.Length)
         {
             // Try to get the TargetScript component from the hit object
-            FishStateController target = hitColliders[i].GetComponent<FishStateController>();
+            Fish_Controller target = hitColliders[i].GetComponent<Fish_Controller>();
             
             if (LurePrefab.activeSelf && target != null) // this should probably be traded out for some kind of event thing
             {
