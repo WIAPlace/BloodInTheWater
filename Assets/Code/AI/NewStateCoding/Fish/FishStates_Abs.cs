@@ -76,12 +76,20 @@ namespace TLC.FishStates{
                 float varriance = Random.Range(-FSC.lureMoveVary,FSC.lureMoveVary);
                 luredRad += varriance; // add varriance to the proposed radius.
 
-                // set destination to somewhere near where the lure is with an equal closness to where the fish is
-                Vector3 newPos = FSC.SC.RandomNavMeshLocation(FSC.targetPos, luredRad);
-                FSC.agent.SetDestination(newPos);  
+                if(luredRad > FSC.tapEnterRange)
+                {
+                    // set destination to somewhere near where the lure is with an equal closness to where the fish is
+                    Vector3 newPos = FSC.SC.RandomNavMeshLocation(FSC.targetPos, luredRad);
+                    FSC.agent.SetDestination(newPos);  
+                }
+                else
+                {
+                    FSC.ChangeState(FSC.SC.Bobber);
+                }
+                float randomTimeLure = Random.Range(1,FSC.wanderTimer);
 
                 // Wait until agent is close to destination or timer runs out
-                yield return new WaitForSeconds(FSC.wanderTimer);
+                yield return new WaitForSeconds(randomTimeLure);
             }
         }
     }

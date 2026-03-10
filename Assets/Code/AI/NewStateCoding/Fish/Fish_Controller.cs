@@ -194,7 +194,7 @@ public class Fish_Controller : MonoBehaviour
     {
         //Debug.Log("ReeledIn");
         inLureTrigger = false;
-        if(currentState == SC.Lure || currentState == SC.Bobber || currentState == SC.Hook) // making sure this is executing only on the ones who need it
+        if(currentState == SC.Lure || currentState == SC.Bobber) // making sure this is executing only on the ones who need it
         { 
             ChangeState(SC.Idle); // change state to idle only if the current state is lure
         }
