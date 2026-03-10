@@ -191,8 +191,14 @@ public class Rod_StateItemPlace : Abs_StateItemPlace
         controller.currentItem.useableMesh.SetActive(false); // turn of the game object 
         if (rod != null && rod.LurePrefab.activeSelf)
         {
-            rod.RetrieveLure(rod.LurePrefab.transform.position,rod.LureRadius); // retrive lure
+            //Debug.Log("Hit retrive on place");
             rod.LurePrefab.SetActive(false); // either it stays out or not.
+            rod.RetrieveLure(rod.LurePrefab.transform.position,rod.LureRadius); // retrive lure
+            rod.SetIfFishing(false);
+        }
+        if (rod != null && rod.CastSpotPrefab.activeSelf)
+        { // bring in cast spot
+            rod.CastSpotPrefab.SetActive(false); // either it stays out or not.
         }
         base.DoEnter(controller);
 
@@ -214,8 +220,9 @@ public class Rod_StateItemUnderAttack : Abs_StateItemUnderAttack
         rod = controller.rod;
         if (rod != null && rod.LurePrefab.activeSelf)
         { // bring in lure
-            rod.RetrieveLure(rod.LurePrefab.transform.position, rod.LureRadius);
             rod.LurePrefab.SetActive(false); // either it stays out or not.
+            rod.RetrieveLure(rod.LurePrefab.transform.position, rod.LureRadius);
+            //rod.SetIfFishing(false);
         }
         if (rod != null && rod.CastSpotPrefab.activeSelf)
         { // bring in cast spot

@@ -13,6 +13,7 @@ using UnityEngine;
 /// 
 public class QuickTimeData_BasicFish : QuickTimeData_Abstract
 {
+    private Fish_Controller FSC;
     private float fishLength;
     private float fishLbs;
     public QuickTimeData_BasicFish(QuickTimeData_BasicFish other) : base(other)
@@ -21,8 +22,14 @@ public class QuickTimeData_BasicFish : QuickTimeData_Abstract
         this.fishLbs = other.fishLbs;
     }
 
+    void Start()
+    {   // needed to activate stuff within the fish itself
+        FSC = GetComponent<Fish_Controller>();
+    }
+
     private void OnEnable()
     {
+        
         fishLbs = Random.Range(5f,15f);
     }
 
@@ -38,6 +45,6 @@ public class QuickTimeData_BasicFish : QuickTimeData_Abstract
     }
     public override void OnMiss()
     {
-        
+        FSC.ChangeState(FSC.SC.Fear); // scare the fish off if you loose the mini game
     }
 }

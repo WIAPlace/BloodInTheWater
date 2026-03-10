@@ -74,31 +74,53 @@ public class Basic_StateBobber : Abs_StateBobber
     Vector3 origin;
     //Coroutine moving = null;
     Vector3 velocity = Vector3.zero;
+    float hookChance = 0f;
+
     public override void DoEnter(Fish_Controller FSC)
     {
+        hookChance = FSC.chanceToHook; // sets base chance to grab bobber.
+        FSC.onHook = false; // making sure this is false at the start
         origin = FSC.transform.position;
         timer = 0f;
         FSC.agent.isStopped = true;
         //FSC.transform.LookAt(FSC.targetPos);
+        FSC.running = FSC.StartCoroutine(Tapping(FSC)); // start the tapp timmer;
     }
 
     public override void DoExit(Fish_Controller FSC)
     {
+        hookChance = 0f;
+        FSC.agent.isStopped = true; // stop agent from continuing to move.
+        FSC.StopCo(FSC.running); // stop this from continuing
         
     }
 
     public override IFishState DoState(Fish_Controller FSC)
     { 
-        RotToTarget(FSC);
-        TapPonging(FSC);
+        if(!FSC.onHook)
+        {
+            RotToTarget(FSC);
+            TapPonging(FSC); // the tappin thing. 
+        }
         return this;
     }
     IEnumerator Tapping(Fish_Controller FSC)
-    {
+    { // will every so seconds decide if its hooked or not.
         while(FSC.currentState == FSC.SC.Bobber)
         {
-            
-            yield return new WaitForSeconds(5f);
+            float randyHit = Random.Range(0,101);
+            //Debug.Log(randyHit);
+            if (randyHit <= hookChance) 
+            {
+                //Debug.Log("Hit");
+                //FSC.ChangeState(FSC.SC.Hook);
+                FSC.onHook = true; // stop the update and allow for collision with bobber to occur.
+                FSC.agent.isStopped = false; // let him move
+                FSC.agent.SetDestination(FSC.SC.target.transform.position); // move twoards lure;
+                FSC.StopCo(FSC.running); // stop running this corutine
+            }
+            hookChance += 5;
+            yield return new WaitForSeconds(3f);
             
         }
     }
@@ -169,6 +191,7 @@ public class Basic_StateEnter : Abs_StateEnter
 {
     public override void DoEnter(Fish_Controller FSC)
     {
+        FSC.onHook = false; // in case i forget to do this in an exit.
         base.DoEnter(FSC);
     }
 
@@ -180,5 +203,19 @@ public class Basic_StateEnter : Abs_StateEnter
     public override IFishState DoState(Fish_Controller FSC)
     {
         return this;
+    }
+}
+
+////////////////////////////////////////////////////////////////// Hooked
+public class Basic_StateHooked : Abs_StateHooked
+{
+    public override void DoEnter(Fish_Controller FSC)
+    {
+        
+    }
+
+    public override void DoExit(Fish_Controller FSC)
+    {
+       
     }
 }

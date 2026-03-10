@@ -31,7 +31,7 @@ namespace TLC.FishStates{
         {
             while(idleActive)
             {
-                Vector3 newPos = RandomNavMeshLocation(FSC.transform.position, FSC.wanderRadius);
+                Vector3 newPos = FSC.SC.RandomNavMeshLocation(FSC.transform.position, FSC.wanderRadius);
                 FSC.agent.SetDestination(newPos);
                     
                 // Wait until agent is close to destination or timer runs out
@@ -39,37 +39,50 @@ namespace TLC.FishStates{
             }
         }
 
-        // Finds a valid NavMesh point near the center point
-        private Vector3 RandomNavMeshLocation(Vector3 center, float radius)
-        {
-            Vector3 randomDirection = Random.insideUnitSphere * radius;
-            randomDirection += center;
-            NavMeshHit hit;
-            
-            // Sample position to make sure it is on the NavMesh
-            NavMesh.SamplePosition(randomDirection, out hit, radius, 1);
-            return hit.position;
-        }
+        
     }
 
     ////////////////////////////////////////////////////////////////// In Lure Range
     public abstract class Abs_StateLure : IFishState
     {
+        protected bool inLureRange = false; // bool for enumerator to continue
+        
         public virtual void DoEnter(Fish_Controller FSC)
         {
             FSC.agent.isStopped = false; // reactivates the agent if its stoped.
-            FSC.agent.SetDestination(FSC.targetPos);
+            //FSC.agent.SetDestination(FSC.targetPos);
+            inLureRange = true; 
+            FSC.running = FSC.StartCoroutine(LureRoutine(FSC)); 
+            
         }
 
         public virtual void DoExit(Fish_Controller FSC)
         {
-            FSC.agent.SetDestination(FSC.transform.position); // set destination to self
+            //FSC.agent.SetDestination(FSC.transform.position); // set destination to self
+            inLureRange = false;
             FSC.agent.isStopped = true; // deactivates
+            FSC.StopCo(FSC.running); // make sture the corutine is stoped
         }
 
         public virtual IFishState DoState(Fish_Controller FSC)
         {
             return this;
+        }
+        IEnumerator LureRoutine(Fish_Controller FSC)
+        {
+            while (inLureRange)
+            { // while lured
+                float luredRad = Vector3.Distance(FSC.transform.position, FSC.targetPos);
+                float varriance = Random.Range(-FSC.lureMoveVary,FSC.lureMoveVary);
+                luredRad += varriance; // add varriance to the proposed radius.
+
+                // set destination to somewhere near where the lure is with an equal closness to where the fish is
+                Vector3 newPos = FSC.SC.RandomNavMeshLocation(FSC.targetPos, luredRad);
+                FSC.agent.SetDestination(newPos);  
+
+                // Wait until agent is close to destination or timer runs out
+                yield return new WaitForSeconds(FSC.wanderTimer);
+            }
         }
     }
 
@@ -173,5 +186,17 @@ namespace TLC.FishStates{
         public abstract void DoExit(Fish_Controller FSC);
 
         public abstract IFishState DoState(Fish_Controller FSC);
+    }
+
+    public abstract class Abs_StateHooked : IFishState
+    {
+        public abstract void DoEnter(Fish_Controller FSC);
+
+        public abstract void DoExit(Fish_Controller FSC);
+
+        public virtual IFishState DoState(Fish_Controller FSC)
+        {
+            return this;
+        }
     }
 }

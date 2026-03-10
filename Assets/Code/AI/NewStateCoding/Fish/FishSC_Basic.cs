@@ -28,6 +28,7 @@ public class FishSC_Basic : FishSC_Abstact
         Fear = new Basic_StateFear();
         Unique = new Basic_StateUnique();
         Enter = new Basic_StateEnter();
+        Hook = new Basic_StateHooked();
     }
 
 }

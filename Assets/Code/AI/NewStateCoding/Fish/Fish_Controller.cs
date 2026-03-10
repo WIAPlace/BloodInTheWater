@@ -42,6 +42,10 @@ public class Fish_Controller : MonoBehaviour
     public float fleeDistance = 20f;
     public float fleeTimer = 5f;
 
+    [field:Header("Lured")]
+    [Tooltip("Varriance in how close it will move with each check of new destination. +-value")]
+    public float lureMoveVary = 2f;
+
     [field:Header("Bobber")]
     [Tooltip("Range at which the fish will enter the tapping behavior")]
     public float tapEnterRange = 4f; // range how far fish can enter the tapping.
@@ -51,6 +55,12 @@ public class Fish_Controller : MonoBehaviour
     public float tapVary = 5f;
     public float tapSmooth = .1f;
     public float tapSmoothRot = 50f;
+
+    [field:Header("Hook")]
+    [Tooltip("value% chance the fish will actully go for the hook while tapping.")]
+    public float chanceToHook = 20f;
+    [HideInInspector]
+    public bool onHook = false; // will be used for collision detection and allowance with the hooked stuff.
 
     [HideInInspector]
     public bool inLureTrigger = false; //checks if in the lure trigger after fear is done
@@ -167,22 +177,24 @@ public class Fish_Controller : MonoBehaviour
 
     ///////////////////////////////////////////////////////////////////////// Collision Functions
     // on contact with bobber.
-    /*
+    
     void OnCollisionEnter(Collision collision)
     {
-        if (((1 << collision.gameObject.layer) & targetMask.value) != 0 && currentState!=SC.Fear && SC.Bobber!=null)
+        if (((1 << collision.gameObject.layer) & targetMask.value) != 0 && currentState!=SC.Fear && SC.Hook!=null && onHook)
         {   // correct layer, not afraid, and able to be on the line
-            currentState = SC.Bobber;
+            currentState = SC.Hook;
             fishData.SendData();
+            onHook = false; // might not want this to be here till later.
         }
     }
-    */
+    
 
     ///////////////////////////////////////////////////////////////////////// Lure Reeled In
     public void LureReeledIn() // called when the lure has been reeled in.
     {
+        //Debug.Log("ReeledIn");
         inLureTrigger = false;
-        if(currentState == SC.Lure || currentState == SC.Bobber) // making sure this is executing only on the ones who need it
+        if(currentState == SC.Lure || currentState == SC.Bobber || currentState == SC.Hook) // making sure this is executing only on the ones who need it
         { 
             ChangeState(SC.Idle); // change state to idle only if the current state is lure
         }

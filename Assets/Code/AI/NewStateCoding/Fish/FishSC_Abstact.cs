@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TLC.FishStates;
 using UnityEngine;
+using UnityEngine.AI;
 /// 
 /// Author: Weston Tollette
 /// Created: 3/8/26
@@ -24,6 +25,7 @@ public abstract class FishSC_Abstact : MonoBehaviour
     public Abs_StateFear Fear; // bobber was too close at start.
     public Abs_StateUnique Unique; // Uniqe behavior, probably called in idle
     public Abs_StateEnter Enter; // on entering the scene.
+    public Abs_StateHooked Hook; // hooked on the bobber
 
     public virtual IFishState DoState(Fish_Controller FSC)
     {
@@ -33,5 +35,16 @@ public abstract class FishSC_Abstact : MonoBehaviour
     public virtual void Enabled(Fish_Controller FSC)
     {
         FSC.fishData = fishData; // put the new data as this data.
+    }
+    // Finds a valid NavMesh point near the center point
+    public Vector3 RandomNavMeshLocation(Vector3 center, float radius)
+    {
+        Vector3 randomDirection = Random.insideUnitSphere * radius;
+        randomDirection += center;
+        NavMeshHit hit;
+            
+        // Sample position to make sure it is on the NavMesh
+        NavMesh.SamplePosition(randomDirection, out hit, radius, 1);
+        return hit.position;
     }
 }
