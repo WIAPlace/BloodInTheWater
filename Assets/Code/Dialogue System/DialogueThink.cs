@@ -17,7 +17,7 @@ public class DialogueThink : MonoBehaviour
     [SerializeField] int repeatStartPosition;
 
     public string npcName;
-    public DialogueAsset dialogueAsset;
+    public DialogueAsset[] dialogueAsset;
     public InteractSystem interactSystem;
 
     [HideInInspector]
@@ -49,12 +49,15 @@ public class DialogueThink : MonoBehaviour
             {
                 Interact();
             }
-            Debug.Log("Busy");
+            else
+            {
+                Debug.Log("Busy");
+            }
         }
     }
 
     public void Interact() // Implemented from interface to start the conversation.
     {
-        DialogueBoxController.instance.StartDialogue(dialogueAsset.dialogue,dialogueAsset.audioclip, StartPosition, npcName);
+        DialogueBoxController.instance.StartDialogue(dialogueAsset[0].dialogue,dialogueAsset[0].audioclip, StartPosition, dialogueAsset[0].speaker);
     }
 }

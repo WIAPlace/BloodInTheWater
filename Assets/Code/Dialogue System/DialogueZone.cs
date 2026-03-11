@@ -18,7 +18,6 @@ public class DialogueZone : MonoBehaviour
     [SerializeField] bool noRepeat = true;
     [SerializeField] int repeatStartPosition;
 
-    public string npcName;
     public DialogueAsset dialogueAsset;
 
 
@@ -44,6 +43,6 @@ public class DialogueZone : MonoBehaviour
 
     private void OnTriggerEnter(Collider thePlayer)
     {
-        DialogueBoxController.instance.StartDialogue(dialogueAsset.dialogue, dialogueAsset.audioclip, StartPosition, npcName);
+        DialogueBoxController.instance.StartDialogue(dialogueAsset.dialogue, dialogueAsset.audioclip, StartPosition, dialogueAsset.speaker);
     }
 }

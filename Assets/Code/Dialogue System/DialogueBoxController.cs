@@ -67,31 +67,30 @@ public class DialogueBoxController : MonoBehaviour
     IEnumerator LateStart()
     {
         yield return new WaitForSeconds(.4f);
-        StartDialogue(startDialogue.dialogue,startDialogue.audioclip, 0, startName);
+        StartDialogue(startDialogue.dialogue,startDialogue.audioclip, 0, startDialogue.speaker);
     }
 
     // The dialogue
-    public void StartDialogue(string[] dialogue,AudioClip[] audioclip, int startPosition, string name)
+    public void StartDialogue(string[] dialogue,AudioClip[] audioclip, int startPosition, string[] speaker)
     {
         GameManager.Instance.HandleDial(false); // turn stuff off
-        nameText.text = name;
         dialogueBox.gameObject.SetActive(true);
         StopAllCoroutines();
-        StartCoroutine(RunDialogue(dialogue,audioclip, startPosition));
+        StartCoroutine(RunDialogue(dialogue,audioclip, startPosition, speaker));
     }
 
     public void StartDialogue(string[] dialogue,AudioClip[] audioclip, int startPosition) // Overload for less stuff
     { // this will be used for system stuff/
         //Debug.Log("Hit");
-        GameManager.Instance.HandleDial(false); // turn stuff off
-        nameText.text = ""; // no name
-        dialogueBox.gameObject.SetActive(true);
-        StopAllCoroutines();
-        StartCoroutine(RunDialogue(dialogue,audioclip, startPosition));
+        //GameManager.Instance.HandleDial(false); // turn stuff off
+        //string[] speakerName = ""; // no name
+        //dialogueBox.gameObject.SetActive(true);
+        //StopAllCoroutines();
+        //StartCoroutine(RunDialogue(dialogue,audioclip, startPosition, speakerName));
     }
 
     //Prints the lines
-    IEnumerator RunDialogue(string[] dialogue,AudioClip[] audioclip, int startPosition)
+    IEnumerator RunDialogue(string[] dialogue,AudioClip[] audioclip, int startPosition, string[] speaker)
     {
         skipLineTriggered = false;
         OnDialogueStarted?.Invoke();
@@ -99,6 +98,8 @@ public class DialogueBoxController : MonoBehaviour
 
         for (int i = startPosition; i < dialogue.Length; i++)
         {
+
+            nameText.text = speaker[i];
             //Text
             dialogueText.text = dialogue[i];
             typing = StartCoroutine(TypeTextUncapped(dialogueText.text));

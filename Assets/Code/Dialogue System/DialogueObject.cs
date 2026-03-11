@@ -16,7 +16,6 @@ public class DialogueObject : MonoBehaviour, IInteractable
     [SerializeField] bool noRepeat = true;
     [SerializeField] int repeatStartPosition;
 
-    public string npcName;
     public DialogueAsset dialogueAsset;
 
     [HideInInspector]
@@ -41,6 +40,6 @@ public class DialogueObject : MonoBehaviour, IInteractable
     }
     public void Interact() // Implemented from interface to start the conversation.
     {
-        DialogueBoxController.instance.StartDialogue(dialogueAsset.dialogue,dialogueAsset.audioclip, StartPosition, npcName);
+        DialogueBoxController.instance.StartDialogue(dialogueAsset.dialogue,dialogueAsset.audioclip, StartPosition, dialogueAsset.speaker);
     }
 }
