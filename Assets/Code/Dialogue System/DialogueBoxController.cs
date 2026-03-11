@@ -31,7 +31,6 @@ public class DialogueBoxController : MonoBehaviour
     public static event Action OnDialogueEnded;
     bool skipLineTriggered;
     public bool OnStart;
-    public string startName;
     public DialogueAsset startDialogue;
 
     private Coroutine typing;
