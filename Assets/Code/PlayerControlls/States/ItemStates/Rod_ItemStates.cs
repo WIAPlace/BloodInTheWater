@@ -42,17 +42,30 @@ public class Rod_StateItemIdle : Abs_StateItemIdle
 public class Rod_StateItemReadying : Abs_StateItemReadying
 { 
     // if fishing readying will be reeling in the fish, else it will be readying to cast.
-    /*
+    
     public override void DoEnter(Useable_Controller controller)
     {
-        Debug.Log("Rod Readying Entered");
+        if(controller.previousState == controller.currentItem.UnderAtk) // catch for if attack just occured
+        {
+            controller.ChangeState(controller.currentItem.Idle);
+            return;
+        }
+        if(!controller.rod.CheckIfFishing())
+        { // only do this if not fishing
+            controller.StartWaitToChange(controller.currentItem.IsReady, controller.readyTime);
+            controller.WindUpOn(controller.readyTime); // turns on the wind up indicator
+        }
+        else
+        { // if fishing just reel in reel quick
+            controller.ChangeState(controller.currentItem.IsReady);
+        }
     }
 
     public override void DoExit(Useable_Controller controller)
     {
-        Debug.Log("Rod Readying Exited");
+        controller.StopCo(controller.running);
     }
-    */
+    
 }
 
 ////////////////////////////////////////////////////// Is Ready //////////////////////////////////////////////

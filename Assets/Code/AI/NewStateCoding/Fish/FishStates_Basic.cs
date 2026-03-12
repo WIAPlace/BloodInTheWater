@@ -104,6 +104,7 @@ public class Basic_StateBobber : Abs_StateBobber
         }
         return this;
     }
+
     IEnumerator Tapping(Fish_Controller FSC)
     { // will every so seconds decide if its hooked or not.
         while(FSC.currentState == FSC.SC.Bobber)
@@ -211,7 +212,27 @@ public class Basic_StateHooked : Abs_StateHooked
 {
     public override void DoEnter(Fish_Controller FSC)
     {
+        FSC.running = FSC.StartCoroutine(AboutToCatch(FSC)); 
+    }
+
+    public override void DoExit(Fish_Controller FSC)
+    {
+       FSC.StopCo(FSC.running);
+    }
+    IEnumerator AboutToCatch(Fish_Controller FSC)
+    {
         
+        yield return new WaitForSeconds(FSC.catchTimeWindow);
+        Debug.Log("Hit");
+        FSC.ChangeState(FSC.SC.Fear);
+    }
+}
+////////////////////////////////////////////////////////////////// On Line
+public class Basic_StateOnLine : Abs_StateOnLine
+{
+    public override void DoEnter(Fish_Controller FSC)
+    {
+        FSC.fishData.SendData();
     }
 
     public override void DoExit(Fish_Controller FSC)

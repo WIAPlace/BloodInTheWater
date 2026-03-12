@@ -207,4 +207,15 @@ namespace TLC.FishStates{
             return this;
         }
     }
+    public abstract class Abs_StateOnLine : IFishState
+    {
+        public abstract void DoEnter(Fish_Controller FSC);
+
+        public abstract void DoExit(Fish_Controller FSC);
+
+        public virtual IFishState DoState(Fish_Controller FSC)
+        {
+            return this;
+        }
+    }
 }

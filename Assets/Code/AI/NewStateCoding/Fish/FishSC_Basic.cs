@@ -29,6 +29,7 @@ public class FishSC_Basic : FishSC_Abstact
         Unique = new Basic_StateUnique();
         Enter = new Basic_StateEnter();
         Hook = new Basic_StateHooked();
+        Line = new Basic_StateOnLine();
     }
 
 }

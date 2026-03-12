@@ -25,7 +25,8 @@ public abstract class FishSC_Abstact : MonoBehaviour
     public Abs_StateFear Fear; // bobber was too close at start.
     public Abs_StateUnique Unique; // Uniqe behavior, probably called in idle
     public Abs_StateEnter Enter; // on entering the scene.
-    public Abs_StateHooked Hook; // hooked on the bobber
+    public Abs_StateHooked Hook; // about to be hooked on the bobber
+    public Abs_StateOnLine Line; // on the line and reelling in.
 
     public virtual IFishState DoState(Fish_Controller FSC)
     {

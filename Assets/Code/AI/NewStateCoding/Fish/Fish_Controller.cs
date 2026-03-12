@@ -59,8 +59,11 @@ public class Fish_Controller : MonoBehaviour
     [field:Header("Hook")]
     [Tooltip("value% chance the fish will actully go for the hook while tapping.")]
     public float chanceToHook = 20f;
+    [Tooltip("window of opprotunity to press click to start the reel in game")]
+    public float catchTimeWindow = 3f;
     [HideInInspector]
     public bool onHook = false; // will be used for collision detection and allowance with the hooked stuff.
+    
 
     [HideInInspector]
     public bool inLureTrigger = false; //checks if in the lure trigger after fear is done
@@ -182,9 +185,12 @@ public class Fish_Controller : MonoBehaviour
     {
         if (((1 << collision.gameObject.layer) & targetMask.value) != 0 && currentState!=SC.Fear && SC.Hook!=null && onHook)
         {   // correct layer, not afraid, and able to be on the line
-            currentState = SC.Hook;
-            fishData.SendData();
+            
+            //currentState = SC.Hook;
+            ChangeState(SC.Hook);
+            //fishData.SendData();
             onHook = false; // might not want this to be here till later.
+            //catchWindow = true;
         }
     }
     
@@ -197,6 +203,10 @@ public class Fish_Controller : MonoBehaviour
         if(currentState == SC.Lure || currentState == SC.Bobber) // making sure this is executing only on the ones who need it
         { 
             ChangeState(SC.Idle); // change state to idle only if the current state is lure
+        }
+        else if(currentState == SC.Hook)
+        {
+            ChangeState(SC.Line);
         }
     }
     ///////////////////////////////////////////////////////////////////////// Bobber Startles fish
