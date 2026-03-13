@@ -126,10 +126,10 @@ public class QuickTimeController_Player : MonoBehaviour
     // On Hook ////////////////////////////////////////////////////////////////////////////////////////////////////
     private void Hooked() // activated when the fish is hooked.
     {
+        // retrive lure as a way to disable the other fish from being interested and interupting.
+        // should be switched out for something more elegent later
         useControl.rod.LurePrefab.SetActive(false);
-        useControl.rod.RetrieveLure(useControl.rod.LurePrefab.transform.position, useControl.rod.LureRadius);
-        // retrives the lure for the moment, we might want this to be something more complex, but for now it is what it is.
-        // it will basicly just keep the other fish from grabbing at the hook.
+        useControl.rod.RetrieveLure(useControl.rod.LurePrefab.transform.position, useControl.rod.LureRadius); 
 
 
         inHit=false; // set this to false for the moment, just in case.
@@ -190,7 +190,7 @@ public class QuickTimeController_Player : MonoBehaviour
 
     private IEnumerator EndQTE(float x) // turns off the qte after a number of seconds.
     {
-        useControl.ChangeState(useControl.currentItem.Readying);
+        //useControl.ChangeState(useControl.currentItem.Readying);
         yield return new WaitForSeconds(x);
         qtUI.SetActive(false);
         input.SetGameplay();
