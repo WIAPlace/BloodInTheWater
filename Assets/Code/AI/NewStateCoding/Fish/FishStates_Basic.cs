@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using TLC.FishStates;
 using UnityEngine.AI;
+using UnityEngine.Splines;
+//using System.Numerics;
 /// 
 /// Author: Weston Tollette
 /// Created: 3/8/26
@@ -213,6 +215,7 @@ public class Basic_StateHooked : Abs_StateHooked
     public override void DoEnter(Fish_Controller FSC)
     {
         FSC.running = FSC.StartCoroutine(AboutToCatch(FSC)); 
+        
     }
 
     public override void DoExit(Fish_Controller FSC)
@@ -223,20 +226,58 @@ public class Basic_StateHooked : Abs_StateHooked
     {
         
         yield return new WaitForSeconds(FSC.catchTimeWindow);
-        Debug.Log("Hit");
+        //Debug.Log("Hit");
         FSC.ChangeState(FSC.SC.Fear);
     }
 }
 ////////////////////////////////////////////////////////////////// On Line
 public class Basic_StateOnLine : Abs_StateOnLine
 {
+    //float FSC.currentLocalOnReel = 0f;
+    float targetDist = 0f;
+
     public override void DoEnter(Fish_Controller FSC)
     {
+        FSC.currentLocalOnReel = 0f;
         FSC.fishData.SendData();
     }
 
     public override void DoExit(Fish_Controller FSC)
     {
-       
+       Debug.Log("OutOfLine");
+    }
+    public override IFishState DoState(Fish_Controller FSC)
+    {
+        if (FSC.currentLocalOnReel < FSC.distOnReel)
+        {
+            float moveDist = 5f * Time.deltaTime;
+            FSC.currentLocalOnReel += moveDist;
+
+            if (FSC.currentLocalOnReel >= FSC.distOnReel)
+            {
+                FSC.currentLocalOnReel = FSC.distOnReel;
+                if(FSC.currentLocalOnReel >= FSC.reelLength){
+                    FSC.gameObject.SetActive(false);
+                }
+            }
+            UpdatePosition(FSC);
+        }
+        
+        return this;
+    }
+    private void UpdatePosition(Fish_Controller FSC)
+    {
+        float normalizedTime = FSC.currentLocalOnReel / FSC.reelLength; 
+
+        Vector3 position = FSC.reelSpline.EvaluatePosition(normalizedTime);
+        FSC.transform.position = position;
+
+        // Get the tangent (forward direction) for rotation
+        Vector3 forward = FSC.reelSpline.EvaluateTangent(normalizedTime);
+        // Calculate the up vector (adjust as needed for 2D or specific orientations)
+        Vector3 up = FSC.reelSpline.EvaluateUpVector(normalizedTime);
+
+        // Set the rotation to align with the spline's direction and up vector
+        FSC.transform.rotation = Quaternion.LookRotation(forward, up);
     }
 }

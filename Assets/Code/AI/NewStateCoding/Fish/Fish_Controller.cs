@@ -4,6 +4,7 @@ using UnityEngine;
 using TLC.FishStates;
 using UnityEngine.AI;
 using UnityEditorInternal;
+using UnityEngine.Splines;
 
 /// 
 /// Author: Weston Tollette
@@ -21,6 +22,15 @@ public class Fish_Controller : MonoBehaviour
     public LayerMask targetMask; 
     [HideInInspector]
     public Vector3 targetPos;
+
+    [field:SerializeField]
+    public SplineContainer reelSpline;
+    [HideInInspector]
+    public float distOnReel = 0; // distance to move on the reel spline
+    [HideInInspector]
+    public float reelLength; // length of the spline.
+    [HideInInspector]
+    public float currentLocalOnReel; // location on the reel when called;
 
     [HideInInspector]
     public FishSC_Abstact SC; // state controller
@@ -217,6 +227,24 @@ public class Fish_Controller : MonoBehaviour
             ChangeState(SC.Fear);
             lurePos = lurePosition;
         }
+    }
+    public void MoveAlongSpline(float dist)
+    {
+        reelLength = SplineUtility.CalculateLength(reelSpline.Spline,reelSpline.transform.localToWorldMatrix);
+        //Vector3 localPositionOnReel = reelSpline.EvaluatePosition(1f);
+        /*
+        // get local position to spline
+        Vector3 endTangent = reelSpline.EvaluateTangent(1f);
+        Vector3 endUp = reelSpline.EvaluateUpVector(1f);
+        Quaternion endRotation = Quaternion.LookRotation(endTangent, endUp);
+
+        transform.rotation = endRotation;
+        transform.position = localPositionOnReel;
+        */
+
+        currentLocalOnReel = 0f;
+        distOnReel = dist;
+        //Debug.Log(distOnReel);
     }
 
 
