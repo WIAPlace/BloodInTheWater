@@ -20,6 +20,8 @@ public class DialogueThink : MonoBehaviour
     public DialogueAsset[] dialogueAsset;
     public InteractSystem interactSystem;
 
+    
+
     [HideInInspector]
     public int StartPosition
     {
@@ -54,10 +56,17 @@ public class DialogueThink : MonoBehaviour
                 Debug.Log("Busy");
             }
         }
+
+        
+        if (Input.GetKeyDown(KeyCode.Y))
+        {
+            ThoughtTracker.thoughtNum += 1;
+            Debug.Log("Thought Change +1");
+        }
     }
 
-    public void Interact() // Implemented from interface to start the conversation.
+    public void Interact() // Implemented from interface to start the conversation. Uses a static varibale from ThoughtTracker.
     {
-        DialogueBoxController.instance.StartDialogue(dialogueAsset[0].dialogue,dialogueAsset[0].audioclip, StartPosition, dialogueAsset[0].speaker);
+        DialogueBoxController.instance.StartDialogue(dialogueAsset[ThoughtTracker.thoughtNum].dialogue,dialogueAsset[ThoughtTracker.thoughtNum].audioclip, StartPosition, dialogueAsset[ThoughtTracker.thoughtNum].speaker);
     }
 }
