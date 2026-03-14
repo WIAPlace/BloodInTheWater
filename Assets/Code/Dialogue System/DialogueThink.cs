@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 /// 
 /// Author: Marsahll Turner
-/// Created: 2/12/26
-/// Purpose: Sets the Object to Have Dialogue
+/// Created: 1/11/26
+/// Purpose: Player can press "T" to open a dialogue on the spot
 /// 
-/// Edited: 2/21/26
-/// Edited By: Weston Tollette
-/// Edit Purpose: implemented the Interactable Interface so that it is usable with the new interact system.
+/// Edited: 
+/// Edited By: 
+/// Edit Purpose: 
 /// 
 public class DialogueThink : MonoBehaviour
 {
