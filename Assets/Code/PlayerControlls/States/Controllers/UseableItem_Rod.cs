@@ -28,6 +28,8 @@ public class UseableItem_Rod : UseableItem_Abstract
     public float PongSpeed { get; private set; }
     [field: SerializeField][Tooltip("Max Cast Distance")]
     public float FearRadius { get; private set; }
+    [field: SerializeField][Tooltip("Reel In Speed")]
+    public float ReelIn {get; private set;} 
 
     [HideInInspector]
     public float LureRadius { get; private set; } // how large the lure radius is

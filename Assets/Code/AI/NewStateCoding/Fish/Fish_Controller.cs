@@ -21,7 +21,7 @@ public class Fish_Controller : MonoBehaviour
     public QuickTimeData_Abstract fishData; 
     public LayerMask targetMask; 
     [HideInInspector]
-    public Vector3 targetPos;
+    public Vector3 targetPos; // used for fear state
 
     [field:SerializeField]
     public SplineContainer reelSpline;
@@ -59,12 +59,15 @@ public class Fish_Controller : MonoBehaviour
     [field:Header("Bobber")]
     [Tooltip("Range at which the fish will enter the tapping behavior")]
     public float tapEnterRange = 4f; // range how far fish can enter the tapping.
+    [Tooltip("Range at which the fish will Exit the tapping behavior. Multiplied against sqr tap range")]
+    public float tapExitRange = 30f; // multiplied against sqr tap range
     [Tooltip("How quickly it will go back and forth between the rod")]
     public float tapSpeed = 4f;
     [Tooltip("Range of its tapping varriance")]
     public float tapVary = 5f;
     public float tapSmooth = .1f;
     public float tapSmoothRot = 50f;
+    
 
     [field:Header("Hook")]
     [Tooltip("value% chance the fish will actully go for the hook while tapping.")]
@@ -181,11 +184,18 @@ public class Fish_Controller : MonoBehaviour
         }
     }
     void OnTriggerExit(Collider other)
-    {
-        if (inLureTrigger && ((1 << other.gameObject.layer) & targetMask.value) != 0)
-        { // if inluretrigger and correct trigger layer
-            inLureTrigger = false; // no longer in lure trigger
+    {   
+        if(((1 << other.gameObject.layer) & targetMask.value) != 0){
+            if (inLureTrigger)
+            { // if inluretrigger and correct trigger layer
+                inLureTrigger = false; // no longer in lure trigger
+            }
+            if(currentState != SC.Fear || currentState != SC.Line)
+            { // if fish leaves trigger zone go back to idleing.
+                ChangeState(SC.Idle);
+            }
         }
+
     }
 
     ///////////////////////////////////////////////////////////////////////// Collision Functions
@@ -241,7 +251,7 @@ public class Fish_Controller : MonoBehaviour
         transform.rotation = endRotation;
         transform.position = localPositionOnReel;
         */
-
+        
         currentLocalOnReel = 0f;
         distOnReel = dist;
         //Debug.Log(distOnReel);

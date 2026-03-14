@@ -24,6 +24,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] PersistantItemSpot itemSpot;
 
     private Coroutine running;
+
+    public static event System.Action OnHooked;
+    public static event System.Action OnHookedCancelled;
     
     void Start()
     {
@@ -152,5 +155,11 @@ public class GameManager : MonoBehaviour
     public int GetItemInSpot()
     {
         return itemSpot.spots[2];
+    }
+
+    public void Hooked(bool active)
+    {
+        if (active) OnHooked.Invoke();
+        else OnHookedCancelled.Invoke();
     }
 }

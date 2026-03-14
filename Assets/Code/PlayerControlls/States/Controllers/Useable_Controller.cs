@@ -171,14 +171,20 @@ public class Useable_Controller : MonoBehaviour
     void OnEnable()
     {
         EnableControlls();
+        GameManager.OnHooked += HandleHook;
+        GameManager.OnHookedCancelled += HandleHookCancelled;
     }
     void OnDisable()
     {
         DisableControlls();
+        GameManager.OnHooked -= HandleHook;
+        GameManager.OnHookedCancelled -= HandleHookCancelled;
     }
     void OnDestroy()
     {
         DisableControlls();
+        GameManager.OnHooked -= HandleHook;
+        GameManager.OnHookedCancelled -= HandleHookCancelled;
     }
 
     /////////////////////////////////////////////////////////////////////////// On Use Begin
@@ -189,8 +195,14 @@ public class Useable_Controller : MonoBehaviour
         { // Error catcher for if we have nothing in our hands
             return;
         }
-
-        ChangeState(currentItem.Readying);
+        if(currentState != currentItem.IsReady)
+        {
+            ChangeState(currentItem.Readying);
+        }
+        else
+        {
+            ChangeState(currentItem.UseItem);
+        }
     }
 
     ////////////////////////////////////////////////////////////////////////// On Use Cancelled
@@ -214,4 +226,21 @@ public class Useable_Controller : MonoBehaviour
         }
     }
 
+    private void HandleHook()
+    {
+        
+        if(currentState == currentItem.Readying || currentState == currentItem.Idle)//&& rod.CheckIfFishing())
+        { // changes it from the reel in stuff to catching state.
+            //Debug.Log("Hooked");
+            ChangeState(currentItem.IsReady);
+        }
+    }
+    private void HandleHookCancelled()
+    {
+        //Debug.Log("Hooked Cancelled");
+        if(currentState == currentItem.IsReady && rod.CheckIfFishing())
+        { // changes it from the reel in stuff to catching state.
+            ChangeState(currentItem.Readying);
+        }
+    }
 }

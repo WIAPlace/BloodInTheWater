@@ -53,10 +53,10 @@ public class Basic_StateLure : Abs_StateLure
 
     public override IFishState DoState(Fish_Controller FSC)
     {
-        if (FSC.targetPos != null)
+        if (FSC.SC.target != null)
         {
             // vector between two points
-            Vector3 heading = FSC.targetPos - FSC.transform.position;
+            Vector3 heading = FSC.SC.target.transform.position - FSC.transform.position;
             //sq mgnitude
             float sqrDist = heading.sqrMagnitude;
             
@@ -72,17 +72,22 @@ public class Basic_StateLure : Abs_StateLure
 ////////////////////////////////////////////////////////////////// In Bobber Range
 public class Basic_StateBobber : Abs_StateBobber
 {
+    float sqrDist; // used for checking how far away the bobber is.
+    private float sqrTapRange;
     float timer = 0f;
     Vector3 origin;
     //Coroutine moving = null;
     Vector3 velocity = Vector3.zero;
     float hookChance = 0f;
+    private bool inRange = false;
 
     public override void DoEnter(Fish_Controller FSC)
     {
         hookChance = FSC.chanceToHook; // sets base chance to grab bobber.
         FSC.onHook = false; // making sure this is false at the start
         origin = FSC.transform.position;
+        sqrTapRange = FSC.tapEnterRange * FSC.tapEnterRange;
+        inRange = true;
         timer = 0f;
         FSC.agent.isStopped = true;
         //FSC.transform.LookAt(FSC.targetPos);
@@ -103,6 +108,15 @@ public class Basic_StateBobber : Abs_StateBobber
         {
             RotToTarget(FSC);
             TapPonging(FSC); // the tappin thing. 
+            
+            Vector3 heading = FSC.SC.target.transform.position - origin;
+            //sq mgnitude
+            sqrDist = heading.sqrMagnitude;
+
+            if(sqrDist > sqrTapRange * FSC.tapExitRange)
+            {   // enter bobber
+                return FSC.SC.Lure;
+            }
         }
         return this;
     }
@@ -114,8 +128,9 @@ public class Basic_StateBobber : Abs_StateBobber
             float randyHit = Random.Range(0,101);
             //Debug.Log(randyHit);
             if (randyHit <= hookChance) 
-            {
-                //Debug.Log("Hit");
+            { // when in hook chance range start moving twoards the bobber.
+            // then on collision it will be in the positioon thats ready to be hooked/
+                //Debug.Log("Hooked Fish");
                 //FSC.ChangeState(FSC.SC.Hook);
                 FSC.onHook = true; // stop the update and allow for collision with bobber to occur.
                 FSC.agent.isStopped = false; // let him move
@@ -129,27 +144,44 @@ public class Basic_StateBobber : Abs_StateBobber
     }
     private void TapPonging(Fish_Controller FSC)
     {
-        // 1. Calculate raw target movement
-        timer += Time.deltaTime;
+        if(sqrDist > sqrTapRange || !inRange)
+        { // this allows for the fish to still be attrackted while the bobber is moving. the range is determined by the tap exit range
+            if(inRange) inRange = false; // change this to out of range so it will at least run once after its in range
+            
+            // move forward
+            FSC.transform.Translate(Vector3.forward * FSC.agent.speed * Time.deltaTime);
+            origin = FSC.transform.position; // set origin point to current position for calculationg the new sqr distance.
 
-        float numInRange = Mathf.PingPong(timer * FSC.tapSpeed, FSC.tapVary);
-        
-        // Original calculation - consider reviewing if this is meant to be a simple offset
-        float tapValue = -FSC.tapVary / (1 + numInRange); 
+            if (sqrDist <= sqrTapRange)
+            {   // basicly do a mini reset for the bobber state.
+                inRange = true;
+                timer = 0;
+            }
+        }
+        else // doo the bobbing back and forth.
+        {
+            // 1. Calculate raw target movement
+            timer += Time.deltaTime;
 
-        Vector3 forward3D = FSC.transform.forward;
-        Vector3 forward2D = new Vector3(forward3D.x, 0f, forward3D.z).normalized;
+            float numInRange = Mathf.PingPong(timer * FSC.tapSpeed, FSC.tapVary);
+            
+            // Original calculation - consider reviewing if this is meant to be a simple offset
+            float tapValue = -FSC.tapVary / (1 + numInRange); 
 
-        // 2. Define the target position
-        Vector3 targetPosition = origin + forward2D * tapValue;
+            Vector3 forward3D = FSC.transform.forward;
+            Vector3 forward2D = new Vector3(forward3D.x, 0f, forward3D.z).normalized;
 
-        // 3. Smoothly move towards the target
-        FSC.transform.position = Vector3.SmoothDamp(
-            FSC.transform.position, 
-            targetPosition, 
-            ref velocity, 
-            FSC.tapSmooth
-        );
+            // 2. Define the target position
+            Vector3 targetPosition = origin + forward2D * tapValue;
+
+            // 3. Smoothly move towards the target
+            FSC.transform.position = Vector3.SmoothDamp(
+                FSC.transform.position, 
+                targetPosition, 
+                ref velocity, 
+                FSC.tapSmooth
+            );
+        }
     }
     private void RotToTarget(Fish_Controller FSC)
     {
@@ -215,12 +247,13 @@ public class Basic_StateHooked : Abs_StateHooked
     public override void DoEnter(Fish_Controller FSC)
     {
         FSC.running = FSC.StartCoroutine(AboutToCatch(FSC)); 
-        
+        GameManager.Instance.Hooked(true);
     }
 
     public override void DoExit(Fish_Controller FSC)
     {
        FSC.StopCo(FSC.running);
+       GameManager.Instance.Hooked(false); // maybe, might need to check what state is being thrown
     }
     IEnumerator AboutToCatch(Fish_Controller FSC)
     {
@@ -233,9 +266,6 @@ public class Basic_StateHooked : Abs_StateHooked
 ////////////////////////////////////////////////////////////////// On Line
 public class Basic_StateOnLine : Abs_StateOnLine
 {
-    //float FSC.currentLocalOnReel = 0f;
-    float targetDist = 0f;
-
     public override void DoEnter(Fish_Controller FSC)
     {
         FSC.currentLocalOnReel = 0f;

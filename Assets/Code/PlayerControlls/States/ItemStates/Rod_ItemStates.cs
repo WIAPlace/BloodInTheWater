@@ -1,4 +1,5 @@
 using Unity.VisualScripting;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 using UnityEngine.Animations;
 /// 
@@ -57,7 +58,7 @@ public class Rod_StateItemReadying : Abs_StateItemReadying
         }
         else
         { // if fishing just reel in reel quick
-            controller.ChangeState(controller.currentItem.IsReady);
+            //controller.ChangeState(controller.currentItem.IsReady);
         }
     }
 
@@ -65,7 +66,31 @@ public class Rod_StateItemReadying : Abs_StateItemReadying
     {
         controller.StopCo(controller.running);
     }
-    
+
+    public override IUseableState DoState(Useable_Controller controller)
+    {
+        if(controller.rod.CheckIfFishing())
+        {
+            Vector3 lookDir = new Vector3( // look at the fishing rod mesh
+                controller.rod.useableMesh.transform.position.x, 
+                controller.rod.LurePrefab.transform.position.y,
+                controller.rod.useableMesh.transform.position.z
+                );
+
+            controller.rod.LurePrefab.transform.LookAt(lookDir);
+            controller.rod.LurePrefab.transform.Translate(Vector3.forward * controller.rod.ReelIn * Time.deltaTime );
+
+            float dist = Vector3.Distance(controller.rod.LurePrefab.transform.position, lookDir);
+            if (dist <= 1)
+            {   // retrive lure if it is at a certain distance
+                controller.rod.LurePrefab.SetActive(false);
+                controller.rod.RetrieveLure(controller.rod.LurePrefab.transform.position, controller.rod.LureRadius); // this will let the fish know they are no longer in lure zone
+                controller.rod.SetIfFishing(false);
+            }
+        }
+
+        return this;
+    }
 }
 
 ////////////////////////////////////////////////////// Is Ready //////////////////////////////////////////////
@@ -78,11 +103,15 @@ public class Rod_StateItemIsReady : Abs_StateItemIsReady
         //Debug.Log("Entered Ready");
         obj = controller.FPCamera;
         rod = controller.rod;
+        
+        /*
         if (rod.CheckIfFishing())
         {
             //Debug.Log("Entered Reel In");
             controller.ChangeState(controller.currentItem.UseItem);
         }
+        */
+        
     }
 
     public override void DoExit(Useable_Controller controller)
