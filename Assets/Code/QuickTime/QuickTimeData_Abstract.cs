@@ -19,12 +19,8 @@ public abstract class QuickTimeData_Abstract : MonoBehaviour
     protected QuickTimeController_Player qtcPlayer; // QuickTimeController_Player 
 
     [Header("Mini Game Stats")]
-    [SerializeField] [Tooltip("Length of the Bar")]
-    protected float barLength;
-    [SerializeField] [Tooltip("Area within that the player will need to hit, Minimum")]
-    protected float[] hitZoneMin;
     [SerializeField] [Tooltip("Area within that the player will need to hit, Maximum")]
-    protected float[] hitZoneMax;
+    protected float[] hitZoneLength;
     [SerializeField] [Tooltip("How fast the player hit indicator should move. Pixels per Second.")]
     protected float qtSpeed;
     [SerializeField] [Tooltip("How long should the allowable time be for this")]
@@ -34,9 +30,7 @@ public abstract class QuickTimeData_Abstract : MonoBehaviour
  
     public QuickTimeData_Abstract(QuickTimeData_Abstract other)
     {
-        this.barLength=other.barLength;
-        this.hitZoneMin = other.hitZoneMin;
-        this.hitZoneMax = other.hitZoneMax;
+        this.hitZoneLength = other.hitZoneLength;
         this.qtSpeed = other.qtSpeed;
         this.qtLength = other.qtLength;
         this.qtcPlayer = other.qtcPlayer;
@@ -62,19 +56,8 @@ public abstract class QuickTimeData_Abstract : MonoBehaviour
     {
         return qtLength;
     }
-    public float GetHitZoneMin(int i)
+    public float GetHitZoneLength(int i)
     {
-        return hitZoneMin[i];
-    }
-    public float GetHitZoneMax(int i)
-    {
-        return hitZoneMax[i];
-    }
-    public float GetBarLength()
-    {
-        return barLength;
-    }
-    
-    
-
+        return hitZoneLength[i];
+    }    
 }
