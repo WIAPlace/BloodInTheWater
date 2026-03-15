@@ -191,10 +191,11 @@ public class QuickTimeController_Player : MonoBehaviour
         //float max = currentQTData.GetHitZoneMax(i);
         float hitBarArea = currentQTData.GetHitZoneLength(0) + origin;
         
+        /*
         Debug.Log(hitBarArea);
         Debug.Log(origin);
         Debug.Log(playerPoint);
-        
+        */
 
         if(playerPoint > origin && playerPoint < hitBarArea)
         {
