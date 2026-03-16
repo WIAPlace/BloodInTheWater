@@ -40,10 +40,11 @@ public class QuickTimeData_BasicFish : QuickTimeData_Abstract
 
     public override  void OnHit()
     {   // change the active state and declare that fish have been caught
+        FSC.waveHandler.SetOnWaves(false);
         FSC.MoveAlongSpline(50f);
         
         //gameObject.SetActive(false);
-        //GameState.Instance.CaughtFish(fishLbs); // send over the caught state to the gamestate thing.
+        GameState.Instance.CaughtFish(fishLbs); // send over the caught state to the gamestate thing.
     }
     public override void OnMiss()
     {

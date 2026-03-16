@@ -104,13 +104,14 @@ public class Rod_StateItemIsReady : Abs_StateItemIsReady
         obj = controller.FPCamera;
         rod = controller.rod;
         
-        /*
-        if (rod.CheckIfFishing())
+        
+        if (rod.fishHookIndicator != null && rod.CheckIfFishing())
         {
-            //Debug.Log("Entered Reel In");
-            controller.ChangeState(controller.currentItem.UseItem);
+            // indicator that the fish is ready to be caught.
+            
+            controller.audioSource.PlayOneShot(rod.fishHookIndicator);
         }
-        */
+        
         
     }
 
