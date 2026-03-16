@@ -39,6 +39,8 @@ public class UseableItem_Rod : UseableItem_Abstract
     public float CurrentCastValue; // the value of the cast at a certain point
 
     // Animations
+    [SerializeField][Tooltip("SFX for fish grabbing bobber.")]
+    public AudioClip fishHookIndicator;
     
 
 

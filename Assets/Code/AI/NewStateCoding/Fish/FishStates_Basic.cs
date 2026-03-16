@@ -22,6 +22,7 @@ public class Basic_StateIdle : Abs_StateIdle
     private Coroutine idleRun;
     public override void DoEnter(Fish_Controller FSC)
     {   
+        FSC.waveHandler.SetOnWaves(true); 
         FSC.agent.isStopped = false; // reactivates the agent if its stoped.
         idleActive = true;
         idleRun = FSC.StartCoroutine(WanderRoutine(FSC));
@@ -283,7 +284,7 @@ public class Basic_StateOnLine : Abs_StateOnLine
             float moveDist = 5f * Time.deltaTime;
             FSC.currentLocalOnReel += moveDist;
 
-            if (FSC.currentLocalOnReel >= FSC.distOnReel)
+            if (FSC.currentLocalOnReel >= FSC.reelLength)
             {
                 FSC.currentLocalOnReel = FSC.distOnReel;
                 if(FSC.currentLocalOnReel >= FSC.reelLength){
@@ -301,6 +302,7 @@ public class Basic_StateOnLine : Abs_StateOnLine
 
         Vector3 position = FSC.reelSpline.EvaluatePosition(normalizedTime);
         FSC.transform.position = position;
+        Debug.Log(normalizedTime);
 
         // Get the tangent (forward direction) for rotation
         Vector3 forward = FSC.reelSpline.EvaluateTangent(normalizedTime);

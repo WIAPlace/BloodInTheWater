@@ -15,6 +15,7 @@ public class Useable_Controller : MonoBehaviour
 
     [SerializeField] [Tooltip("Insert the Scriptable Object Input Reader.")]
     private InputReader input;
+    public AudioSource audioSource; // sound player
     public GameObject FPCamera;
 
     public UseableItem_Empty empty;

@@ -10,15 +10,35 @@ public class MeshWithWaves : MonoBehaviour
 {
     [SerializeField] [Tooltip("The game object holding the transform of what will move with the waves")]
     private Transform UseableMesh;
+    [SerializeField][Tooltip("If they should be effected by this.")]
+    private bool onWaves = true;
     [SerializeField] [Tooltip("How far under water it should be")]
     private float displacement = 0;
+    
+
+    private Vector3 originalPosition;
+
+    void Start()
+    {
+        originalPosition = UseableMesh.localPosition;
+    }
 
     void Update()
     {
-        if (UseableMesh != null)
+        if (UseableMesh != null && onWaves)
         {
             WaveManager.Instance.WaveUpdate(UseableMesh);
             UseableMesh.position += Vector3.down * displacement; 
+        }
+    }
+
+    public void SetOnWaves(bool setter)
+    {
+        onWaves = setter;
+
+        if(setter == false)
+        {
+            UseableMesh.localPosition = originalPosition;
         }
     }
 }

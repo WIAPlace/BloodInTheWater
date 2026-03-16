@@ -22,6 +22,8 @@ public class Fish_Controller : MonoBehaviour
     public LayerMask targetMask; 
     [HideInInspector]
     public Vector3 targetPos; // used for fear state
+    [HideInInspector]
+    public MeshWithWaves waveHandler;
 
     [field:SerializeField]
     public SplineContainer reelSpline;
@@ -145,6 +147,7 @@ public class Fish_Controller : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         SC = GetComponent<FishSC_Abstact>();
+        waveHandler = GetComponent<MeshWithWaves>();
     }
 
     ///////////////////////////////////////////////////////////////////////// Starting Functions

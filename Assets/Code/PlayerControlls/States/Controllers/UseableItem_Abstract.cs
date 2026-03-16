@@ -12,6 +12,7 @@ public abstract class UseableItem_Abstract : MonoBehaviour
 {
     [Tooltip("Game Object of the thing being used")]
     public GameObject useableMesh;
+    //public AudioSource audioSource;
 
     // States:
     public Abs_StateItemIdle Idle; // no contact in between action states.
