@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1407686103430132817}
   - component: {fileID: 413690323842010444}
   - component: {fileID: 4924169164883724002}
+  - component: {fileID: 185055685401638151}
   m_Layer: 8
   m_Name: TestFish
   m_TagString: Untagged
@@ -93,11 +94,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   qtcPlayer: {fileID: 0}
-  barLength: 100
-  hitZoneMin:
-  - 20
-  hitZoneMax:
-  - 50
+  hitZoneLength: []
   qtSpeed: 20
   qtLength: 100
   type: 0
@@ -118,12 +115,26 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   targetPos: {x: 0, y: 0, z: 0}
-  stateController: {fileID: 0}
+  reelSpline: {fileID: 0}
+  distOnReel: 0
+  reelLength: 0
+  currentLocalOnReel: 0
+  SC: {fileID: 0}
   agent: {fileID: 0}
   wanderRadius: 20
   wanderTimer: 5
   fleeDistance: 20
   fleeTimer: 5
+  lureMoveVary: 2
+  tapEnterRange: 4
+  tapExitRange: 30
+  tapSpeed: 4
+  tapVary: 5
+  tapSmooth: 0.1
+  tapSmoothRot: 50
+  chanceToHook: 20
+  catchTimeWindow: 3
+  onHook: 0
   inLureTrigger: 0
   lurePos: {x: 0, y: 0, z: 0}
   debugCurrentStateName: 
@@ -140,8 +151,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8eb89bd204fc7df4aaaf165c78f5018b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fishData: {fileID: 0}
   target: {fileID: 0}
+--- !u!114 &185055685401638151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2540850831461931456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e8ded9223332b241b09f3330778843d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UseableMesh: {fileID: 0}
+  displacement: 0
 --- !u!1001 &6870379017648183807
 PrefabInstance:
   m_ObjectHideFlags: 0

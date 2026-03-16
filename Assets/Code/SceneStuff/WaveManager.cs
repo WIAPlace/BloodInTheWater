@@ -62,7 +62,7 @@ public class WaveManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    public void WaveUpdate(Transform obj, float yVelocity, float smoothTime)
+    public void WaveUpdate(Transform obj)
     {
         float x = obj.position.x;
         float z = obj.position.z;

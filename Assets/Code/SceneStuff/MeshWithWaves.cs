@@ -8,17 +8,17 @@ using UnityEngine;
 /// 
 public class MeshWithWaves : MonoBehaviour
 {
-    [SerializeField]
+    [SerializeField] [Tooltip("The game object holding the transform of what will move with the waves")]
     private Transform UseableMesh;
-
-    [SerializeField]
-    private float smoothTime = .1f;
-
-    private float yVelocity = 0f;
-
+    [SerializeField] [Tooltip("How far under water it should be")]
+    private float displacement = 0;
 
     void Update()
     {
-        WaveManager.Instance.WaveUpdate(UseableMesh,yVelocity,smoothTime);
+        if (UseableMesh != null)
+        {
+            WaveManager.Instance.WaveUpdate(UseableMesh);
+            UseableMesh.position += Vector3.down * displacement; 
+        }
     }
 }
