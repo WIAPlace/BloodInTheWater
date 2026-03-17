@@ -4267,7 +4267,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1846328398}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1846328400}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e51d416b7755e8f459a91e032316ae8f, type: 3}
@@ -14345,6 +14345,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2136629555465664514, guid: 938713e14dd4ab24fa7912353ab28e69,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2530879989377737941, guid: 938713e14dd4ab24fa7912353ab28e69,
         type: 3}
       propertyPath: m_Name
@@ -22410,9 +22415,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadingScreen: {fileID: 919178782}
-  targetScene: IslandDay3_Night
+  targetScene: IslandDay1_Night
   transitionType: TransitionDaysLater
   canvasGroup: {fileID: 760141496}
+  resetThoughts: 0
 --- !u!4 &1718153715
 Transform:
   m_ObjectHideFlags: 0
@@ -23993,7 +23999,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3521429072004894161, guid: 7d3e6ae5bae3878439adcfc4fad4769d,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1846328401}
   m_SourcePrefab: {fileID: 100100000, guid: 7d3e6ae5bae3878439adcfc4fad4769d, type: 3}
 --- !u!1 &1846328399 stripped
 GameObject:
@@ -24001,6 +24011,43 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1846328398}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1846328400 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3521429072004894161, guid: 7d3e6ae5bae3878439adcfc4fad4769d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1846328398}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1846328401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1846328400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2419c9720f6797f49bd8e6afba32062f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firstInteraction: 1
+  noRepeat: 0
+  repeatStartPosition: 0
+  npcName: 
+  dialogueAsset:
+  - {fileID: 11400000, guid: dffb5f4746538234396dc0055beed9c0, type: 2}
+  interactSystem: {fileID: 1846328402}
+--- !u!114 &1846328402 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6265562224383870667, guid: 7d3e6ae5bae3878439adcfc4fad4769d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1846328398}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1846328400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 253d4755df8f0f947a78953c9f006699, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1855533381 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 484479978005255287, guid: 9adb18a3397d5fd43ab2f8527aaa4647,

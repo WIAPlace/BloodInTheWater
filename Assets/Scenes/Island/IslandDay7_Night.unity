@@ -9867,7 +9867,11 @@ PrefabInstance:
         type: 3}
       insertIndex: 0
       addedObject: {fileID: 58940629}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3521429072004894161, guid: 7d3e6ae5bae3878439adcfc4fad4769d,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 629755106}
   m_SourcePrefab: {fileID: 100100000, guid: 7d3e6ae5bae3878439adcfc4fad4769d, type: 3}
 --- !u!4 &629755100 stripped
 Transform:
@@ -9893,7 +9897,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 629755099}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 629755104}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e51d416b7755e8f459a91e032316ae8f, type: 3}
@@ -9905,6 +9909,43 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 629755099}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &629755104 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3521429072004894161, guid: 7d3e6ae5bae3878439adcfc4fad4769d,
+    type: 3}
+  m_PrefabInstance: {fileID: 629755099}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &629755105 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6265562224383870667, guid: 7d3e6ae5bae3878439adcfc4fad4769d,
+    type: 3}
+  m_PrefabInstance: {fileID: 629755099}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 629755104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 253d4755df8f0f947a78953c9f006699, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &629755106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 629755104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2419c9720f6797f49bd8e6afba32062f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firstInteraction: 1
+  noRepeat: 0
+  repeatStartPosition: 0
+  npcName: 
+  dialogueAsset:
+  - {fileID: 11400000, guid: add31431a3761804fa9b6ac1705b2dab, type: 2}
+  interactSystem: {fileID: 629755105}
 --- !u!1001 &630065585
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22470,6 +22511,7 @@ MonoBehaviour:
   targetScene: 
   transitionType: 
   canvasGroup: {fileID: 1730174417}
+  resetThoughts: 0
 --- !u!4 &1718153715
 Transform:
   m_ObjectHideFlags: 0
