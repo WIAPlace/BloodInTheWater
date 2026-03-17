@@ -37,7 +37,7 @@ public class Useable_Controller : MonoBehaviour
     public IUseableState currentState; // will just be swaped out for whatever is needed at that point
     public IUseableState previousState; // used for if we need to know the state that came before another.
     
-
+    
 
     
     public float readyTime; // used for how long the readying state will last
@@ -50,6 +50,7 @@ public class Useable_Controller : MonoBehaviour
     private string debugCurrentStateName = "";
     [SerializeField] [Tooltip("used to see what state we are in")]
     private string debugPreviousStateName = "";
+    //[SerializeField] public Animator anim;
 
     // States:
     //public Abs_StateItemIdle Idle; // no contact in between action states.

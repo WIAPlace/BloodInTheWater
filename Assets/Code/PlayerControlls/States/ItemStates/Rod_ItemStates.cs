@@ -23,6 +23,8 @@ public class Rod_StateItemIdle : Abs_StateItemIdle
         if (controller.rod.CheckIfFishing())
         { // if fishing
             // do the fishing animation
+            //--by Kennedy
+            //controller.anim.SetTrigger("RodReel");
         }
         else
         {
@@ -55,6 +57,9 @@ public class Rod_StateItemReadying : Abs_StateItemReadying
         { // only do this if not fishing
             controller.StartWaitToChange(controller.currentItem.IsReady, controller.readyTime);
             controller.WindUpOn(controller.readyTime); // turns on the wind up indicator
+            //---By Kennedy
+            //controller.anim.SetTrigger("RodReady");
+            
         }
         else
         { // if fishing just reel in reel quick
@@ -182,6 +187,8 @@ public class Rod_StateItemUse : Abs_StateItemUse
         if (!controller.rod.CheckIfFishing())
         {  //if not fishing send out lure
             // throw out rod animation and deposit lures
+            //---by Kennedy
+            //controller.anim.SetTrigger("RodCast");
             rod.CastSpotPrefab.SetActive(false);
             CastLure();
             rod.SetIfFishing(true);
