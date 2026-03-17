@@ -17,15 +17,21 @@ public class TransistionScene : MonoBehaviour
     public string targetScene;
     public string transitionType;
     public CanvasGroup canvasGroup;
+    public bool resetThoughts;
 
     public void StartGame()
     {
-        TransitionData.sceneToLoad = targetScene; // changes the scene tied to TransitionData
+        StaticVariables.sceneToLoad = targetScene; // changes the scene tied to TransitionData
         StartCoroutine(StartLoad());
     }
 
     IEnumerator StartLoad()
     {
+        if (resetThoughts)
+        {
+            StaticVariables.thoughtNum = 0;
+        }
+
         loadingScreen.SetActive(true); //Turns on the fade image
         yield return StartCoroutine(FadeLoadingScreen(1, 1)); //The speed of the fade in
 
