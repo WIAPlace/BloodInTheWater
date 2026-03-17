@@ -54,7 +54,8 @@ public class PlaceableAreas : MonoBehaviour
             }
             else if(perSpot.spots[i] == -1)
             { // place items of index -1 into the player's hand.
-                PlayerHolding.Instance.ChangeInHand(i);
+                //PlayerHolding.Instance.ChangeInHand(i);
+                placeableSpots[i][0].SetPlaced(true); // should be changed so that the player can carry stuff between scenes.
                 //Debug.Log(perSpot.spots[i]);
             }
         }

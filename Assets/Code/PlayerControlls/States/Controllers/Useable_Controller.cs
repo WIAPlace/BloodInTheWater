@@ -164,7 +164,7 @@ public class Useable_Controller : MonoBehaviour
         UseableItem[1] = rod;
         UseableItem[2] = harp;
 
-        CheckItemAtStart();
+        //CheckItemAtStart();
 
         currentItemIndex = startingItemInHand;
         currentItem = UseableItem[currentItemIndex];
@@ -175,7 +175,7 @@ public class Useable_Controller : MonoBehaviour
 
     void CheckItemAtStart()
     {
-        for(int i = 1; i<perSpot.spots.Length; i++)
+        for(int i = 0; i<perSpot.spots.Length; i++)
         {
             if(perSpot.spots[i]== -1)
             {
