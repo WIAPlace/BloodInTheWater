@@ -17,10 +17,12 @@ public class Useable_Controller : MonoBehaviour
     private InputReader input;
     public AudioSource audioSource; // sound player
     public GameObject FPCamera;
+    public PersistantItemSpot perSpot;
 
     public UseableItem_Empty empty;
     public UseableItem_Rod rod;
     public UseableItem_Harp harp;
+    
 
     
     public UseableItem_Abstract[] UseableItem { get; private set; }
@@ -162,12 +164,25 @@ public class Useable_Controller : MonoBehaviour
         UseableItem[1] = rod;
         UseableItem[2] = harp;
 
+        CheckItemAtStart();
+
         currentItemIndex = startingItemInHand;
         currentItem = UseableItem[currentItemIndex];
 
         currentItem.useableMesh.SetActive(true);
         currentState = currentItem.Idle;
     }    
+
+    void CheckItemAtStart()
+    {
+        for(int i = 1; i<perSpot.spots.Length; i++)
+        {
+            if(perSpot.spots[i]== -1)
+            {
+                startingItemInHand = i;
+            }
+        }
+    }
 
     ////////////////////////////////////////////////////////////////////////// On thing happens
     void OnEnable()
