@@ -302,7 +302,7 @@ public class Basic_StateOnLine : Abs_StateOnLine
 
         Vector3 position = FSC.reelSpline.EvaluatePosition(normalizedTime);
         FSC.transform.position = position;
-        Debug.Log(normalizedTime);
+        //Debug.Log(normalizedTime);
 
         // Get the tangent (forward direction) for rotation
         Vector3 forward = FSC.reelSpline.EvaluateTangent(normalizedTime);

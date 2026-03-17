@@ -22,9 +22,9 @@ public abstract class QuickTimeData_Abstract : MonoBehaviour
     [SerializeField] [Tooltip("Area within that the player will need to hit, Maximum")]
     protected float[] hitZoneLength;
     [SerializeField] [Tooltip("How fast the player hit indicator should move. Pixels per Second.")]
-    protected float qtSpeed;
+    protected float qtSpeed = 360;
     [SerializeField] [Tooltip("How long should the allowable time be for this")]
-    protected float qtLength ;
+    protected float qtLength;
     [SerializeField] [Tooltip("Type of Game")]
     protected QuickTimeType_Enum type;
  
