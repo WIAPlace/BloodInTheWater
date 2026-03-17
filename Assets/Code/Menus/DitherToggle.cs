@@ -18,6 +18,12 @@ public class DitherToggle : MonoBehaviour
     public RenderTexture ditherTexture;
     public GameObject ditherImage;
 
+    void Start()
+    {
+        ditherImage.SetActive(false);
+        Camera.main.targetTexture = null;
+    }
+
     public void DitherSwitch()
     {
         ditherToggle = !ditherToggle;
