@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using TLC.FishStates;
 using UnityEngine.AI;
-using UnityEditorInternal;
 using UnityEngine.Splines;
 
 /// 

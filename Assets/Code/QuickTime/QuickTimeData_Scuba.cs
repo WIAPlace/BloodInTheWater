@@ -19,7 +19,8 @@ public class QuickTimeData_Scuba : QuickTimeData_Abstract
 
     public override  void OnHit()
     {
-        controller.SetCurrentState(controller.BreakOffState);
+        //controller.SetCurrentState(controller.HitState);
+        controller.MonsterHit(controller.transform.forward - Vector3.up/2);
     }
     public override void OnMiss()
     {
