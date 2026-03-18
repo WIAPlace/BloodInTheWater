@@ -13,6 +13,7 @@ using UnityEngine;
 /// 
 public class TimeKeeper : MonoBehaviour
 {
+    [SerializeField] private bool limitTime = true;
     [SerializeField] [Tooltip("Allocated Time To Fish")]
     float secondsAllocated;
 
@@ -26,7 +27,10 @@ public class TimeKeeper : MonoBehaviour
     void Start()
     {
         //GameState.Instance.ChangeTime(GetTimeLeft());
-        StartCoroutine(TickTock());
+        if (limitTime)
+        {
+            StartCoroutine(TickTock());
+        }
     }
     void Update()
     {
