@@ -120,7 +120,7 @@ public class Scuba_Controller : MonoBehaviour, IMonster
     // Monster Interface
     public void MonsterHit(Vector3 hitDir) // on hit by harpoon
     {
-        this.hitDir = -hitDir;
+        this.hitDir = new Vector3(-hitDir.x,1,-hitDir.z);
         currentState = HitState;
     }
 }   
