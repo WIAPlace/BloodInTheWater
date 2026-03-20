@@ -8510,8 +8510,18 @@ PrefabInstance:
       objectReference: {fileID: 1730174416}
     - target: {fileID: 462693389088423982, guid: d582cee2b8663be43ae3058f18c1d5ca,
         type: 3}
+      propertyPath: resetThoughts
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 462693389088423982, guid: d582cee2b8663be43ae3058f18c1d5ca,
+        type: 3}
       propertyPath: transitionType
       value: TransitionToFishing
+      objectReference: {fileID: 0}
+    - target: {fileID: 462693389088423982, guid: d582cee2b8663be43ae3058f18c1d5ca,
+        type: 3}
+      propertyPath: lastFishingLevel
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1673383433939416933, guid: d582cee2b8663be43ae3058f18c1d5ca,
         type: 3}
@@ -22557,6 +22567,8 @@ MonoBehaviour:
   transitionType: 
   canvasGroup: {fileID: 1730174417}
   resetThoughts: 0
+  lastFishingLevel: 
+  levelRetry: 0
 --- !u!4 &1718153715
 Transform:
   m_ObjectHideFlags: 0

@@ -11,6 +11,10 @@ using UnityEngine.SceneManagement;
 /// Edited By: Marshall Turner
 /// Edit Purpose: To reduce required transistion scenes
 ///
+/// Edited: 3/20/2026
+/// Edited By: Marshall Turner
+/// Edit Purpose: A bool to stop the script from changing StaticVariables.sceneToLoad
+///
 public class TransistionScene : MonoBehaviour
 {
     public GameObject loadingScreen;
@@ -18,10 +22,21 @@ public class TransistionScene : MonoBehaviour
     public string transitionType;
     public CanvasGroup canvasGroup;
     public bool resetThoughts;
+    public string lastFishingLevel;
+    public bool levelRetry; //If StaticVariables.sceneToLoad uses StaticVariables.lastLevel(true) or targetScene(false) 
+
 
     public void StartGame()
     {
-        StaticVariables.sceneToLoad = targetScene; // changes the scene tied to TransitionData
+        if (levelRetry)
+        {
+            StaticVariables.sceneToLoad = StaticVariables.lastLevel;
+        }
+        else
+        {
+            StaticVariables.sceneToLoad = targetScene; // changes the scene tied to TransitionData
+            StaticVariables.lastLevel = lastFishingLevel; // changes lastLevel
+        }
         StartCoroutine(StartLoad());
     }
 
@@ -35,12 +50,22 @@ public class TransistionScene : MonoBehaviour
         loadingScreen.SetActive(true); //Turns on the fade image
         yield return StartCoroutine(FadeLoadingScreen(1, 1)); //The speed of the fade in
 
-        AsyncOperation operation = SceneManager.LoadSceneAsync(transitionType);
-        while (!operation.isDone)
+        if (levelRetry)
         {
-            yield return null;
+            AsyncOperation operation = SceneManager.LoadSceneAsync(StaticVariables.lastLevel);
+            while (!operation.isDone)
+            {
+                yield return null;
+            }
         }
-
+        else
+        {
+            AsyncOperation operation = SceneManager.LoadSceneAsync(transitionType);
+            while (!operation.isDone)
+            {
+                yield return null;
+            }
+        }
     }
     // The fade in itself
     IEnumerator FadeLoadingScreen(float targetValue, float duration)
