@@ -2218,6 +2218,8 @@ MonoBehaviour:
   transitionType: IslandDay3_Morning
   canvasGroup: {fileID: 2008792900}
   resetThoughts: 0
+  lastFishingLevel: 
+  levelRetry: 0
 --- !u!114 &279007543
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2827,6 +2829,8 @@ MonoBehaviour:
   transitionType: IslandDay3_Night
   canvasGroup: {fileID: 2008792900}
   resetThoughts: 0
+  lastFishingLevel: 
+  levelRetry: 0
 --- !u!114 &474590496
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3549,6 +3553,8 @@ MonoBehaviour:
   transitionType: IslandDay7_Night
   canvasGroup: {fileID: 2008792900}
   resetThoughts: 0
+  lastFishingLevel: 
+  levelRetry: 0
 --- !u!114 &585621692
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3864,6 +3870,8 @@ MonoBehaviour:
   transitionType: IslandDay7_Morning
   canvasGroup: {fileID: 2008792900}
   resetThoughts: 0
+  lastFishingLevel: 
+  levelRetry: 0
 --- !u!114 &715724758
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4462,6 +4470,8 @@ MonoBehaviour:
   transitionType: IslandDay1_Night
   canvasGroup: {fileID: 2008792900}
   resetThoughts: 0
+  lastFishingLevel: 
+  levelRetry: 0
 --- !u!114 &831199931
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5114,6 +5124,8 @@ MonoBehaviour:
   transitionType: IslandDay0
   canvasGroup: {fileID: 2008792900}
   resetThoughts: 0
+  lastFishingLevel: 
+  levelRetry: 0
 --- !u!114 &1026768763
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6876,6 +6888,8 @@ MonoBehaviour:
   transitionType: IslandDay1_Morning
   canvasGroup: {fileID: 2008792900}
   resetThoughts: 0
+  lastFishingLevel: 
+  levelRetry: 0
 --- !u!114 &1388467245
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7350,6 +7364,8 @@ MonoBehaviour:
   transitionType: IslandDay0
   canvasGroup: {fileID: 2008792900}
   resetThoughts: 0
+  lastFishingLevel: 
+  levelRetry: 0
 --- !u!1 &1461746119
 GameObject:
   m_ObjectHideFlags: 0
@@ -9367,6 +9383,8 @@ MonoBehaviour:
   transitionType: ModelShowcase
   canvasGroup: {fileID: 2008792900}
   resetThoughts: 0
+  lastFishingLevel: 
+  levelRetry: 0
 --- !u!1 &1873279127
 GameObject:
   m_ObjectHideFlags: 0
@@ -9513,8 +9531,9 @@ GameObject:
   - component: {fileID: 1896295980}
   - component: {fileID: 1896295979}
   - component: {fileID: 1896295978}
+  - component: {fileID: 1896295982}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: MenuCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9606,6 +9625,23 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1896295982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1896295977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15d06c00dcd616f4bb257802d3905cc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menu:
+  - {fileID: 1468833772}
+  - {fileID: 915373746}
+  - {fileID: 1503604292}
+  - {fileID: 274644827}
 --- !u!1 &1900281067
 GameObject:
   m_ObjectHideFlags: 0

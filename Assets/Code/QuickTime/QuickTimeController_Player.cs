@@ -81,6 +81,8 @@ public class QuickTimeController_Player : MonoBehaviour
         {
             KeepingTime();
             qte.SetPlayerPoint(timeKeeper,playerPointUI);
+
+            
         }
     }
 
