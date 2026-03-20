@@ -67,10 +67,12 @@ public class QuickTimeController_Player : MonoBehaviour
     void Start()
     {
         input.UseEventQT += HandelUseQT;
+        input.UseEventQTCanelled += HandleUseQTCancelled;
     }
     void OnDestroy()
     {
         input.UseEventQT -= HandelUseQT;
+        input.UseEventQTCanelled -= HandleUseQTCancelled;
     }
 
     void Update()
@@ -183,6 +185,10 @@ public class QuickTimeController_Player : MonoBehaviour
         } 
 
         StartCoroutine(EndQTE(.4f));
+    }
+    private void HandleUseQTCancelled()
+    {
+        
     }
 
     private void CheckInRange(int i) // i will be used for array indexing later on
