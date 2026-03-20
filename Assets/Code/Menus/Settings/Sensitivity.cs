@@ -32,7 +32,10 @@ public class Sensitivity : MonoBehaviour
     public void SensitivityChange()
     {
         //Debug.Log("Changed to: "+slider.value);
-        playerLook.UpdateSensitivity(isX, slider.value);
+        if(playerLook != null)
+        {
+           playerLook.UpdateSensitivity(isX, slider.value); 
+        }
         if (isX)
         {
             settings.xSensitivity = slider.value;
