@@ -82,7 +82,7 @@ public class QuickTimeData_BasicFish : QuickTimeData_Abstract
         else // if player won
         {
             GameState.Instance.CaughtFish(fishLbs); // send over the caught state to the gamestate thing.
-            qtcPlayer.PlayFakeFish(FSC.waveHandler.UseableMesh.gameObject, rot); // pretend to catch the fish
+            GameManager.Instance.qtcPlayer.PlayFakeFish(FSC.waveHandler.UseableMesh.gameObject, rot); // pretend to catch the fish
 
             // set it to inactive
             FSC.gameObject.SetActive(false);

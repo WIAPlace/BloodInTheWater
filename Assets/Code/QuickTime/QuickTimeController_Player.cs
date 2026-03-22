@@ -4,7 +4,6 @@ using UnityEngine;
 using QuickTime;
 using UnityEngine.UI;
 using Unity.VisualScripting;
-using Unity.PlasticSCM.Editor.WebApi;
 //using System;
 /// 
 /// Author: Weston Tollette
@@ -65,12 +64,7 @@ public class QuickTimeController_Player : MonoBehaviour
     private bool inProgress = false; // should time be going.
     private bool graceTime = true; // used to give the player a bit of time before missing hurts them.
 
-    private Coroutine grace;
-    
-    private float playerPoint; // used for determining where the player's  point is. 
-    private float currentQTSpeed;
-    private float currentQTLength; // how long the game will last before force quiting
-    
+    private Coroutine grace; 
     
     private bool inHit=false;
     private float completionAmnt = 0; // will help determin the amount needed for completion or amount to loose
@@ -78,22 +72,13 @@ public class QuickTimeController_Player : MonoBehaviour
     // Quick Time Stuff // Will be initiated by the fish hooked //
     private QuickTimeData_Abstract currentQTData; // the given data at that time.
     private QuickTimeType_Enum currentType; // holder of what the current type of game is playing.
+
     void Awake()
     {
         if (useControl == null)
         {
             useControl = GetComponent<Useable_Controller>();
         }
-        
-        /*
-        qtUI = Instantiate(qtUI); // Instantiate and alter the instantiated version in scene
-        Transform hitZoneT = qtUI.transform.Find("HitBar");
-        Transform playerPointT = qtUI.transform.Find("HitMarker");
-        //Debug.Log(redArea); 
-        hitZone = hitZoneT.GetComponent<Image>();
-        qtHitMarker = playerPointT.GetComponent<Image>();
-        qtUI.SetActive(false); // dont have it on screen imedietly.
-        */
     }
     void Start()
     {
@@ -208,40 +193,22 @@ public class QuickTimeController_Player : MonoBehaviour
     }
     
     // Set Data //////////////////////////////////////////////////////////////////////////////////////
-    private void SetNeededData() // basic stuff that will be needed every frame is better to have as an in class variable
-    {   
-        currentQTSpeed = currentQTData.GetQTSpeed();
-        currentQTLength = currentQTData.GetQTLength();
-        //currentQTBarLength = currentQTData.GetHitZoneLength(0);
-
-    }
     public void SetData(QuickTimeData_Abstract data) // Abstract
     {
         currentQTData = data; 
-        SetNeededData();
         Hooked();
     } 
     public void SetData(QuickTimeData_BasicFish data)// Basic Fish Type
     {
         currentQTData = data; 
-        SetNeededData();
         Hooked();
     }
     public void SetData(QuickTimeData_Scuba data)
     {
         currentQTData = data; 
-        SetNeededData();
         Hooked();
     }
 
-
-    // On LuredIn /////////////////////////////////////////////////////////////////////////////////////////////////
-    /* // will set up later
-    public void LuredIn() // when the fish is contemplating going for the lure. with tentative taps.
-    {
-        // Have the lure be set so that it is no longer luring in new fish, basicly have it so the lure is reeled in.
-    }
-    */
     // On Hook ////////////////////////////////////////////////////////////////////////////////////////////////////
     private void Hooked() // activated when the fish is hooked.
     {
@@ -262,7 +229,6 @@ public class QuickTimeController_Player : MonoBehaviour
         
         // set up minigame bar
         qtUI.SetActive(true);
-        //origin = Random.Range(0,360);
         // set the point at which the spinner will be to within the circle
 
         hitZone.fillAmount = hitArea/360;   
@@ -279,26 +245,7 @@ public class QuickTimeController_Player : MonoBehaviour
 
     private void HandelUseQT()
     {
-        //inProgress = false; // turn of time keeping for the moment
-        //playerPoint = timeKeeper; // this will be used to check if its in range.
-        /*
-        CheckInRange(0);
-        if (inHit)
-        {
-            // shit, would be nice if we had the fish object.
-            // maybe do a event thing?
-            currentQTData.OnHit();
-            
-        }
-        else
-        {
-            currentQTData.OnMiss();
-        } 
-
-        StartCoroutine(EndQTE(.4f));
-        */
         counterClockwise = true;
-
     }
     private void HandleUseQTCancelled()
     {

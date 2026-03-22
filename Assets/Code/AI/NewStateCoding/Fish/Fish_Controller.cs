@@ -24,7 +24,7 @@ public class Fish_Controller : MonoBehaviour
     [HideInInspector]
     public MeshWithWaves waveHandler;
 
-    [field:SerializeField]
+    [HideInInspector]
     public SplineContainer reelSpline;
     [HideInInspector]
     public float distOnReel = 0; // distance to move on the reel spline
@@ -150,6 +150,7 @@ public class Fish_Controller : MonoBehaviour
 
     void Start()
     {
+        reelSpline = GameManager.Instance.reelSpline;
         agent = GetComponent<NavMeshAgent>();
         SC = GetComponent<FishSC_Abstact>();
         waveHandler = GetComponent<MeshWithWaves>();

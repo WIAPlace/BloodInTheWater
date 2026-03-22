@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI; 
 using TMPro;
+using UnityEngine.Splines;
 /// 
 /// Author: Weston Tollette
 /// Created: 2/22/26
@@ -22,6 +23,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Image windUpIndicator; // will show when u have would up and are ready to release
     [SerializeField] private TextMeshProUGUI text; // ui for temp text
     [SerializeField] PersistantItemSpot itemSpot;
+    [field: SerializeField] public QuickTimeController_Player qtcPlayer;
+    [field: SerializeField] public SplineContainer reelSpline;
+    [field: SerializeField] public GameObject lureTarget; 
 
     private Coroutine running;
 

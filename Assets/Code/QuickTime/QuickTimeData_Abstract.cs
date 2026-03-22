@@ -15,8 +15,8 @@ using Unity.VisualScripting;
 public abstract class QuickTimeData_Abstract : MonoBehaviour
 {
 
-    [SerializeField] [Tooltip("Refrence to Controller")]
-    protected QuickTimeController_Player qtcPlayer; // QuickTimeController_Player 
+    //[SerializeField] [Tooltip("Refrence to Controller")]
+    //protected QuickTimeController_Player GameManager.Instance.qtcPlayer; // QuickTimeController_Player 
 
     [Header("Mini Game Stats")]
     [SerializeField] [Tooltip("Area within that the player will need to hit, Maximum")]
@@ -50,7 +50,6 @@ public abstract class QuickTimeData_Abstract : MonoBehaviour
         this.hitZoneLength = other.hitZoneLength;
         this.qtSpeed = other.qtSpeed;
         this.qtLength = other.qtLength;
-        this.qtcPlayer = other.qtcPlayer;
     }
     private void OnValidate()
     { 
@@ -58,6 +57,10 @@ public abstract class QuickTimeData_Abstract : MonoBehaviour
         {
             looseRate = winRate;
         }
+    }
+    void Awake()
+    {
+        
     }
     public virtual float GetCompletionRate(bool rate)
     {
@@ -79,7 +82,7 @@ public abstract class QuickTimeData_Abstract : MonoBehaviour
 
     public virtual void SendData() // sends the data to the Rod scipt.
     {
-        qtcPlayer.SetData(this);
+        GameManager.Instance.qtcPlayer.SetData(this);
         EnterQTEvent();
     }
     public float GetQTSpeed()
