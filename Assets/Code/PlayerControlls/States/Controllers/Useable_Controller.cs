@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Splines;
 /// 
 /// Author: Weston Tollette
 /// Created: 2/25/26
@@ -17,7 +18,14 @@ public class Useable_Controller : MonoBehaviour
     private InputReader input;
     public AudioSource audioSource; // sound player
     public GameObject FPCamera;
+    public GameObject fakeFish; // fake fish to hold on stick
+    private TestReelLine TRL;
+    //public GameObject fakeFishBody; // body of it that is a child of the fake fish object
+    [field:SerializeField]
+    public SplineContainer reelSpline;
+
     public PersistantItemSpot perSpot;
+    
 
     public UseableItem_Empty empty;
     public UseableItem_Rod rod;
@@ -54,6 +62,9 @@ public class Useable_Controller : MonoBehaviour
     private string debugPreviousStateName = "";
     //[SerializeField] public Animator anim;
 
+    [HideInInspector]
+    public bool showingFish=false;
+
     // States:
     //public Abs_StateItemIdle Idle; // no contact in between action states.
     //public Abs_StateItemReadying Readying; // The process of setting up to do the thing. //press held down 
@@ -72,6 +83,10 @@ public class Useable_Controller : MonoBehaviour
 
             debugCurrentStateName = currentState.GetType().Name; //used for debuging to see name
             debugPreviousStateName = previousState?.GetType().Name; //used for debuging to see name
+            if (showingFish)
+            {
+                ShowingFish();
+            }
         }
     }
     
@@ -158,6 +173,8 @@ public class Useable_Controller : MonoBehaviour
     }
     void Awake()
     {
+        TRL = GetComponent<TestReelLine>(); 
+
         UseableItem = new UseableItem_Abstract[3];
 
         UseableItem[0] = empty;
@@ -208,6 +225,11 @@ public class Useable_Controller : MonoBehaviour
     private void HandleUse()
     { // on clicking trigger of use
         //Debug.Log("Used Begun");
+        if (showingFish)
+        {
+            StopShowingFish(); // turn off the fish and destroy its children
+        }
+
         if(currentItem == null)
         { // Error catcher for if we have nothing in our hands
             return;
@@ -259,5 +281,73 @@ public class Useable_Controller : MonoBehaviour
         { // changes it from the reel in stuff to catching state.
             ChangeState(currentItem.Readying);
         }
+    }
+
+
+
+    ////////////////////////////////////////////////////////////////////////////// Reel In The Fake Fish 
+    public void ReelInFakeFish(GameObject fish, int rot)
+    {
+        showingFish = false;
+        // direction
+        fakeFish.transform.position = reelSpline.EvaluatePosition(1,0);
+        // rotation
+        Vector3 forward = reelSpline.EvaluateTangent(0,1);
+        // Calculate the up vector (adjust as needed for 2D or specific orientations)
+        Vector3 up = reelSpline.EvaluateUpVector(0,1);
+
+        // Set the rotation to align with the spline's direction and up vector
+        fakeFish.transform.rotation = Quaternion.LookRotation(forward, up);
+        
+        GameObject fakeFishBody = Instantiate(fish,fish.transform.position, fish.transform.rotation);
+
+        TRL.setRot(rot); // change the rot to what it should be now
+
+        fakeFishBody.transform.parent = fakeFish.transform;
+        
+        StartCoroutine(ReelInFakeFishThenHold());
+    }
+    private IEnumerator ReelInFakeFishThenHold()
+    {
+        float i = 0;
+        while (i < 1)
+        {
+            i+=.01f;
+            fakeFish.transform.position = reelSpline.EvaluatePosition(1,i);
+
+            Vector3 forward = reelSpline.EvaluateTangent(1,i);
+            // Calculate the up vector (adjust as needed for 2D or specific orientations)
+            Vector3 up = reelSpline.EvaluateUpVector(1,i);
+
+            // Set the rotation to align with the spline's direction and up vector
+            fakeFish.transform.rotation = Quaternion.LookRotation(forward, up);
+            yield return new WaitForSeconds(.01f);
+        }
+        showingFish = true;
+    }
+    private void StopShowingFish()
+    {
+        if (showingFish)
+        {
+            showingFish = false;
+            TRL.setRot(0); // change the rot to what it should be now
+            
+            foreach (Transform child in fakeFish.transform)
+            {// destroy the children
+                Destroy(child.gameObject);
+            }
+            
+        }
+    }
+    private void ShowingFish()
+    {
+        fakeFish.transform.position = reelSpline.EvaluatePosition(1,1);
+
+        Vector3 forward = reelSpline.EvaluateTangent(1,1);
+        // Calculate the up vector (adjust as needed for 2D or specific orientations)
+        Vector3 up = reelSpline.EvaluateUpVector(1,1);
+
+        // Set the rotation to align with the spline's direction and up vector
+        fakeFish.transform.rotation = Quaternion.LookRotation(forward, up);
     }
 }

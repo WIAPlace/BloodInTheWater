@@ -14,7 +14,7 @@ public class QuickTimeData_Scuba : QuickTimeData_Abstract
     }
     public override void SendData()
     {
-        qtcPlayer.SetData(this); // send the data of this mans
+        base.SendData();
     }
 
     public override  void OnHit()
@@ -27,5 +27,19 @@ public class QuickTimeData_Scuba : QuickTimeData_Abstract
         //Debug.Log("Hit");
         GameState.Instance.LooseState();
     }
-    
+
+    public override void EnterQTEvent()
+    {
+        //throw new System.NotImplementedException();
+    }
+
+    public override void ExitQuickTimeEvent(bool status)
+    {
+        //throw new System.NotImplementedException();
+    }
+
+    public override void QTStatus(float amnt)
+    {
+        throw new System.NotImplementedException();
+    }
 }

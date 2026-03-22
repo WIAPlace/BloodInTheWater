@@ -8,15 +8,15 @@ using UnityEngine;
 /// 
 public class MeshWithWaves : MonoBehaviour
 {
-    [SerializeField] [Tooltip("The game object holding the transform of what will move with the waves")]
-    private Transform UseableMesh;
+    [Tooltip("The game object holding the transform of what will move with the waves")]
+    public Transform UseableMesh;
     [SerializeField][Tooltip("If they should be effected by this.")]
     private bool onWaves = true;
     [SerializeField] [Tooltip("How far under water it should be")]
     private float displacement = 0;
     
-
-    private Vector3 originalPosition;
+    [HideInInspector]
+    public Vector3 originalPosition;
 
     void Start()
     {

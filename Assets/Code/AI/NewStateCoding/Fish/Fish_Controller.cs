@@ -77,6 +77,9 @@ public class Fish_Controller : MonoBehaviour
     public float catchTimeWindow = 3f;
     [HideInInspector]
     public bool onHook = false; // will be used for collision detection and allowance with the hooked stuff.
+
+    [HideInInspector]
+    public float ReelRate; // rate at whicj it moves allong the spline
     
 
     [HideInInspector]
@@ -117,6 +120,9 @@ public class Fish_Controller : MonoBehaviour
         currentState?.DoExit(this); // leave the prevvious state
         currentState = newState;
         currentState?.DoEnter(this); // enter the new state   
+        
+        debugCurrentStateName = currentState.GetType().Name; //used for debuging to see name
+        debugPreviousStateName = previousState?.GetType().Name; //used for debuging to see name
     }
 
     /////////////////////////////////////////////////////////////////////////// wait to change
@@ -242,19 +248,7 @@ public class Fish_Controller : MonoBehaviour
     }
     public void MoveAlongSpline(float dist)
     {
-        reelLength = SplineUtility.CalculateLength(reelSpline.Spline,reelSpline.transform.localToWorldMatrix);
-        //Vector3 localPositionOnReel = reelSpline.EvaluatePosition(1f);
-        /*
-        // get local position to spline
-        Vector3 endTangent = reelSpline.EvaluateTangent(1f);
-        Vector3 endUp = reelSpline.EvaluateUpVector(1f);
-        Quaternion endRotation = Quaternion.LookRotation(endTangent, endUp);
-
-        transform.rotation = endRotation;
-        transform.position = localPositionOnReel;
-        */
-        
-        currentLocalOnReel = 0f;
+        //Debug.Log(dist);
         distOnReel = dist;
         //Debug.Log(distOnReel);
     }

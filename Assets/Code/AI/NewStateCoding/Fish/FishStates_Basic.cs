@@ -279,6 +279,7 @@ public class Basic_StateOnLine : Abs_StateOnLine
     }
     public override IFishState DoState(Fish_Controller FSC)
     {
+        /*
         if (FSC.currentLocalOnReel < FSC.distOnReel)
         {
             float moveDist = 5f * Time.deltaTime;
@@ -293,7 +294,20 @@ public class Basic_StateOnLine : Abs_StateOnLine
             }
             UpdatePosition(FSC);
         }
-        
+        */
+        float dist = FSC.distOnReel;
+        if (dist < 1)
+        {        
+            Vector3 position = FSC.reelSpline.EvaluatePosition(0,dist);
+            FSC.transform.position = position;
+            // Get the tangent (forward direction) for rotation
+            Vector3 forward = FSC.reelSpline.EvaluateTangent(0,dist);
+            // Calculate the up vector (adjust as needed for 2D or specific orientations)
+            Vector3 up = FSC.reelSpline.EvaluateUpVector(0,dist);
+
+            // Set the rotation to align with the spline's direction and up vector
+            FSC.transform.rotation = Quaternion.LookRotation(forward, up);
+        }
         return this;
     }
     private void UpdatePosition(Fish_Controller FSC)
