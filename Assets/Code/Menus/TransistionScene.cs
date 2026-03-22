@@ -15,6 +15,7 @@ using UnityEngine.SceneManagement;
 /// Edited By: Marshall Turner
 /// Edit Purpose: A bool to stop the script from changing StaticVariables.sceneToLoad
 ///
+/// Edited by wes
 public class TransistionScene : MonoBehaviour
 {
     public GameObject loadingScreen;
@@ -24,6 +25,7 @@ public class TransistionScene : MonoBehaviour
     public bool resetThoughts;
     public string lastFishingLevel;
     public bool levelRetry; //If StaticVariables.sceneToLoad uses StaticVariables.lastLevel(true) or targetScene(false) 
+    //public bool toMenu = false;
 
 
     public void StartGame()

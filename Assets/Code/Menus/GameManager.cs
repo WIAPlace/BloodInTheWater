@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
 {
     private static GameManager GM; // static for the game manager
 
-    [SerializeField] private InputReader input; //Input reader
+    [SerializeField] public InputReader input; //Input reader
     [SerializeField] private GameObject pauseMenu; // ui for the pause menu
     [SerializeField] private GameObject gameUI; // ui for the game during play
     [SerializeField] private Image windUpIndicator; // will show when u have would up and are ready to release
