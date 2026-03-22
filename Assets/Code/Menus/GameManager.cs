@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI; 
 using TMPro;
 using UnityEngine.Splines;
+using Unity.Burst.CompilerServices;
 /// 
 /// Author: Weston Tollette
 /// Created: 2/22/26
@@ -26,6 +27,8 @@ public class GameManager : MonoBehaviour
     [field: SerializeField] public QuickTimeController_Player qtcPlayer;
     [field: SerializeField] public SplineContainer reelSpline;
     [field: SerializeField] public GameObject lureTarget; 
+    [SerializeField] private GameObject hintUI; // ui for hints
+    [SerializeField] private TextMeshProUGUI hintText; // text for hints
 
     private Coroutine running;
 
@@ -36,6 +39,7 @@ public class GameManager : MonoBehaviour
     {
         input.PauseEvent += HandlePause;
         input.ResumeEvent += HandleResume;
+        //input.InteractEvent += 
         pauseMenu.SetActive(false);
         gameUI.SetActive(true);
         windUpIndicator.gameObject.SetActive(false);
@@ -44,6 +48,7 @@ public class GameManager : MonoBehaviour
 
     void OnDestroy()
     {
+        input.InteractEvent -= CloseHint;
         input.PauseEvent -= HandlePause;
         input.ResumeEvent -= HandleResume;
     }
@@ -57,7 +62,7 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
-    void HandleResume()
+    public void HandleResume()
     {
         gameUI.SetActive(true);
         pauseMenu.SetActive(false);
@@ -165,5 +170,21 @@ public class GameManager : MonoBehaviour
     {
         if (active) OnHooked.Invoke();
         else OnHookedCancelled.Invoke();
+    }
+
+
+    public void GiveHint(string givenHint)
+    {
+        hintUI.SetActive(true);
+        hintText.SetText(givenHint);
+        input.InteractEvent += CloseHint; // allow player to close out the hint menu
+    }
+    public void CloseHint()
+    {
+        if (hintUI.activeSelf)
+        {
+            hintUI.SetActive(false);
+            input.InteractEvent -= CloseHint; // stop listening for interact
+        }
     }
 }

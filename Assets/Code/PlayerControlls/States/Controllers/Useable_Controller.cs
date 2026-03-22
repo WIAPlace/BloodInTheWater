@@ -65,6 +65,8 @@ public class Useable_Controller : MonoBehaviour
     [HideInInspector]
     public bool showingFish=false;
 
+    public Animator mAnimator;
+
     // States:
     //public Abs_StateItemIdle Idle; // no contact in between action states.
     //public Abs_StateItemReadying Readying; // The process of setting up to do the thing. //press held down 
@@ -262,6 +264,7 @@ public class Useable_Controller : MonoBehaviour
         { // if winding up and let go early. 
             // this is mainly used to handle simple clicks not setting off the items
             ChangeState(currentItem.Idle);
+            
         }
     }
 

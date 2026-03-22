@@ -29,6 +29,10 @@ public class Rod_StateItemIdle : Abs_StateItemIdle
         else
         {
             // start the idle holding animation
+            if(controller.previousState == controller.currentItem.Readying)
+            {
+                controller.mAnimator.SetTrigger("RodUnReady"); // lower the rod if we were still readying
+            }
         }
     }
 
@@ -59,6 +63,7 @@ public class Rod_StateItemReadying : Abs_StateItemReadying
             controller.WindUpOn(controller.readyTime); // turns on the wind up indicator
             //---By Kennedy
             //controller.anim.SetTrigger("RodReady");
+            controller.mAnimator.SetTrigger("RodReady"); // start readying
             
         }
         else
