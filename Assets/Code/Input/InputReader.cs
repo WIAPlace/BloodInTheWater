@@ -210,6 +210,12 @@ public class InputReader : ScriptableObject, GameInput.IGamePlayActions, GameInp
         //throw new NotImplementedException();
     }
 
+    public void OnCheck(InputAction.CallbackContext context)
+    {   // check time
+        //throw new NotImplementedException();
+
+    }
+
     /////////////////////////////////////////////////////////////////////////////// Extra stuff
     public bool CheckIfGameplay()
     {
