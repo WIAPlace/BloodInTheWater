@@ -20,8 +20,8 @@ public class DitherToggle : MonoBehaviour
 
     void Start()
     {
-        ditherImage.SetActive(false);
-        Camera.main.targetTexture = null;
+        //ditherImage.SetActive(false);
+        //Camera.main.targetTexture = null;
     }
 
     public void DitherSwitch()
