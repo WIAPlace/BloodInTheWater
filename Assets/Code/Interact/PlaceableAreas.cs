@@ -64,7 +64,7 @@ public class PlaceableAreas : MonoBehaviour
     {
         for(int i = 1; i < placeableSpots.Length; i++)
         { // starting i at 1 because 0 is null and doesnt need to be turned off.
-            perSpot.spots[i] = -1;
+            perSpot.spots[i] = 0;
             for(int x = 0; x < placeableSpots[i].Length; x++)
             {
                 if (placeableSpots[i][x] != null && placeableSpots[i][x].gameObject.activeSelf && placeableSpots[i][x].gameObject.CompareTag("PlaceEmpty"))
