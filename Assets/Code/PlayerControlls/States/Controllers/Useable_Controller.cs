@@ -65,7 +65,7 @@ public class Useable_Controller : MonoBehaviour
     [HideInInspector]
     public bool showingFish=false;
 
-    public Animator mAnimator;
+    //public Animator mAnimator;
 
     // States:
     //public Abs_StateItemIdle Idle; // no contact in between action states.

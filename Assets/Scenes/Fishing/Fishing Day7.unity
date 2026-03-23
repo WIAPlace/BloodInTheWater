@@ -468,7 +468,7 @@ MonoBehaviour:
   useControl: {fileID: 165310812}
   scubaData: {fileID: 353911576}
   agent: {fileID: 353911574}
-  secondsStunned: 1
+  secondsStunned: 3
   hitForce: 200
   hitDir: {x: 0, y: 0, z: 0}
   rb: {fileID: 0}
@@ -484,12 +484,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23eb186e88e314345a98a878bffe4018, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  qtcPlayer: {fileID: 165310813}
   hitZoneLength:
   - 100
   qtSpeed: 360
+  qtSmoothMotion: 1
   qtLength: 100
   type: 0
+  timerMultiplyer: 3
+  diffRate: 1
+  winRate: 0.2
+  looseRate: 0.06
 --- !u!136 &353911577
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -4014,6 +4018,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1754961527840138785, guid: 3598aa3f55e6f50489fdee72d471301e,
+        type: 3}
+      propertyPath: qtcPlayer
+      value: 
+      objectReference: {fileID: 165310813}
+    - target: {fileID: 1754961527840138785, guid: 3598aa3f55e6f50489fdee72d471301e,
+        type: 3}
+      propertyPath: lureTarget
+      value: 
+      objectReference: {fileID: 6276343037632136480}
+    - target: {fileID: 1754961527840138785, guid: 3598aa3f55e6f50489fdee72d471301e,
+        type: 3}
+      propertyPath: reelSpline
+      value: 
+      objectReference: {fileID: 6276343037632136481}
     - target: {fileID: 2402129002843093341, guid: 3598aa3f55e6f50489fdee72d471301e,
         type: 3}
       propertyPath: virtualCamera
@@ -4048,6 +4067,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3727669345629421182, guid: 3598aa3f55e6f50489fdee72d471301e,
+        type: 3}
+      propertyPath: limitTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3727669345629421182, guid: 3598aa3f55e6f50489fdee72d471301e,
+        type: 3}
+      propertyPath: secondsAllocated
+      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 3829346988755770075, guid: 3598aa3f55e6f50489fdee72d471301e,
         type: 3}
