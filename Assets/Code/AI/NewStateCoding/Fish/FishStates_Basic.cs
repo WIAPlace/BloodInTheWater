@@ -275,7 +275,7 @@ public class Basic_StateOnLine : Abs_StateOnLine
 
     public override void DoExit(Fish_Controller FSC)
     {
-       Debug.Log("OutOfLine");
+       //Debug.Log("OutOfLine");
     }
     public override IFishState DoState(Fish_Controller FSC)
     {
