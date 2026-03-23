@@ -140,7 +140,7 @@ public class GameManager : MonoBehaviour
                 GM = FindObjectOfType<GameManager>();
                 if (GM == null)
                 {
-                    Debug.LogError("A GameManager instance is missing from the scene.");
+                    //Debug.LogError("A GameManager instance is missing from the scene.");
                 }
             }
             return GM;
