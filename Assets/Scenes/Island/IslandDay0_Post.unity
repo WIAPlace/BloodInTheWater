@@ -14,7 +14,7 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
-  m_Fog: 1
+  m_Fog: 0
   m_FogColor: {r: 0.7490196, g: 0.8745099, b: 0.9607844, a: 1}
   m_FogMode: 3
   m_FogDensity: 0.015
@@ -20472,6 +20472,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fog
       objectReference: {fileID: 0}
+    - target: {fileID: 2092957939603522620, guid: ce14cd656e09a2a448b0b7552ad65fc8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5254320679488325853, guid: ce14cd656e09a2a448b0b7552ad65fc8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -22445,6 +22450,8 @@ MonoBehaviour:
   transitionType: TransitionDaysLater
   canvasGroup: {fileID: 760141496}
   resetThoughts: 0
+  lastFishingLevel: 
+  levelRetry: 0
 --- !u!4 &1718153715
 Transform:
   m_ObjectHideFlags: 0
