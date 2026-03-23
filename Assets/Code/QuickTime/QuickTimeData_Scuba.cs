@@ -20,12 +20,12 @@ public class QuickTimeData_Scuba : QuickTimeData_Abstract
     public override  void OnHit()
     {
         //controller.SetCurrentState(controller.HitState);
-        controller.MonsterHit(controller.transform.forward - Vector3.up/2);
+        
     }
     public override void OnMiss()
     {
         //Debug.Log("Hit");
-        GameState.Instance.LooseState();
+        //GameState.Instance.LooseState();
     }
 
     public override void EnterQTEvent()
@@ -35,11 +35,18 @@ public class QuickTimeData_Scuba : QuickTimeData_Abstract
 
     public override void ExitQuickTimeEvent(bool status)
     {
-        //throw new System.NotImplementedException();
+        if (!status)
+        {
+            GameState.Instance.LooseState();
+        }
+        else
+        {
+            controller.MonsterHit(controller.transform.forward - Vector3.up/2);
+        }
     }
 
     public override void QTStatus(float amnt)
     {
-        throw new System.NotImplementedException();
+        //throw new System.NotImplementedException();
     }
 }
