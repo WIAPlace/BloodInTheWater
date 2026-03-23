@@ -6,7 +6,8 @@ using UnityEngine;
 public class ResumeButton : MonoBehaviour
 {
     public void ResumeGame()
-    {
+    {   // when leave pause menue through resume button resume
         GameManager.Instance.HandleResume();
+        GameManager.Instance.input.SetGameplay();
     }
 }
