@@ -138,7 +138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NoiseProfile: {fileID: 11400000, guid: 46965f9cbaf525742a6da4c2172a99cd, type: 2}
+  NoiseProfile: {fileID: 11400000, guid: a3dacaec0287d7444b4bd276816e1666, type: 2}
   PivotOffset: {x: 0, y: 0, z: 0}
   AmplitudeGain: 1
   FrequencyGain: 1
@@ -511,6 +511,81 @@ MonoBehaviour:
       m_Data: []
   m_Knots:
     m_KnotsLink: []
+--- !u!1 &2456494750599369273
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5636809541469434397}
+  - component: {fileID: 3069805963809995954}
+  - component: {fileID: 8304206858013752771}
+  m_Layer: 0
+  m_Name: Fish
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &5636809541469434397
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2456494750599369273}
+  m_LocalRotation: {x: 0.00046538995, y: 0.014617976, z: 0.031817306, w: 0.9993867}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6059900241536070904}
+  m_LocalEulerAnglesHint: {x: 0, y: 1.676, z: 3.647}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 6.1, y: -150.2}
+  m_SizeDelta: {x: 73.9987, y: 73.9987}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &3069805963809995954
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2456494750599369273}
+  m_CullTransparentMesh: 1
+--- !u!114 &8304206858013752771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2456494750599369273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: b2c98856046a5094290394dfff6b9bbf, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &2464198341817912693
 GameObject:
   m_ObjectHideFlags: 0
@@ -931,7 +1006,7 @@ MonoBehaviour:
   qtCompletion: {fileID: 7588608768983463207}
   hitArea: 100
   maxHitSpeed: 400
-  changeSmooth: 1
+  changeSmooth: 0.8
   graceTimeAmnt: 4
 --- !u!114 &2460994001563903028
 MonoBehaviour:
@@ -962,7 +1037,6 @@ MonoBehaviour:
   debugCurrentStateName: 
   debugPreviousStateName: 
   showingFish: 0
-  mAnimator: {fileID: 0}
 --- !u!114 &5034288454990251177
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2097,6 +2171,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: QTReticle
       objectReference: {fileID: 0}
+    - target: {fileID: 4298255787646156224, guid: ec6098e5740607c47b2ba6cc25089499,
+        type: 3}
+      propertyPath: m_FillAmount
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5058471994926775230, guid: ec6098e5740607c47b2ba6cc25089499,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2147,6 +2226,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6250261872624969132, guid: ec6098e5740607c47b2ba6cc25089499,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0
+      objectReference: {fileID: 0}
     - target: {fileID: 7950874377787459677, guid: ec6098e5740607c47b2ba6cc25089499,
         type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
@@ -2169,6 +2253,10 @@ PrefabInstance:
         type: 3}
       insertIndex: 1
       addedObject: {fileID: 5972116078919863345}
+    - targetCorrespondingSourceObject: {fileID: 6250261872624969132, guid: ec6098e5740607c47b2ba6cc25089499,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5636809541469434397}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec6098e5740607c47b2ba6cc25089499, type: 3}
 --- !u!224 &173745007738023734 stripped
@@ -2198,6 +2286,12 @@ MonoBehaviour:
 --- !u!4 &4942487685251607274 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5058471994926775230, guid: ec6098e5740607c47b2ba6cc25089499,
+    type: 3}
+  m_PrefabInstance: {fileID: 190403697643426132}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &6059900241536070904 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 6250261872624969132, guid: ec6098e5740607c47b2ba6cc25089499,
     type: 3}
   m_PrefabInstance: {fileID: 190403697643426132}
   m_PrefabAsset: {fileID: 0}
