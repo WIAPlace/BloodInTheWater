@@ -50,9 +50,28 @@ public class TimeKeeper : MonoBehaviour
     {
         penaltyTime += seconds;
     }
-    public float GetTimeLeft()
+    public string GetTimeLeft()
     {
         float timeLeft = secondsAllocated-timePassed;
-        return timeLeft;
+        int minutes = (int)(timeLeft/60); 
+        int seconds = (int)(timeLeft%60);
+        
+        string sec = "";
+        if(seconds < 10)
+        {
+            sec = "0";
+        }
+        sec += seconds;
+
+        string min = "";
+        if (minutes < 10)
+        {
+            min="0";
+        }
+        min+=minutes;
+        
+       string timHasLeft = min + " : " + sec;
+
+        return timHasLeft;
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Splines;
 using Unity.Burst.CompilerServices;
+using Unity.VisualScripting;
 /// 
 /// Author: Weston Tollette
 /// Created: 2/22/26
@@ -29,6 +30,7 @@ public class GameManager : MonoBehaviour
     [field: SerializeField] public GameObject lureTarget; 
     [SerializeField] private GameObject hintUI; // ui for hints
     [SerializeField] private TextMeshProUGUI hintText; // text for hints
+    [SerializeField] private TimeKeeper keptTime;
 
     private Coroutine running;
 
@@ -39,7 +41,7 @@ public class GameManager : MonoBehaviour
     {
         input.PauseEvent += HandlePause;
         input.ResumeEvent += HandleResume;
-        //input.InteractEvent += 
+        input.CheckEvent += HandleCheck;
         pauseMenu.SetActive(false);
         gameUI.SetActive(true);
         windUpIndicator.gameObject.SetActive(false);
@@ -51,6 +53,7 @@ public class GameManager : MonoBehaviour
         input.InteractEvent -= CloseHint;
         input.PauseEvent -= HandlePause;
         input.ResumeEvent -= HandleResume;
+        input.CheckEvent -= HandleCheck;
     }
     void HandlePause()
     {
@@ -186,5 +189,15 @@ public class GameManager : MonoBehaviour
             hintUI.SetActive(false);
             input.InteractEvent -= CloseHint; // stop listening for interact
         }
+    }
+
+    public void HandleCheck()
+    {
+        string txt ="Clock for keeping time";
+        if(GameState.Instance !=null&& keptTime != null){
+            string timeLeft = keptTime.GetTimeLeft();
+            txt = timeLeft;
+        }
+        ShowUIText(txt);
     }
 }

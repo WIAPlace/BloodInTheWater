@@ -69,6 +69,8 @@ public class InputReader : ScriptableObject, GameInput.IGamePlayActions, GameInp
     public event Action InteractUIEvent;
     public event Action PlaceEvent;
     public event Action PlaceCancelledEvent;
+    public event Action CheckEvent;
+    public event Action CheckCancelledEvent;
 
     public event Action UseEventQT; // quick time click
     public event Action UseEventQTCanelled;
@@ -212,8 +214,14 @@ public class InputReader : ScriptableObject, GameInput.IGamePlayActions, GameInp
 
     public void OnCheck(InputAction.CallbackContext context)
     {   // check time
-        //throw new NotImplementedException();
-
+        if (context.phase == InputActionPhase.Performed)
+        {
+            CheckEvent?.Invoke();
+        }
+        if (context.phase == InputActionPhase.Canceled)
+        {
+            CheckCancelledEvent?.Invoke();
+        }
     }
 
     /////////////////////////////////////////////////////////////////////////////// Extra stuff
