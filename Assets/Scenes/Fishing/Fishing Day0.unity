@@ -1027,11 +1027,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23eb186e88e314345a98a878bffe4018, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  qtcPlayer: {fileID: 165310813}
   hitZoneLength: []
   qtSpeed: 360
+  qtSmoothMotion: 0
   qtLength: 100
   type: 0
+  timerMultiplyer: 0
+  diffRate: 0
+  winRate: 0
+  looseRate: 0
 --- !u!136 &353911577
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -4248,6 +4252,21 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1754961527840138785, guid: 3598aa3f55e6f50489fdee72d471301e,
+        type: 3}
+      propertyPath: qtcPlayer
+      value: 
+      objectReference: {fileID: 165310813}
+    - target: {fileID: 1754961527840138785, guid: 3598aa3f55e6f50489fdee72d471301e,
+        type: 3}
+      propertyPath: lureTarget
+      value: 
+      objectReference: {fileID: 6276343037632136480}
+    - target: {fileID: 1754961527840138785, guid: 3598aa3f55e6f50489fdee72d471301e,
+        type: 3}
+      propertyPath: reelSpline
+      value: 
+      objectReference: {fileID: 6276343037632136481}
     - target: {fileID: 2402129002843093341, guid: 3598aa3f55e6f50489fdee72d471301e,
         type: 3}
       propertyPath: virtualCamera
@@ -4319,6 +4338,11 @@ PrefabInstance:
       propertyPath: playerLook
       value: 
       objectReference: {fileID: 1069041242}
+    - target: {fileID: 6213375380370748914, guid: 3598aa3f55e6f50489fdee72d471301e,
+        type: 3}
+      propertyPath: ditherToggle
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6901927697402245435, guid: 3598aa3f55e6f50489fdee72d471301e,
         type: 3}
       propertyPath: m_LocalPosition.x
