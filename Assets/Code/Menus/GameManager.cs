@@ -31,9 +31,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject hintUI; // ui for hints
     [SerializeField] private TextMeshProUGUI hintText; // text for hints
     [SerializeField] private TimeKeeper keptTime;
+    [SerializeField] private HintArray hintArray;
+    
 
     private Coroutine running;
-
+    [HideInInspector]public bool hintsEnabled = true;
     public static event System.Action OnHooked;
     public static event System.Action OnHookedCancelled;
     
@@ -176,18 +178,23 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void GiveHint(string givenHint)
+    public void GiveHint(int type, int hint)
     {
-        hintUI.SetActive(true);
-        hintText.SetText(givenHint);
-        input.InteractEvent += CloseHint; // allow player to close out the hint menu
+        if(hintUI != null && hintsEnabled){
+            hintUI.SetActive(true);
+            hintArray.ShowHint(type,hint);
+            input.InteractEvent += CloseHint; // allow player to close out the hint menu
+            input.InteractEventQT += CloseHint;
+        }
     }
     public void CloseHint()
     {
-        if (hintUI.activeSelf)
+        if (hintUI != null && hintUI.activeSelf)
         {
+            hintArray.CloseHints();
             hintUI.SetActive(false);
             input.InteractEvent -= CloseHint; // stop listening for interact
+            input.InteractEventQT -= CloseHint;
         }
     }
 
@@ -200,4 +207,5 @@ public class GameManager : MonoBehaviour
         }
         ShowUIText(txt);
     }
+    
 }

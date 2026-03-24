@@ -84,11 +84,13 @@ public class QuickTimeController_Player : MonoBehaviour
     {
         input.UseEventQT += HandelUseQT;
         input.UseEventQTCanelled += HandleUseQTCancelled;
+        
     }
     void OnDestroy()
     {
         input.UseEventQT -= HandelUseQT;
         input.UseEventQTCanelled -= HandleUseQTCancelled;
+        input.InteractEventQT -= NextHint;
     }
 
     // Update //////////////////////////////////////////////////////////////////////////////////////
@@ -212,6 +214,8 @@ public class QuickTimeController_Player : MonoBehaviour
     // On Hook ////////////////////////////////////////////////////////////////////////////////////////////////////
     private void Hooked() // activated when the fish is hooked.
     {
+        GameManager.Instance.GiveHint(2,0); // Hold Release
+        input.InteractEventQT += NextHint;
         // retrive lure as a way to disable the other fish from being interested and interupting.
         // should be switched out for something more elegent later
         useControl.rod.LurePrefab.SetActive(false);
@@ -254,6 +258,7 @@ public class QuickTimeController_Player : MonoBehaviour
 
     private void EndQTEAll(bool status)
     {
+        input.InteractEventQT -= NextHint;
         inProgress = false;
         currentQTData.ExitQuickTimeEvent(status);
         StartCoroutine(EndQTE(.4f));
@@ -276,5 +281,16 @@ public class QuickTimeController_Player : MonoBehaviour
     {
         //Debug.Log("Hit");
         useControl.ReelInFakeFish(fish,rot);
+    }
+    
+    private void NextHint()
+    {
+        StartCoroutine(HintForCast());
+    }
+    private IEnumerator HintForCast()
+    {
+        yield return new WaitForSeconds(.01f);
+        GameManager.Instance.GiveHint(2,1);
+        input.InteractEvent -=NextHint;
     }
 }   

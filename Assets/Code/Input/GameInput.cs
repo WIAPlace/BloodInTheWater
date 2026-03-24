@@ -980,6 +980,15 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""InteractQT"",
+                    ""type"": ""Button"",
+                    ""id"": ""b48e1b8e-3ffe-4d14-8cc0-d927abf2711c"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -1002,6 +1011,28 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""UseQT"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c1fdc1ba-bfb9-4f5a-8c26-fbba955a951b"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""InteractQT"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""afcef234-b453-4598-ac8f-899ad623bee2"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""InteractQT"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1036,6 +1067,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         // QuickTime
         m_QuickTime = asset.FindActionMap("QuickTime", throwIfNotFound: true);
         m_QuickTime_UseQT = m_QuickTime.FindAction("UseQT", throwIfNotFound: true);
+        m_QuickTime_InteractQT = m_QuickTime.FindAction("InteractQT", throwIfNotFound: true);
     }
 
     ~@GameInput()
@@ -1498,6 +1530,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_QuickTime;
     private List<IQuickTimeActions> m_QuickTimeActionsCallbackInterfaces = new List<IQuickTimeActions>();
     private readonly InputAction m_QuickTime_UseQT;
+    private readonly InputAction m_QuickTime_InteractQT;
     /// <summary>
     /// Provides access to input actions defined in input action map "QuickTime".
     /// </summary>
@@ -1513,6 +1546,10 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "QuickTime/UseQT".
         /// </summary>
         public InputAction @UseQT => m_Wrapper.m_QuickTime_UseQT;
+        /// <summary>
+        /// Provides access to the underlying input action "QuickTime/InteractQT".
+        /// </summary>
+        public InputAction @InteractQT => m_Wrapper.m_QuickTime_InteractQT;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1542,6 +1579,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @UseQT.started += instance.OnUseQT;
             @UseQT.performed += instance.OnUseQT;
             @UseQT.canceled += instance.OnUseQT;
+            @InteractQT.started += instance.OnInteractQT;
+            @InteractQT.performed += instance.OnInteractQT;
+            @InteractQT.canceled += instance.OnInteractQT;
         }
 
         /// <summary>
@@ -1556,6 +1596,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @UseQT.started -= instance.OnUseQT;
             @UseQT.performed -= instance.OnUseQT;
             @UseQT.canceled -= instance.OnUseQT;
+            @InteractQT.started -= instance.OnInteractQT;
+            @InteractQT.performed -= instance.OnInteractQT;
+            @InteractQT.canceled -= instance.OnInteractQT;
         }
 
         /// <summary>
@@ -1752,5 +1795,12 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnUseQT(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "InteractQT" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnInteractQT(InputAction.CallbackContext context);
     }
 }

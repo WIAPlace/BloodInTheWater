@@ -25,7 +25,7 @@ public class MeshWithWaves : MonoBehaviour
 
     void Update()
     {
-        if (UseableMesh != null && onWaves)
+        if (WaveManager.Instance != null && UseableMesh != null && onWaves)
         {
             WaveManager.Instance.WaveUpdate(UseableMesh);
             UseableMesh.position += Vector3.down * displacement; 

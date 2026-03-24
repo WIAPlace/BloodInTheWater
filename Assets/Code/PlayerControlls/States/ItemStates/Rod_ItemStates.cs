@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.VisualScripting;
 using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
@@ -28,6 +29,11 @@ public class Rod_StateItemIdle : Abs_StateItemIdle
         }
         else
         {
+            if(controller.previousState == controller.empty.Place)
+            {
+                controller.PickUpRodHints();
+                
+            }
             // start the idle holding animation
             /*
             if(controller.previousState == controller.currentItem.Readying)
@@ -45,6 +51,8 @@ public class Rod_StateItemIdle : Abs_StateItemIdle
             rod.RetrieveLure(rod.LurePrefab.transform.position, rod.LureRadius);
         }
     }
+
+    
 }
 
 ////////////////////////////////////////////////////// Readying /////////////////////////////////////////////
@@ -199,6 +207,8 @@ public class Rod_StateItemUse : Abs_StateItemUse
             rod.CastSpotPrefab.SetActive(false);
             CastLure();
             rod.SetIfFishing(true);
+
+            GameManager.Instance.GiveHint(0,1); 
             //Debug.Log("Hit");
         }
         else

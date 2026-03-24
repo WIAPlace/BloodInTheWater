@@ -215,12 +215,14 @@ public class Useable_Controller : MonoBehaviour
         DisableControlls();
         GameManager.OnHooked -= HandleHook;
         GameManager.OnHookedCancelled -= HandleHookCancelled;
+        input.InteractEvent -=GiveHintForCast;
     }
     void OnDestroy()
     {
         DisableControlls();
         GameManager.OnHooked -= HandleHook;
         GameManager.OnHookedCancelled -= HandleHookCancelled;
+        input.InteractEvent -=GiveHintForCast;
     }
 
     /////////////////////////////////////////////////////////////////////////// On Use Begin
@@ -275,6 +277,7 @@ public class Useable_Controller : MonoBehaviour
         { // changes it from the reel in stuff to catching state.
             //Debug.Log("Hooked");
             ChangeState(currentItem.IsReady);
+            GameManager.Instance.GiveHint(1,3); // fish, catch.
         }
     }
     private void HandleHookCancelled()
@@ -353,4 +356,22 @@ public class Useable_Controller : MonoBehaviour
         // Set the rotation to align with the spline's direction and up vector
         fakeFish.transform.rotation = Quaternion.LookRotation(forward, up);
     }
+
+    public void PickUpRodHints()
+    {
+        input.InteractEvent +=GiveHintForCast;
+        GameManager.Instance.GiveHint(4,0);
+    }
+
+    private void GiveHintForCast()
+    {
+        StartCoroutine(HintForCast());
+    }
+    private IEnumerator HintForCast()
+    {
+        yield return new WaitForSeconds(.01f);
+        GameManager.Instance.GiveHint(0,0);
+        input.InteractEvent -=GiveHintForCast;
+    }
+    
 }

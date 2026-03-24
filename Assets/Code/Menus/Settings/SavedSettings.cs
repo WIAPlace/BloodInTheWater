@@ -9,4 +9,5 @@ public class SavedSettings : ScriptableObject
     public float Volume = .6f;
     public bool DitherToggle;
     public bool CameraShake;
+    public bool HintsToggle;
 }
