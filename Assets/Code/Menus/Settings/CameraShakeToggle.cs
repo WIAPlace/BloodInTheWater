@@ -21,14 +21,14 @@ public class CameraShakeToggle : MonoBehaviour
 
             // Add a listener to the toggle's OnValueChanged event to update the ScriptableObject
             toggle.onValueChanged.AddListener(OnToggleValueChanged);
-            toggle.isOn = settings.DitherToggle;
+            toggle.isOn = settings.CameraShake;
         }
     }
 
     private void OnToggleValueChanged(bool newValue)
     {
         // Update the ScriptableObject's value whenever the UI toggle changes
-        settings.DitherToggle = newValue;
+        settings.CameraShake = newValue;
         if(noise != null)
         {
             if (newValue)

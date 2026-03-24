@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Splines;
 /// 
@@ -216,6 +217,7 @@ public class Useable_Controller : MonoBehaviour
         GameManager.OnHooked -= HandleHook;
         GameManager.OnHookedCancelled -= HandleHookCancelled;
         input.InteractEvent -=GiveHintForCast;
+        input.InteractEvent -= ContinueTime;
     }
     void OnDestroy()
     {
@@ -223,6 +225,7 @@ public class Useable_Controller : MonoBehaviour
         GameManager.OnHooked -= HandleHook;
         GameManager.OnHookedCancelled -= HandleHookCancelled;
         input.InteractEvent -=GiveHintForCast;
+        input.InteractEvent -= ContinueTime;
     }
 
     /////////////////////////////////////////////////////////////////////////// On Use Begin
@@ -277,7 +280,11 @@ public class Useable_Controller : MonoBehaviour
         { // changes it from the reel in stuff to catching state.
             //Debug.Log("Hooked");
             ChangeState(currentItem.IsReady);
-            GameManager.Instance.GiveHint(1,3); // fish, catch.
+            if(GameManager.Instance.hintsEnabled){
+                Time.timeScale = 0f;
+                GameManager.Instance.GiveHint(1,3); // fish, catch.
+                input.InteractEvent += ContinueTime;
+            }
         }
     }
     private void HandleHookCancelled()
@@ -285,11 +292,15 @@ public class Useable_Controller : MonoBehaviour
         //Debug.Log("Hooked Cancelled");
         if(currentState == currentItem.IsReady && rod.CheckIfFishing())
         { // changes it from the reel in stuff to catching state.
-            ChangeState(currentItem.Readying);
+            ChangeState(currentItem.Idle);
         }
     }
 
-
+    private void ContinueTime()
+    {
+        Time.timeScale = 1f;
+        input.InteractEvent -= ContinueTime;
+    }
 
     ////////////////////////////////////////////////////////////////////////////// Reel In The Fake Fish 
     public void ReelInFakeFish(GameObject fish, int rot)

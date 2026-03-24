@@ -89,8 +89,9 @@ public class Rod_StateItemReadying : Abs_StateItemReadying
 
     public override IUseableState DoState(Useable_Controller controller)
     {
-        if(controller.rod.CheckIfFishing())
+        if(controller.rod.CheckIfFishing() && controller.rod.LurePrefab.activeSelf)
         {
+            //Debug.Log("Readying");
             Vector3 lookDir = new Vector3( // look at the fishing rod mesh
                 controller.rod.useableMesh.transform.position.x, 
                 controller.rod.LurePrefab.transform.position.y,
@@ -107,6 +108,9 @@ public class Rod_StateItemReadying : Abs_StateItemReadying
                 controller.rod.RetrieveLure(controller.rod.LurePrefab.transform.position, controller.rod.LureRadius); // this will let the fish know they are no longer in lure zone
                 controller.rod.SetIfFishing(false);
             }
+        }
+        else if (controller.rod.CheckIfFishing()){
+            controller.rod.SetIfFishing(false);
         }
 
         return this;
@@ -243,6 +247,18 @@ public class Rod_StateItemUse : Abs_StateItemUse
             rod.LurePrefab.transform.position = rod.CastSpotPrefab.transform.position; 
             rod.RetrieveLure(rod.LurePrefab.transform.position, rod.FearRadius); // this isnt retriving it thats just what the name was before i modifired stuff.
             // set the lure position to the position that the indicator used to be.
+        }
+        else
+        {
+            if (rod.LurePrefab.activeSelf)
+            {
+                Vector3 currentLurePosition = rod.LurePrefab.transform.position;
+                // will be used to get the lures position right before it is deactivated.
+
+                rod.LurePrefab.SetActive(false);
+                rod.RetrieveLure(currentLurePosition, rod.LureRadius); // this will let the fish know they are no longer in lure zone
+            }
+            rod.SetIfFishing(false);
         }
     }
 }

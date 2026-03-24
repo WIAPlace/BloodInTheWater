@@ -91,6 +91,7 @@ public class QuickTimeController_Player : MonoBehaviour
         input.UseEventQT -= HandelUseQT;
         input.UseEventQTCanelled -= HandleUseQTCancelled;
         input.InteractEventQT -= NextHint;
+        input.InteractEventQT -= TurnTimeBackOn;
     }
 
     // Update //////////////////////////////////////////////////////////////////////////////////////
@@ -214,7 +215,13 @@ public class QuickTimeController_Player : MonoBehaviour
     // On Hook ////////////////////////////////////////////////////////////////////////////////////////////////////
     private void Hooked() // activated when the fish is hooked.
     {
-        GameManager.Instance.GiveHint(2,0); // Hold Release
+        if (GameManager.Instance.hintsEnabled)
+        {
+            Time.timeScale = 0f;
+            GameManager.Instance.GiveHint(2,0); // Hold Release
+        }
+        
+        
         input.InteractEventQT += NextHint;
         // retrive lure as a way to disable the other fish from being interested and interupting.
         // should be switched out for something more elegent later
@@ -289,8 +296,16 @@ public class QuickTimeController_Player : MonoBehaviour
     }
     private IEnumerator HintForCast()
     {
+        Time.timeScale = 1f;
         yield return new WaitForSeconds(.01f);
+        Time.timeScale = 0f;
         GameManager.Instance.GiveHint(2,1);
-        input.InteractEvent -=NextHint;
+        input.InteractEventQT -=NextHint;
+        input.InteractEventQT += TurnTimeBackOn;
+    }
+    private void TurnTimeBackOn()
+    {
+        Time.timeScale = 1f;
+        input.InteractEventQT -= TurnTimeBackOn;
     }
 }   
