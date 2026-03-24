@@ -20991,6 +20991,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e51d416b7755e8f459a91e032316ae8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1528736310 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1662268151793306564, guid: 7d3e6ae5bae3878439adcfc4fad4769d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1528736307}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1531334479
 GameObject:
   m_ObjectHideFlags: 0
@@ -22649,6 +22661,8 @@ MonoBehaviour:
   transitionType: WinScreen
   canvasGroup: {fileID: 1730174417}
   resetThoughts: 0
+  lastFishingLevel: 
+  levelRetry: 0
 --- !u!4 &1718153715
 Transform:
   m_ObjectHideFlags: 0
@@ -22873,11 +22887,21 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3940611082760277543, guid: 3598aa3f55e6f50489fdee72d471301e,
+        type: 3}
+      propertyPath: playerLook
+      value: 
+      objectReference: {fileID: 1528736309}
     - target: {fileID: 3963442594085442040, guid: 3598aa3f55e6f50489fdee72d471301e,
         type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4490677835036743502, guid: 3598aa3f55e6f50489fdee72d471301e,
+        type: 3}
+      propertyPath: playerLook
+      value: 
+      objectReference: {fileID: 1528736309}
     - target: {fileID: 4832434959020348325, guid: 3598aa3f55e6f50489fdee72d471301e,
         type: 3}
       propertyPath: crosshairImage
@@ -22888,6 +22912,11 @@ PrefabInstance:
       propertyPath: crosshairImageSmall
       value: 
       objectReference: {fileID: 1730174414}
+    - target: {fileID: 5117618192804204070, guid: 3598aa3f55e6f50489fdee72d471301e,
+        type: 3}
+      propertyPath: noise
+      value: 
+      objectReference: {fileID: 1528736310}
     - target: {fileID: 5560721666515895054, guid: 3598aa3f55e6f50489fdee72d471301e,
         type: 3}
       propertyPath: m_Pivot.x
