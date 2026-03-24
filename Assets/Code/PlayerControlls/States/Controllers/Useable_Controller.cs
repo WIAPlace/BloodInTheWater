@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Splines;
 /// 
 /// Author: Weston Tollette
 /// Created: 2/25/26
@@ -17,10 +18,19 @@ public class Useable_Controller : MonoBehaviour
     private InputReader input;
     public AudioSource audioSource; // sound player
     public GameObject FPCamera;
+    public GameObject fakeFish; // fake fish to hold on stick
+    private TestReelLine TRL;
+    //public GameObject fakeFishBody; // body of it that is a child of the fake fish object
+    [field:SerializeField]
+    public SplineContainer reelSpline;
+
+    public PersistantItemSpot perSpot;
+    
 
     public UseableItem_Empty empty;
     public UseableItem_Rod rod;
     public UseableItem_Harp harp;
+    
 
     
     public UseableItem_Abstract[] UseableItem { get; private set; }
@@ -37,7 +47,7 @@ public class Useable_Controller : MonoBehaviour
     public IUseableState currentState; // will just be swaped out for whatever is needed at that point
     public IUseableState previousState; // used for if we need to know the state that came before another.
     
-
+    
 
     
     public float readyTime; // used for how long the readying state will last
@@ -50,6 +60,12 @@ public class Useable_Controller : MonoBehaviour
     private string debugCurrentStateName = "";
     [SerializeField] [Tooltip("used to see what state we are in")]
     private string debugPreviousStateName = "";
+    //[SerializeField] public Animator anim;
+
+    [HideInInspector]
+    public bool showingFish=false;
+
+    //public Animator mAnimator;
 
     // States:
     //public Abs_StateItemIdle Idle; // no contact in between action states.
@@ -69,6 +85,10 @@ public class Useable_Controller : MonoBehaviour
 
             debugCurrentStateName = currentState.GetType().Name; //used for debuging to see name
             debugPreviousStateName = previousState?.GetType().Name; //used for debuging to see name
+            if (showingFish)
+            {
+                ShowingFish();
+            }
         }
     }
     
@@ -155,11 +175,15 @@ public class Useable_Controller : MonoBehaviour
     }
     void Awake()
     {
+        TRL = GetComponent<TestReelLine>(); 
+
         UseableItem = new UseableItem_Abstract[3];
 
         UseableItem[0] = empty;
         UseableItem[1] = rod;
         UseableItem[2] = harp;
+
+        CheckItemAtStart();
 
         currentItemIndex = startingItemInHand;
         currentItem = UseableItem[currentItemIndex];
@@ -167,6 +191,17 @@ public class Useable_Controller : MonoBehaviour
         currentItem.useableMesh.SetActive(true);
         currentState = currentItem.Idle;
     }    
+
+    void CheckItemAtStart()
+    {
+        for(int i = 1; i<perSpot.spots.Length; i++)
+        {
+            if(perSpot.spots[i]== -1)
+            {
+                startingItemInHand = i;
+            }
+        }
+    }
 
     ////////////////////////////////////////////////////////////////////////// On thing happens
     void OnEnable()
@@ -180,18 +215,25 @@ public class Useable_Controller : MonoBehaviour
         DisableControlls();
         GameManager.OnHooked -= HandleHook;
         GameManager.OnHookedCancelled -= HandleHookCancelled;
+        input.InteractEvent -=GiveHintForCast;
     }
     void OnDestroy()
     {
         DisableControlls();
         GameManager.OnHooked -= HandleHook;
         GameManager.OnHookedCancelled -= HandleHookCancelled;
+        input.InteractEvent -=GiveHintForCast;
     }
 
     /////////////////////////////////////////////////////////////////////////// On Use Begin
     private void HandleUse()
     { // on clicking trigger of use
         //Debug.Log("Used Begun");
+        if (showingFish)
+        {
+            StopShowingFish(); // turn off the fish and destroy its children
+        }
+
         if(currentItem == null)
         { // Error catcher for if we have nothing in our hands
             return;
@@ -224,6 +266,7 @@ public class Useable_Controller : MonoBehaviour
         { // if winding up and let go early. 
             // this is mainly used to handle simple clicks not setting off the items
             ChangeState(currentItem.Idle);
+            
         }
     }
 
@@ -234,6 +277,7 @@ public class Useable_Controller : MonoBehaviour
         { // changes it from the reel in stuff to catching state.
             //Debug.Log("Hooked");
             ChangeState(currentItem.IsReady);
+            GameManager.Instance.GiveHint(1,3); // fish, catch.
         }
     }
     private void HandleHookCancelled()
@@ -244,4 +288,90 @@ public class Useable_Controller : MonoBehaviour
             ChangeState(currentItem.Readying);
         }
     }
+
+
+
+    ////////////////////////////////////////////////////////////////////////////// Reel In The Fake Fish 
+    public void ReelInFakeFish(GameObject fish, int rot)
+    {
+        showingFish = false;
+        // direction
+        fakeFish.transform.position = reelSpline.EvaluatePosition(1,0);
+        // rotation
+        Vector3 forward = reelSpline.EvaluateTangent(0,1);
+        // Calculate the up vector (adjust as needed for 2D or specific orientations)
+        Vector3 up = reelSpline.EvaluateUpVector(0,1);
+
+        // Set the rotation to align with the spline's direction and up vector
+        fakeFish.transform.rotation = Quaternion.LookRotation(forward, up);
+        
+        GameObject fakeFishBody = Instantiate(fish,fish.transform.position, fish.transform.rotation);
+
+        TRL.setRot(rot); // change the rot to what it should be now
+
+        fakeFishBody.transform.parent = fakeFish.transform;
+        
+        StartCoroutine(ReelInFakeFishThenHold());
+    }
+    private IEnumerator ReelInFakeFishThenHold()
+    {
+        float i = 0;
+        while (i < 1)
+        {
+            i+=.01f;
+            fakeFish.transform.position = reelSpline.EvaluatePosition(1,i);
+
+            Vector3 forward = reelSpline.EvaluateTangent(1,i);
+            // Calculate the up vector (adjust as needed for 2D or specific orientations)
+            Vector3 up = reelSpline.EvaluateUpVector(1,i);
+
+            // Set the rotation to align with the spline's direction and up vector
+            fakeFish.transform.rotation = Quaternion.LookRotation(forward, up);
+            yield return new WaitForSeconds(.01f);
+        }
+        showingFish = true;
+    }
+    private void StopShowingFish()
+    {
+        if (showingFish)
+        {
+            showingFish = false;
+            TRL.setRot(0); // change the rot to what it should be now
+            
+            foreach (Transform child in fakeFish.transform)
+            {// destroy the children
+                Destroy(child.gameObject);
+            }
+            
+        }
+    }
+    private void ShowingFish()
+    {
+        fakeFish.transform.position = reelSpline.EvaluatePosition(1,1);
+
+        Vector3 forward = reelSpline.EvaluateTangent(1,1);
+        // Calculate the up vector (adjust as needed for 2D or specific orientations)
+        Vector3 up = reelSpline.EvaluateUpVector(1,1);
+
+        // Set the rotation to align with the spline's direction and up vector
+        fakeFish.transform.rotation = Quaternion.LookRotation(forward, up);
+    }
+
+    public void PickUpRodHints()
+    {
+        input.InteractEvent +=GiveHintForCast;
+        GameManager.Instance.GiveHint(4,0);
+    }
+
+    private void GiveHintForCast()
+    {
+        StartCoroutine(HintForCast());
+    }
+    private IEnumerator HintForCast()
+    {
+        yield return new WaitForSeconds(.01f);
+        GameManager.Instance.GiveHint(0,0);
+        input.InteractEvent -=GiveHintForCast;
+    }
+    
 }

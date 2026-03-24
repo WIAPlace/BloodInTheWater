@@ -78,7 +78,7 @@ public class Scuba_Controller : MonoBehaviour, IMonster
             }
             else
             {
-                rb.isKinematic = true; // player can no longer push my mans around
+                //rb.isKinematic = true; // player can no longer push my mans around
             }
         }
         
@@ -89,6 +89,9 @@ public class Scuba_Controller : MonoBehaviour, IMonster
         {
             //currentState = SpawnState;
             gameObject.SetActive(false);
+        }
+        if(((1 << collision.gameObject.layer) & playerMask.value) != 0 && currentState == StunnedState){
+            rb.isKinematic = true;
         }
     }
 
@@ -117,7 +120,7 @@ public class Scuba_Controller : MonoBehaviour, IMonster
     // Monster Interface
     public void MonsterHit(Vector3 hitDir) // on hit by harpoon
     {
-        this.hitDir = -hitDir;
+        this.hitDir = new Vector3(-hitDir.x,1,-hitDir.z);
         currentState = HitState;
     }
 }   

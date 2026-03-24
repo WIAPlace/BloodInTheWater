@@ -125,8 +125,11 @@ public class DialogueBoxController : MonoBehaviour
 
     public void SkipLine()
     {
-        StopCoroutine(typing);
-        skipLineTriggered = true;
+        if (typing != null)
+        {
+            StopCoroutine(typing);
+            skipLineTriggered = true;
+        }
     }
     //Typewriter Text
     IEnumerator TypeTextUncapped(string line)

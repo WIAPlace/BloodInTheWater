@@ -41,5 +41,8 @@ public class LoadInFade : MonoBehaviour
             yield return null;
         }
         canvasGroup.alpha = targetValue;
+        if(GameManager.Instance!=null){
+            GameManager.Instance.input.SetGameplay();
+        }
     }
 }

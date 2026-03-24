@@ -324,15 +324,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23eb186e88e314345a98a878bffe4018, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  qtcPlayer: {fileID: 165310813}
-  barLength: 360
-  hitZoneMin:
-  - 10
-  hitZoneMax:
-  - 100
+  hitZoneLength: []
   qtSpeed: 360
+  qtSmoothMotion: 0
   qtLength: 100
   type: 0
+  timerMultiplyer: 0
+  diffRate: 0
+  winRate: 0
+  looseRate: 0
 --- !u!136 &353911577
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1391,6 +1391,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 796b0b9424bb829469eb64cba50dfbc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  limitTime: 1
   secondsAllocated: 200
   waitInterval: 1
 --- !u!4 &1304901184
@@ -2700,6 +2701,36 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d3e6ae5bae3878439adcfc4fad4769d, type: 3}
+--- !u!1 &6276343037632136480 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2685268455513145599, guid: 7d3e6ae5bae3878439adcfc4fad4769d,
+    type: 3}
+  m_PrefabInstance: {fileID: 6276343037632136479}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6276343037632136481 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4409498259504748032, guid: 7d3e6ae5bae3878439adcfc4fad4769d,
+    type: 3}
+  m_PrefabInstance: {fileID: 6276343037632136479}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dab5c7d4c32e743048dfca98e2d5914f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6276343037632136482 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1662268151793306564, guid: 7d3e6ae5bae3878439adcfc4fad4769d,
+    type: 3}
+  m_PrefabInstance: {fileID: 6276343037632136479}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6431999584610546080
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2914,6 +2945,21 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1754961527840138785, guid: 3598aa3f55e6f50489fdee72d471301e,
+        type: 3}
+      propertyPath: qtcPlayer
+      value: 
+      objectReference: {fileID: 165310813}
+    - target: {fileID: 1754961527840138785, guid: 3598aa3f55e6f50489fdee72d471301e,
+        type: 3}
+      propertyPath: lureTarget
+      value: 
+      objectReference: {fileID: 6276343037632136480}
+    - target: {fileID: 1754961527840138785, guid: 3598aa3f55e6f50489fdee72d471301e,
+        type: 3}
+      propertyPath: reelSpline
+      value: 
+      objectReference: {fileID: 6276343037632136481}
     - target: {fileID: 2402129002843093341, guid: 3598aa3f55e6f50489fdee72d471301e,
         type: 3}
       propertyPath: virtualCamera
@@ -2959,6 +3005,21 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3940611082760277543, guid: 3598aa3f55e6f50489fdee72d471301e,
+        type: 3}
+      propertyPath: playerLook
+      value: 
+      objectReference: {fileID: 1069041242}
+    - target: {fileID: 4490677835036743502, guid: 3598aa3f55e6f50489fdee72d471301e,
+        type: 3}
+      propertyPath: playerLook
+      value: 
+      objectReference: {fileID: 1069041242}
+    - target: {fileID: 5117618192804204070, guid: 3598aa3f55e6f50489fdee72d471301e,
+        type: 3}
+      propertyPath: noise
+      value: 
+      objectReference: {fileID: 6276343037632136482}
     - target: {fileID: 5961249925114487546, guid: 3598aa3f55e6f50489fdee72d471301e,
         type: 3}
       propertyPath: playerLook

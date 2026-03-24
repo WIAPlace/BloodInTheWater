@@ -28,7 +28,7 @@ public class TransitionTimer : MonoBehaviour
         loadingScreen.SetActive(true); //Turns on the fade image
         yield return StartCoroutine(FadeLoadingScreen(1, 1)); //The speed of the fade in
 
-       SceneManager.LoadSceneAsync(TransitionData.sceneToLoad);
+       SceneManager.LoadSceneAsync(StaticVariables.sceneToLoad);
        
 
     }

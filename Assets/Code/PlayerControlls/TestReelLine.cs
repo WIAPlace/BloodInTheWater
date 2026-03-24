@@ -7,7 +7,9 @@ public class TestReelLine : MonoBehaviour
 {
     public SplineContainer mySpline;
     public Transform rodTip;
+    public Transform midPoint;
     public Transform lureTip;
+    private int newRot = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,17 +21,22 @@ public class TestReelLine : MonoBehaviour
     {
         if(mySpline !=null)
         {
-            if(rodTip!=null) UpdateUP(); //UpdateKnotPosition(2,rodTip.position);
-            if(lureTip!=null) UpdateKnotPosition(0,lureTip.position);
+            //
+            if(lureTip!=null) UpdateKnotPosition(0,0,lureTip.position);
+            if(midPoint!=null) UpdateUP(0,1); //UpdateKnotPosition(2,rodTip.position);
+
+            if(midPoint!=null) UpdateUP(1,0);
+            if(rodTip!=null) UpdateUP(1,1);
+
             //UpdateKnotPosition(1,lureTip.position - rodTip.position, lureTip.rotation);
             //if(rodTip!=null) UpdateMiddlePosition(1);
         }
         
     }
-    public void UpdateKnotPosition(int knotIndex, Vector3 newWorldPosition)
+    public void UpdateKnotPosition(int splineIndex, int knotIndex, Vector3 newWorldPosition)
     {
         // 1. Get the current spline reference
-        var spline = mySpline.Spline;
+        var spline = mySpline.Splines[splineIndex];
 
         // 2. Get the specific knot's data (SplinePoint struct)
         // Note: You can also use mySpline.Spline.ToArray()[knotIndex]
@@ -41,18 +48,28 @@ public class TestReelLine : MonoBehaviour
         knot.Rotation = Quaternion.Inverse(mySpline.transform.rotation);
 
         // 4. Set the modified knot back to the spline
-        mySpline.Spline.SetKnot(knotIndex, knot);
+        mySpline.Splines[splineIndex].SetKnot(knotIndex, knot);
         
         // Note: The tangents (AnterierTangent, PosteriourTangent) can also be modified similarly if needed.
     }
-    public void UpdateUP()
+    public void UpdateUP(int splineIndex,int knotIndex)
     {
-        var spline = mySpline.Spline;
+        var knot = mySpline.Splines[splineIndex][knotIndex];
+        
+        knot.Position = mySpline.transform.InverseTransformPoint(midPoint.position);
 
-        var knot = spline[2];
-        knot.Position = mySpline.transform.InverseTransformPoint(rodTip.position);
-        Vector3 rot = new Vector3(270,0,270); // set it to face directly up
-        knot.Rotation = Quaternion.Euler(rot);
-        mySpline.Spline.SetKnot(2, knot);
+        if(splineIndex == 1 && knotIndex == 1)
+        {   // if its the one that should be a at the tip of the rod
+            //Debug.Log("Hit");
+            knot.Position = mySpline.transform.InverseTransformPoint(rodTip.position);
+            Vector3 rot = new Vector3(270,0,180 + newRot); // set it to face directly up
+            knot.Rotation = Quaternion.Euler(rot);
+        }
+        mySpline.Splines[splineIndex].SetKnot(knotIndex, knot);
+    }
+
+    public void setRot(int rot)
+    {
+        newRot=rot;
     }
 }

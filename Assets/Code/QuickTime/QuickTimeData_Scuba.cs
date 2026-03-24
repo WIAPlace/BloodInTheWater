@@ -14,17 +14,39 @@ public class QuickTimeData_Scuba : QuickTimeData_Abstract
     }
     public override void SendData()
     {
-        qtcPlayer.SetData(this); // send the data of this mans
+        base.SendData();
     }
 
     public override  void OnHit()
     {
-        controller.SetCurrentState(controller.BreakOffState);
+        //controller.SetCurrentState(controller.HitState);
+        
     }
     public override void OnMiss()
     {
         //Debug.Log("Hit");
-        GameState.Instance.LooseState();
+        //GameState.Instance.LooseState();
     }
-    
+
+    public override void EnterQTEvent()
+    {
+        //throw new System.NotImplementedException();
+    }
+
+    public override void ExitQuickTimeEvent(bool status)
+    {
+        if (!status)
+        {
+            GameState.Instance.LooseState();
+        }
+        else
+        {
+            controller.MonsterHit(controller.transform.forward - Vector3.up/2);
+        }
+    }
+
+    public override void QTStatus(float amnt)
+    {
+        //throw new System.NotImplementedException();
+    }
 }

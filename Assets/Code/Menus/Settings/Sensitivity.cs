@@ -25,6 +25,10 @@ public class Sensitivity : MonoBehaviour
         {
             slider.value = settings.ySensitivity;
         }
+        if(playerLook != null)
+        {
+           playerLook.UpdateSensitivity(isX, slider.value); 
+        }
         
         slider.onValueChanged.AddListener(delegate {SensitivityChange();});
         // on change, change the sensitivity
@@ -32,7 +36,10 @@ public class Sensitivity : MonoBehaviour
     public void SensitivityChange()
     {
         //Debug.Log("Changed to: "+slider.value);
-        playerLook.UpdateSensitivity(isX, slider.value);
+        if(playerLook != null)
+        {
+           playerLook.UpdateSensitivity(isX, slider.value); 
+        }
         if (isX)
         {
             settings.xSensitivity = slider.value;

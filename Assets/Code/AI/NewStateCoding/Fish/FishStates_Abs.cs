@@ -53,6 +53,7 @@ namespace TLC.FishStates{
             //FSC.agent.SetDestination(FSC.targetPos);
             inLureRange = true; 
             FSC.running = FSC.StartCoroutine(LureRoutine(FSC)); 
+            //GameManager.Instance.GiveHint(1,1); // Tapping
             
         }
 
@@ -97,7 +98,10 @@ namespace TLC.FishStates{
     ////////////////////////////////////////////////////////////////// In Bobber Range
     public abstract class Abs_StateBobber : IFishState
     {
-        public abstract void DoEnter(Fish_Controller FSC);
+        public virtual void DoEnter(Fish_Controller FSC)
+        {
+            GameManager.Instance.GiveHint(1,2); // Tapping
+        }
 
         public abstract void DoExit(Fish_Controller FSC);
 
@@ -113,6 +117,7 @@ namespace TLC.FishStates{
 
         public virtual void DoEnter(Fish_Controller FSC)
         {
+            GameManager.Instance.GiveHint(1,0); // Fear
             FSC.running = FSC.StartCoroutine(FearTheBobber(FSC.lurePos,FSC));
         }
 

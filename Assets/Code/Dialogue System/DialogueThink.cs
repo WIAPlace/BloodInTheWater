@@ -60,13 +60,13 @@ public class DialogueThink : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.Y))
         {
-            ThoughtTracker.thoughtNum += 1;
+            StaticVariables.thoughtNum += 1;
             Debug.Log("Thought Change +1");
         }
     }
 
-    public void Interact() // Implemented from interface to start the conversation. Uses a static varibale from ThoughtTracker.
+    public void Interact() // Implemented from interface to start the conversation. Uses thoughtNum from StaticVariables.
     {
-        DialogueBoxController.instance.StartDialogue(dialogueAsset[ThoughtTracker.thoughtNum].dialogue,dialogueAsset[ThoughtTracker.thoughtNum].audioclip, StartPosition, dialogueAsset[ThoughtTracker.thoughtNum].speaker);
+        DialogueBoxController.instance.StartDialogue(dialogueAsset[StaticVariables.thoughtNum].dialogue,dialogueAsset[StaticVariables.thoughtNum].audioclip, StartPosition, dialogueAsset[StaticVariables.thoughtNum].speaker);
     }
 }

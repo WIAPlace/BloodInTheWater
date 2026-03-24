@@ -18,6 +18,7 @@ public class InteractableHover : MonoBehaviour
     public LayerMask interactableLayer;
     public LayerMask hitMasks;
     public Camera UIcamera;
+    public bool hint = true;
 
     void Update()
     {
@@ -31,6 +32,11 @@ public class InteractableHover : MonoBehaviour
             {
                 crosshairImage.enabled = true;
                 crosshairImageSmall.enabled = false;
+                if (hint)
+                {
+                    GameManager.Instance.GiveHint(3,0);
+                    hint = false;
+                }
             } 
             else
             {

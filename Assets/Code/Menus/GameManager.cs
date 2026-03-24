@@ -3,6 +3,9 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI; 
 using TMPro;
+using UnityEngine.Splines;
+using Unity.Burst.CompilerServices;
+using Unity.VisualScripting;
 /// 
 /// Author: Weston Tollette
 /// Created: 2/22/26
@@ -16,15 +19,23 @@ public class GameManager : MonoBehaviour
 {
     private static GameManager GM; // static for the game manager
 
-    [SerializeField] private InputReader input; //Input reader
+    [SerializeField] public InputReader input; //Input reader
     [SerializeField] private GameObject pauseMenu; // ui for the pause menu
     [SerializeField] private GameObject gameUI; // ui for the game during play
     [SerializeField] private Image windUpIndicator; // will show when u have would up and are ready to release
     [SerializeField] private TextMeshProUGUI text; // ui for temp text
     [SerializeField] PersistantItemSpot itemSpot;
+    [field: SerializeField] public QuickTimeController_Player qtcPlayer;
+    [field: SerializeField] public SplineContainer reelSpline;
+    [field: SerializeField] public GameObject lureTarget; 
+    [SerializeField] private GameObject hintUI; // ui for hints
+    [SerializeField] private TextMeshProUGUI hintText; // text for hints
+    [SerializeField] private TimeKeeper keptTime;
+    [SerializeField] private HintArray hintArray;
+    
 
     private Coroutine running;
-
+    [HideInInspector]public bool hintsEnabled = true;
     public static event System.Action OnHooked;
     public static event System.Action OnHookedCancelled;
     
@@ -32,6 +43,7 @@ public class GameManager : MonoBehaviour
     {
         input.PauseEvent += HandlePause;
         input.ResumeEvent += HandleResume;
+        input.CheckEvent += HandleCheck;
         pauseMenu.SetActive(false);
         gameUI.SetActive(true);
         windUpIndicator.gameObject.SetActive(false);
@@ -40,8 +52,10 @@ public class GameManager : MonoBehaviour
 
     void OnDestroy()
     {
+        input.InteractEvent -= CloseHint;
         input.PauseEvent -= HandlePause;
         input.ResumeEvent -= HandleResume;
+        input.CheckEvent -= HandleCheck;
     }
     void HandlePause()
     {
@@ -53,7 +67,7 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
-    void HandleResume()
+    public void HandleResume()
     {
         gameUI.SetActive(true);
         pauseMenu.SetActive(false);
@@ -128,7 +142,7 @@ public class GameManager : MonoBehaviour
                 GM = FindObjectOfType<GameManager>();
                 if (GM == null)
                 {
-                    Debug.LogError("A GameManager instance is missing from the scene.");
+                    //Debug.LogError("A GameManager instance is missing from the scene.");
                 }
             }
             return GM;
@@ -162,4 +176,36 @@ public class GameManager : MonoBehaviour
         if (active) OnHooked.Invoke();
         else OnHookedCancelled.Invoke();
     }
+
+
+    public void GiveHint(int type, int hint)
+    {
+        if(hintUI != null && hintsEnabled){
+            hintUI.SetActive(true);
+            hintArray.ShowHint(type,hint);
+            input.InteractEvent += CloseHint; // allow player to close out the hint menu
+            input.InteractEventQT += CloseHint;
+        }
+    }
+    public void CloseHint()
+    {
+        if (hintUI != null && hintUI.activeSelf)
+        {
+            hintArray.CloseHints();
+            hintUI.SetActive(false);
+            input.InteractEvent -= CloseHint; // stop listening for interact
+            input.InteractEventQT -= CloseHint;
+        }
+    }
+
+    public void HandleCheck()
+    {
+        string txt ="Clock for keeping time";
+        if(GameState.Instance !=null&& keptTime != null){
+            string timeLeft = keptTime.GetTimeLeft();
+            txt = timeLeft;
+        }
+        ShowUIText(txt);
+    }
+    
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 using QuickTime;
 using UnityEngine.UI;
 using Unity.VisualScripting;
+//using System;
 /// 
 /// Author: Weston Tollette
 /// Created: 2/14/26
@@ -12,6 +13,10 @@ using Unity.VisualScripting;
 /// Edited: 2/15/26
 /// Edited By: Weston Tollette
 /// Edit Purpose: Moving the UI to this instead of the Scriptable Object.
+/// 
+/// Edited: 3/21/26
+/// Edited By: Weston Tollette
+/// Edit Purpose: changing minigame to be more traditional fishing hold spot in reel zone
 /// 
 public class QuickTimeController_Player : MonoBehaviour
 {
@@ -25,112 +30,192 @@ public class QuickTimeController_Player : MonoBehaviour
     private GameObject qtUI;
 
     // Quick Time UI
-    
     [SerializeField]
     private Image hitZone;
     [SerializeField]
-    private Image playerPointUI;
+    private Image qtHitMarker;
+    [SerializeField]
+    private Image qtCompletion;
 
-    float origin;
+    [Header("QT Variables")]
+    [SerializeField] // size of hitzone
+    private float hitArea;
+    
+    [SerializeField] [Tooltip("How fast should it's max be on either side of spinning")]
+    private float maxHitSpeed;
+    [SerializeField] [Tooltip("Rat of change speed for changing directions")]
+    private float changeSmooth;
+    private float currentHitSpeed=0;
+    private float _hitVelocity = 0f;
 
+    [SerializeField] [Tooltip("Time before concequences of missing too much comes in")]
+    private float graceTimeAmnt = 4f;
+
+    private float currentHitSpot = 0; // will be used to check where the hit zone is at any given time
+    private float hitMarker =0; // will be used to check hit marker position at any time
+    
+    //float origin;
+
+    private bool counterClockwise = false;
+    
 
     // Time Variables //
-    private float timeKeeper = 0; // current time.
-    private bool timeStarted = false; // should time be going.
-    private float playerPoint; // used for determining where the player's  point is. 
-    private float currentQTSpeed;
-    private float currentQTLength; // how long the game will last before force quiting
-    
+    //private float timeKeeper = 0; // current time.
+    private bool inProgress = false; // should time be going.
+    private bool graceTime = true; // used to give the player a bit of time before missing hurts them.
+
+    private Coroutine grace; 
     
     private bool inHit=false;
+    private float completionAmnt = 0; // will help determin the amount needed for completion or amount to loose
 
     // Quick Time Stuff // Will be initiated by the fish hooked //
     private QuickTimeData_Abstract currentQTData; // the given data at that time.
     private QuickTimeType_Enum currentType; // holder of what the current type of game is playing.
+
     void Awake()
     {
         if (useControl == null)
         {
             useControl = GetComponent<Useable_Controller>();
         }
-        
-        /*
-        qtUI = Instantiate(qtUI); // Instantiate and alter the instantiated version in scene
-        Transform hitZoneT = qtUI.transform.Find("HitBar");
-        Transform playerPointT = qtUI.transform.Find("HitMarker");
-        //Debug.Log(redArea); 
-        hitZone = hitZoneT.GetComponent<Image>();
-        playerPointUI = playerPointT.GetComponent<Image>();
-        qtUI.SetActive(false); // dont have it on screen imedietly.
-        */
     }
     void Start()
     {
         input.UseEventQT += HandelUseQT;
+        input.UseEventQTCanelled += HandleUseQTCancelled;
+        
     }
     void OnDestroy()
     {
         input.UseEventQT -= HandelUseQT;
+        input.UseEventQTCanelled -= HandleUseQTCancelled;
+        input.InteractEventQT -= NextHint;
     }
 
+    // Update //////////////////////////////////////////////////////////////////////////////////////
     void Update()
     {
-        if (timeStarted)
+        if (inProgress)
         {
-            KeepingTime();
-            qte.SetPlayerPoint(timeKeeper,playerPointUI);
+            //Set QT Point
+            float location = currentQTData.GetQTMove(Time.deltaTime);
+            hitMarker = (hitMarker + location+360) % 360;
+            qtHitMarker.transform.rotation = Quaternion.Euler(Vector3.forward * hitMarker);
+
+            //Set Player Hit Zone
+            RotateHitZone();
+
+            //Debug.Log("currentHitSpot: " + currentHitSpot);
+            //Debug.Log("ExtendedHitSpot: " + (currentHitSpot+hitArea));
+            //Debug.Log("HitMarker: "+hitMarker);
+
+            // check if the hit marker is in the hit range
+            inHit = CheckInRange(hitMarker);
+
+            // if true will run on hit, if false will run on miss;
+            if (inHit)
+            {
+                currentQTData.OnHit(); 
+            }
+            else
+            {
+                currentQTData.OnMiss();
+            }
+            
+            // completion amount and change of grace time
+            completionAmnt += currentQTData.GetCompletionRate(inHit)*Time.deltaTime; // will add the rate of change overtime to completion amount
+            completionAmnt = Mathf.Clamp(completionAmnt,0,1);
+
+            if(graceTime && completionAmnt >= .2f) // check if grace needs to be revoked early
+            { // if they complete this a good amount they are alowed to fail
+                graceTime = false;
+                if(grace!=null) StopCoroutine(grace); // stop the corutine if this is still going
+            }
+
+            // change reticle to know how complete it is.
+            qtCompletion.fillAmount = completionAmnt;
+            currentQTData.QTStatus(completionAmnt);
+
+            if(completionAmnt >= 1) // win
+            {   
+                EndQTEAll(true);
+            }
+            else if(!graceTime&&completionAmnt <= 0) //lose
+            {
+                EndQTEAll(false);
+            }
+            
         }
     }
 
-    // Quick Time Keeping;
-    private void KeepingTime() // This is basicly the Player point position during the minigame. 
-    {                           // playerpoint variable only used for when the player hits the button.
-        timeKeeper = (Time.time * currentQTSpeed) % 360;
+    // Rotate Hit Zone //////////////////////////////////////////////////////////////////////////////////////
+    private void RotateHitZone()
+    { // rotates the players hit zone. wether the key is down the spinner will move clockwise or counter
+        float chosenHitSpeed;
+        if (counterClockwise)
+        { // if QT use key is down
+            chosenHitSpeed = maxHitSpeed;
+        }
+        else
+        { // if QT use Key is not down
+            chosenHitSpeed = -maxHitSpeed;
+        }
+        // Smoothly damp the current speed towards the target speed
+        currentHitSpeed = Mathf.SmoothDamp(currentHitSpeed, chosenHitSpeed, ref _hitVelocity, changeSmooth);
+
+        currentHitSpot = (currentHitSpot + (currentHitSpeed * Time.deltaTime)+360) % 360 ;//% 360; // move the hit spot with the current speed over time.
+        
+
+        hitZone.transform.rotation = Quaternion.Euler(Vector3.forward* currentHitSpot);
     }
 
-    public void SetType(QuickTimeType_Enum qtType) // determins what type this is
-    { // might not need this
-        currentType = qtType;
-    }
+    // Check if in Range //////////////////////////////////////////////////////////////////////////////////////
+    private bool CheckInRange(float marker)
+    { // every update it will check if the hit marker is within the hit zone
+        bool setter = false; // will be returned as to say if its in range
 
+        if(marker>currentHitSpot && marker < currentHitSpot + hitArea)
+        { // in Hit Zone
+            if(qtHitMarker.color != Color.green) qtHitMarker.color = Color.green; // visual Debugging
+            setter = true;
+        }
+        else if(marker + 360 > currentHitSpot && marker + 360 < currentHitSpot+hitArea)
+        { // in Hit Zone
+            if(qtHitMarker.color != Color.green) qtHitMarker.color = Color.green; // visual Debugging
+            setter = true;
+        }
+
+        else
+        { // outside of Hit Zone
+            if(qtHitMarker.color != Color.red) qtHitMarker.color = Color.red; // visual debugging
+            setter = false;
+        }
+        return setter;
+    }
+    
     // Set Data //////////////////////////////////////////////////////////////////////////////////////
-    private void SetNeededData() // basic stuff that will be needed every frame is better to have as an in class variable
-    {   
-        currentQTSpeed = currentQTData.GetQTSpeed();
-        currentQTLength = currentQTData.GetQTLength();
-        //currentQTBarLength = currentQTData.GetHitZoneLength(0);
-
-    }
     public void SetData(QuickTimeData_Abstract data) // Abstract
     {
         currentQTData = data; 
-        SetNeededData();
         Hooked();
     } 
     public void SetData(QuickTimeData_BasicFish data)// Basic Fish Type
     {
         currentQTData = data; 
-        SetNeededData();
         Hooked();
     }
     public void SetData(QuickTimeData_Scuba data)
     {
         currentQTData = data; 
-        SetNeededData();
         Hooked();
     }
 
-
-    // On LuredIn /////////////////////////////////////////////////////////////////////////////////////////////////
-    /* // will set up later
-    public void LuredIn() // when the fish is contemplating going for the lure. with tentative taps.
-    {
-        // Have the lure be set so that it is no longer luring in new fish, basicly have it so the lure is reeled in.
-    }
-    */
     // On Hook ////////////////////////////////////////////////////////////////////////////////////////////////////
     private void Hooked() // activated when the fish is hooked.
     {
+        GameManager.Instance.GiveHint(2,0); // Hold Release
+        input.InteractEventQT += NextHint;
         // retrive lure as a way to disable the other fish from being interested and interupting.
         // should be switched out for something more elegent later
         useControl.rod.LurePrefab.SetActive(false);
@@ -138,25 +223,22 @@ public class QuickTimeController_Player : MonoBehaviour
 
 
         inHit=false; // set this to false for the moment, just in case.
+        completionAmnt = 0;
         // (set off some animation for the rod).
 
         // Set controls to Minigame State
         input.SetQuickTime();
 
-        timeStarted = true; // keep track of time.
+        inProgress = true; // keep track of time.
         
         // set up minigame bar
         qtUI.SetActive(true);
-        origin = Random.Range(0,360);
         // set the point at which the spinner will be to within the circle
 
-        qte.SetHitZone(currentQTData.GetHitZoneLength(0), origin, hitZone);
+        hitZone.fillAmount = hitArea/360;   
 
-        //qte.SetRedArea(currentQTData.GetBarLength(),redArea); // sets the red area to bar length of the fish data 
-        //qte.SetHitZone(currentQTData.GetHitZoneMin(0),currentQTData.GetHitZoneMax(0),hitZone,redArea);
-        //qte.SetHitZone(20,100,hitZone,redArea); used for debugging
-        
-        
+        graceTime = true;
+        grace = StartCoroutine(GracePeriod(graceTimeAmnt)); // give the player a bit of time before they will loose    
 
         // begin minigame
 
@@ -167,48 +249,20 @@ public class QuickTimeController_Player : MonoBehaviour
 
     private void HandelUseQT()
     {
-        timeStarted = false; // turn of time keeping for the moment
-        playerPoint = timeKeeper; // this will be used to check if its in range.
-        CheckInRange(0);
-        if (inHit)
-        {
-            // shit, would be nice if we had the fish object.
-            // maybe do a event thing?
-            currentQTData.OnHit();
-            
-        }
-        else
-        {
-            currentQTData.OnMiss();
-        } 
+        counterClockwise = true;
+    }
+    private void HandleUseQTCancelled()
+    {
+        counterClockwise = false;
+    }
 
+    private void EndQTEAll(bool status)
+    {
+        input.InteractEventQT -= NextHint;
+        inProgress = false;
+        currentQTData.ExitQuickTimeEvent(status);
         StartCoroutine(EndQTE(.4f));
     }
-
-    private void CheckInRange(int i) // i will be used for array indexing later on
-    {
-        //float min = currentQTData.GetHitZoneMin(i);
-        //float max = currentQTData.GetHitZoneMax(i);
-        float hitBarArea = currentQTData.GetHitZoneLength(0) + origin;
-        
-        /*
-        Debug.Log(hitBarArea);
-        Debug.Log(origin);
-        Debug.Log(playerPoint);
-        */
-
-        if(playerPoint > origin && playerPoint < hitBarArea)
-        {
-            inHit = true;
-            //GameState.Instance.CheckWin();
-        }
-        else if(playerPoint + 360 > origin && playerPoint + 360 < hitBarArea)
-        {
-            inHit = true;
-        }
-        // im not doing an else false cause it will be easier to just check all then see if its true. maybe?
-    }
-
     private IEnumerator EndQTE(float x) // turns off the qte after a number of seconds.
     {
         //useControl.ChangeState(useControl.currentItem.Readying);
@@ -217,8 +271,26 @@ public class QuickTimeController_Player : MonoBehaviour
         input.SetGameplay();
         
     }
+    private IEnumerator GracePeriod(float x)
+    { // after a number of seconds force grace time to be false
+        yield return new WaitForSeconds(x);
+        graceTime = false;
+    }
 
-
-
-    //inHit = qte.CheckInRange(currentQTData.GetHitZoneMin(0),currentQTData.GetHitZoneMax(0),playerPoint);
+    public void PlayFakeFish(GameObject fish, int rot)
+    {
+        //Debug.Log("Hit");
+        useControl.ReelInFakeFish(fish,rot);
+    }
+    
+    private void NextHint()
+    {
+        StartCoroutine(HintForCast());
+    }
+    private IEnumerator HintForCast()
+    {
+        yield return new WaitForSeconds(.01f);
+        GameManager.Instance.GiveHint(2,1);
+        input.InteractEvent -=NextHint;
+    }
 }   

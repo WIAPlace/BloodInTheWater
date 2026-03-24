@@ -21,6 +21,7 @@ public class FishSC_Basic : FishSC_Abstact
 
     public void Awake()
     {
+        target = GameManager.Instance.lureTarget;
         fishData = GetComponent<QuickTimeData_Abstract>();
         Idle = new Basic_StateIdle();
         Lure = new Basic_StateLure();

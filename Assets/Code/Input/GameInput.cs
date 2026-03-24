@@ -145,6 +145,15 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Check"",
+                    ""type"": ""Button"",
+                    ""id"": ""15118108-c25e-4c24-9310-a9a54d26a39d"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -261,7 +270,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""f255265e-5861-49d5-8f1f-9e261ae1d23b"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -316,7 +325,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""79941fe5-6534-4f0b-90c5-eaf6cc01cea9"",
-                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -343,6 +352,28 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Place"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""93917475-7dfa-4784-8b34-5826951d90ee"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Check"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""62447684-dcd2-481a-9199-34fa45510930"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Check"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -949,6 +980,15 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""InteractQT"",
+                    ""type"": ""Button"",
+                    ""id"": ""b48e1b8e-3ffe-4d14-8cc0-d927abf2711c"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -973,6 +1013,28 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""action"": ""UseQT"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c1fdc1ba-bfb9-4f5a-8c26-fbba955a951b"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""InteractQT"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""afcef234-b453-4598-ac8f-899ad623bee2"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""InteractQT"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -987,6 +1049,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         m_GamePlay_Pause = m_GamePlay.FindAction("Pause", throwIfNotFound: true);
         m_GamePlay_Interact = m_GamePlay.FindAction("Interact", throwIfNotFound: true);
         m_GamePlay_Place = m_GamePlay.FindAction("Place", throwIfNotFound: true);
+        m_GamePlay_Check = m_GamePlay.FindAction("Check", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1004,6 +1067,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         // QuickTime
         m_QuickTime = asset.FindActionMap("QuickTime", throwIfNotFound: true);
         m_QuickTime_UseQT = m_QuickTime.FindAction("UseQT", throwIfNotFound: true);
+        m_QuickTime_InteractQT = m_QuickTime.FindAction("InteractQT", throwIfNotFound: true);
     }
 
     ~@GameInput()
@@ -1092,6 +1156,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_GamePlay_Pause;
     private readonly InputAction m_GamePlay_Interact;
     private readonly InputAction m_GamePlay_Place;
+    private readonly InputAction m_GamePlay_Check;
     /// <summary>
     /// Provides access to input actions defined in input action map "GamePlay".
     /// </summary>
@@ -1127,6 +1192,10 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "GamePlay/Place".
         /// </summary>
         public InputAction @Place => m_Wrapper.m_GamePlay_Place;
+        /// <summary>
+        /// Provides access to the underlying input action "GamePlay/Check".
+        /// </summary>
+        public InputAction @Check => m_Wrapper.m_GamePlay_Check;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1171,6 +1240,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Place.started += instance.OnPlace;
             @Place.performed += instance.OnPlace;
             @Place.canceled += instance.OnPlace;
+            @Check.started += instance.OnCheck;
+            @Check.performed += instance.OnCheck;
+            @Check.canceled += instance.OnCheck;
         }
 
         /// <summary>
@@ -1200,6 +1272,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Place.started -= instance.OnPlace;
             @Place.performed -= instance.OnPlace;
             @Place.canceled -= instance.OnPlace;
+            @Check.started -= instance.OnCheck;
+            @Check.performed -= instance.OnCheck;
+            @Check.canceled -= instance.OnCheck;
         }
 
         /// <summary>
@@ -1455,6 +1530,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_QuickTime;
     private List<IQuickTimeActions> m_QuickTimeActionsCallbackInterfaces = new List<IQuickTimeActions>();
     private readonly InputAction m_QuickTime_UseQT;
+    private readonly InputAction m_QuickTime_InteractQT;
     /// <summary>
     /// Provides access to input actions defined in input action map "QuickTime".
     /// </summary>
@@ -1470,6 +1546,10 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "QuickTime/UseQT".
         /// </summary>
         public InputAction @UseQT => m_Wrapper.m_QuickTime_UseQT;
+        /// <summary>
+        /// Provides access to the underlying input action "QuickTime/InteractQT".
+        /// </summary>
+        public InputAction @InteractQT => m_Wrapper.m_QuickTime_InteractQT;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1499,6 +1579,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @UseQT.started += instance.OnUseQT;
             @UseQT.performed += instance.OnUseQT;
             @UseQT.canceled += instance.OnUseQT;
+            @InteractQT.started += instance.OnInteractQT;
+            @InteractQT.performed += instance.OnInteractQT;
+            @InteractQT.canceled += instance.OnInteractQT;
         }
 
         /// <summary>
@@ -1513,6 +1596,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @UseQT.started -= instance.OnUseQT;
             @UseQT.performed -= instance.OnUseQT;
             @UseQT.canceled -= instance.OnUseQT;
+            @InteractQT.started -= instance.OnInteractQT;
+            @InteractQT.performed -= instance.OnInteractQT;
+            @InteractQT.canceled -= instance.OnInteractQT;
         }
 
         /// <summary>
@@ -1595,6 +1681,13 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnPlace(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Check" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnCheck(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.
@@ -1702,5 +1795,12 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnUseQT(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "InteractQT" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnInteractQT(InputAction.CallbackContext context);
     }
 }
