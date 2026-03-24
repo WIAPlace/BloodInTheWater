@@ -1,24 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Data.Common;
-using System.Threading;
+using System.Diagnostics.Tracing;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.UI;
-/// 
-/// Author: Marsahll Turner
-/// Created: 3/8/26
-/// Purpose: To toggle on/off the dither effect on screen
-/// 
-/// Edited: 
-/// Edited By: 
-/// Edit Purpose: 
-/// 
-public class DitherToggle : MonoBehaviour
+
+public class CameraShakeToggle : MonoBehaviour
 {
-    public Toggle toggle;
-    public RenderTexture ditherTexture;
-    public GameObject ditherImage;
-    public SavedSettings settings;
+    //[SerializeField] CinemachineCamera cam;
+    [SerializeField] private CinemachineBasicMultiChannelPerlin noise;
+    [SerializeField] private SavedSettings settings;
+    [SerializeField] private Toggle toggle;
 
     void Start()
     {
@@ -37,15 +29,16 @@ public class DitherToggle : MonoBehaviour
     {
         // Update the ScriptableObject's value whenever the UI toggle changes
         settings.DitherToggle = newValue;
-        if (!newValue)
+        if(noise != null)
         {
-            ditherImage.SetActive(false);
-            Camera.main.targetTexture = null;
-        }
-        else
-        {
-            ditherImage.SetActive(true);
-            Camera.main.targetTexture = ditherTexture;
+            if (newValue)
+            {   
+                noise.AmplitudeGain = 1;
+            }
+            else
+            {
+                noise.AmplitudeGain = 0;
+            }
         }
     }
 
