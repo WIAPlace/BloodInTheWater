@@ -102,8 +102,9 @@ public class QuickTimeController_Player : MonoBehaviour
             //Set QT Point
             float location = currentQTData.GetQTMove(Time.deltaTime);
             hitMarker = (hitMarker + location+360) % 360;
+            
             qtHitMarker.transform.rotation = Quaternion.Euler(Vector3.forward * hitMarker);
-
+            
             //Set Player Hit Zone
             RotateHitZone();
 

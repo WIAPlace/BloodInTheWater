@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI hintText; // text for hints
     [SerializeField] private TimeKeeper keptTime;
     [SerializeField] private HintArray hintArray;
+    [SerializeField] private PlayerPrefrenceScript pref;
     
 
     private Coroutine running;
@@ -57,7 +58,7 @@ public class GameManager : MonoBehaviour
         input.ResumeEvent -= HandleResume;
         input.CheckEvent -= HandleCheck;
     }
-    void HandlePause()
+    public void HandlePause()
     {
         gameUI.SetActive(false);
         pauseMenu.SetActive(true);
@@ -69,6 +70,7 @@ public class GameManager : MonoBehaviour
     }
     public void HandleResume()
     {
+        pref.LoadUIStates();
         gameUI.SetActive(true);
         pauseMenu.SetActive(false);
         windUpIndicator.gameObject.SetActive(false);
