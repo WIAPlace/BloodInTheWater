@@ -12,7 +12,7 @@ using UnityEngine.UI;
 ///
 public class InteractableHover : MonoBehaviour
 {
-    public Image crosshairImage;
+    [SerializeField] CanvasGroup crosshairImage;
     public Image crosshairImageSmall;
     public float detectionRange = 100f;
     public LayerMask interactableLayer;
@@ -27,10 +27,10 @@ public class InteractableHover : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, detectionRange, hitMasks))
         {
-            if ((((1 << hit.collider.gameObject.layer) & interactableLayer.value) != 0) && !crosshairImage.enabled)
+            if ((((1 << hit.collider.gameObject.layer) & interactableLayer.value) != 0) && !crosshairImage.isActiveAndEnabled)
             //if (!crosshairImage.enabled )
             {
-                crosshairImage.enabled = true;
+                crosshairImage.gameObject.SetActive(true);
                 crosshairImageSmall.enabled = false;
                 if (hint)
                 {
@@ -42,7 +42,7 @@ public class InteractableHover : MonoBehaviour
             {
                 if (crosshairImage.enabled && !(((1 << hit.collider.gameObject.layer) & interactableLayer.value) != 0) )
                 {
-                    crosshairImage.enabled = false;
+                    crosshairImage.gameObject.SetActive(false);
                     crosshairImageSmall.enabled = true;
                 }
             }
@@ -50,9 +50,9 @@ public class InteractableHover : MonoBehaviour
         }
         else
         {
-            if (crosshairImage.enabled)
+            if (crosshairImage.isActiveAndEnabled)
             {
-                crosshairImage.enabled = false;
+                crosshairImage.gameObject.SetActive(false);
                 crosshairImageSmall.enabled = true;
             }
         }

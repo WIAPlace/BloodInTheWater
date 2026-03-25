@@ -25,7 +25,7 @@ public class DialogueBoxController : MonoBehaviour
     [SerializeField] TextMeshProUGUI nameText;
     [SerializeField] CanvasGroup dialogueBox;
 
-    public Image crosshairImage;
+    [SerializeField] CanvasGroup crosshairImage;
     public Image crosshairImageSmall;
     public static event Action OnDialogueStarted;
     public static event Action OnDialogueEnded;

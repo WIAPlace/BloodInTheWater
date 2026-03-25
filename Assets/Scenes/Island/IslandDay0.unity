@@ -22991,17 +22991,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2234065711678246116, guid: 3598aa3f55e6f50489fdee72d471301e,
-        type: 3}
-      propertyPath: OnStart
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2234065711678246116, guid: 3598aa3f55e6f50489fdee72d471301e,
-        type: 3}
-      propertyPath: startDialogue
-      value: 
-      objectReference: {fileID: 11400000, guid: be81453735a260a4585ff654a98ed962,
-        type: 2}
     - target: {fileID: 2380518969316242504, guid: 3598aa3f55e6f50489fdee72d471301e,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -23085,7 +23074,7 @@ PrefabInstance:
     - target: {fileID: 3963442594085442040, guid: 3598aa3f55e6f50489fdee72d471301e,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4490677835036743502, guid: 3598aa3f55e6f50489fdee72d471301e,
         type: 3}
@@ -23260,18 +23249,6 @@ PrefabInstance:
 --- !u!114 &1730174414 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7687968143917060247, guid: 3598aa3f55e6f50489fdee72d471301e,
-    type: 3}
-  m_PrefabInstance: {fileID: 1730174413}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1730174415 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4510529429321963886, guid: 3598aa3f55e6f50489fdee72d471301e,
     type: 3}
   m_PrefabInstance: {fileID: 1730174413}
   m_PrefabAsset: {fileID: 0}
@@ -23644,6 +23621,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59cc93f5aac196a44a41aa21e3a1367b, type: 3}
+--- !u!225 &1764728400 stripped
+CanvasGroup:
+  m_CorrespondingSourceObject: {fileID: 4157803037719317687, guid: 3598aa3f55e6f50489fdee72d471301e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1730174413}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1776713200 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6170607464330026111, guid: c5c1ce5349b5ed3409cdaede8497722f,
@@ -24538,7 +24521,7 @@ PrefabInstance:
         type: 3}
       propertyPath: crosshairImage
       value: 
-      objectReference: {fileID: 1730174415}
+      objectReference: {fileID: 1764728400}
     - target: {fileID: 116861743981614157, guid: 7d3e6ae5bae3878439adcfc4fad4769d,
         type: 3}
       propertyPath: crosshairImageSmall
