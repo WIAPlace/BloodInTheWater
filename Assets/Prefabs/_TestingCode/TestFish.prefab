@@ -11,11 +11,10 @@ GameObject:
   - component: {fileID: 5036488451287448674}
   - component: {fileID: 7709157529852804139}
   - component: {fileID: 6409282403089810547}
-  - component: {fileID: 5498360993950441911}
-  - component: {fileID: 701674220553937572}
-  - component: {fileID: 6055549306306161453}
-  - component: {fileID: 555607246259464934}
   - component: {fileID: 1407686103430132817}
+  - component: {fileID: 413690323842010444}
+  - component: {fileID: 4924169164883724002}
+  - component: {fileID: 185055685401638151}
   m_Layer: 8
   m_Name: TestFish
   m_TagString: Untagged
@@ -82,62 +81,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 1
   m_ObstacleAvoidanceType: 2
---- !u!114 &5498360993950441911
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2540850831461931456}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4975413a8cbb294b898df24acbc3cb5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  lureMask:
-    serializedVersion: 2
-    m_Bits: 128
---- !u!114 &701674220553937572
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2540850831461931456}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ef15b464bdeec5418064918526ed6ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &6055549306306161453
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2540850831461931456}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e4b7ca656a851d4482178e9afe0f0d8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  wanderRadius: 10
-  wanderTimer: 3
---- !u!114 &555607246259464934
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2540850831461931456}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e4b6af937a52d84297611b9040a8d70, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  FearTimer: 8
-  testlocation: {fileID: 0}
 --- !u!114 &1407686103430132817
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,14 +94,80 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   qtcPlayer: {fileID: 0}
-  barLength: 100
-  hitZoneMin:
-  - 20
-  hitZoneMax:
-  - 50
-  qtSpeed: 1
+  hitZoneLength: []
+  qtSpeed: 360
   qtLength: 100
   type: 0
+--- !u!114 &413690323842010444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2540850831461931456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f6b13c8cd33db7449e9f9e804a05a9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fishData: {fileID: 0}
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 128
+  targetPos: {x: 0, y: 0, z: 0}
+  waveHandler: {fileID: 0}
+  reelSpline: {fileID: 0}
+  distOnReel: 0
+  reelLength: 0
+  currentLocalOnReel: 0
+  SC: {fileID: 0}
+  agent: {fileID: 0}
+  wanderRadius: 20
+  wanderTimer: 5
+  fleeDistance: 20
+  fleeTimer: 5
+  lureMoveVary: 2
+  tapEnterRange: 4
+  tapExitRange: 30
+  tapSpeed: 4
+  tapVary: 5
+  tapSmooth: 0.1
+  tapSmoothRot: 50
+  chanceToHook: 20
+  catchTimeWindow: 3
+  onHook: 0
+  inLureTrigger: 0
+  lurePos: {x: 0, y: 0, z: 0}
+  debugCurrentStateName: 
+  debugPreviousStateName: 
+--- !u!114 &4924169164883724002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2540850831461931456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eb89bd204fc7df4aaaf165c78f5018b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+--- !u!114 &185055685401638151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2540850831461931456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e8ded9223332b241b09f3330778843d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UseableMesh: {fileID: 0}
+  onWaves: 1
+  displacement: 0
 --- !u!1001 &6870379017648183807
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -13,7 +13,7 @@ using UnityEngine;
 public class FishingSystem : MonoBehaviour
 {
     public static FishingSystem Instance {get;set;}
-
+    
     private void Awake()
     { // makes sure this is the only instance of this system.
         if (Instance != null && Instance != this)

@@ -69,8 +69,12 @@ public class InputReader : ScriptableObject, GameInput.IGamePlayActions, GameInp
     public event Action InteractUIEvent;
     public event Action PlaceEvent;
     public event Action PlaceCancelledEvent;
+    public event Action CheckEvent;
+    public event Action CheckCancelledEvent;
 
     public event Action UseEventQT; // quick time click
+    public event Action UseEventQTCanelled;
+    public event Action InteractEventQT;
 
     public event Action PauseEvent;
     public event Action ResumeEvent;
@@ -133,6 +137,10 @@ public class InputReader : ScriptableObject, GameInput.IGamePlayActions, GameInp
         if (context.phase == InputActionPhase.Performed)
         {
             UseEventQT?.Invoke();
+        }
+        if (context.phase == InputActionPhase.Canceled)
+        {
+            UseEventQTCanelled?.Invoke();
         }
     }
 
@@ -203,6 +211,31 @@ public class InputReader : ScriptableObject, GameInput.IGamePlayActions, GameInp
     public void OnTrackedDeviceOrientation(InputAction.CallbackContext context)
     {
         //throw new NotImplementedException();
+    }
+
+    public void OnCheck(InputAction.CallbackContext context)
+    {   // check time
+        if (context.phase == InputActionPhase.Performed)
+        {
+            CheckEvent?.Invoke();
+        }
+        if (context.phase == InputActionPhase.Canceled)
+        {
+            CheckCancelledEvent?.Invoke();
+        }
+    }
+    public void OnInteractQT(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            InteractEventQT?.Invoke();
+        }
+    }
+
+    /////////////////////////////////////////////////////////////////////////////// Extra stuff
+    public bool CheckIfGameplay()
+    {
+        return gameInput.GamePlay.enabled;  
     }
 
     

@@ -1,5 +1,6 @@
-using System.Collections;
 using System;
+using System.Collections;
+using System.Threading;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,6 +13,10 @@ using UnityEngine.UI;
 /// Edited By: 2/15/2026
 /// Edit Purpose: Adding typewriter text and audio
 ///
+/// Edited: Weston T
+/// Edited By: 3/1/2026
+/// Edit Purpose: Creating a overload for start dialouge
+///
 public class DialogueBoxController : MonoBehaviour
 {
     public static DialogueBoxController instance;
@@ -20,13 +25,15 @@ public class DialogueBoxController : MonoBehaviour
     [SerializeField] TextMeshProUGUI nameText;
     [SerializeField] CanvasGroup dialogueBox;
 
+    [SerializeField] CanvasGroup crosshairImage;
+    public Image crosshairImageSmall;
     public static event Action OnDialogueStarted;
     public static event Action OnDialogueEnded;
     bool skipLineTriggered;
     public bool OnStart;
-    public string startName;
     public DialogueAsset startDialogue;
 
+    private Coroutine typing;
     public AudioSource audioSource;
     //Typing Speed
     float charactersPerSecond = 25;
@@ -35,7 +42,8 @@ public class DialogueBoxController : MonoBehaviour
     {
         if (OnStart)
         {
-            StartDialogue(startDialogue.dialogue,startDialogue.audioclip, 0, startName);
+            StartCoroutine(LateStart());
+            //StartDialogue(startDialogue.dialogue,startDialogue.audioclip, 0, startName);
         }
         else
         {
@@ -55,31 +63,52 @@ public class DialogueBoxController : MonoBehaviour
             Destroy(this);
         }
     }
+    IEnumerator LateStart()
+    {
+        yield return new WaitForSeconds(.4f);
+        StartDialogue(startDialogue.dialogue,startDialogue.audioclip, 0, startDialogue.speaker);
+    }
 
     // The dialogue
-    public void StartDialogue(string[] dialogue,AudioClip[] audioclip, int startPosition, string name)
+    public void StartDialogue(string[] dialogue,AudioClip[] audioclip, int startPosition, string[] speaker)
     {
-        nameText.text = name;
+        GameManager.Instance.HandleDial(false); // turn stuff off
         dialogueBox.gameObject.SetActive(true);
         StopAllCoroutines();
-        StartCoroutine(RunDialogue(dialogue,audioclip, startPosition));
+        StartCoroutine(RunDialogue(dialogue,audioclip, startPosition, speaker));
+    }
+
+    public void StartDialogue(string[] dialogue,AudioClip[] audioclip, int startPosition) // Overload for less stuff
+    { // this will be used for system stuff/
+        //Debug.Log("Hit");
+        //GameManager.Instance.HandleDial(false); // turn stuff off
+        //string[] speakerName = ""; // no name
+        //dialogueBox.gameObject.SetActive(true);
+        //StopAllCoroutines();
+        //StartCoroutine(RunDialogue(dialogue,audioclip, startPosition, speakerName));
     }
 
     //Prints the lines
-    IEnumerator RunDialogue(string[] dialogue,AudioClip[] audioclip, int startPosition)
+    IEnumerator RunDialogue(string[] dialogue,AudioClip[] audioclip, int startPosition, string[] speaker)
     {
         skipLineTriggered = false;
         OnDialogueStarted?.Invoke();
+        
 
         for (int i = startPosition; i < dialogue.Length; i++)
         {
+
+            nameText.text = speaker[i];
             //Text
             dialogueText.text = dialogue[i];
-            StartCoroutine(TypeTextUncapped(dialogueText.text));
+            typing = StartCoroutine(TypeTextUncapped(dialogueText.text));
 
             //Audio
-            audioSource.clip = audioclip[i];
-            audioSource.Play();
+            if(audioSource != null)
+            {
+                audioSource.clip = audioclip[i];
+                audioSource.Play();
+            }
 
             while (skipLineTriggered == false)
             {
@@ -91,11 +120,16 @@ public class DialogueBoxController : MonoBehaviour
 
         OnDialogueEnded?.Invoke();
         dialogueBox.gameObject.SetActive(false); //Hides box once done
+        GameManager.Instance.HandleDial(true); // set stuff back on.
     }
 
     public void SkipLine()
     {
-        skipLineTriggered = true;
+        if (typing != null)
+        {
+            StopCoroutine(typing);
+            skipLineTriggered = true;
+        }
     }
     //Typewriter Text
     IEnumerator TypeTextUncapped(string line)

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 /// 
 /// Author: Weston Tollette
@@ -12,35 +13,75 @@ using UnityEngine;
 /// 
 public class TimeKeeper : MonoBehaviour
 {
+    [SerializeField] private bool limitTime = true;
     [SerializeField] [Tooltip("Allocated Time To Fish")]
     float secondsAllocated;
 
     [SerializeField] [Tooltip("Time Between Each checkign of the timer")]
     float waitInterval=5f; // we are doing it like this because we dont need to have this update every frame.
 
+    private float sceneTime = 0;
     private float timePassed=0;
     private float penaltyTime=0;
 
     void Start()
     {
-        StartCoroutine(TickTock());
+        //GameState.Instance.ChangeTime(GetTimeLeft());
+        if (limitTime)
+        {
+            StartCoroutine(TickTock());
+            //GameManager.BoatHit += AddPenaltyTime;
+        }
+        GameManager.BoatHit += AddPenaltyTime;
+    }
+    void OnDestroy()
+    {
+        GameManager.BoatHit -= AddPenaltyTime;
+    }
+    void Update()
+    {
+        sceneTime += Time.deltaTime;
     }
 
     IEnumerator TickTock()
     {
         while(timePassed<secondsAllocated){
             yield return new WaitForSeconds(waitInterval);
-            timePassed = Time.time + penaltyTime;
+            timePassed = sceneTime + penaltyTime;
+            //GameState.Instance.ChangeTime(GetTimeLeft());
             //Debug.Log(timePassed);
         }
+       GameState.Instance.LooseState();
     }
+
     public void AddPenaltyTime(float seconds)
     {
         penaltyTime += seconds;
+        //Debug.Log(penaltyTime);
     }
-    public float GetTimeLeft()
+
+    public string GetTimeLeft()
     {
         float timeLeft = secondsAllocated-timePassed;
-        return timeLeft;
+        int minutes = (int)(timeLeft/60); 
+        int seconds = (int)(timeLeft%60);
+        
+        string sec = "";
+        if(seconds < 10)
+        {
+            sec = "0";
+        }
+        sec += seconds;
+
+        string min = "";
+        if (minutes < 10)
+        {
+            min="0";
+        }
+        min+=minutes;
+        
+       string timHasLeft = min + " : " + sec;
+
+        return timHasLeft;
     }
 }

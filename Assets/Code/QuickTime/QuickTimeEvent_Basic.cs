@@ -15,30 +15,18 @@ public class QuickTimeEvent_Basic : ScriptableObject
     // will need to figure out how to keep this working with screen size.
 
 
-    public void SetPlayerPoint(float position, Image playerPoint, Image maxBar)
-    {
-        playerPoint.rectTransform.anchoredPosition = maxBar.rectTransform.anchoredPosition + Vector2.right*position;
-    }
-
-    public void SetRedArea(float max, Image redBar)
-    {
-        SetBarLength(0,max,redBar);
-        redBar.rectTransform.anchoredPosition = Vector2.left*(max/2) + Vector2.down*Screen.height/4;
+    public void SetPlayerPoint(float position, Image playerPoint) 
+    { // player point is now the fish's marker on the radial
+        Vector3 rot = new Vector3(0,0,position);
+        playerPoint.transform.rotation = Quaternion.Euler(rot);
     }
 
     // set the are of the hit zone then move it to be between the min and max.
-    public void SetHitZone(float min, float max, Image hitBar, Image maxBar)
+    public void SetHitZone(float length, float origin, Image hitBar)
     {
-        SetBarLength(min,max,hitBar);
-        float origin = (min+max)/2;
-        hitBar.rectTransform.anchoredPosition = maxBar.rectTransform.anchoredPosition + Vector2.right*min;
-    }
-
-    private void SetBarLength(float min, float max, Image bar)
-    {
-        float length = max-min; // length
-        //RectTransform rtform = bar.rectTransform; // make this am instance thing for eiser editing.
-        bar.rectTransform.sizeDelta = new Vector2(length,bar.rectTransform.sizeDelta.y); // change size of width only
+        hitBar.fillAmount = length/360; // set size of the bar to be between 0-1 on a scale of 360;
+        Vector3 rot = new Vector3(0,0,origin+length);
+        hitBar.transform.rotation = Quaternion.Euler(rot);
     }
 
 

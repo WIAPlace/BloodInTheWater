@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 /// 
 /// Author: Marsahll Turner
@@ -18,8 +20,16 @@ public class InteractSystem : MonoBehaviour
 {
     [SerializeField] [Tooltip("Insert the Scriptable Object Input Reader")]
     private InputReader input; // used for input reader stuff.
+    [SerializeField] private GameObject FPCamera;
+    [SerializeField] private LayerMask interactMask; // mask for what will be hit by raycast
+    [SerializeField][Tooltip("Interact Layer and any that would block it")]
+    private LayerMask hitMask; // Interact layer and any that could block it
     [SerializeField] float interactDistance = 2.6f; //Should be the same distance as the interactable hover
-    bool inConversation;
+    //[SerializeField] private float radius=1f; // radius of spherecast
+    
+    public bool inConversation;
+    
+    
 
     private void Start()
     {
@@ -45,9 +55,9 @@ public class InteractSystem : MonoBehaviour
         }
         else //Starts interact
         {
-            if (Physics.Raycast(new Ray(transform.position, transform.forward), out RaycastHit hitInfo, interactDistance))
+            if (Physics.Raycast(new Ray(FPCamera.transform.position, FPCamera.transform.forward), out RaycastHit hitInfo, interactDistance,hitMask,QueryTriggerInteraction.Collide))
             {
-                if(hitInfo.collider.TryGetComponent(out IInteractable interactable))
+                if((((1 << hitInfo.collider.gameObject.layer) & interactMask.value) != 0) && hitInfo.collider.TryGetComponent(out IInteractable interactable))
                 {
                     interactable.Interact();
                 }

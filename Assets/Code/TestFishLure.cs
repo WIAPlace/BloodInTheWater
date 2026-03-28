@@ -21,7 +21,7 @@ using UnityEngine.Rendering;
 /// Edited By: Weston Tollette
 /// Edit Purpose: Changing this to a child of an abstract for use in dealing with Player Holding script stuff.
 /// 
-public class TestFishLure : UseableItems_Abstract
+public class TestFishLure : MonoBehaviour
 {
     [SerializeField] [Tooltip("The Prefab For the Lure")]
     private GameObject lurePrefab; // The Prefab for the lure object.
@@ -73,7 +73,12 @@ public class TestFishLure : UseableItems_Abstract
         {
             AutoHandled();
         }
+        input.UseEvent -= HandleUse;
+        input.UseCancelledEvent -= HandleUseCancelled;
+
     }
+
+
 
     void Update()
     {
@@ -159,8 +164,20 @@ public class TestFishLure : UseableItems_Abstract
     {
         HandleUse();
     }
+    [SerializeField] [Tooltip("Insert the Scriptable Object Input Reader.")]
+    protected InputReader input;
+    void OnEnable()
+    {
+        input.UseEvent += HandleUse;
+        input.UseCancelledEvent += HandleUseCancelled;
+    }
+    void OnDestroy()
+    {
+        input.UseEvent -= HandleUse;
+        input.UseCancelledEvent -= HandleUseCancelled;
+    }
     
-    protected override void HandleUse() // When you click the left mouse button
+    protected void HandleUse() // When you click the left mouse button
     {
         if (lurePrefab.activeSelf)
         {// if there is a lure already out only get rid of it, dont start the cast process again.
@@ -169,12 +186,15 @@ public class TestFishLure : UseableItems_Abstract
 
             lurePrefab.SetActive(false);
             RetrieveLure(currentLurePosition, lureRadius); // this will let the fish know they are no longer in lure zone
-            
+            //Debug.Log(holdToCast);
+
             return;
         }
-        holdToCast = true;
+        else {
+            holdToCast = true;
+        }
     }
-    protected override void HandleUseCancelled() // when release left mouse
+    protected void HandleUseCancelled() // when release left mouse
     {
         if(holdToCast)
         { // if the cast indicator is around.
@@ -185,7 +205,7 @@ public class TestFishLure : UseableItems_Abstract
             //CastAnim();
         }
     }
-
+    
 
 
 

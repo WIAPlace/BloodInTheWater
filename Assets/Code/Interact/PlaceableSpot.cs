@@ -12,9 +12,6 @@ using UnityEngine;
 ///
 public class PlaceableSpot : MonoBehaviour, IInteractable
 {
-    [SerializeField][Tooltip("Refrence To Player Holding Script")]
-    private PlayerHolding holding;
-
     [SerializeField][Tooltip("Filled Spot")]
     private GameObject filledSpot;
     [SerializeField][Tooltip("Empty Spot")]
@@ -22,6 +19,8 @@ public class PlaceableSpot : MonoBehaviour, IInteractable
 
     [SerializeField][Tooltip("Place in the Placeable Area typeIndex this is. Must be Greater than 0")]
     private int typeIndex = 1;
+
+    //[SerializeField][Tooltip("Bool to check if this item is placed (Make sure there is only ever one placed)")]
     private bool itemPlaced = false; // if the item is located here.
 
     void OnValidate()
@@ -34,19 +33,19 @@ public class PlaceableSpot : MonoBehaviour, IInteractable
     }
     
 
-    private void Start()
+    private void Awake()
     {
         // fire these two off just to make sure its all going as planned;
         OffPlaced();
         SetPlacedTag();
     }
 
-    private void SetPlaced(bool isPlaced) // setter for if the item has been placed.
+    public void SetPlaced(bool isPlaced) // setter for if the item has been placed.
     {
         itemPlaced = isPlaced;
-        OffPlaced();
-        SetPlacedTag();
-        ChangeHoldingState();
+        OffPlaced(); // changes either on or off based on bool of if it is or isnt
+        SetPlacedTag(); // changes tag
+        ChangeHoldingState(); // changes the state of whats in your hand
     }
 
     // Scripts for changing acording to their status of itemPlaced.
@@ -74,17 +73,20 @@ public class PlaceableSpot : MonoBehaviour, IInteractable
         {
             indexHolder = typeIndex;
         }
-        holding.ChangeInHand(indexHolder);
+        PlayerHolding.Instance.ChangeInHand(indexHolder);
     }
 
     // interface implementation
     public void Interact()
     {
-        SetPlaced(!itemPlaced);
+        if(PlayerHolding.Instance.CheckInHand() == typeIndex || PlayerHolding.Instance.CheckInHand() == 0)
+        {
+            SetPlaced(!itemPlaced);
 
-        if (!holding.CheckIfChecking())
-        { //if we arnt checking dont keep this game object around
-            gameObject.SetActive(false);
+            if (!PlayerHolding.Instance.CheckIfChecking())
+            { //if we arnt checking dont keep this game object around
+                gameObject.SetActive(false);
+            }
         }
     }
 }

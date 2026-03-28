@@ -11,16 +11,8 @@ using UnityEngine;
 /// Edit Purpose:
 ///
 public class BehaviorStateController : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+{   
+    [SerializeField][Tooltip("BasicThing")]
+    private float u; // ?
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

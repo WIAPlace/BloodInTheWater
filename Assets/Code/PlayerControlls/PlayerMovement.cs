@@ -16,6 +16,10 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] [Tooltip("Insert the Scriptable Object Input Reader")]
     private InputReader input;
+    [SerializeField] [Tooltip("Character controller of player body")]
+    private CharacterController controller;
+    [SerializeField][Tooltip("Player Body")]
+    private GameObject playerBody; 
 
     [SerializeField] [Tooltip("How fast the player moves")]
     private float speed;
@@ -25,13 +29,11 @@ public class PlayerMovement : MonoBehaviour
 
     private float gravity = -9.81f; 
 
-    private CharacterController controller;
     private Vector2 moveDir; // Direction the Player is moving at any given time
     private Vector3 velocity; // speed 
 
     void Start()
     {
-        controller = GetComponent<CharacterController>();
         input.MoveEvent += HandleMove;
     }
     void OnDestroy()
@@ -53,16 +55,16 @@ public class PlayerMovement : MonoBehaviour
         { // If the player has no controls down, so isnt touching any directional input, dont move
             return;
         }
-        Vector3 directionalMovement = transform.forward * moveDir.y + transform.right * moveDir.x;
+        Vector3 directionalMovement = playerBody.transform.forward * moveDir.y + playerBody.transform.right * moveDir.x;
 
         // move in the desired direction.
         Vector3 movement = directionalMovement * speed * Time.deltaTime;
         controller.Move(movement);
     }
-
+    
     private void RotateToView()
-    {
-        transform.rotation = Quaternion.Euler(transform.eulerAngles.x, playerView.eulerAngles.y, transform.eulerAngles.z);
+    { // the object / player turns to where the camera is looking
+        playerBody.transform.rotation = Quaternion.Euler(playerBody.transform.eulerAngles.x, playerView.eulerAngles.y, playerBody.transform.eulerAngles.z);
     }
 
     // Input Handler // 

@@ -1,35 +1,219 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI; 
+using TMPro;
+using UnityEngine.Splines;
+using Unity.Burst.CompilerServices;
+using Unity.VisualScripting;
+/// 
+/// Author: Weston Tollette
+/// Created: 2/22/26
+/// Purpose: Game Manager script
+/// 
+/// Edited:
+/// Edited By:
+/// Edit Purpose:
+/// 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private InputReader input;
-    [SerializeField] private GameObject pauseMenu;
+    private static GameManager GM; // static for the game manager
+
+    [SerializeField] public InputReader input; //Input reader
+    [SerializeField] private GameObject pauseMenu; // ui for the pause menu
+    [SerializeField] private GameObject gameUI; // ui for the game during play
+    [SerializeField] private Image windUpIndicator; // will show when u have would up and are ready to release
+    [SerializeField] private TextMeshProUGUI text; // ui for temp text
+    [SerializeField] PersistantItemSpot itemSpot;
+    [field: SerializeField] public QuickTimeController_Player qtcPlayer;
+    [field: SerializeField] public SplineContainer reelSpline;
+    [field: SerializeField] public GameObject lureTarget; 
+    [SerializeField] private GameObject hintUI; // ui for hints
+    [SerializeField] private TextMeshProUGUI hintText; // text for hints
+    [SerializeField] private TimeKeeper keptTime;
+    [SerializeField] private HintArray hintArray;
+    [SerializeField] private PlayerPrefrenceScript pref;
+    
+
+    private Coroutine running;
+    [HideInInspector]public bool hintsEnabled = true;
+    public static event System.Action OnHooked;
+    public static event System.Action OnHookedCancelled;
+    public static Action<float> BoatHit;
+    
     void Start()
     {
         input.PauseEvent += HandlePause;
         input.ResumeEvent += HandleResume;
+        input.CheckEvent += HandleCheck;
         pauseMenu.SetActive(false);
+        gameUI.SetActive(true);
+        windUpIndicator.gameObject.SetActive(false);
+        text.gameObject.SetActive(false);
     }
 
     void OnDestroy()
     {
+        input.InteractEvent -= CloseHint;
         input.PauseEvent -= HandlePause;
         input.ResumeEvent -= HandleResume;
+        input.CheckEvent -= HandleCheck;
     }
-    void HandlePause()
+    public void HandlePause()
     {
+        gameUI.SetActive(false);
         pauseMenu.SetActive(true);
+        windUpIndicator.gameObject.SetActive(false);
+        text.gameObject.SetActive(false);
         Time.timeScale=0f;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
-    void HandleResume()
+    public void HandleResume()
     {
+        pref.LoadUIStates();
+        gameUI.SetActive(true);
         pauseMenu.SetActive(false);
+        windUpIndicator.gameObject.SetActive(false);
         Time.timeScale=1f;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
+
+    public void HandleDial(bool onoff)
+    {// called by dialoge box controll to turn off UI.
+        gameUI.SetActive(onoff);
+    }
+    
+    /////////////// Easing Stuff for Indicator //////////////////////////////////
+    public IEnumerator EaseIndicator(float duration) // enumerator to call to show wind up
+    {
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            windUpIndicator.fillAmount = Mathf.Lerp(0f,1f,elapsedTime/duration);
+            yield return null;
+        }
+        windUpIndicator.fillAmount = 1f;
+    }
+    public void ActiveIndicator(bool onoff)
+    {
+        windUpIndicator.gameObject.SetActive(onoff);
+    }
+
+
+    public void SetPause(bool timeOn) // pause for doors maybe
+    {
+        HandlePause();
+        pauseMenu.SetActive(false);
+        if (timeOn)
+        {
+            Time.timeScale=1f;
+        }
+    }
+
+    //////// Show a UI thing for measure stuff
+    public IEnumerator ShowFishLbs(string lbsText)
+    {
+        text.gameObject.SetActive(true); // see the text (love the text)
+        text.text = lbsText;
+        
+        yield return new WaitForSeconds(4f);
+
+        text.text = ""; // make it empty
+        text.gameObject.SetActive(false); // make it unseen
+    }
+    public void ShowUIText(string txt)
+    {
+        if (running != null)
+        {
+            StopCoroutine(running);
+        }
+        running = StartCoroutine(ShowFishLbs(txt));
+    }
+
+    //////// singleton stuff ////////////////////////////////////
+    public static GameManager Instance // accesor for the game manager singleton
+    {
+        get
+        {
+            if (GM == null)
+            {
+                // If the instance is null, try to find an existing instance in the scene
+                GM = FindObjectOfType<GameManager>();
+                if (GM == null)
+                {
+                    //Debug.LogError("A GameManager instance is missing from the scene.");
+                }
+            }
+            return GM;
+        }
+    }
+
+    private void Awake() // ON Start make sure this is the only one
+    {
+        if (GM != null && GM != this)
+        {
+            // If another instance already exists, destroy this new one to enforce singularity
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            // Set the instance to this object if it's the first one
+            GM = this;
+
+            // DontDestroyOnLoad(this.gameObject); 
+        }
+    }
+
+
+    public int GetItemInSpot()
+    {
+        return itemSpot.spots[2];
+    }
+
+    public void Hooked(bool active)
+    {
+        if (active) OnHooked.Invoke();
+        else OnHookedCancelled.Invoke();
+    }
+
+
+    public void GiveHint(int type, int hint)
+    {
+        if(hintUI != null && hintsEnabled){
+            hintUI.SetActive(true);
+            hintArray.ShowHint(type,hint);
+            input.InteractEvent += CloseHint; // allow player to close out the hint menu
+            input.InteractEventQT += CloseHint;
+        }
+    }
+    public void CloseHint()
+    {
+        if (hintUI != null && hintUI.activeSelf)
+        {
+            hintArray.CloseHints();
+            hintUI.SetActive(false);
+            input.InteractEvent -= CloseHint; // stop listening for interact
+            input.InteractEventQT -= CloseHint;
+        }
+    }
+
+    public void HandleCheck()
+    {
+        string txt ="Clock for keeping time";
+        if(GameState.Instance !=null&& keptTime != null){
+            string timeLeft = keptTime.GetTimeLeft();
+            txt = timeLeft;
+        }
+        ShowUIText(txt);
+    }
+
+    public void OnBoatHit(float hitAmt)
+    {
+        BoatHit?.Invoke(hitAmt);
+    }
+    
 }
