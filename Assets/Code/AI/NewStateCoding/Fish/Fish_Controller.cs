@@ -152,6 +152,7 @@ public class Fish_Controller : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         SC = GetComponent<FishSC_Abstact>();
         waveHandler = GetComponent<MeshWithWaves>();
+        //currentState = SC.Idle;
     }
 
     ///////////////////////////////////////////////////////////////////////// Starting Functions

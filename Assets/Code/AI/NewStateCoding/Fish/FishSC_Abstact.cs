@@ -19,7 +19,8 @@ public abstract class FishSC_Abstact : MonoBehaviour
     protected Fish_Controller FSC;
 
     public GameObject target;
-    
+    public float ChaceIncrease;
+
     public Abs_StateIdle Idle; // Outside of lure or bobber range, mainly just hanging out
     public Abs_StateLure Lure; // Inside of lure range, but outside of bobber range.
     public Abs_StateBobber Bobber; // inside of bobber range and not in fear range
@@ -59,4 +60,6 @@ public abstract class FishSC_Abstact : MonoBehaviour
     {
         return Vector3.zero;
     }
+    public abstract void IdleMovement(Fish_Controller FSC);
+    public abstract IFishState MoveBackToIdle(Fish_Controller FSC);
 }

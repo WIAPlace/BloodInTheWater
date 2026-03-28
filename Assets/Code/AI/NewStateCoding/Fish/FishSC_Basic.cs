@@ -110,4 +110,14 @@ public class FishSC_Basic : FishSC_Abstact
             FSC.ChangeState(FSC.SC.Line);
         }
     }
+
+    public override void IdleMovement(Fish_Controller FSC)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override IFishState MoveBackToIdle(Fish_Controller FSC)
+    {
+        throw new System.NotImplementedException();
+    }
 }

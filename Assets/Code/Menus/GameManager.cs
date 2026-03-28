@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector]public bool hintsEnabled = true;
     public static event System.Action OnHooked;
     public static event System.Action OnHookedCancelled;
+    public static Action<float> BoatHit;
     
     void Start()
     {
@@ -208,6 +209,11 @@ public class GameManager : MonoBehaviour
             txt = timeLeft;
         }
         ShowUIText(txt);
+    }
+
+    public void OnBoatHit(float hitAmt)
+    {
+        BoatHit?.Invoke(hitAmt);
     }
     
 }
