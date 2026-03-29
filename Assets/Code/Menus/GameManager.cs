@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
     {
         input.PauseEvent += HandlePause;
         input.ResumeEvent += HandleResume;
-        input.CheckEvent += HandleCheck;
+        //input.CheckEvent += HandleCheck;
         pauseMenu.SetActive(false);
         gameUI.SetActive(true);
         windUpIndicator.gameObject.SetActive(false);
@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour
         input.InteractEvent -= CloseHint;
         input.PauseEvent -= HandlePause;
         input.ResumeEvent -= HandleResume;
-        input.CheckEvent -= HandleCheck;
+        //input.CheckEvent -= HandleCheck;
     }
     public void HandlePause()
     {
@@ -201,19 +201,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void HandleCheck()
-    {
-        string txt ="Clock for keeping time";
-        if(GameState.Instance !=null&& keptTime != null){
-            string timeLeft = keptTime.GetTimeLeft();
-            txt = timeLeft;
-        }
-        ShowUIText(txt);
-    }
-
     public void OnBoatHit(float hitAmt)
     {
         BoatHit?.Invoke(hitAmt);
+    }
+
+    public float CheckTime()
+    {   // equation to put the amount of time that has passed into a rotation.
+        float max = keptTime.GetMaxTime();
+        float time = keptTime.GetCurrentTime();
+        time = (max-time)/max * 360;
+        return time;
     }
     
 }

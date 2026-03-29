@@ -84,4 +84,12 @@ public class TimeKeeper : MonoBehaviour
 
         return timHasLeft;
     }
+    public float GetMaxTime()
+    {
+        return secondsAllocated;
+    }
+    public float GetCurrentTime()
+    {
+        return secondsAllocated-timePassed;
+    }
 }

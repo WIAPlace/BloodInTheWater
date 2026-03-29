@@ -32,13 +32,19 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 moveDir; // Direction the Player is moving at any given time
     private Vector3 velocity; // speed 
 
+    private bool checking = false;
+
     void Start()
     {
         input.MoveEvent += HandleMove;
+        input.CheckEvent += HandleCheck;
+        input.CheckCancelledEvent += HandleCheckCancelled;
     }
     void OnDestroy()
     {
         input.MoveEvent -= HandleMove;
+        input.CheckEvent -= HandleCheck;
+        input.CheckCancelledEvent -= HandleCheckCancelled;
     }
 
     void Update()
@@ -64,7 +70,9 @@ public class PlayerMovement : MonoBehaviour
     
     private void RotateToView()
     { // the object / player turns to where the camera is looking
-        playerBody.transform.rotation = Quaternion.Euler(playerBody.transform.eulerAngles.x, playerView.eulerAngles.y, playerBody.transform.eulerAngles.z);
+        if(!checking){
+            playerBody.transform.rotation = Quaternion.Euler(playerBody.transform.eulerAngles.x, playerView.eulerAngles.y, playerBody.transform.eulerAngles.z);
+        }
     }
 
     // Input Handler // 
@@ -86,5 +94,13 @@ public class PlayerMovement : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
         // Move the controller
         controller.Move(velocity * Time.deltaTime);
+    }
+    private void HandleCheck()
+    {
+        checking = true;
+    }
+    private void HandleCheckCancelled()
+    {
+        checking = false;
     }
 }
