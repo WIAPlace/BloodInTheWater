@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Cinemachine;
-using UnityEditorInternal;
 using UnityEngine;
 /// 
 /// Author: Weston Tollette
@@ -68,17 +67,20 @@ public class CheckTIme : MonoBehaviour
     private void HandleCheck()
     {
         watch.SetActive(true);
-        SetChildActive(false);
-        TransitionToCamera(1);
+        //SetChildActive(false);
+        //TransitionToCamera(1);
+        /*
         if(putWatchAway != null)
         {
             StopCoroutine(putWatchAway);
         }
+        */
     }
     private void HandleCheckCancelled()
     {
-        putWatchAway = StartCoroutine(PutAwayWatch());
-        TransitionToCamera(0);   
+        //putWatchAway = StartCoroutine(PutAwayWatch());
+        //TransitionToCamera(0);
+        watch.SetActive(false);   
     }
     public void TransitionToCamera(int targetIndex)
     {

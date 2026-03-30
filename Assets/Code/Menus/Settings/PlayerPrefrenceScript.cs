@@ -83,6 +83,10 @@ public class PlayerPrefrenceScript : MonoBehaviour
 
         ApplySettings();
     }
+    void Start()
+    {
+        ApplySettings();
+    }
 
     public void LoadData()
     {

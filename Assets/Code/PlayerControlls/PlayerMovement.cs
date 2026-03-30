@@ -37,14 +37,14 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         input.MoveEvent += HandleMove;
-        input.CheckEvent += HandleCheck;
-        input.CheckCancelledEvent += HandleCheckCancelled;
+        //input.CheckEvent += HandleCheck;
+        //input.CheckCancelledEvent += HandleCheckCancelled;
     }
     void OnDestroy()
     {
         input.MoveEvent -= HandleMove;
-        input.CheckEvent -= HandleCheck;
-        input.CheckCancelledEvent -= HandleCheckCancelled;
+        //input.CheckEvent -= HandleCheck;
+        //input.CheckCancelledEvent -= HandleCheckCancelled;
     }
 
     void Update()

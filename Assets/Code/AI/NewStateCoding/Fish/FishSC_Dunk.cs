@@ -11,6 +11,9 @@ public class FishSC_Dunk : FishSC_Abstact
     public Transform BoatObj;
     [SerializeField] private SplineContainer circleSpline;
     private float distanceTravelled=0f;
+    [SerializeField] [Tooltip("Sound of hitting the boat")]
+    private SoundEffectSO BoatHit;
+    public AudioSource soundMaker;
     
 
     [SerializeField] [Tooltip("In seconds")]
@@ -96,6 +99,7 @@ public class FishSC_Dunk : FishSC_Abstact
             //Debug.Log("Collision");
             GameManager.Instance.OnBoatHit(Damage);
             StartCoroutine(CollisionShock(FSC));
+            BoatHit.Play(soundMaker);
         }
     }
     private IEnumerator CollisionShock(Fish_Controller FSC)
