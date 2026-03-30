@@ -214,4 +214,9 @@ public class GameManager : MonoBehaviour
         return time;
     }
     
+
+    public void DamageBoat(float time)
+    {
+        keptTime.AddPenaltyTime(time);
+    }
 }

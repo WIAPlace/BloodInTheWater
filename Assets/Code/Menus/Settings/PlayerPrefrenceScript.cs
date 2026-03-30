@@ -18,7 +18,7 @@ public class PlayerPrefrenceScript : MonoBehaviour
     // sliders
     private float defaultSensX = 1;
     private float defaultSensY = 1;
-    private float defaultVol = 50;
+    private float defaultVol = 1;
 
     // toggles
     private int defaultDither = 1;
@@ -28,7 +28,8 @@ public class PlayerPrefrenceScript : MonoBehaviour
     //temp holders
     private float tempSensX=1;
     private float tempSensY=1;
-    private float tempVol=50;
+    [SerializeField]
+    private float tempVol=1;
 
     private int tempDither=1;
     private int tempCamShake=1;
@@ -92,7 +93,8 @@ public class PlayerPrefrenceScript : MonoBehaviour
     {
         defaultSensX = PlayerPrefs.GetFloat("SensX",1); // defaut to one
         defaultSensY = PlayerPrefs.GetFloat("SensY",1); // defaut to one
-        defaultVol = PlayerPrefs.GetFloat("Vol",50f);   // default to 50
+        defaultVol = PlayerPrefs.GetFloat("Vol",1f);   // default to 1
+        //Debug.Log(defaultVol);
 
         defaultDither = PlayerPrefs.GetInt("Dither",1); // default to true;
         defaultCamShake = PlayerPrefs.GetInt("CamShake",1); // default to true;
@@ -135,6 +137,25 @@ public class PlayerPrefrenceScript : MonoBehaviour
         RemoveListeners();
     }
     
+    public void ResetAllPlayerPrefs()
+    {
+        PlayerPrefs.DeleteAll();
+        PlayerPrefs.Save(); // Ensures immediate disk write
+
+        // we cant do appy settings cause save() would overwirte anything else.
+        LoadData();
+        
+
+        // apply settings 
+        ChangeSensitivity();
+        ChangeVolume();
+
+        ChangeDither();
+        ChangeCamShake();
+        ChangeHints();
+
+        LoadUIStates();
+    }
 
     public void LoadUIStates()
     {   // plug stuff into tem data while messing with data that hasnt changed
@@ -251,8 +272,10 @@ public class PlayerPrefrenceScript : MonoBehaviour
     {
         if(myMixer!=null)
         {
+            //Debug.Log(defaultVol);
             // Use log to map 0-1 to dB, avoiding Log10(0)
             myMixer.SetFloat("MasterVolume", Mathf.Log10(defaultVol) * 20); 
+            //Debug.Log(Mathf.Log10(defaultVol) * 20);
         }
     }
 
