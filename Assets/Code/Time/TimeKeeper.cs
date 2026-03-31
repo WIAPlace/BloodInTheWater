@@ -30,7 +30,13 @@ public class TimeKeeper : MonoBehaviour
         if (limitTime)
         {
             StartCoroutine(TickTock());
+            //GameManager.BoatHit += AddPenaltyTime;
         }
+        GameManager.BoatHit += AddPenaltyTime;
+    }
+    void OnDestroy()
+    {
+        GameManager.BoatHit -= AddPenaltyTime;
     }
     void Update()
     {
@@ -43,13 +49,17 @@ public class TimeKeeper : MonoBehaviour
             yield return new WaitForSeconds(waitInterval);
             timePassed = sceneTime + penaltyTime;
             //GameState.Instance.ChangeTime(GetTimeLeft());
+            //Debug.Log(timePassed);
         }
        GameState.Instance.LooseState();
     }
+
     public void AddPenaltyTime(float seconds)
     {
         penaltyTime += seconds;
+        //Debug.Log(penaltyTime);
     }
+
     public string GetTimeLeft()
     {
         float timeLeft = secondsAllocated-timePassed;
@@ -73,5 +83,13 @@ public class TimeKeeper : MonoBehaviour
        string timHasLeft = min + " : " + sec;
 
         return timHasLeft;
+    }
+    public float GetMaxTime()
+    {
+        return secondsAllocated;
+    }
+    public float GetCurrentTime()
+    {
+        return secondsAllocated-timePassed;
     }
 }

@@ -101,7 +101,7 @@ public class QuickTimeController_Player : MonoBehaviour
         {
             //Set QT Point
             float location = currentQTData.GetQTMove(Time.deltaTime);
-            hitMarker = (hitMarker + location+360) % 360;
+            hitMarker = (hitMarker + location + 360) % 360;
             
             qtHitMarker.transform.rotation = Quaternion.Euler(Vector3.forward * hitMarker);
             
@@ -216,14 +216,14 @@ public class QuickTimeController_Player : MonoBehaviour
     // On Hook ////////////////////////////////////////////////////////////////////////////////////////////////////
     private void Hooked() // activated when the fish is hooked.
     {
-        if (GameManager.Instance.hintsEnabled)
-        {
-            Time.timeScale = 0f;
-            GameManager.Instance.GiveHint(2,0); // Hold Release
-        }
+        //if (GameManager.Instance.hintsEnabled)
+        //{
+            //Time.timeScale = 0f;
+            //GameManager.Instance.GiveHint(2,0); // Hold Release
+        //}
         
         
-        input.InteractEventQT += NextHint;
+        //input.InteractEventQT += NextHint;
         // retrive lure as a way to disable the other fish from being interested and interupting.
         // should be switched out for something more elegent later
         useControl.rod.LurePrefab.SetActive(false);
@@ -231,7 +231,7 @@ public class QuickTimeController_Player : MonoBehaviour
 
 
         inHit=false; // set this to false for the moment, just in case.
-        completionAmnt = 0;
+        completionAmnt = .5f;
         // (set off some animation for the rod).
 
         // Set controls to Minigame State

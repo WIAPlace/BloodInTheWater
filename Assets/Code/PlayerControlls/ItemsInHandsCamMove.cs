@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ItemsInHandsCamMove : MonoBehaviour
 {
+    
     [SerializeField][Tooltip("First Person Camera")]
     private Transform cameraRot;
     [SerializeField][Tooltip("Holder of item meshes")]

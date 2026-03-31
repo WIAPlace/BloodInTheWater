@@ -16,8 +16,10 @@ public abstract class FishSC_Abstact : MonoBehaviour
 {
     //[SerializeField][Tooltip("This will be a dadded to the controller's fishdata")]
     protected QuickTimeData_Abstract fishData;
+    protected Fish_Controller FSC;
 
     public GameObject target;
+    public float ChaceIncrease;
 
     public Abs_StateIdle Idle; // Outside of lure or bobber range, mainly just hanging out
     public Abs_StateLure Lure; // Inside of lure range, but outside of bobber range.
@@ -48,4 +50,16 @@ public abstract class FishSC_Abstact : MonoBehaviour
         NavMesh.SamplePosition(randomDirection, out hit, radius, 1);
         return hit.position;
     }
+    ///////////////////////////////////////////////////////////////////////// Bobber Startles fish
+    public abstract void BobberSpooked(Vector3 lurePosition);
+
+    ///////////////////////////////////////////////////////////////////////// Lure Reeled In
+    public abstract void LureReeledIn(); // called when the lure has been reeled in.
+
+    public virtual Vector3 GetRamTarget(Fish_Controller FSC)
+    {
+        return Vector3.zero;
+    }
+    public abstract void IdleMovement(Fish_Controller FSC);
+    public abstract IFishState MoveBackToIdle(Fish_Controller FSC);
 }

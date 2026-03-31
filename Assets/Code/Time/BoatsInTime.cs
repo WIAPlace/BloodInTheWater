@@ -21,10 +21,12 @@ public class BoatsInTime : MonoBehaviour
     
 
     // Callable Functions ///////
+    /*
     public void HitHull(float timePenalty)
     { // throw that over to the time keeper. 
         timeKeeper.AddPenaltyTime(timePenalty);
         // likely play some audio here.
         // Shake the camera
     }
+    */
 }

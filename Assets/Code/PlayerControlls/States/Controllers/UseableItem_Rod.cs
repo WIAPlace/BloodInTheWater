@@ -93,12 +93,12 @@ public class UseableItem_Rod : UseableItem_Abstract
             
             if (LurePrefab.activeSelf && target != null) // this should probably be traded out for some kind of event thing
             {
-                target.BobberSpooked(lurePos); 
+                target.SC.BobberSpooked(lurePos); 
                 
             }
             else if (target != null)
             {
-                target.LureReeledIn();  // we should get the data here
+                target.SC.LureReeledIn();  // we should get the data here
             }
             i++;
         }

@@ -15,8 +15,8 @@ public class QuickTimeEvent_Basic : ScriptableObject
     // will need to figure out how to keep this working with screen size.
 
 
-    public void SetPlayerPoint(float position, Image playerPoint)
-    {
+    public void SetPlayerPoint(float position, Image playerPoint) 
+    { // player point is now the fish's marker on the radial
         Vector3 rot = new Vector3(0,0,position);
         playerPoint.transform.rotation = Quaternion.Euler(rot);
     }
