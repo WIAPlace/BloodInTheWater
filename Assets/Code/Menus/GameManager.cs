@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] public InputReader input; //Input reader
     [SerializeField] private GameObject pauseMenu; // ui for the pause menu
+    [SerializeField] private GameObject howToPlay; // how to play.
     [SerializeField] private GameObject gameUI; // ui for the game during play
     [SerializeField] private Image windUpIndicator; // will show when u have would up and are ready to release
     [SerializeField] private TextMeshProUGUI text; // ui for temp text
@@ -73,7 +74,8 @@ public class GameManager : MonoBehaviour
     {
         pref.LoadUIStates();
         gameUI.SetActive(true);
-        pauseMenu.SetActive(false);
+        if(pauseMenu.activeSelf) pauseMenu.SetActive(false);
+        if(howToPlay.activeSelf) howToPlay.SetActive(false);
         windUpIndicator.gameObject.SetActive(false);
         Time.timeScale=1f;
         Cursor.lockState = CursorLockMode.Locked;
