@@ -1,9 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
-using Unity.PlasticSCM.Editor.WebApi;
+using Unity.Cinemachine;
 using UnityEngine;
-using UnityEngine.Rendering;
+
 
 public class PrimativeStarFish : MonoBehaviour
 {
@@ -14,6 +12,8 @@ public class PrimativeStarFish : MonoBehaviour
     private Transform[] spawnSpots;
     [SerializeField]
     Animator anim;
+    [SerializeField]
+    CinemachineImpulseSource impSour;
 
     [SerializeField]
     private AudioSource soundMaker;
@@ -21,6 +21,8 @@ public class PrimativeStarFish : MonoBehaviour
     private SoundEffectSO hit;
     [SerializeField][Tooltip("SFX SO for StarFish Dying")]
     private SoundEffectSO fall;
+    [SerializeField][Tooltip("SFX SO for StarFish arriving")]
+    private SoundEffectSO start;
 
     [SerializeField][Tooltip("Max Number of hits to get this man out of here.")]
     private int maxHP = 3;
@@ -48,26 +50,27 @@ public class PrimativeStarFish : MonoBehaviour
     // trigger on spawinging this man. //////////////////////////
     public void Spawn()
     {
-        body.SetActive(true);
-        SpawnInRandomLocation();
-        onBoat = true;
-        currentHP = maxHP;
-        hurtingBoat = StartCoroutine(HurtBoat());
+        impSour.GenerateImpulse(); // make the player feel the rumble
+        body.SetActive(true); // set the body as see able
+        SpawnInRandomLocation(); // spawin at one of the spawn points
+        start.Play(soundMaker); // make sound on start
+        onBoat = true; // boi is on boat
+        currentHP = maxHP; // set current hp = max hp
+        hurtingBoat = StartCoroutine(HurtBoat()); // start hurting
     }
 
     // triggers when hp is 0 ///////////////////////////////////
     private void Despawn()
     {
-
-        onBoat = false;
-        fall.Play(soundMaker);
+        onBoat = false; // off boat so stop hurting
+        fall.Play(soundMaker); // play sfx
         if (hurtingBoat != null)
-        {
+        { // if hurting boat stop
             StopCoroutine(hurtingBoat);
         }
 
-        body.SetActive(false);
-        StartCoroutine(ChanceSpawn());
+        body.SetActive(false); // go invis
+        StartCoroutine(ChanceSpawn());// start plotting arrival
     }
 
     // when a limb is hit ////////////////////////////////////////

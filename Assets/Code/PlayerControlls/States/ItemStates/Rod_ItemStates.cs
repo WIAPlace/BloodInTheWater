@@ -134,6 +134,7 @@ public class Rod_StateItemIsReady : Abs_StateItemIsReady
             // indicator that the fish is ready to be caught.
             
             controller.audioSource.PlayOneShot(rod.fishHookIndicator);
+            rod.SpawnEffectAtPosition(rod.LurePrefab.transform.position, rod.SmallSplash);
         }
         
         
@@ -211,6 +212,10 @@ public class Rod_StateItemUse : Abs_StateItemUse
             rod.CastSpotPrefab.SetActive(false);
             CastLure();
             rod.SetIfFishing(true);
+
+            //rod.BigSplash.transform.position = rod.LurePrefab.transform.position;
+            //rod.BigSplash.Play();
+            rod.SpawnEffectAtPosition(rod.LurePrefab.transform.position, rod.BigSplash);
 
             GameManager.Instance.GiveHint(0,1); 
             //Debug.Log("Hit");

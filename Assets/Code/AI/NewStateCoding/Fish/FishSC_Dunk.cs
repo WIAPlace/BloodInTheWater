@@ -4,6 +4,8 @@ using System.Data;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Splines;
+using Unity.Cinemachine;
+using JetBrains.Annotations;
 
 public class FishSC_Dunk : FishSC_Abstact
 {
@@ -14,7 +16,8 @@ public class FishSC_Dunk : FishSC_Abstact
     [SerializeField] [Tooltip("Sound of hitting the boat")]
     private SoundEffectSO BoatHit;
     public AudioSource soundMaker;
-    
+    [SerializeField]
+    CinemachineImpulseSource impSour;
 
     [SerializeField] [Tooltip("In seconds")]
     private float Damage=5;
@@ -100,6 +103,7 @@ public class FishSC_Dunk : FishSC_Abstact
             GameManager.Instance.OnBoatHit(Damage);
             StartCoroutine(CollisionShock(FSC));
             BoatHit.Play(soundMaker);
+            impSour.GenerateImpulse();
         }
     }
     private IEnumerator CollisionShock(Fish_Controller FSC)

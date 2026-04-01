@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6497749623678682615}
   - component: {fileID: 2170323324750439728}
   - component: {fileID: 2038943128255155707}
+  - component: {fileID: 5796429889163955143}
   m_Layer: 0
   m_Name: StarfishMain
   m_TagString: Untagged
@@ -53,14 +54,16 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   anim: {fileID: 2061079866777738926}
+  impSour: {fileID: 5796429889163955143}
   soundMaker: {fileID: 2038943128255155707}
   hit: {fileID: 11400000, guid: fddeef372cca6ac449ffdb9b47265405, type: 2}
   fall: {fileID: 11400000, guid: 4cc59e10440d35449a2092cec5e161a0, type: 2}
+  start: {fileID: 11400000, guid: 3286a11961465404187967a34d287ea5, type: 2}
   maxHP: 3
-  damageToBoat: 0.1
+  damageToBoat: 1
   intervals: 1
-  min: 1
-  max: 10
+  min: 50
+  max: 200
 --- !u!82 &2038943128255155707
 AudioSource:
   m_ObjectHideFlags: 0
@@ -158,6 +161,59 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5796429889163955143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4432030845004245505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ImpulseDefinition:
+    ImpulseChannel: 1
+    ImpulseShape: 4
+    CustomImpulseShape:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    ImpulseDuration: 1
+    ImpulseType: 0
+    DissipationRate: 0.25
+    RawSignal: {fileID: 0}
+    AmplitudeGain: 1
+    FrequencyGain: 1
+    RepeatMode: 0
+    Randomize: 1
+    TimeEnvelope:
+      AttackShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      DecayShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      AttackTime: 0
+      SustainTime: 0.2
+      DecayTime: 0.7
+      ScaleWithImpact: 1
+      HoldForever: 0
+    ImpactRadius: 100
+    DirectionMode: 0
+    DissipationMode: 2
+    DissipationDistance: 100
+    PropagationSpeed: 343
+  DefaultVelocity: {x: 0.1, y: 0, z: 0}
 --- !u!1001 &1982613768213724846
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -31,6 +31,11 @@ public class UseableItem_Rod : UseableItem_Abstract
     [field: SerializeField][Tooltip("Reel In Speed")]
     public float ReelIn {get; private set;} 
 
+    [field: SerializeField]
+    public ParticleSystem BigSplash { get; private set; }
+    [field: SerializeField]
+    public ParticleSystem SmallSplash { get; private set; }
+
     [HideInInspector]
     public float LureRadius { get; private set; } // how large the lure radius is
     [HideInInspector]
@@ -102,6 +107,13 @@ public class UseableItem_Rod : UseableItem_Abstract
             }
             i++;
         }
+    }
+
+    public void SpawnEffectAtPosition(Vector3 position, ParticleSystem part)
+    {
+        // Instantiate the prefab at the specified position with no rotation
+        ParticleSystem ps = Instantiate(part, position, Quaternion.Euler(Vector3.right*-90));
+        Destroy(ps,ps.main.duration);
     }
 
 }
