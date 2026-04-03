@@ -20,6 +20,19 @@ public class UseableItem_Harp : UseableItem_Abstract
     public float AtkDistance { get; private set; }
     [field: SerializeField][Tooltip("Harpoon's thickness / leniency for hits")]
     public float AtkRadius { get; private set; }
+    [field: SerializeField][Tooltip("speed for readying rot")]
+    public float RotSpeed { get; private set; }
+    [field: SerializeField][Tooltip("speed for readying")]
+    public float MoveSpeed { get; private set; }
+    [field: SerializeField][Tooltip("speed of swing")]
+    public float SwingSpeed { get; private set; }
+    
+    [field: SerializeField][Tooltip("position for idle holding")]
+    public Transform IdlePos { get; private set; }
+    [field: SerializeField][Tooltip("position for ready to hit")]
+    public Transform ReadyPos { get; private set; }
+    [field: SerializeField][Tooltip("position for hit")]
+    public Transform HitPos { get; private set; }
 
 
 
