@@ -33,6 +33,7 @@ namespace TLC.FishStates{
             {
                 Vector3 newPos = FSC.SC.RandomNavMeshLocation(FSC.transform.position, FSC.wanderRadius);
                 FSC.agent.SetDestination(newPos);
+                //FSC.agent.Warp(newPos);
                     
                 // Wait until agent is close to destination or timer runs out
                 yield return new WaitForSeconds(FSC.wanderTimer);
@@ -184,7 +185,8 @@ namespace TLC.FishStates{
             //Debug.Log("Running Enter");
             if (NavMesh.SamplePosition(randomPoint, out hit, 50f, -1)) 
             {
-                FSC.transform.position = hit.position;
+                //FSC.transform.position = hit.position;
+                FSC.agent.Warp(hit.position);
             }
             else
             {

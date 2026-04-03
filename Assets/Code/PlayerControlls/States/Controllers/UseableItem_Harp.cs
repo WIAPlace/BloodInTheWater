@@ -44,6 +44,10 @@ public class UseableItem_Harp : UseableItem_Abstract
         UseItem = new Harp_StateItemUse();
         Place = new Harp_StateItemPlace();
         UnderAtk = new Harp_StateItemUnderAttack();
+
+        IdlePos.gameObject.SetActive(false);
+        ReadyPos.gameObject.SetActive(false);
+        HitPos.gameObject.SetActive(false);
     }
     
     public override IUseableState DoState(Useable_Controller controller)

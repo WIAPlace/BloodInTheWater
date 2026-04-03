@@ -48,9 +48,6 @@ public class QuickTimeController_Player : MonoBehaviour
     private float currentHitSpeed=0;
     private float _hitVelocity = 0f;
 
-    [SerializeField] [Tooltip("Time before concequences of missing too much comes in")]
-    private float graceTimeAmnt = 4f;
-
     private float currentHitSpot = 0; // will be used to check where the hit zone is at any given time
     private float hitMarker =0; // will be used to check hit marker position at any time
     
@@ -62,7 +59,6 @@ public class QuickTimeController_Player : MonoBehaviour
     // Time Variables //
     //private float timeKeeper = 0; // current time.
     private bool inProgress = false; // should time be going.
-    private bool graceTime = true; // used to give the player a bit of time before missing hurts them.
 
     private Coroutine grace; 
     
@@ -91,7 +87,7 @@ public class QuickTimeController_Player : MonoBehaviour
         input.UseEventQT -= HandelUseQT;
         input.UseEventQTCanelled -= HandleUseQTCancelled;
         input.InteractEventQT -= NextHint;
-        input.InteractEventQT -= TurnTimeBackOn;
+        //input.InteractEventQT -= TurnTimeBackOn;
     }
 
     // Update //////////////////////////////////////////////////////////////////////////////////////
@@ -129,12 +125,6 @@ public class QuickTimeController_Player : MonoBehaviour
             completionAmnt += currentQTData.GetCompletionRate(inHit)*Time.deltaTime; // will add the rate of change overtime to completion amount
             completionAmnt = Mathf.Clamp(completionAmnt,0,1);
 
-            if(graceTime && completionAmnt >= .2f) // check if grace needs to be revoked early
-            { // if they complete this a good amount they are alowed to fail
-                graceTime = false;
-                if(grace!=null) StopCoroutine(grace); // stop the corutine if this is still going
-            }
-
             // change reticle to know how complete it is.
             qtCompletion.fillAmount = completionAmnt;
             currentQTData.QTStatus(completionAmnt);
@@ -143,7 +133,7 @@ public class QuickTimeController_Player : MonoBehaviour
             {   
                 EndQTEAll(true);
             }
-            else if(!graceTime&&completionAmnt <= 0) //lose
+            else if(completionAmnt <= 0) //lose
             {
                 EndQTEAll(false);
             }
@@ -213,19 +203,26 @@ public class QuickTimeController_Player : MonoBehaviour
         Hooked();
     }
 
+
+    private void HookTutor()
+    {
+        if (GameManager.Instance.hintsEnabled)
+        { // if hints are enabled play the hint
+            Time.timeScale = 0f;
+            GameManager.Instance.GiveHint(2,0); // Hold Release
+            input.InteractEventQT += NextHint;
+        }
+        else
+        {// else just skip
+            Hooked();
+        }
+    }
     // On Hook ////////////////////////////////////////////////////////////////////////////////////////////////////
     private void Hooked() // activated when the fish is hooked.
     {
-        //if (GameManager.Instance.hintsEnabled)
-        //{
-            //Time.timeScale = 0f;
-            //GameManager.Instance.GiveHint(2,0); // Hold Release
-        //}
-        
-        
-        //input.InteractEventQT += NextHint;
         // retrive lure as a way to disable the other fish from being interested and interupting.
         // should be switched out for something more elegent later
+
         useControl.rod.LurePrefab.SetActive(false);
         useControl.rod.RetrieveLure(useControl.rod.LurePrefab.transform.position, useControl.rod.LureRadius); 
 
@@ -243,10 +240,7 @@ public class QuickTimeController_Player : MonoBehaviour
         qtUI.SetActive(true);
         // set the point at which the spinner will be to within the circle
 
-        hitZone.fillAmount = hitArea/360;   
-
-        graceTime = true;
-        grace = StartCoroutine(GracePeriod(graceTimeAmnt)); // give the player a bit of time before they will loose    
+        hitZone.fillAmount = hitArea/360;      
 
         // begin minigame
 
@@ -279,11 +273,6 @@ public class QuickTimeController_Player : MonoBehaviour
         input.SetGameplay();
         
     }
-    private IEnumerator GracePeriod(float x)
-    { // after a number of seconds force grace time to be false
-        yield return new WaitForSeconds(x);
-        graceTime = false;
-    }
 
     public void PlayFakeFish(GameObject fish, int rot)
     {
@@ -291,10 +280,12 @@ public class QuickTimeController_Player : MonoBehaviour
         useControl.ReelInFakeFish(fish,rot);
     }
     
+    
     private void NextHint()
     {
-        StartCoroutine(HintForCast());
+        //StartCoroutine(HintForCast());
     }
+    /*
     private IEnumerator HintForCast()
     {
         Time.timeScale = 1f;
@@ -308,5 +299,7 @@ public class QuickTimeController_Player : MonoBehaviour
     {
         Time.timeScale = 1f;
         input.InteractEventQT -= TurnTimeBackOn;
+        Hooked();
     }
+    */
 }   

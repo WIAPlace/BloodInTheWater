@@ -20,6 +20,10 @@ public class MeshWithWaves : MonoBehaviour
 
     void Start()
     {
+        if(UseableMesh == null)
+        {
+            UseableMesh = transform.GetChild(0).gameObject.transform;
+        }
         originalPosition = UseableMesh.localPosition;
     }
 
