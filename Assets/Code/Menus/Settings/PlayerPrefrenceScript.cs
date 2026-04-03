@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Unity.Cinemachine;
 using UnityEngine.Audio;
+using System;
 /// 
 /// Author: Weston Tollette
 /// Created: 3/24/26
@@ -19,6 +20,8 @@ public class PlayerPrefrenceScript : MonoBehaviour
     private float defaultSensX = 1;
     private float defaultSensY = 1;
     private float defaultVol = 1;
+    private float defaultSFX = 1;
+    private float defaultMusic = 1;
 
     // toggles
     private int defaultDither = 1;
@@ -28,8 +31,10 @@ public class PlayerPrefrenceScript : MonoBehaviour
     //temp holders
     private float tempSensX=1;
     private float tempSensY=1;
-    [SerializeField]
+    //[SerializeField]
     private float tempVol=1;
+    private float tempSFX = 1;
+    private float tempMusic =1;
 
     private int tempDither=1;
     private int tempCamShake=1;
@@ -43,6 +48,11 @@ public class PlayerPrefrenceScript : MonoBehaviour
     private Slider ySlider;
     [SerializeField][Tooltip("Volume")]
     private Slider volSlider;
+    [SerializeField][Tooltip("Volume")]
+    private Slider sfxSlider;
+    [SerializeField][Tooltip("Volume")]
+    private Slider musicSlider;
+    
 
     // toggles
     [SerializeField][Tooltip("Dither Toggle")]
@@ -59,6 +69,12 @@ public class PlayerPrefrenceScript : MonoBehaviour
     private GameObject ditherImage;
     [SerializeField][Tooltip("Main Audio Mixer")]
     private AudioMixer myMixer;
+    /*
+    [SerializeField][Tooltip("Main Audio Mixer")]
+    private AudioMixer sfxMixer;
+    [SerializeField][Tooltip("Main Audio Mixer")]
+    private AudioMixer musicMixer;
+    */
 
     [Header("In Scene Refrences")]
     [SerializeField][Tooltip("Player Look Script")]
@@ -73,6 +89,8 @@ public class PlayerPrefrenceScript : MonoBehaviour
         xSlider.onValueChanged.AddListener(delegate {SliderChange(0);});
         ySlider.onValueChanged.AddListener(delegate {SliderChange(1);});
         volSlider.onValueChanged.AddListener(delegate{SliderChange(2);});
+        sfxSlider.onValueChanged.AddListener(delegate{SliderChange(3);});
+        musicSlider.onValueChanged.AddListener(delegate{SliderChange(4);});
 
         ditherToggle.onValueChanged.AddListener(delegate{ToggleChange(0);});
         camToggle.onValueChanged.AddListener(delegate{ToggleChange(1);});
@@ -94,6 +112,8 @@ public class PlayerPrefrenceScript : MonoBehaviour
         defaultSensX = PlayerPrefs.GetFloat("SensX",1); // defaut to one
         defaultSensY = PlayerPrefs.GetFloat("SensY",1); // defaut to one
         defaultVol = PlayerPrefs.GetFloat("Vol",1f);   // default to 1
+        defaultSFX = PlayerPrefs.GetFloat("SFX",1f); // sound effects
+        defaultMusic = PlayerPrefs.GetFloat("Music",1f); // music
         //Debug.Log(defaultVol);
 
         defaultDither = PlayerPrefs.GetInt("Dither",1); // default to true;
@@ -106,6 +126,8 @@ public class PlayerPrefrenceScript : MonoBehaviour
         PlayerPrefs.SetFloat("SensX",tempSensX); // sensetivity x
         PlayerPrefs.SetFloat("SensY",tempSensY); // sensetivity Y
         PlayerPrefs.SetFloat("Vol",tempVol); // volume;
+        PlayerPrefs.SetFloat("SFX",tempSFX); // sound effects
+        PlayerPrefs.SetFloat("Music",tempMusic); // music
 
         PlayerPrefs.SetInt("Dither",tempDither); // default to true;
         PlayerPrefs.SetInt("CamShake",tempCamShake); // default to true;
@@ -126,6 +148,8 @@ public class PlayerPrefrenceScript : MonoBehaviour
         xSlider.onValueChanged.RemoveListener(delegate {SliderChange(0);});
         ySlider.onValueChanged.RemoveListener(delegate {SliderChange(1);});
         volSlider.onValueChanged.RemoveListener(delegate{SliderChange(2);});
+        sfxSlider.onValueChanged.RemoveListener(delegate{SliderChange(3);});
+        musicSlider.onValueChanged.RemoveListener(delegate{SliderChange(4);});
 
         ditherToggle.onValueChanged.RemoveListener(delegate{ToggleChange(0);});
         camToggle.onValueChanged.RemoveListener(delegate{ToggleChange(1);});
@@ -139,7 +163,14 @@ public class PlayerPrefrenceScript : MonoBehaviour
     
     public void ResetAllPlayerPrefs()
     {
-        PlayerPrefs.DeleteAll();
+        PlayerPrefs.DeleteKey("SensX");
+        PlayerPrefs.DeleteKey("SensY");
+        PlayerPrefs.DeleteKey("Vol");
+        PlayerPrefs.DeleteKey("SFX");
+        PlayerPrefs.DeleteKey("Music");
+        PlayerPrefs.DeleteKey("Dither");
+        PlayerPrefs.DeleteKey("CamShake");
+        PlayerPrefs.DeleteKey("Hints");
         PlayerPrefs.Save(); // Ensures immediate disk write
 
         // we cant do appy settings cause save() would overwirte anything else.
@@ -148,7 +179,9 @@ public class PlayerPrefrenceScript : MonoBehaviour
 
         // apply settings 
         ChangeSensitivity();
-        ChangeVolume();
+        ChangeVolume("MasterVolume",defaultVol);
+        ChangeVolume("SFXVolume", defaultSFX);
+        ChangeVolume("MusicVolume",defaultMusic);
 
         ChangeDither();
         ChangeCamShake();
@@ -162,6 +195,8 @@ public class PlayerPrefrenceScript : MonoBehaviour
         tempSensX = defaultSensX;
         tempSensY = defaultSensY;
         tempVol = defaultVol;
+        tempSFX = defaultSFX;
+        tempMusic = defaultMusic;
 
         tempDither = defaultDither;
         tempCamShake = defaultCamShake;
@@ -170,6 +205,8 @@ public class PlayerPrefrenceScript : MonoBehaviour
         xSlider.value = defaultSensX;
         ySlider.value = defaultSensY;
         volSlider.value = defaultVol;
+        sfxSlider.value = defaultSFX;
+        musicSlider.value = defaultMusic;
 
         ditherToggle.isOn = CheckBool(defaultDither);
         camToggle.isOn = CheckBool(defaultCamShake);
@@ -191,6 +228,14 @@ public class PlayerPrefrenceScript : MonoBehaviour
             
             case 2:  // volume
                 tempVol = volSlider.value;
+                break;
+
+            case 3: // SfX
+                tempSFX = sfxSlider.value;
+                break;
+
+            case 4: // music
+                tempMusic = musicSlider.value;
                 break;
 
             default:
@@ -246,7 +291,10 @@ public class PlayerPrefrenceScript : MonoBehaviour
 
         // apply settings 
         ChangeSensitivity();
-        ChangeVolume();
+        ChangeVolume("MasterVolume",defaultVol);
+        ChangeVolume("SFXVolume", defaultSFX);
+        ChangeVolume("MusicVolume",defaultMusic);
+
 
         ChangeDither();
         ChangeCamShake();
@@ -268,13 +316,13 @@ public class PlayerPrefrenceScript : MonoBehaviour
         }
     }
     
-    private void ChangeVolume()
+    private void ChangeVolume(string mixer, float vol)
     {
         if(myMixer!=null)
         {
             //Debug.Log(defaultVol);
             // Use log to map 0-1 to dB, avoiding Log10(0)
-            myMixer.SetFloat("MasterVolume", Mathf.Log10(defaultVol) * 20); 
+            myMixer.SetFloat(mixer, Mathf.Log10(vol) * 20); 
             //Debug.Log(Mathf.Log10(defaultVol) * 20);
         }
     }

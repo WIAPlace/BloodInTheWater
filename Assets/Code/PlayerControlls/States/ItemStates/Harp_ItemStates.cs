@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 /// 
 /// Author: Weston Tollette
@@ -12,8 +13,10 @@ using UnityEngine;
 ////////////////////////////////////////////////////// Idle /////////////////////////////////////////////
 public class Harp_StateItemIdle : Abs_StateItemIdle
 {
+    private UseableItem_Harp harp;
     public override void DoEnter(Useable_Controller controller)
     {
+        harp = controller.harp;
         base.DoEnter(controller);
     }
 
@@ -21,12 +24,51 @@ public class Harp_StateItemIdle : Abs_StateItemIdle
     {
         // stop corutine for idle animation
     }
-}
+    public override IUseableState DoState(Useable_Controller controller)
+    {
+         // 1. Rotate towards target local rotation
+        harp.useableMesh.transform.localRotation = Quaternion.RotateTowards(
+            harp.useableMesh.transform.localRotation, 
+            harp.IdlePos.localRotation, 
+            harp.RotSpeed * Time.deltaTime
+        );
 
+        // 2. Move towards target local position
+        harp.useableMesh.transform.localPosition = Vector3.MoveTowards(
+            harp.useableMesh.transform.localPosition, 
+            harp.IdlePos.localPosition, 
+            harp.MoveSpeed * Time.deltaTime
+        );
+        return this;
+    }
+}
 ////////////////////////////////////////////////////// Readying /////////////////////////////////////////////
 public class Harp_StateItemReadying : Abs_StateItemReadying
 {
-    
+    private UseableItem_Harp harp;
+    public override void DoEnter(Useable_Controller controller)
+    {
+        base.DoEnter(controller);
+        harp = controller.harp;
+
+    }
+    public override IUseableState DoState(Useable_Controller controller)
+    {
+        // 1. Rotate towards target local rotation
+        harp.useableMesh.transform.localRotation = Quaternion.RotateTowards(
+            harp.useableMesh.transform.localRotation, 
+            harp.ReadyPos.localRotation, 
+            harp.RotSpeed * Time.deltaTime
+        );
+
+        // 2. Move towards target local position
+        harp.useableMesh.transform.localPosition = Vector3.MoveTowards(
+            harp.useableMesh.transform.localPosition, 
+            harp.ReadyPos.localPosition, 
+            harp.MoveSpeed * Time.deltaTime
+        );
+        return this;
+    }
 }
 
 ////////////////////////////////////////////////////// Is Ready //////////////////////////////////////////////
@@ -52,14 +94,17 @@ public class Harp_StateItemUse : Abs_StateItemUse
 {
     GameObject obj; // object for the controller so we dont have to continualy call and pass it
     UseableItem_Harp harp; // game object for harpoon so we can access it's variables
+    Transform target;
+    IUseableState returnable;
 
     public override void DoEnter(Useable_Controller controller)
     {
         obj = controller.FPCamera; // set object to the controller's pobject.
         harp = controller.harp; // set harp as the harpoon attached to the player.
         // play animation
-
-        TryToHit();
+        returnable = this;
+        //TryToHit();
+        controller.StartCoroutine(Swing(controller));
     }
 
     public override void DoExit(Useable_Controller controller)
@@ -69,7 +114,30 @@ public class Harp_StateItemUse : Abs_StateItemUse
 
     public override IUseableState DoState(Useable_Controller controller)
     {
-        return controller.currentItem.Idle;
+        // 1. Rotate towards target local rotation
+        harp.useableMesh.transform.localRotation = Quaternion.RotateTowards(
+            harp.useableMesh.transform.localRotation, 
+            target.localRotation, 
+            harp.RotSpeed * Time.deltaTime
+        );
+
+        // 2. Move towards target local position
+        harp.useableMesh.transform.localPosition = Vector3.MoveTowards(
+            harp.useableMesh.transform.localPosition, 
+            target.localPosition, 
+            harp.MoveSpeed * 5 * Time.deltaTime
+        );
+        return returnable;//controller.currentItem.Idle;
+    }
+    IEnumerator Swing(Useable_Controller con)
+    {
+        target = harp.HitPos;
+        yield return new WaitForSeconds(harp.SwingSpeed);
+        TryToHit();
+        target = harp.ReadyPos;
+        yield return new WaitForSeconds(harp.SwingSpeed);
+        returnable = con.currentItem.Idle;
+
     }
     private void TryToHit()
     {
@@ -112,4 +180,5 @@ public class Harp_StateItemUnderAttack : Abs_StateItemUnderAttack
     {
         base.DoExit(controller);
     }
+
 }

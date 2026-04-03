@@ -93,11 +93,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9ed717cec850d6478044773965b719c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  qtcPlayer: {fileID: 0}
   hitZoneLength: []
   qtSpeed: 360
+  qtSmoothMotion: 0
   qtLength: 100
   type: 0
+  timerMultiplyer: 0
+  diffRate: 0
+  winRate: 0
+  looseRate: 0
+  rot: 0
+  minLbs: 5
+  maxLbs: 15
 --- !u!114 &413690323842010444
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,6 +143,7 @@ MonoBehaviour:
   chanceToHook: 20
   catchTimeWindow: 3
   onHook: 0
+  ReelRate: 0
   inLureTrigger: 0
   lurePos: {x: 0, y: 0, z: 0}
   debugCurrentStateName: 
@@ -153,6 +161,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  ChaceIncrease: 0
 --- !u!114 &185055685401638151
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,6 +177,7 @@ MonoBehaviour:
   UseableMesh: {fileID: 0}
   onWaves: 1
   displacement: 0
+  originalPosition: {x: 0, y: 0, z: 0}
 --- !u!1001 &6870379017648183807
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -18,6 +18,10 @@ public class QuickTimeData_BasicFish : QuickTimeData_Abstract
     private float fishLbs;
     [SerializeField] [Tooltip("When caught how much should they rotate to show their good side")]
     private int rot;
+    [SerializeField][Tooltip("Fish lbs min")]
+    private float minLbs=5;
+    [SerializeField][Tooltip("Fish lbs max")]
+    private float maxLbs=15;
     
     public QuickTimeData_BasicFish(QuickTimeData_BasicFish other) : base(other)
     {
@@ -33,7 +37,8 @@ public class QuickTimeData_BasicFish : QuickTimeData_Abstract
     private void OnEnable()
     {
         
-        fishLbs = Random.Range(5f,15f);
+        float normalRandy = Random.Range(0,1)+Random.Range(0,1);
+        fishLbs = normalRandy *.5f *(maxLbs-minLbs)+minLbs; // trigangle distrubutin
     }
 
     public override void SendData() // sends the data to the Rod scipt.
