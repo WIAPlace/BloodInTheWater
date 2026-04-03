@@ -34,13 +34,15 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TimeKeeper keptTime;
     [SerializeField] private HintArray hintArray;
     [SerializeField] private PlayerPrefrenceScript pref;
-    
+    public Unlocks unlocks;
 
     private Coroutine running;
     [HideInInspector]public bool hintsEnabled = true;
     public static event System.Action OnHooked;
     public static event System.Action OnHookedCancelled;
     public static Action<float> BoatHit;
+
+    
     
     void Start()
     {
