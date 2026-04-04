@@ -61,7 +61,7 @@ public class Useable_Controller : MonoBehaviour
     private string debugCurrentStateName = "";
     [SerializeField] [Tooltip("used to see what state we are in")]
     private string debugPreviousStateName = "";
-    //[SerializeField] public Animator anim;
+    [SerializeField] public Animator anim;
 
     [HideInInspector]
     public bool showingFish=false;
