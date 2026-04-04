@@ -31,22 +31,30 @@ public class Unlocks : ScriptableObject
         }
         // unlock levels?
         PlayerPrefs.SetInt(levelKeys[1],100);
+        PlayerPrefs.Save();
     }
 
     public void ResetAll()
     {
         for(int i = 0; i < fishKeys.Length; i++)
         {   // reset fish
-            SaveFishData(i,0);
+            //SaveFishData(i,0);
+            PlayerPrefs.DeleteKey(fishKeys[i]);
         }
         for(int i = 0; i < monsterKeys.Length; i++)
         {   // reset monsters
-            PlayerPrefs.SetInt(monsterKeys[i],0);
+            //PlayerPrefs.SetInt(monsterKeys[i],0);
+            PlayerPrefs.DeleteKey(monsterKeys[i]);
         }
 
         // reset levels
-        PlayerPrefs.SetInt(levelKeys[0],0);
-        PlayerPrefs.SetInt(levelKeys[1],0);
+        //PlayerPrefs.SetInt(levelKeys[0],0);
+        //PlayerPrefs.SetInt(levelKeys[1],0);
+        PlayerPrefs.DeleteKey(monsterKeys[0]);
+        PlayerPrefs.DeleteKey(monsterKeys[1]);
+        
+        //Debug.Log("Locked");
+        PlayerPrefs.Save();
     }
     
     /////////////////////////////////////////////////////////////////////////////////////////////////// Fish

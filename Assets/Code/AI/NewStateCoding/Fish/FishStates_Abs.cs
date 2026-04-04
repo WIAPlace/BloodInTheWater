@@ -186,23 +186,9 @@ namespace TLC.FishStates{
         public virtual void DoEnter(Fish_Controller FSC)
         {
             // set locaton of fish to somewhere in range
-            
-            Vector3 randomPoint = Vector3.zero + Random.insideUnitSphere * 50f;
-            NavMeshHit hit;
-            //Debug.Log("Running Enter");
-            int walkableMask = 1 << NavMesh.GetAreaFromName("Walkable");
-            if (NavMesh.SamplePosition(randomPoint, out hit, 50f,walkableMask)) 
-            {
-                //FSC.transform.position = hit.position;
-                FSC.agent.Warp(hit.position);
-                //Debug.Log("found a spot");
-            }
-            else
-            {
-                //Debug.Log("Didn't find spot");
-                FSC.transform.position = Vector3.zero;
-                //Debug.Log("Spot was not in valid Range");
-            } 
+            FSC.agent.enabled = false;
+
+            FSC.agent.Warp(GetRandomPoint(Vector3.zero, 50f));
 
             FSC.StartWaitToChange(FSC.SC.Idle,2f);
             FSC.agent.enabled = true; 
@@ -212,6 +198,22 @@ namespace TLC.FishStates{
         public abstract void DoExit(Fish_Controller FSC);
 
         public abstract IFishState DoState(Fish_Controller FSC);
+
+        Vector3 GetRandomPoint(Vector3 center, float range) {
+            for (int i = 0; i < 30; i++) { // Try up to 30 times
+                Vector2 randomCircle = Random.insideUnitCircle * range;
+                Vector3 randomPoint = center + new Vector3(randomCircle.x, 0, randomCircle.y);
+                
+                NavMeshHit hit;
+                int walkableMask = 1 << NavMesh.GetAreaFromName("Walkable");
+                
+                // Use a small distance (e.g., 2.0f) to ensure we don't snap to distant areas
+                if (NavMesh.SamplePosition(randomPoint, out hit, 2.0f, walkableMask)) {
+                    return hit.position;
+                }
+            }
+            return Vector3.back*20; // Or a fallback position
+        }
     }
 
     public abstract class Abs_StateHooked : IFishState

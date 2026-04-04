@@ -21,7 +21,9 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] public InputReader input; //Input reader
     [SerializeField] private GameObject pauseMenu; // ui for the pause menu
+    [SerializeField] private GameObject pauseMainMenu; // default menu for pause menu
     [SerializeField] private GameObject howToPlay; // how to play.
+    [SerializeField] private GameObject settingsMenu; // menu for settings
     [SerializeField] private GameObject gameUI; // ui for the game during play
     [SerializeField] private Image windUpIndicator; // will show when u have would up and are ready to release
     [SerializeField] private TextMeshProUGUI text; // ui for temp text
@@ -32,6 +34,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TimeKeeper keptTime;
     [SerializeField] private PlayerPrefrenceScript pref;
     public Unlocks unlocks;
+    [SerializeField] private GameObject scubaNavMesh;
 
     private Coroutine running;
     [HideInInspector]public bool hintsEnabled = true;
@@ -46,10 +49,14 @@ public class GameManager : MonoBehaviour
         input.PauseEvent += HandlePause;
         input.ResumeEvent += HandleResume;
         //input.CheckEvent += HandleCheck;
-        pauseMenu.SetActive(false);
-        gameUI.SetActive(true);
+        pauseMenu.SetActive(false); // turn off pause menu and the extra menus it has
+        if(howToPlay.activeSelf) howToPlay.SetActive(false);
+        if(settingsMenu.activeSelf) settingsMenu.SetActive(false);
+
+        gameUI.SetActive(true); // make the game ui active
         windUpIndicator.gameObject.SetActive(false);
         text.gameObject.SetActive(false);
+
     }
 
     void OnDestroy()
@@ -62,6 +69,7 @@ public class GameManager : MonoBehaviour
     {
         gameUI.SetActive(false);
         pauseMenu.SetActive(true);
+        if(!pauseMainMenu.activeSelf) pauseMainMenu.SetActive(true);
         windUpIndicator.gameObject.SetActive(false);
         text.gameObject.SetActive(false);
         Time.timeScale=0f;
@@ -74,6 +82,7 @@ public class GameManager : MonoBehaviour
         gameUI.SetActive(true);
         if(pauseMenu.activeSelf) pauseMenu.SetActive(false);
         if(howToPlay.activeSelf) howToPlay.SetActive(false);
+        if(settingsMenu.activeSelf) settingsMenu.SetActive(false);
         windUpIndicator.gameObject.SetActive(false);
         Time.timeScale=1f;
         Cursor.lockState = CursorLockMode.Locked;
@@ -211,5 +220,10 @@ public class GameManager : MonoBehaviour
     public void LockAll()
     {
         unlocks.ResetAll();
+    }
+
+    public void ChangeScubaMesActive(bool change)
+    {
+        //scubaNavMesh.SetActive(change);
     }
 }

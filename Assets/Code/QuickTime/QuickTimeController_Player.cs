@@ -4,6 +4,7 @@ using UnityEngine;
 using QuickTime;
 using UnityEngine.UI;
 using Unity.VisualScripting;
+using UnityEngine.ProBuilder;
 //using System;
 /// 
 /// Author: Weston Tollette
@@ -299,4 +300,34 @@ public class QuickTimeController_Player : MonoBehaviour
         Hooked();
     }
     */
+
+    ////////////////////////////////////////////////////////////////// Arcade Mode Settings Changes
+    /// Getters
+    public float GetHitArea()
+    {
+       return hitArea; 
+    }
+    public float GetHitSpeed()
+    {
+        return maxHitSpeed;
+    }
+    public float GetHitSmooth()
+    {
+        return changeSmooth;
+    }
+
+    /// Setters
+    public void ChangeHitArea(float newArea)
+    {
+       hitArea = newArea;
+    }
+    public void ChangeHitSpeed(float newSpeed)
+    {
+        maxHitSpeed = newSpeed;
+    }
+    public void changeHitSmooth(float newSmooth)
+    {
+        changeSmooth = newSmooth;
+    }
+    
 }   
