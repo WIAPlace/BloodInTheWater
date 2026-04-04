@@ -32,7 +32,10 @@ public class Rod_StateItemIdle : Abs_StateItemIdle
             if(controller.previousState == controller.empty.Place)
             {
                 controller.PickUpRodHints();
-                
+                if(GameManager.Instance.hintsEnabled)
+                {    // this one should only ever be active if the other is not.
+                    TutorialManager.Instance.TriggerTutorial(0,0); // casting
+                }
             }
             // start the idle holding animation
             /*
@@ -217,7 +220,10 @@ public class Rod_StateItemUse : Abs_StateItemUse
             //rod.BigSplash.Play();
             rod.SpawnEffectAtPosition(rod.LurePrefab.transform.position, rod.BigSplash);
 
-            GameManager.Instance.GiveHint(0,1); 
+            if(GameManager.Instance.hintsEnabled)
+            {
+                TutorialManager.Instance.TriggerTutorial(0,1); // Use
+            } 
             //Debug.Log("Hit");
         }
         else

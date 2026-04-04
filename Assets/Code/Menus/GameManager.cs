@@ -29,10 +29,7 @@ public class GameManager : MonoBehaviour
     [field: SerializeField] public QuickTimeController_Player qtcPlayer;
     [field: SerializeField] public SplineContainer reelSpline;
     [field: SerializeField] public GameObject lureTarget; 
-    [SerializeField] private GameObject hintUI; // ui for hints
-    [SerializeField] private TextMeshProUGUI hintText; // text for hints
     [SerializeField] private TimeKeeper keptTime;
-    [SerializeField] private HintArray hintArray;
     [SerializeField] private PlayerPrefrenceScript pref;
     public Unlocks unlocks;
 
@@ -57,7 +54,6 @@ public class GameManager : MonoBehaviour
 
     void OnDestroy()
     {
-        input.InteractEvent -= CloseHint;
         input.PauseEvent -= HandlePause;
         input.ResumeEvent -= HandleResume;
         //input.CheckEvent -= HandleCheck;
@@ -172,6 +168,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // change if the game ui is on or off, used in the custom menu script;
+    public void changeGameUI(bool check)
+    {
+        gameUI.SetActive(check);
+    }
 
     public int GetItemInSpot()
     {
@@ -182,27 +183,6 @@ public class GameManager : MonoBehaviour
     {
         if (active) OnHooked.Invoke();
         else OnHookedCancelled.Invoke();
-    }
-
-
-    public void GiveHint(int type, int hint)
-    {
-        if(hintUI != null && hintsEnabled){
-            hintUI.SetActive(true);
-            hintArray.ShowHint(type,hint);
-            input.InteractEvent += CloseHint; // allow player to close out the hint menu
-            input.InteractEventQT += CloseHint;
-        }
-    }
-    public void CloseHint()
-    {
-        if (hintUI != null && hintUI.activeSelf)
-        {
-            hintArray.CloseHints();
-            hintUI.SetActive(false);
-            input.InteractEvent -= CloseHint; // stop listening for interact
-            input.InteractEventQT -= CloseHint;
-        }
     }
 
     public void OnBoatHit(float hitAmt)
@@ -222,5 +202,14 @@ public class GameManager : MonoBehaviour
     public void DamageBoat(float time)
     {
         keptTime.AddPenaltyTime(time);
+    }
+
+    public void UnlockAll()
+    {
+        unlocks.UnlockAll();
+    }
+    public void LockAll()
+    {
+        unlocks.ResetAll();
     }
 }

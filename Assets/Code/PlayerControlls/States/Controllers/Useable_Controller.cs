@@ -216,14 +216,12 @@ public class Useable_Controller : MonoBehaviour
         DisableControlls();
         GameManager.OnHooked -= HandleHook;
         GameManager.OnHookedCancelled -= HandleHookCancelled;
-        input.InteractEvent -=GiveHintForCast;
     }
     void OnDestroy()
     {
         DisableControlls();
         GameManager.OnHooked -= HandleHook;
         GameManager.OnHookedCancelled -= HandleHookCancelled;
-        input.InteractEvent -=GiveHintForCast;
     }
 
     /////////////////////////////////////////////////////////////////////////// On Use Begin
@@ -358,19 +356,10 @@ public class Useable_Controller : MonoBehaviour
 
     public void PickUpRodHints()
     {
-        input.InteractEvent +=GiveHintForCast;
-        GameManager.Instance.GiveHint(4,0);
+        //input.InteractEvent +=GiveHintForCast;
+        if(GameManager.Instance.hintsEnabled)
+        {
+            TutorialManager.Instance.TriggerTutorial(4,0); // pickup
+        }
     }
-
-    private void GiveHintForCast()
-    {
-        StartCoroutine(HintForCast());
-    }
-    private IEnumerator HintForCast()
-    {
-        yield return new WaitForSeconds(.01f);
-        GameManager.Instance.GiveHint(0,0);
-        input.InteractEvent -=GiveHintForCast;
-    }
-    
 }

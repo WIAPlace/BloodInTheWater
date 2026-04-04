@@ -11,7 +11,8 @@ public class HintArray : MonoBehaviour
     [SerializeField] GameObject[] Hints_Interact;
     [SerializeField] GameObject[] Hints_Objects;
 
-    private GameObject[][] HintIcons = new GameObject[5][];
+    [HideInInspector]
+    public GameObject[][] HintIcons = new GameObject[5][];
     private void Start()
     {
         HintIcons[0] = Hints_FishingRod;

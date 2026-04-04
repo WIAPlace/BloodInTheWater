@@ -32,10 +32,9 @@ public class InteractableHover : MonoBehaviour
             {
                 crosshairImage.gameObject.SetActive(true);
                 crosshairImageSmall.enabled = false;
-                if (hint)
+                if(GameManager.Instance.hintsEnabled)
                 {
-                    GameManager.Instance.GiveHint(3,0);
-                    hint = false;
+                    TutorialManager.Instance.TriggerTutorial(3,0); // interact
                 }
             } 
             else

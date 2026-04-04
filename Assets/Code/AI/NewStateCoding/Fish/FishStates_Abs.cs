@@ -101,7 +101,10 @@ namespace TLC.FishStates{
     {
         public virtual void DoEnter(Fish_Controller FSC)
         {
-            GameManager.Instance.GiveHint(1,2); // Tapping
+            if(GameManager.Instance.hintsEnabled)
+            {
+                TutorialManager.Instance.TriggerTutorial(1,2); // tapping
+            }
         }
 
         public abstract void DoExit(Fish_Controller FSC);
@@ -118,7 +121,10 @@ namespace TLC.FishStates{
 
         public virtual void DoEnter(Fish_Controller FSC)
         {
-            GameManager.Instance.GiveHint(1,0); // Fear
+            if(GameManager.Instance.hintsEnabled)
+            {
+                TutorialManager.Instance.TriggerTutorial(1,0); // Fear
+            }
             FSC.running = FSC.StartCoroutine(FearTheBobber(FSC.lurePos,FSC));
         }
 
@@ -180,21 +186,26 @@ namespace TLC.FishStates{
         public virtual void DoEnter(Fish_Controller FSC)
         {
             // set locaton of fish to somewhere in range
+            
             Vector3 randomPoint = Vector3.zero + Random.insideUnitSphere * 50f;
             NavMeshHit hit;
             //Debug.Log("Running Enter");
-            if (NavMesh.SamplePosition(randomPoint, out hit, 50f, -1)) 
+            int walkableMask = 1 << NavMesh.GetAreaFromName("Walkable");
+            if (NavMesh.SamplePosition(randomPoint, out hit, 50f,walkableMask)) 
             {
                 //FSC.transform.position = hit.position;
                 FSC.agent.Warp(hit.position);
+                //Debug.Log("found a spot");
             }
             else
             {
+                //Debug.Log("Didn't find spot");
                 FSC.transform.position = Vector3.zero;
                 //Debug.Log("Spot was not in valid Range");
             } 
 
-            FSC.StartWaitToChange(FSC.SC.Idle,2f); 
+            FSC.StartWaitToChange(FSC.SC.Idle,2f);
+            FSC.agent.enabled = true; 
             // in 2 seconds change to Idle
         }
 

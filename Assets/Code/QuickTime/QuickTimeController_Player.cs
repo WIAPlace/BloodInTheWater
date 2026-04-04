@@ -190,17 +190,17 @@ public class QuickTimeController_Player : MonoBehaviour
     public void SetData(QuickTimeData_Abstract data) // Abstract
     {
         currentQTData = data; 
-        Hooked();
+        HookTutor();
     } 
     public void SetData(QuickTimeData_BasicFish data)// Basic Fish Type
     {
         currentQTData = data; 
-        Hooked();
+        HookTutor();
     }
     public void SetData(QuickTimeData_Scuba data)
     {
         currentQTData = data; 
-        Hooked();
+        HookTutor();
     }
 
 
@@ -208,14 +208,10 @@ public class QuickTimeController_Player : MonoBehaviour
     {
         if (GameManager.Instance.hintsEnabled)
         { // if hints are enabled play the hint
-            Time.timeScale = 0f;
-            GameManager.Instance.GiveHint(2,0); // Hold Release
-            input.InteractEventQT += NextHint;
+            //Time.timeScale = 0f;
+            TutorialManager.Instance.TriggerTutorial(2,0); // Hold Release
         }
-        else
-        {// else just skip
-            Hooked();
-        }
+        Hooked();
     }
     // On Hook ////////////////////////////////////////////////////////////////////////////////////////////////////
     private void Hooked() // activated when the fish is hooked.
@@ -283,7 +279,8 @@ public class QuickTimeController_Player : MonoBehaviour
     
     private void NextHint()
     {
-        //StartCoroutine(HintForCast());
+        Hooked();
+        input.InteractEvent -= NextHint;
     }
     /*
     private IEnumerator HintForCast()
