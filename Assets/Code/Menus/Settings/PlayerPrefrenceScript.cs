@@ -101,10 +101,12 @@ public class PlayerPrefrenceScript : MonoBehaviour
         LoadUIStates();
 
         ApplySettings();
+        
     }
     void Start()
     {
         ApplySettings();
+        
     }
 
     public void LoadData()
