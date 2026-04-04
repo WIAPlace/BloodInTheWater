@@ -25,7 +25,8 @@ public class Rod_StateItemIdle : Abs_StateItemIdle
         { // if fishing
             // do the fishing animation
             //--by Kennedy
-            controller.anim.SetTrigger("RodReel");
+            //controller.anim.SetTrigger("RodReel"); ////////////////////////////////////////
+            controller.rod.RodTriggerAnimator(controller,3);
         }
         else
         {
@@ -41,7 +42,8 @@ public class Rod_StateItemIdle : Abs_StateItemIdle
             
             if(controller.previousState == controller.currentItem.Readying)
             {
-                controller.anim.SetTrigger("RodUnReady"); // lower the rod if we were still readying
+                //controller.anim.SetTrigger("RodUnReady"); // lower the rod if we were still readying ///////////
+                controller.rod.RodTriggerAnimator(controller,2);
             }
             
         }
@@ -75,12 +77,16 @@ public class Rod_StateItemReadying : Abs_StateItemReadying
             controller.StartWaitToChange(controller.currentItem.IsReady, controller.readyTime);
             controller.WindUpOn(controller.readyTime); // turns on the wind up indicator
             //---By Kennedy
-            controller.anim.SetTrigger("RodReady");
+            //controller.anim.SetTrigger("RodReady");
+            controller.rod.RodTriggerAnimator(controller,1);
             //controller.mAnimator.SetTrigger("RodReady"); // start readying
             
         }
         else
         { // if fishing just reel in reel quick
+            //controller.anim.ResetTrigger("")
+            //controller.anim.SetTrigger("RodReelingOut");
+            controller.rod.RodTriggerAnimator(controller,3);
             //controller.ChangeState(controller.currentItem.IsReady);
         }
     }
@@ -211,7 +217,8 @@ public class Rod_StateItemUse : Abs_StateItemUse
         {  //if not fishing send out lure
             // throw out rod animation and deposit lures
             //---by Kennedy
-            controller.anim.SetTrigger("RodCast");
+            //controller.anim.SetTrigger("RodCast");
+            controller.rod.RodTriggerAnimator(controller,0);
             rod.CastSpotPrefab.SetActive(false);
             CastLure();
             rod.SetIfFishing(true);
