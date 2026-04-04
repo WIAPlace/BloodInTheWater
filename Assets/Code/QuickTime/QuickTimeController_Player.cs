@@ -271,10 +271,10 @@ public class QuickTimeController_Player : MonoBehaviour
         
     }
 
-    public void PlayFakeFish(GameObject fish, int rot)
+    public void PlayFakeFish(GameObject fish, int rot, float normalRandy)
     {
         //Debug.Log("Hit");
-        useControl.ReelInFakeFish(fish,rot);
+        useControl.ReelInFakeFish(fish,rot,normalRandy);
     }
     
     
