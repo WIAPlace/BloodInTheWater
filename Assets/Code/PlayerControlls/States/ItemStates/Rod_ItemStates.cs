@@ -43,7 +43,7 @@ public class Rod_StateItemIdle : Abs_StateItemIdle
             if(controller.previousState == controller.currentItem.Readying)
             {
                 //controller.anim.SetTrigger("RodUnReady"); // lower the rod if we were still readying ///////////
-                controller.rod.RodTriggerAnimator(controller,0);
+                controller.rod.RodTriggerAnimator(controller,2);
             }
             
         }
