@@ -38,12 +38,12 @@ public class Rod_StateItemIdle : Abs_StateItemIdle
                 }
             }
             // start the idle holding animation
-            /*
+            
             if(controller.previousState == controller.currentItem.Readying)
             {
-                controller.mAnimator.SetTrigger("RodUnReady"); // lower the rod if we were still readying
+                controller.anim.SetTrigger("RodUnReady"); // lower the rod if we were still readying
             }
-            */
+            
         }
     }
 
