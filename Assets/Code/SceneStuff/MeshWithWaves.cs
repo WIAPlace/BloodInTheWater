@@ -47,7 +47,7 @@ public class MeshWithWaves : MonoBehaviour
     }
     public GameObject GetFishMesh()
     {
-        UseableMesh.localPosition = originalPosition;
+        //UseableMesh.localPosition = originalPosition;
         return UseableMesh.gameObject;
     }
 }

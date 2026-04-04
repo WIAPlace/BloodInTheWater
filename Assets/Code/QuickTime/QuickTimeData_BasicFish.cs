@@ -22,7 +22,15 @@ public class QuickTimeData_BasicFish : QuickTimeData_Abstract
     private float minLbs=5;
     [SerializeField][Tooltip("Fish lbs max")]
     private float maxLbs=15;
+
+    [SerializeField][Tooltip("Fish lbs min")]
+    private float minMeshSize=.5f;
+    [SerializeField][Tooltip("Fish lbs max")]
+    private float maxMeshSize=1.5f;
+    [SerializeField][Tooltip("Refrence the unlocks Fish array")]
+    private int key;
     
+    private float normalRandy;
     public QuickTimeData_BasicFish(QuickTimeData_BasicFish other) : base(other)
     {
         this.fishLength = other.fishLength; 
@@ -37,8 +45,13 @@ public class QuickTimeData_BasicFish : QuickTimeData_Abstract
     private void OnEnable()
     {
         
-        float normalRandy = Random.Range(0,1)+Random.Range(0,1);
+        normalRandy = Random.Range(0f,1f)+Random.Range(0f,1f);
         fishLbs = normalRandy *.5f *(maxLbs-minLbs)+minLbs; // trigangle distrubutin
+        //Debug.Log(fishLbs);
+        normalRandy = Mathf.Lerp(minMeshSize,maxMeshSize,normalRandy/2);
+        
+        transform.localScale*=normalRandy; // change their scaling relatively
+        //Debug.Log(normalRandy);
     }
 
     public override void SendData() // sends the data to the Rod scipt.
@@ -86,9 +99,12 @@ public class QuickTimeData_BasicFish : QuickTimeData_Abstract
         } 
         else // if player won
         {
+            transform.localScale/=normalRandy; // change their scaling back to what the prefab is.
             GameState.Instance.CaughtFish(fishLbs); // send over the caught state to the gamestate thing.
             GameObject fakeFish = FSC.waveHandler.GetFishMesh(); // get the correct mesh at its original position
-            GameManager.Instance.qtcPlayer.PlayFakeFish(fakeFish, rot); // pretend to catch the fish
+            GameManager.Instance.qtcPlayer.PlayFakeFish(fakeFish, rot, normalRandy); // pretend to catch the fish
+
+            GameManager.Instance.unlocks.SaveFishData(key,fishLbs); // send the fish data to unlocks so it can be saved as a player pref
 
             // set it to inactive
             FSC.gameObject.SetActive(false);

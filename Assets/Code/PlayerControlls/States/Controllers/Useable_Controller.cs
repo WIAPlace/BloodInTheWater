@@ -289,8 +289,9 @@ public class Useable_Controller : MonoBehaviour
     }
 
     ////////////////////////////////////////////////////////////////////////////// Reel In The Fake Fish 
-    public void ReelInFakeFish(GameObject fish, int rot)
+    public void ReelInFakeFish(GameObject fish, int rot, float normalRandy)
     {
+        
         showingFish = false;
         // direction
         fakeFish.transform.position = reelSpline.EvaluatePosition(1,0);
@@ -307,6 +308,7 @@ public class Useable_Controller : MonoBehaviour
         TRL.setRot(rot); // change the rot to what it should be now
 
         fakeFishBody.transform.parent = fakeFish.transform;
+        fakeFish.transform.localScale *= normalRandy;
         
         StartCoroutine(ReelInFakeFishThenHold());
     }
