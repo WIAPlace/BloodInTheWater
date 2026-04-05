@@ -151,7 +151,9 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  outOfTheWay: {fileID: 0}
   target: {fileID: 0}
+  body: {fileID: 463345276265106841}
   playerMask:
     serializedVersion: 2
     m_Bits: 512
@@ -168,6 +170,9 @@ MonoBehaviour:
   hitForce: 320
   hitDir: {x: 0, y: 0, z: 0}
   rb: {fileID: 0}
+  active: 1
+  respawnMin: 10
+  respawnMax: 100
 --- !u!114 &4333093923188571945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,13 +187,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitZoneLength: []
   qtSpeed: 360
-  qtSmoothMotion: 0
+  qtSmoothMotion: 1
   qtLength: 100
   type: 0
-  timerMultiplyer: 0
+  timerMultiplyer: 2
   diffRate: 0
-  winRate: 0
-  looseRate: 0
+  winRate: 0.2
+  looseRate: 0.2
 --- !u!1001 &769917362398703816
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -281,6 +286,12 @@ PrefabInstance:
       addedObject: {fileID: 1752574358809915784}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ba6724662763f1540ad1f9adcc312f2c, type: 3}
+--- !u!1 &463345276265106841 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: ba6724662763f1540ad1f9adcc312f2c,
+    type: 3}
+  m_PrefabInstance: {fileID: 769917362398703816}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &947430196411324195 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ba6724662763f1540ad1f9adcc312f2c,
