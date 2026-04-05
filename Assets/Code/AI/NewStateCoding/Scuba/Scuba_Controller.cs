@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.AI;
 using Unity.VisualScripting;
+using UnityEditor.EditorTools;
 /// 
 /// Author: Weston Tollette
 /// Created: 2/24/26
@@ -15,11 +16,17 @@ public class Scuba_Controller : MonoBehaviour, IMonster
 {
     [SerializeField][Tooltip("The places he can spawn")]
     private GameObject[] scubaSpots;
+    [SerializeField][Tooltip("The places he can wait to spawn at")]
+    private GameObject outOfTheWay; // a transform on the top of the boat.
     [SerializeField][Tooltip("Target for the navmesh")]
     private GameObject target; // should be the player
+    [field: SerializeField][Tooltip("Dat body")]
+    public GameObject body;
     private IBoatStomperState currentState;
     [SerializeField][Tooltip("Player layer")]
     private LayerMask playerMask;
+    [SerializeField][Tooltip("Game Geometry and player layer.")]
+    private LayerMask hitMask;
     [SerializeField][Tooltip("Boat Edge layer")]
     private LayerMask edgeMask;
     [SerializeField][Tooltip("Player StateController script")]
@@ -38,6 +45,16 @@ public class Scuba_Controller : MonoBehaviour, IMonster
     public Rigidbody rb;
     public Coroutine stun;
 
+    [HideInInspector]
+    public bool active = true;
+
+    [SerializeField][Tooltip("How lond to spawn/respawn")]
+    private float respawnMin;
+    [SerializeField][Tooltip("How lond to spawn/respawn max amount of time")]
+    private float respawnMax;
+
+    Vector3 direction;
+
     // All of the States
     public Scuba_StateSpawn SpawnState = new Scuba_StateSpawn(); // when called spawn at a random spot out of avalible ones
     public Scuba_StateMove MoveState = new Scuba_StateMove(); // move twoards player
@@ -54,26 +71,60 @@ public class Scuba_Controller : MonoBehaviour, IMonster
         scubaData = GetComponent<QuickTimeData_Scuba>();
         rb = GetComponent<Rigidbody>(); // rigid body for the scuba being hit
         //gameObject.SetActive(false); // start out false because he will be activated in spawn state.
-        currentState = SpawnState; 
         // scuba will have to be activated by something outside itself, because the update wont run if it is disabled
+
+
+    }
+    private void OnEnable()
+    {
+        agent.isStopped = true; // dont move
+        transform.position = outOfTheWay.transform.position; // dont be in the way
+        body.SetActive(false); // dont be seen
+        StartCoroutine(StartSpawnDelay()); // start spawning boy.
     }
 
     private void Update()
     {
-        if(currentState!=null)
+        if(currentState!=null && active)
         { // set current state to whatever the state tells you to
             currentState = currentState.DoState(this);
         }
     }
+
+    IEnumerator StartSpawnDelay()
+    {
+        float randy = Random.Range(respawnMin,respawnMax);
+        yield return new WaitForSeconds(randy);
+        active = true;
+        currentState = SpawnState; 
+    }
+
+    
     void OnTriggerEnter(Collider other)
     {
         if(((1 << other.gameObject.layer) & playerMask.value) != 0 )
         {
+            //Debug.Log("Gate 1");
             if(currentState != StunnedState)
             {
-                currentState = ContactState; // data is being transfered;
+                //Debug.Log("Gate 2");
+                Vector3 heading = other.transform.position - transform.position;
+                direction = heading.normalized;
+                //Gizmos.DrawRay(transform.position, direction * .8f);
+                RaycastHit hit;
+                if(Physics.Raycast(transform.position, direction, out hit,2f,hitMask))
+                {// shoot a ray twoards the player
+
+                    //Debug.Log("Gate 3");
+                    if(((1 << other.gameObject.layer) & playerMask.value) != 0)
+                    { // if the thing hit is the wall do not go for it.
+                    // we have to do this a second time so that we arnt checking eveyry time the guy is near a wall.
+                        //Debug.Log("Gate 4");
+                        currentState = ContactState; // data is being transfered;
                 
-                useControl.ChangeState(useControl.currentItem.UnderAtk);
+                        useControl.ChangeState(useControl.currentItem.UnderAtk);
+                    }
+                }
                 // change player's state to hit
             }
             else
@@ -83,12 +134,19 @@ public class Scuba_Controller : MonoBehaviour, IMonster
         }
         
     }
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(transform.position, direction * 2f);
+    }
     void OnCollisionEnter(Collision collision)
     {
         if(((1 << collision.gameObject.layer) & edgeMask.value) != 0 && currentState == StunnedState)
         {
             //currentState = SpawnState;
-            gameObject.SetActive(false);
+            active = false;
+            transform.position = outOfTheWay.transform.position;
+            body.SetActive(false);
         }
         if(((1 << collision.gameObject.layer) & playerMask.value) != 0 && currentState == StunnedState){
             rb.isKinematic = true;

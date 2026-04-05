@@ -2251,10 +2251,50 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2886226368959513362, guid: d38a7dec56ef66942a45a970c04dd2ec,
+        type: 3}
+      propertyPath: body
+      value: 
+      objectReference: {fileID: 1145281593}
+    - target: {fileID: 2886226368959513362, guid: d38a7dec56ef66942a45a970c04dd2ec,
+        type: 3}
+      propertyPath: respawnMax
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2886226368959513362, guid: d38a7dec56ef66942a45a970c04dd2ec,
+        type: 3}
+      propertyPath: respawnMin
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2886226368959513362, guid: d38a7dec56ef66942a45a970c04dd2ec,
+        type: 3}
+      propertyPath: outOfTheWay
+      value: 
+      objectReference: {fileID: 1158247455}
     - target: {fileID: 2898667090029792362, guid: d38a7dec56ef66942a45a970c04dd2ec,
         type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2899964683143394348, guid: d38a7dec56ef66942a45a970c04dd2ec,
+        type: 3}
+      propertyPath: winRate
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2899964683143394348, guid: d38a7dec56ef66942a45a970c04dd2ec,
+        type: 3}
+      propertyPath: looseRate
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2899964683143394348, guid: d38a7dec56ef66942a45a970c04dd2ec,
+        type: 3}
+      propertyPath: qtSmoothMotion
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2899964683143394348, guid: d38a7dec56ef66942a45a970c04dd2ec,
+        type: 3}
+      propertyPath: timerMultiplyer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2937884699898705868, guid: d38a7dec56ef66942a45a970c04dd2ec,
         type: 3}
@@ -3842,6 +3882,43 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 1
+--- !u!1 &1145281593 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1329302301396780700, guid: d38a7dec56ef66942a45a970c04dd2ec,
+    type: 3}
+  m_PrefabInstance: {fileID: 580716613}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1158247455
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1158247456}
+  m_Layer: 0
+  m_Name: OutOfTheWayw
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1158247456
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1158247455}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.941, y: 7.2473, z: 0.208}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1161952160
 GameObject:
   m_ObjectHideFlags: 0
@@ -5834,3 +5911,4 @@ SceneRoots:
   - {fileID: 580716613}
   - {fileID: 1395608108}
   - {fileID: 935257108}
+  - {fileID: 1158247456}

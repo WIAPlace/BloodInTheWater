@@ -228,8 +228,10 @@ public class QuickTimeController_Player : MonoBehaviour
         inHit=false; // set this to false for the moment, just in case.
         completionAmnt = .5f;
         // (set off some animation for the rod).
-        useControl.rod.RodTriggerAnimator(useControl,3);
-
+        if(useControl.currentItem == useControl.rod)
+        {
+            useControl.rod.RodTriggerAnimator(useControl,3);
+        }
         // Set controls to Minigame State
         input.SetQuickTime();
 
@@ -259,7 +261,10 @@ public class QuickTimeController_Player : MonoBehaviour
 
     private void EndQTEAll(bool status)
     {
-        useControl.rod.RodTriggerAnimator(useControl,0);
+        if(useControl.currentItem == useControl.rod)
+        {
+            useControl.rod.RodTriggerAnimator(useControl,0);
+        }
         input.InteractEventQT -= NextHint;
         inProgress = false;
         currentQTData.ExitQuickTimeEvent(status);

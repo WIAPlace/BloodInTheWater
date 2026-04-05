@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using UnityEngine;
 /// 
 /// Author: Weston Tollette
@@ -20,6 +21,7 @@ public class Scuba_StateSpawn : IBoatStomperState
         int spots = scubaGuy.GetNumberOfSpots(); // get number of spots
         int rando = Random.Range(0, spots); // picks a spot out of the avalible options
         scubaGuy.transform.position = scubaGuy.GetScubaSpots(rando).transform.position;
+        
         //Debug.Log("Spawned At: "+rando);
     }   
 
@@ -34,9 +36,12 @@ public class Scuba_StateSpawn : IBoatStomperState
         SC.agent.enabled = true;
 
         Spawning(SC);
-        SC.gameObject.SetActive(true);
+        //SC.active=true;
+        SC.body.SetActive(true);
+        //SC.gameObject.SetActive(true);
         //Debug.Log("Active");
         //Spawing animation and stuff.
         return  SC.MoveState;
     }
+    
 }
