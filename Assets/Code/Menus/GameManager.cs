@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine.Splines;
 using Unity.Burst.CompilerServices;
 using Unity.VisualScripting;
+using UnityEditor.SceneManagement;
 /// 
 /// Author: Weston Tollette
 /// Created: 2/22/26
@@ -46,6 +47,7 @@ public class GameManager : MonoBehaviour
     
     void Start()
     {
+        pref.ApplySettings();
         input.PauseEvent += HandlePause;
         input.ResumeEvent += HandleResume;
         //input.CheckEvent += HandleCheck;

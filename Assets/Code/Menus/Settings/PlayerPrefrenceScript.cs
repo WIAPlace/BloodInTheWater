@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using Unity.Cinemachine;
 using UnityEngine.Audio;
 using System;
+using Unity.VisualScripting;
 /// 
 /// Author: Weston Tollette
 /// Created: 3/24/26
@@ -100,12 +101,13 @@ public class PlayerPrefrenceScript : MonoBehaviour
 
         LoadUIStates();
 
-        ApplySettings();
+        SaveAndApply();
+
         
     }
     void Start()
     {
-        ApplySettings();
+       //SaveAndApply();
         
     }
 
@@ -282,11 +284,15 @@ public class PlayerPrefrenceScript : MonoBehaviour
         else return false;
     }
     //////////////////////////////////////////////////////////////////////////// Apply Settings:
-    
+    /// 
+    public void SaveAndApply()
+    {
+        SaveData();
+        ApplySettings();
+    }
+
     public void ApplySettings()
     {
-        
-        SaveData();
         
         LoadData();
         

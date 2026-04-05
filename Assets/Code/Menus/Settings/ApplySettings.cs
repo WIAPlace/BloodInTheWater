@@ -6,8 +6,14 @@ public class ApplySettings : MonoBehaviour
 {
     [SerializeField]
     PlayerPrefrenceScript pref;
+    void Start()
+    {
+        ApplyChanges();
+    }
     public void ApplyChanges()
     {
         pref.ApplySettings();
     }
+
+    
 }
