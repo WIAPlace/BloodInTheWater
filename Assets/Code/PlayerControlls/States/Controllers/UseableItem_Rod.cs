@@ -115,5 +115,43 @@ public class UseableItem_Rod : UseableItem_Abstract
         ParticleSystem ps = Instantiate(part, position, Quaternion.Euler(Vector3.right*-90));
         Destroy(ps,ps.main.duration);
     }
+    public void RodTriggerAnimator(Useable_Controller controller,int key)
+    {
+        controller.anim.ResetTrigger("RodReel");
+        controller.anim.ResetTrigger("RodUnReady");
+        controller.anim.ResetTrigger("RodReady");
+        controller.anim.ResetTrigger("RodReelingOut");
+        controller.anim.ResetTrigger("RodCast");
+        controller.anim.ResetTrigger("RodReelIn");
+
+        switch (key)
+        {
+            case 0:
+                controller.anim.SetTrigger("RodCast");
+                break;
+
+            case 1:
+                controller.anim.SetTrigger("RodReady");
+                break;
+            
+            case 2:
+                controller.anim.SetTrigger("RodUnReady"); // lower the rod if we were still readying
+                break;
+
+            case 3:
+                controller.anim.SetTrigger("RodReel");
+                break;
+            
+            case 4:
+                controller.anim.SetTrigger("RodReelingOut");
+                break;
+            case 5:
+                controller.anim.SetTrigger("RodReelIn");
+                break;
+            default:
+                break;
+        }
+        Debug.Log(key);
+    }
 
 }
