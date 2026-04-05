@@ -8,6 +8,6 @@ public class SetObjectPlacesOnSceneOne : MonoBehaviour
     void Awake()
     {
         spots.spots[1] = 0;
-        spots.spots[2] = 3;
+        spots.spots[2] = 0;
     }
 }
