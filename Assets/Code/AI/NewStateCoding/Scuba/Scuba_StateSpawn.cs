@@ -20,8 +20,8 @@ public class Scuba_StateSpawn : IBoatStomperState
         
         int spots = scubaGuy.GetNumberOfSpots(); // get number of spots
         int rando = Random.Range(0, spots); // picks a spot out of the avalible options
-        scubaGuy.transform.position = scubaGuy.GetScubaSpots(rando).transform.position;
-        
+        //scubaGuy.transform.position = scubaGuy.GetScubaSpots(rando).transform.position;
+        scubaGuy.agent.Warp(scubaGuy.GetScubaSpots(rando).transform.position);
         //Debug.Log("Spawned At: "+rando);
     }   
 

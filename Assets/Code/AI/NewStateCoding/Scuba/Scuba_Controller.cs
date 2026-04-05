@@ -77,10 +77,18 @@ public class Scuba_Controller : MonoBehaviour, IMonster
     }
     private void OnEnable()
     {
+        Spawn();
+    }
+
+    void Spawn()
+    {
+        active = false;
         agent.isStopped = true; // dont move
-        transform.position = outOfTheWay.transform.position; // dont be in the way
+        //transform.position = outOfTheWay.transform.position; // dont be in the way
+        agent.Warp(outOfTheWay.transform.position);
         body.SetActive(false); // dont be seen
         StartCoroutine(StartSpawnDelay()); // start spawning boy.
+        Debug.Log("Spawned");
     }
 
     private void Update()
@@ -102,7 +110,7 @@ public class Scuba_Controller : MonoBehaviour, IMonster
     
     void OnTriggerEnter(Collider other)
     {
-        if(((1 << other.gameObject.layer) & playerMask.value) != 0 )
+        if(((1 << other.gameObject.layer) & playerMask.value) != 0 && active)
         {
             //Debug.Log("Gate 1");
             if(currentState != StunnedState)
@@ -116,7 +124,7 @@ public class Scuba_Controller : MonoBehaviour, IMonster
                 {// shoot a ray twoards the player
 
                     //Debug.Log("Gate 3");
-                    if(((1 << other.gameObject.layer) & playerMask.value) != 0)
+                    if(((1 << hit.collider.gameObject.layer) & playerMask.value) != 0)
                     { // if the thing hit is the wall do not go for it.
                     // we have to do this a second time so that we arnt checking eveyry time the guy is near a wall.
                         //Debug.Log("Gate 4");
@@ -144,9 +152,7 @@ public class Scuba_Controller : MonoBehaviour, IMonster
         if(((1 << collision.gameObject.layer) & edgeMask.value) != 0 && currentState == StunnedState)
         {
             //currentState = SpawnState;
-            active = false;
-            transform.position = outOfTheWay.transform.position;
-            body.SetActive(false);
+            Spawn();
         }
         if(((1 << collision.gameObject.layer) & playerMask.value) != 0 && currentState == StunnedState){
             rb.isKinematic = true;
