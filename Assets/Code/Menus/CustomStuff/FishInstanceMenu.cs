@@ -25,6 +25,12 @@ public class FishInstanceMenu : MonoBehaviour
     [SerializeField][Tooltip("Spinner Settings Sliders")]
     Slider[] spinnerSettings;
 
+    [SerializeField][Tooltip("Array of Monsters")]
+    GameObject[] monsters;
+
+    [SerializeField][Tooltip("Toggles Associated with monsters")]
+    Toggle[] monsterToggles;
+
     private float defaultHitArea = 100;
     private float defaultHitSpeed = 400;
     private float defaultHitSmooth = 100;
@@ -57,6 +63,7 @@ public class FishInstanceMenu : MonoBehaviour
             SliderInstance(i);
         }
         SpinnerSettingsChanges();
+        TogglesAvalible();
     }
 
     // Update is called once per frame
@@ -119,6 +126,35 @@ public class FishInstanceMenu : MonoBehaviour
         spinnerSettings[1].value = defaultHitSpeed;
         spinnerSettings[2].value = defaultHitSmooth;
     }
+
+    //////////////////////////////////////////////////////////////////////////////////////////////// Monster Settings
+    private void TogglesAvalible()
+    {
+        for(int i =0; i < monsterToggles.Length; i++)
+        {
+            monsterToggles[i].isOn=false;
+            monsterToggles[i].gameObject.SetActive(false);
+            // turn off the object on load then only turn it on if its been unlocked.
+            if (unlocks.LoadMonserData(i))
+            {// if the monster hasnt been unlocked
+                monsterToggles[i].gameObject.SetActive(true);
+                int index = i;
+                monsterToggles[i].onValueChanged.AddListener(delegate
+                {   // add a listener that will activate the monster toggle associated with this ones key.
+                    
+                    MonsterToggleChanged(monsterToggles[index],monsters[index]);
+                });
+            }
+        }
+    }
+
+    public void MonsterToggleChanged(Toggle monTog,GameObject mon)
+    {   // set the monster at key i, to whatever the toggle is at.
+        //Debug.Log(i);
+        mon.gameObject.SetActive(monTog.isOn);
+    }
+
+
 
     //////////////////////////////////////////////////////////////////////////////////////////////// Apply Changes
     // change the amount of fish relative to the new sliders values

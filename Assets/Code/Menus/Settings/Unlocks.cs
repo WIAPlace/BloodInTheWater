@@ -27,7 +27,7 @@ public class Unlocks : ScriptableObject
         for(int i = 0; i < monsterKeys.Length; i++)
         {   // unlock monsters
             //PlayerPrefs.SetInt(monsterKeys[i],0);
-            LoadMonserData(i);
+            SaveMonsterData(i);
         }
         // unlock levels?
         PlayerPrefs.SetInt(levelKeys[1],100);

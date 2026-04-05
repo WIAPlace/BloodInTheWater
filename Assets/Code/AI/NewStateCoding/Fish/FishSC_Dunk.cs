@@ -21,6 +21,8 @@ public class FishSC_Dunk : FishSC_Abstact
 
     [SerializeField] [Tooltip("In seconds")]
     private float Damage=5;
+
+    //[SerializeField] GameObject debugPosition;
     
     public void Awake()
     {
@@ -115,7 +117,7 @@ public class FishSC_Dunk : FishSC_Abstact
 
     public override IFishState MoveBackToIdle(Fish_Controller FSC)
     {
-        float3 pos = FSC.transform.position;
+        float3 pos = circleSpline.transform.InverseTransformPoint(FSC.transform.position);
         float3 nearPoint;
         SplineUtility.GetNearestPoint(
             circleSpline.Spline,
@@ -124,7 +126,8 @@ public class FishSC_Dunk : FishSC_Abstact
             out float t // 't' is the normalized distance along the spline
         );
         
-        Vector3 nearestPoint = nearPoint;
+        Vector3 nearestPoint = circleSpline.transform.TransformPoint(nearPoint); 
+        //debugPosition.transform.position = nearestPoint;
 
         // Calculate the direction to the nearest point and move the object
         float distance = Vector3.Distance(FSC.transform.position,nearestPoint);
@@ -135,12 +138,13 @@ public class FishSC_Dunk : FishSC_Abstact
         // look at the target point over time
         Quaternion targetRotation = Quaternion.LookRotation(direction);
         FSC.transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, FSC.agent.angularSpeed * Time.deltaTime);
-
+        
         // when a certain distance from the spline get back on it
-        if(distance <= .4f)
+        if(distance <= .3f)
         {
             //Debug.Log(t);
             distanceTravelled = t*circleSpline.CalculateLength();
+            Debug.Log("idle");
             return FSC.SC.Idle;
         }
         else return FSC.SC.Fear;
