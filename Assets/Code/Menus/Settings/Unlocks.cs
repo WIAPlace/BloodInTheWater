@@ -64,7 +64,7 @@ public class Unlocks : ScriptableObject
         float tempCompare = PlayerPrefs.GetFloat(fishKeys[key],0);
         if (tempCompare < weight)
         {   // only keep track of the heaviest fish caught.
-            Debug.Log(weight);
+            //Debug.Log(weight);
             PlayerPrefs.SetFloat(fishKeys[key],weight);
         }
     }
