@@ -16,6 +16,7 @@ public class Harp_StateItemIdle : Abs_StateItemIdle
     private UseableItem_Harp harp;
     public override void DoEnter(Useable_Controller controller)
     {
+        TutorialManager.Instance.TriggerTutorial(4,1);
         harp = controller.harp;
         base.DoEnter(controller);
     }
