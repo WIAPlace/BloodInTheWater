@@ -5,7 +5,7 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Splines;
 using Unity.Cinemachine;
-using JetBrains.Annotations;
+//using JetBrains.Annotations;
 
 public class FishSC_Dunk : FishSC_Abstact
 {
@@ -26,6 +26,7 @@ public class FishSC_Dunk : FishSC_Abstact
     
     public void Awake()
     {
+        GameManager.Instance.unlocks.SaveMonsterData(1);
         //target = GameManager.Instance.lureTarget;
         FSC = GetComponent<Fish_Controller>();
         Idle = new Dunk_StateIdle();

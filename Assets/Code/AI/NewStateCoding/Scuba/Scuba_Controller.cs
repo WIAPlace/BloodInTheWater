@@ -65,14 +65,15 @@ public class Scuba_Controller : MonoBehaviour, IMonster
 
     private void Start()
     {
+        
         agent = GetComponent<NavMeshAgent>(); // set agent to this part of the component.
         scubaData = GetComponent<QuickTimeData_Scuba>();
         rb = GetComponent<Rigidbody>(); // rigid body for the scuba being hit
         //gameObject.SetActive(false); // start out false because he will be activated in spawn state.
         // scuba will have to be activated by something outside itself, because the update wont run if it is disabled
 
-
-    }
+        GameManager.Instance.unlocks.SaveMonsterData(2);
+        }
     private void OnEnable()
     {
         Spawn();

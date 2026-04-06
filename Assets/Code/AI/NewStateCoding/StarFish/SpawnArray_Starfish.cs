@@ -16,6 +16,7 @@ public class SpawnArray_Starfish : MonoBehaviour
     void Start()
     {
         SpawnInRandomLocation();
+        GameManager.Instance.unlocks.SaveMonsterData(0);
     }
 
     public void SpawnInRandomLocation()

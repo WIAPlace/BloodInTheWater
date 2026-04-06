@@ -135,7 +135,7 @@ public class FishInstanceMenu : MonoBehaviour
             monsterToggles[i].isOn=false;
             monsterToggles[i].gameObject.SetActive(false);
             // turn off the object on load then only turn it on if its been unlocked.
-            if (unlocks.LoadMonserData(i))
+            if (unlocks.LoadMonsterData(i))
             {// if the monster hasnt been unlocked
                 monsterToggles[i].gameObject.SetActive(true);
                 int index = i;

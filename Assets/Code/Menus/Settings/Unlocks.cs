@@ -84,7 +84,7 @@ public class Unlocks : ScriptableObject
             PlayerPrefs.SetInt(monsterKeys[key],1);
         }
     }
-    public bool LoadMonserData(int key)
+    public bool LoadMonsterData(int key)
     {
         // if true then the monster has been unlocked.v
         if (PlayerPrefs.GetInt(monsterKeys[key], 0) != 0) return true;
