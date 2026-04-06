@@ -144,7 +144,7 @@ public class FishSC_Dunk : FishSC_Abstact
         {
             //Debug.Log(t);
             distanceTravelled = t*circleSpline.CalculateLength();
-            Debug.Log("idle");
+            //Debug.Log("idle");
             return FSC.SC.Idle;
         }
         else return FSC.SC.Fear;

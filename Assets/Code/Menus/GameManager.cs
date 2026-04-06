@@ -4,9 +4,6 @@ using UnityEngine;
 using UnityEngine.UI; 
 using TMPro;
 using UnityEngine.Splines;
-using Unity.Burst.CompilerServices;
-using Unity.VisualScripting;
-using UnityEditor.SceneManagement;
 /// 
 /// Author: Weston Tollette
 /// Created: 2/22/26

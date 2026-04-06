@@ -1,8 +1,6 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.AI;
-using Unity.VisualScripting;
-using UnityEditor.EditorTools;
 /// 
 /// Author: Weston Tollette
 /// Created: 2/24/26
@@ -88,7 +86,7 @@ public class Scuba_Controller : MonoBehaviour, IMonster
         agent.Warp(outOfTheWay.transform.position);
         body.SetActive(false); // dont be seen
         StartCoroutine(StartSpawnDelay()); // start spawning boy.
-        Debug.Log("Spawned");
+        //Debug.Log("Spawned");
     }
 
     private void Update()
