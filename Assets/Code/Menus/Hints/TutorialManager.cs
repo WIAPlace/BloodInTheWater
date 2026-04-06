@@ -41,6 +41,7 @@ public class TutorialManager : MonoBehaviour
             TM = this;
             // DontDestroyOnLoad(this.gameObject); 
         }
+        hintUI.SetActive(false);
     }
     
     void OnDestroy()
