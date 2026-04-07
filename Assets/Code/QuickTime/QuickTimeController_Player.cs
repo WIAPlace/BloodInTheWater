@@ -224,7 +224,7 @@ public class QuickTimeController_Player : MonoBehaviour
         useControl.rod.RetrieveLure(useControl.rod.LurePrefab.transform.position, useControl.rod.LureRadius); 
 
 
-
+        currentHitSpeed = 0; // change hit speed to 0;
         inHit=false; // set this to false for the moment, just in case.
         completionAmnt = .5f;
         // (set off some animation for the rod).

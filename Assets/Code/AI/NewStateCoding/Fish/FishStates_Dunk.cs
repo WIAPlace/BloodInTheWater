@@ -126,6 +126,7 @@ public class Dunk_StateUnique : Abs_StateUnique
         targetDirection = new Vector3(targetDirection.x,FSC.transform.position.y,targetDirection.z);
         // 2. Create the target rotation (a Quaternion looking in that direction).
         targetRotation = Quaternion.LookRotation(targetDirection);
+        TutorialManager.Instance.TriggerTutorial(1,4);
     }
 
     public override void DoExit(Fish_Controller FSC)
