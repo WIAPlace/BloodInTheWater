@@ -98,7 +98,7 @@ BlendTree:
   m_Name: Blend Tree
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 1827226128182048838, guid: 36db94ab2a31c9f44ac2ad45b32014ce,
+    m_Motion: {fileID: 1827226128182048838, guid: 271c68b60e3980649a16d39fd056716a,
       type: 3}
     m_Threshold: 0
     m_Position: {x: 0, y: 0}
@@ -107,7 +107,8 @@ BlendTree:
     m_DirectBlendParameter: IdleAnim
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 8832b9fda1223a44ca156d25a62e4c74, type: 2}
+    m_Motion: {fileID: 1827226128182048838, guid: 36db94ab2a31c9f44ac2ad45b32014ce,
+      type: 3}
     m_Threshold: 1
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -115,7 +116,7 @@ BlendTree:
     m_DirectBlendParameter: IdleAnim
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 1827226128182048838, guid: 36db94ab2a31c9f44ac2ad45b32014ce,
+    m_Motion: {fileID: 1827226128182048838, guid: 271c68b60e3980649a16d39fd056716a,
       type: 3}
     m_Threshold: 2
     m_Position: {x: 0, y: 0}
@@ -124,8 +125,54 @@ BlendTree:
     m_DirectBlendParameter: IdleAnim
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 8832b9fda1223a44ca156d25a62e4c74, type: 2}
+    m_Motion: {fileID: 1827226128182048838, guid: b73eafb7b78bb0747ac5372e74d18f5a,
+      type: 3}
     m_Threshold: 3
+    m_Position: {x: 0, y: 0}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: IdleAnim
+    m_Mirror: 0
+  - serializedVersion: 2
+    m_Motion: {fileID: 1827226128182048838, guid: 271c68b60e3980649a16d39fd056716a,
+      type: 3}
+    m_Threshold: 4
+    m_Position: {x: 0, y: 0}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: IdleAnim
+    m_Mirror: 0
+  - serializedVersion: 2
+    m_Motion: {fileID: 1827226128182048838, guid: f6913699f6a610e438d8d6dc19f0036b,
+      type: 3}
+    m_Threshold: 5
+    m_Position: {x: 0, y: 0}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: IdleAnim
+    m_Mirror: 0
+  - serializedVersion: 2
+    m_Motion: {fileID: 1827226128182048838, guid: 271c68b60e3980649a16d39fd056716a,
+      type: 3}
+    m_Threshold: 6
+    m_Position: {x: 0, y: 0}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: IdleAnim
+    m_Mirror: 0
+  - serializedVersion: 2
+    m_Motion: {fileID: 1827226128182048838, guid: 271c68b60e3980649a16d39fd056716a,
+      type: 3}
+    m_Threshold: 7
+    m_Position: {x: 0, y: 0}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: IdleAnim
+    m_Mirror: 0
+  - serializedVersion: 2
+    m_Motion: {fileID: 1827226128182048838, guid: 271c68b60e3980649a16d39fd056716a,
+      type: 3}
+    m_Threshold: 8
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
@@ -134,7 +181,7 @@ BlendTree:
   m_BlendParameter: IdleAnim
   m_BlendParameterY: Blend
   m_MinThreshold: 0
-  m_MaxThreshold: 3
+  m_MaxThreshold: 8
   m_UseAutomaticThresholds: 0
   m_NormalizedBlendValues: 0
   m_BlendType: 0
@@ -150,8 +197,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5657a3c0ec4ec784d93031ca76aa3062, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _timeUntilIdle: 2
-  _numberOfBirdIdles: 1
+  _timeUntilIdle: 5
+  _numberOfBirdIdles: 5
 --- !u!1107 &8632909487985659253
 AnimatorStateMachine:
   serializedVersion: 6

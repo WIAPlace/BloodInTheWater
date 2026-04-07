@@ -95,8 +95,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5657a3c0ec4ec784d93031ca76aa3062, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _timeUntilIdle: 3
-  _numberOfBirdIdles: 3
+  _timeUntilIdle: 5
+  _numberOfBirdIdles: 4
 --- !u!206 &5160399503606260969
 BlendTree:
   m_ObjectHideFlags: 1
@@ -168,10 +168,28 @@ BlendTree:
     m_CycleOffset: 0
     m_DirectBlendParameter: Blend
     m_Mirror: 0
+  - serializedVersion: 2
+    m_Motion: {fileID: 1827226128182048838, guid: 99a1083768bd713448f544904bd786d1,
+      type: 3}
+    m_Threshold: 7
+    m_Position: {x: 0, y: 0}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: IdleGull
+    m_Mirror: 0
+  - serializedVersion: 2
+    m_Motion: {fileID: 1827226128182048838, guid: 99a1083768bd713448f544904bd786d1,
+      type: 3}
+    m_Threshold: 8
+    m_Position: {x: 0, y: 0}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: IdleGull
+    m_Mirror: 0
   m_BlendParameter: IdleAnim
   m_BlendParameterY: Blend
   m_MinThreshold: 0
-  m_MaxThreshold: 6
+  m_MaxThreshold: 8
   m_UseAutomaticThresholds: 0
   m_NormalizedBlendValues: 0
   m_BlendType: 0
