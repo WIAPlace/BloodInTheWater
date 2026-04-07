@@ -36,7 +36,7 @@ public class Dunk_StateIdle : Abs_StateIdle
         {
             yield return new WaitForSeconds(FSC.catchTimeWindow); // wait a bit
             float randy = Random.Range(0,101);
-            if(randy <= ChanceToAggro) 
+            if(randy < ChanceToAggro) 
             {   // if random number is in range go aggro.
                 //Debug.Log("Changed To Unique");
                 FSC.ChangeState(FSC.SC.Unique);
