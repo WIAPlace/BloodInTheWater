@@ -50,8 +50,8 @@ public class Unlocks : ScriptableObject
         // reset levels
         //PlayerPrefs.SetInt(levelKeys[0],0);
         //PlayerPrefs.SetInt(levelKeys[1],0);
-        PlayerPrefs.DeleteKey(monsterKeys[0]);
-        PlayerPrefs.DeleteKey(monsterKeys[1]);
+        //PlayerPrefs.DeleteKey(monsterKeys[0]);
+        //PlayerPrefs.DeleteKey(monsterKeys[1]);
 
         //Debug.Log("Locked");
         PlayerPrefs.Save();
