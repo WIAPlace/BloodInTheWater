@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEditor.ShaderKeywordFilter;
 using UnityEngine;
 
-public class QuickTimeData_DeepAngle : QuickTimeData_BasicFish
+public class QuickTimeData_DeepAngel_Reel : QuickTimeData_BasicFish
 {
     [SerializeField] private QuickTimeData_Abstract QTD;
     [SerializeField] private float secondsTillLatchOn;
 
 
-    public QuickTimeData_DeepAngle(QuickTimeData_BasicFish other) : base(other)
+    public QuickTimeData_DeepAngel_Reel(QuickTimeData_BasicFish other) : base(other)
     {
     }
 
@@ -44,7 +44,8 @@ public class QuickTimeData_DeepAngle : QuickTimeData_BasicFish
         }
     }
     IEnumerator Latch()
-    {
+    {   // after caught latch on and play the much more dangerous game.
         yield return new WaitForSeconds(secondsTillLatchOn);
+        QTD.SendData();
     }
 }
