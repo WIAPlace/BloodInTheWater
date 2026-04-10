@@ -26,7 +26,7 @@ public class FishSC_Dunk : FishSC_Abstact
     
     public void Awake()
     {
-        GameManager.Instance.unlocks.SaveMonsterData(1);
+        
         //target = GameManager.Instance.lureTarget;
         FSC = GetComponent<Fish_Controller>();
         Idle = new Dunk_StateIdle();

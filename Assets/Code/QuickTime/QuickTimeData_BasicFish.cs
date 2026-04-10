@@ -13,11 +13,12 @@ using UnityEngine;
 /// 
 public class QuickTimeData_BasicFish : QuickTimeData_Abstract
 {
-    private Fish_Controller FSC;
+    [HideInInspector]
+    public Fish_Controller FSC;
     private float fishLength;
-    private float fishLbs;
+    protected float fishLbs;
     [SerializeField] [Tooltip("When caught how much should they rotate to show their good side")]
-    private int rot;
+    protected int rot;
     [SerializeField][Tooltip("Fish lbs min")]
     private float minLbs=5;
     [SerializeField][Tooltip("Fish lbs max")]
@@ -28,9 +29,9 @@ public class QuickTimeData_BasicFish : QuickTimeData_Abstract
     [SerializeField][Tooltip("Fish lbs max")]
     private float maxMeshSize=1.5f;
     [SerializeField][Tooltip("Refrence the unlocks Fish array")]
-    private int key;
+    protected int key;
     
-    private float normalRandy;
+    protected float normalRandy;
     public QuickTimeData_BasicFish(QuickTimeData_BasicFish other) : base(other)
     {
         this.fishLength = other.fishLength; 

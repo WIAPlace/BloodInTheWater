@@ -163,7 +163,7 @@ public class Dunk_StateEnter : Abs_StateEnter
 {
     public override void DoEnter(Fish_Controller FSC)
     {
-       
+       GameManager.Instance.unlocks.SaveMonsterData(1);
     }
 
     public override void DoExit(Fish_Controller FSC)
