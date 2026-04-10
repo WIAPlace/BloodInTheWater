@@ -27,7 +27,7 @@ namespace TLC.FishStates{
             return this;
         }
 
-        protected IEnumerator WanderRoutine(Fish_Controller FSC)
+        protected virtual IEnumerator WanderRoutine(Fish_Controller FSC)
         {
             while(idleActive)
             {
