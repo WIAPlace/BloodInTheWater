@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Scripting.APIUpdating;
 /// 
 /// Author: Weston Tollette
 /// Created: 2/5/26
@@ -24,6 +20,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] [Tooltip("How fast the player moves")]
     private float speed;
 
+    [SerializeField] [Tooltip("Speed While Angel is latched on")]
+    private float latchSpeed;
+
     [SerializeField] [Tooltip("First Person Camera attached to this so the body moves with the camera")]
     private Transform playerView;
 
@@ -33,16 +32,21 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 velocity; // speed 
 
     private bool checking = false;
+    public bool latchOn = false;
 
     void Start()
     {
         input.MoveEvent += HandleMove;
+        GameManager.OnLatch += HandleLatch;
+        GameManager.OnLatchCancelled += HandleLatchCancelled;
         //input.CheckEvent += HandleCheck;
         //input.CheckCancelledEvent += HandleCheckCancelled;
     }
     void OnDestroy()
     {
         input.MoveEvent -= HandleMove;
+        GameManager.OnLatch -= HandleLatch;
+        GameManager.OnLatchCancelled -= HandleLatchCancelled;
         //input.CheckEvent -= HandleCheck;
         //input.CheckCancelledEvent -= HandleCheckCancelled;
     }
@@ -50,8 +54,10 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         RotateToView();
-        Move();
+        if(latchOn) IsLatched();
+        else Move();
         Gravity();
+
     }
 
     //Movement Method 
@@ -95,6 +101,16 @@ public class PlayerMovement : MonoBehaviour
         // Move the controller
         controller.Move(velocity * Time.deltaTime);
     }
+
+    private void IsLatched() // while deep angel is on face move backwards
+    {
+        Vector3 directionalMovement = -playerBody.transform.forward;
+
+        // move in the desired direction.
+        Vector3 movement = directionalMovement * latchSpeed * Time.deltaTime;
+        controller.Move(movement);
+    }
+
     private void HandleCheck()
     {
         checking = true;
@@ -102,5 +118,14 @@ public class PlayerMovement : MonoBehaviour
     private void HandleCheckCancelled()
     {
         checking = false;
+    }
+
+    private void HandleLatch()
+    {
+        latchOn = true;
+    }
+    private void HandleLatchCancelled()
+    {
+        latchOn = false;
     }
 }

@@ -14,7 +14,7 @@ using UnityEngine.AI;
 ///
 public abstract class FishSC_Abstact : MonoBehaviour
 {
-    //[SerializeField][Tooltip("This will be a dadded to the controller's fishdata")]
+    [SerializeField][Tooltip("This will be a dadded to the controller's fishdata")]
     protected QuickTimeData_Abstract fishData;
     protected Fish_Controller FSC;
 

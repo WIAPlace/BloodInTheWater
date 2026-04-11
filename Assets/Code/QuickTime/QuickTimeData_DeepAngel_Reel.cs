@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor.ShaderKeywordFilter;
 using UnityEngine;
 
@@ -32,20 +33,17 @@ public class QuickTimeData_DeepAngel_Reel : QuickTimeData_BasicFish
         } 
         else // if player won
         {
-            transform.localScale/=normalRandy; // change their scaling back to what the prefab is.
-            GameState.Instance.CaughtFish(fishLbs); // send over the caught state to the gamestate thing.
-            GameObject fakeFish = FSC.waveHandler.GetFishMesh(); // get the correct mesh at its original position
-            GameManager.Instance.qtcPlayer.PlayFakeFish(fakeFish, rot, normalRandy); // pretend to catch the fish
-
-            GameManager.Instance.unlocks.SaveFishData(key,fishLbs); // send the fish data to unlocks so it can be saved as a player pref
-
+            StartCoroutine(Latch());    
             // set it to inactive
-            FSC.gameObject.SetActive(false);
+            //FSC.gameObject.SetActive(false);
+            FSC.agent.isStopped = true;
+            FSC.waveHandler.UseableMesh.gameObject.SetActive(false);
         }
     }
     IEnumerator Latch()
     {   // after caught latch on and play the much more dangerous game.
         yield return new WaitForSeconds(secondsTillLatchOn);
         QTD.SendData();
+        
     }
 }

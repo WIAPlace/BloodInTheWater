@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 // Deep Angel Latched on to the Face.
 public class QuickTimeData_DeepAngel_Latch : QuickTimeData_Abstract
 {
@@ -11,12 +12,20 @@ public class QuickTimeData_DeepAngel_Latch : QuickTimeData_Abstract
 
     public override void EnterQTEvent()
     {
-        //throw new System.NotImplementedException();
+        GameManager.Instance.OnLatchActive(true); // begin lattching onto the face
     }
 
     public override void ExitQuickTimeEvent(bool status)
     {
-        //throw new System.NotImplementedException();
+        GameManager.Instance.OnLatchActive(false); // end latch onto face
+        if (status) // win
+        {
+            
+        }
+        else  // lose
+        {
+            
+        }
     }
 
     public override void OnHit()
@@ -32,17 +41,5 @@ public class QuickTimeData_DeepAngel_Latch : QuickTimeData_Abstract
     public override void QTStatus(float amnt)
     {
         //throw new System.NotImplementedException();
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

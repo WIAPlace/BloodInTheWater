@@ -160,7 +160,7 @@ public class FishInstanceMenu : MonoBehaviour
     // change the amount of fish relative to the new sliders values
     public void ApplyChanges()
     {
-        GameManager.Instance.ChangeScubaMesActive(false);
+        GameManager.Instance.ChangeScubaMeshActive(false);
         foreach(GameObject i in activeFish)
         {// destroy all the previous fish just so we dont over load the system
             Destroy(i);
@@ -179,6 +179,6 @@ public class FishInstanceMenu : MonoBehaviour
                 activeFish.Add(newFish);
             }
         }
-        GameManager.Instance.ChangeScubaMesActive(true);
+        GameManager.Instance.ChangeScubaMeshActive(true);
     }
 }

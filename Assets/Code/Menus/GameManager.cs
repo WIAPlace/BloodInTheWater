@@ -39,6 +39,8 @@ public class GameManager : MonoBehaviour
     public static event System.Action OnHooked;
     public static event System.Action OnHookedCancelled;
     public static Action<float> BoatHit;
+    public static event Action OnLatch;
+    public static event Action OnLatchCancelled;
 
     
     
@@ -187,15 +189,21 @@ public class GameManager : MonoBehaviour
         return itemSpot.spots[2];
     }
 
-    public void Hooked(bool active)
+    public void Hooked(bool active)         // Hooked
     {
         if (active) OnHooked.Invoke();
         else OnHookedCancelled.Invoke();
     }
 
-    public void OnBoatHit(float hitAmt)
+    public void OnBoatHit(float hitAmt)     // Boat Hit
     {
         BoatHit?.Invoke(hitAmt);
+    }
+
+    public void OnLatchActive(bool active)   // latch
+    {
+        if(active) OnLatch?.Invoke();
+        else OnLatchCancelled?.Invoke();
     }
 
     public float CheckTime()
@@ -221,8 +229,10 @@ public class GameManager : MonoBehaviour
         unlocks.ResetAll();
     }
 
-    public void ChangeScubaMesActive(bool change)
+    public void ChangeScubaMeshActive(bool change)
     {
         //scubaNavMesh.SetActive(change);
     }
+    
+    
 }

@@ -13,7 +13,7 @@ using UnityEngine;
 /// 
 public class QuickTimeData_BasicFish : QuickTimeData_Abstract
 {
-    [HideInInspector]
+    //[HideInInspector]
     public Fish_Controller FSC;
     private float fishLength;
     protected float fishLbs;
