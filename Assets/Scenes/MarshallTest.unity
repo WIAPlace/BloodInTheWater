@@ -15289,6 +15289,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: House
       objectReference: {fileID: 0}
+    - target: {fileID: 5370167057548955128, guid: a5d9d22a79492d240902e77238e5e06d,
+        type: 3}
+      propertyPath: transistion
+      value: 
+      objectReference: {fileID: 1101880522}
     - target: {fileID: 5838531660389318222, guid: a5d9d22a79492d240902e77238e5e06d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -19720,13 +19725,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5078cb139deb9fb4e8e494a5581472fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loadingScreen: {fileID: 0}
-  targetScene: 
-  transitionType: 
-  canvasGroup: {fileID: 0}
+  loadingScreen: {fileID: 1780915260}
+  targetScene: IslandDay3_Night
+  transitionType: TransitionDay
+  canvasGroup: {fileID: 1165164075}
   resetThoughts: 0
   lastFishingLevel: 
   levelRetry: 0
+  nightNum: Night 42
 --- !u!4 &1101880523
 Transform:
   m_ObjectHideFlags: 0
@@ -21228,6 +21234,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1640660722}
   m_PrefabAsset: {fileID: 0}
+--- !u!225 &1165164075 stripped
+CanvasGroup:
+  m_CorrespondingSourceObject: {fileID: 1136048434583972852, guid: 3598aa3f55e6f50489fdee72d471301e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1730174413}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1165866111 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8013754571554745784, guid: 3b49f84841609a646a1f203d314b5ae0,
@@ -21840,7 +21852,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &1213120951
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -28782,6 +28794,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6170607464330026111, guid: c5c1ce5349b5ed3409cdaede8497722f,
     type: 3}
   m_PrefabInstance: {fileID: 692048820}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1780915260 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3177672203606912617, guid: 3598aa3f55e6f50489fdee72d471301e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1730174413}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1781174594 stripped
 Transform:
