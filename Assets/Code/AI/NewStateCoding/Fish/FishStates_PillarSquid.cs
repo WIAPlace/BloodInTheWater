@@ -130,6 +130,10 @@ public class PS_StateUnique : Abs_StateUnique
 
     public override IFishState DoState(Fish_Controller FSC)
     {
+        if (woundUp)
+        {
+            
+        }
         return this;
     } 
     IEnumerator Rotate90Degrees(Fish_Controller FSC) {
