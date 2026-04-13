@@ -136,7 +136,7 @@ public class QuickTimeController_Player : MonoBehaviour
             }
             else if(completionAmnt <= 0) //lose
             {
-                EndQTEAll(false);
+                if(currentQTData.type == QuickTimeType_Enum.BasicFish) EndQTEAll(false);
             }
             
         }

@@ -18,17 +18,6 @@ public class PS_StateIdle : Abs_StateIdle
         FSC.agent.isStopped = false;
 
         FSC.running = FSC.StartCoroutine(Rotate90Degrees(FSC));
-        /*
-        Quaternion targetRotation = orientation.localRotation * Quaternion.Euler(0, 0, 0);
-        if(Quaternion.Angle(orientation.localRotation, targetRotation) < 0.1f)
-        {
-            FSC.running = FSC.StartCoroutine(WanderRoutine(FSC));
-        }
-        else
-        {
-            FSC.StartCoroutine(Rotate90Degrees(FSC));
-        }
-        */
         ChanceToAggro = FSC.chanceToHook;
     }
 
@@ -227,11 +216,6 @@ public class PS_StateUnique : Abs_StateUnique
 ////////////////////////////////////////////////////////////////// Enter
 public class PS_StateEnter : Abs_StateEnter
 {
-    public override void DoEnter(Fish_Controller FSC)
-    {
-       //GameManager.Instance.unlocks.SaveMonsterData(1);
-    }
-
     public override void DoExit(Fish_Controller FSC)
     {
         
@@ -239,7 +223,7 @@ public class PS_StateEnter : Abs_StateEnter
 
     public override IFishState DoState(Fish_Controller FSC)
     {
-        return FSC.SC.Idle;
+        return this;
     }
 }
 

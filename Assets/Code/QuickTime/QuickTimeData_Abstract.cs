@@ -28,8 +28,8 @@ public abstract class QuickTimeData_Abstract : MonoBehaviour
 
     [SerializeField] [Tooltip("How long should the allowable time be for this")]
     protected float qtLength;
-    [SerializeField] [Tooltip("Type of Game")]
-    protected QuickTimeType_Enum type;
+    [field: SerializeField] [Tooltip("Type of Game")]
+    public QuickTimeType_Enum type;
  
     protected float timeKeeper;
     [SerializeField][Tooltip("max amount of time between behavior changes")]
