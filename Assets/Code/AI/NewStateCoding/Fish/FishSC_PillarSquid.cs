@@ -1,12 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
+using Unity.Cinemachine;
 
 public class FishSC_PillarSquid : FishSC_Abstact
 {
     [SerializeField] private Transform orientation;
+    [SerializeField] private LayerMask BoatMask;
+    [SerializeField] [Tooltip("Sound of hitting the boat")]
+    private SoundEffectSO BoatHit;
+    public AudioSource soundMaker;
+    [SerializeField]
+    CinemachineImpulseSource impSour;
+
+    [SerializeField] private float damage;
+
     public void Awake()
     {
         orientation.rotation = Quaternion.Euler(Vector3.zero);
@@ -46,5 +54,21 @@ public class FishSC_PillarSquid : FishSC_Abstact
     {
         return FSC.SC.Idle;
         //throw new System.NotImplementedException();
+    }
+
+    public override void Collision(Collision collision)
+    {
+        if(((1 << collision.gameObject.layer) & BoatMask.value) != 0 && FSC.currentState == FSC.SC.Bobber)
+        { // bobber state is when it is jetting twoards thing.
+            GameManager.Instance.OnBoatHit(damage);
+            BoatHit.Play(soundMaker);
+            impSour.GenerateImpulse();
+            FSC.ChangeState(Idle);
+        }
+        else if(((1 << collision.gameObject.layer) & BoatMask.value) != 0 && FSC.currentState == FSC.SC.Unique)
+        {
+            // maybe some noice for like a little bonk.
+            FSC.ChangeState(Idle);
+        }
     }
 }

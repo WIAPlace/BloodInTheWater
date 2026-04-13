@@ -169,7 +169,6 @@ namespace TLC.FishStates{
             }
         }
     }
-
     ////////////////////////////////////////////////////////////////// Unique Behavior
     public abstract class Abs_StateUnique : IFishState
     {

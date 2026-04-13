@@ -841,7 +841,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35e95dc5ff2b64380880dd7ac5922847, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Size: {x: 4, y: 3, z: 4}
+  m_Size: {x: 1, y: 3.55, z: 1}
   m_Center: {x: 0, y: 1, z: 0}
   m_Area: 0
   m_AffectedAgents: c3c0608d
@@ -985,7 +985,7 @@ GameObject:
   - component: {fileID: 7330698573527726758}
   - component: {fileID: 8146559636625066944}
   m_Layer: 0
-  m_Name: NavMeshHolder
+  m_Name: FishMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1035,7 +1035,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.13333334
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 02d6e91900747d940b8d30b1536ed7af, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: fcd5ee5db85da6049b834cb8400e0833, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1 &5911603673200608848
 GameObject:
@@ -1433,7 +1433,7 @@ GameObject:
   - component: {fileID: 2081667576848041334}
   - component: {fileID: 4864045154529378949}
   m_Layer: 0
-  m_Name: NavMeshHolder (1)
+  m_Name: ScubaMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1474,7 +1474,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1089
   m_UseGeometry: 0
-  m_DefaultArea: 0
+  m_DefaultArea: 3
   m_GenerateLinks: 0
   m_IgnoreNavMeshAgent: 1
   m_IgnoreNavMeshObstacle: 1
@@ -3222,6 +3222,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1146209400483057008, guid: d582cee2b8663be43ae3058f18c1d5ca,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1673383433939416933, guid: d582cee2b8663be43ae3058f18c1d5ca,
         type: 3}
       propertyPath: m_Name
@@ -3292,6 +3297,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -0.066
       objectReference: {fileID: 0}
+    - target: {fileID: 4522026751272463813, guid: d582cee2b8663be43ae3058f18c1d5ca,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5007762632819672961, guid: d582cee2b8663be43ae3058f18c1d5ca,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -3325,6 +3335,21 @@ PrefabInstance:
     - target: {fileID: 6821952886499563478, guid: d582cee2b8663be43ae3058f18c1d5ca,
         type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7080469427118414606, guid: d582cee2b8663be43ae3058f18c1d5ca,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7293211385151733409, guid: d582cee2b8663be43ae3058f18c1d5ca,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 7458353203174753759, guid: d582cee2b8663be43ae3058f18c1d5ca,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7649224506158107205, guid: d582cee2b8663be43ae3058f18c1d5ca,
@@ -3432,6 +3457,11 @@ PrefabInstance:
       propertyPath: sceneName
       value: IslandDay3_Morning
       objectReference: {fileID: 0}
+    - target: {fileID: 9107421598821710455, guid: d582cee2b8663be43ae3058f18c1d5ca,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.24
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -3444,6 +3474,14 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 8245786473131881127}
+    - targetCorrespondingSourceObject: {fileID: 7080469427118414606, guid: d582cee2b8663be43ae3058f18c1d5ca,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1262140175382090532}
+    - targetCorrespondingSourceObject: {fileID: 4522026751272463813, guid: d582cee2b8663be43ae3058f18c1d5ca,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5045491407542764912}
   m_SourcePrefab: {fileID: 100100000, guid: d582cee2b8663be43ae3058f18c1d5ca, type: 3}
 --- !u!4 &1011703298158115230 stripped
 Transform:
@@ -3463,6 +3501,28 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2530342773235833154}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2151843244099138695 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4522026751272463813, guid: d582cee2b8663be43ae3058f18c1d5ca,
+    type: 3}
+  m_PrefabInstance: {fileID: 2530342773235833154}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5045491407542764912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2151843244099138695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35e95dc5ff2b64380880dd7ac5922847, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Size: {x: 1.57, y: 2.05, z: 1.57}
+  m_Center: {x: 0, y: 0, z: 0}
+  m_Area: 1
+  m_AffectedAgents: c3c0608d
 --- !u!4 &2297695438054571146 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4395118010436019656, guid: d582cee2b8663be43ae3058f18c1d5ca,
@@ -3505,6 +3565,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dab5c7d4c32e743048dfca98e2d5914f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &4710611513094357580 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7080469427118414606, guid: d582cee2b8663be43ae3058f18c1d5ca,
+    type: 3}
+  m_PrefabInstance: {fileID: 2530342773235833154}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1262140175382090532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4710611513094357580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35e95dc5ff2b64380880dd7ac5922847, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Size: {x: 1.36, y: 2.17, z: 1.43}
+  m_Center: {x: 0, y: 0, z: 0}
+  m_Area: 1
+  m_AffectedAgents: c3c0608d
 --- !u!1 &4782968816283167204 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7024790323753054374, guid: d582cee2b8663be43ae3058f18c1d5ca,

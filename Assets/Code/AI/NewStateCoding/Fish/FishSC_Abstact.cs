@@ -50,6 +50,10 @@ public abstract class FishSC_Abstact : MonoBehaviour
         NavMesh.SamplePosition(randomDirection, out hit, radius, 1);
         return hit.position;
     }
+    public virtual void Collision(Collision collision)
+    {
+            
+    }
     ///////////////////////////////////////////////////////////////////////// Bobber Startles fish
     public abstract void BobberSpooked(Vector3 lurePosition);
 
