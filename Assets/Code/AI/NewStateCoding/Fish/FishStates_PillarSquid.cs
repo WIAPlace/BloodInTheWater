@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TLC.FishStates;
-using Unity.VisualScripting.FullSerializer;
 
 ////////////////////////////////////////////////////////////////// In Idle Range
 public class PS_StateIdle : Abs_StateIdle
@@ -11,6 +10,9 @@ public class PS_StateIdle : Abs_StateIdle
     public override void DoEnter(Fish_Controller FSC)
     {
         idleActive = true;
+        FSC.agent.enabled = true; // turn that mans on
+        FSC.agent.isStopped = false;
+
         FSC.running = FSC.StartCoroutine(WanderRoutine(FSC));
         
         ChanceToAggro = FSC.chanceToHook;
@@ -107,51 +109,68 @@ public class PS_StateFear : Abs_StateFear
 
 ////////////////////////////////////////////////////////////////// Unique Behavior
 public class PS_StateUnique : Abs_StateUnique
-{
+{   
+    Transform orientation;
     Vector3 ramTarget;
-    Vector3 targetDirection;
-    Quaternion targetRotation;
-    bool woundUp = false;
+    bool woundUp;
     public override void DoEnter(Fish_Controller FSC)
     {
-        ramTarget = FSC.SC.GetRamTarget(FSC);
+        FSC.agent.isStopped = true;
         woundUp = false;
-        FSC.running = FSC.StartCoroutine(WindUp(FSC));   
-        // 1. Determine the direction to the target.
-        targetDirection = ramTarget - FSC.transform.position;
-        targetDirection = new Vector3(targetDirection.x,FSC.transform.position.y,targetDirection.z);
-        // 2. Create the target rotation (a Quaternion looking in that direction).
-        targetRotation = Quaternion.LookRotation(targetDirection);
-        TutorialManager.Instance.TriggerTutorial(1,4);
+        orientation = FSC.waveHandler.UseableMesh;
+        ramTarget = FSC.SC.target.transform.position;
+        //woundUp = false;
+        //FSC.running = FSC.StartCoroutine(WindUp(FSC));   
+        orientation.localRotation = Quaternion.Euler(0, 0, 0);
+        FSC.running = FSC.StartCoroutine(Rotate90Degrees(FSC));
     }
 
     public override void DoExit(Fish_Controller FSC)
     {
-        
+        FSC.StopCo(FSC.running);
     }
 
     public override IFishState DoState(Fish_Controller FSC)
     {
-        if(!woundUp){
-            // do some splashing or something
-            if (ramTarget != null && FSC.transform.rotation != targetRotation)
-            {
-                // 3. Rotate the current transform towards the target rotation at a specified speed.
-                //    The speed is in degrees per second, so multiply by Time.deltaTime.
-                FSC.transform.rotation = Quaternion.RotateTowards(FSC.transform.rotation, targetRotation, FSC.agent.angularSpeed * Time.deltaTime);
-            }
-        }
-        else
+        if (woundUp)
         {
-            FSC.transform.Translate(Vector3.forward * FSC.agent.speed * 3 * Time.deltaTime);
+            FSC.transform.Translate(Vector3.forward * FSC.agent.speed * 4 * Time.deltaTime);
         }
         return this;
+    } 
+    IEnumerator Rotate90Degrees(Fish_Controller FSC) {
+        // Calculate the exact target rotation relative to current
+        
+        Quaternion startRotation = orientation.localRotation;
+        Quaternion targetRotation = orientation.localRotation * Quaternion.Euler(90, 0, 0);
+        
+        float progress = 0;
+        while (progress < 1f) {
+            ramTarget = FSC.SC.target.transform.position;
+            // 1. Find direction to target
+            Vector3 direction = ramTarget - FSC.transform.position;
+
+            // 2. Create the rotation the object should eventually have
+            Quaternion targetRot = Quaternion.LookRotation(direction);
+            
+            float angle = Quaternion.Angle(FSC.transform.rotation,targetRot);
+                // 3. Rotate towards that target over time (Slerp for easing)
+            FSC.transform.rotation = Quaternion.RotateTowards(FSC.transform.rotation, targetRot, FSC.agent.angularSpeed/3 * Time.deltaTime);
+            
+
+            // Smoothly move towards target based on time
+            orientation.localRotation = Quaternion.RotateTowards(orientation.localRotation, targetRotation, FSC.agent.angularSpeed/6 * Time.deltaTime);
+
+            // Check if we are close enough to stop this is the stopper because it will almost certainly happen first.
+            if (Quaternion.Angle(orientation.localRotation, targetRotation) < 0.1f && angle<0.1f) {
+                Debug.Log("break");
+                orientation.localRotation = targetRotation; // Snap to exact value
+                woundUp = true;
+                break;
+            }
+            yield return null; // Wait for the next frame
+        }
     }
-    public IEnumerator WindUp(Fish_Controller FSC)
-    {
-        yield return new WaitForSeconds(FSC.wanderTimer);
-        woundUp =  true;
-    }   
 }
 
 ////////////////////////////////////////////////////////////////// Enter

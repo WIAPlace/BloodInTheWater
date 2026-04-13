@@ -4957,8 +4957,40 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7e093f40f46dce742bd31d3a5d46f536,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 341406421972631731}
   m_SourcePrefab: {fileID: 100100000, guid: 7e093f40f46dce742bd31d3a5d46f536, type: 3}
+--- !u!1 &310794889004386254 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 7e093f40f46dce742bd31d3a5d46f536,
+    type: 3}
+  m_PrefabInstance: {fileID: 617348978015484575}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &341406421972631731
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 310794889004386254}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -2754020517947190558, guid: 7e093f40f46dce742bd31d3a5d46f536, type: 3}
 --- !u!4 &1088739586054380916 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7e093f40f46dce742bd31d3a5d46f536,
@@ -4977,7 +5009,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: -5260598712678395398, guid: 7e0b0069343b29244b5d78884ea2abec,
+      objectReference: {fileID: -2309305249758762421, guid: 7e0b0069343b29244b5d78884ea2abec,
         type: 3}
     - target: {fileID: 3080664118793735724, guid: 703143014af4c7d42b3c7a2dd0688777,
         type: 3}
@@ -5171,6 +5203,7 @@ MonoBehaviour:
   resetThoughts: 0
   lastFishingLevel: 
   levelRetry: 0
+  nightNum: 
 --- !u!1001 &1003474641062977227
 PrefabInstance:
   m_ObjectHideFlags: 0

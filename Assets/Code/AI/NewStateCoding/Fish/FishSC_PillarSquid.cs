@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 public class FishSC_PillarSquid : FishSC_Abstact
 {
+    [SerializeField] private Transform orientation;
     public void Awake()
     {
+        orientation.rotation = Quaternion.Euler(Vector3.zero);
         target = GameManager.Instance.lureTarget;
         fishData = GetComponent<QuickTimeData_Abstract>();
         FSC = GetComponent<Fish_Controller>();
@@ -27,8 +30,9 @@ public class FishSC_PillarSquid : FishSC_Abstact
 
     public override void IdleMovement(Fish_Controller FSC)
     {
-        //throw new System.NotImplementedException();
+        
     }
+    
 
     public override void LureReeledIn()
     {
