@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TLC.FishStates;
-using Unity.VisualScripting.FullSerializer;
-using UnityEditor.Experimental.GraphView;
 
 ////////////////////////////////////////////////////////////////// In Idle Range
 public class PS_StateIdle : Abs_StateIdle
@@ -12,6 +10,9 @@ public class PS_StateIdle : Abs_StateIdle
     public override void DoEnter(Fish_Controller FSC)
     {
         idleActive = true;
+        FSC.agent.enabled = true; // turn that mans on
+        FSC.agent.isStopped = false;
+
         FSC.running = FSC.StartCoroutine(WanderRoutine(FSC));
         
         ChanceToAggro = FSC.chanceToHook;
@@ -114,6 +115,7 @@ public class PS_StateUnique : Abs_StateUnique
     bool woundUp;
     public override void DoEnter(Fish_Controller FSC)
     {
+        FSC.agent.isStopped = true;
         woundUp = false;
         orientation = FSC.waveHandler.UseableMesh;
         ramTarget = FSC.SC.target.transform.position;
@@ -132,7 +134,7 @@ public class PS_StateUnique : Abs_StateUnique
     {
         if (woundUp)
         {
-            
+            FSC.transform.Translate(Vector3.forward * FSC.agent.speed * 4 * Time.deltaTime);
         }
         return this;
     } 
