@@ -22,10 +22,14 @@ public class TransistionScene : MonoBehaviour
     public string targetScene;
     public string transitionType;
     public CanvasGroup canvasGroup;
+    [Space(5)]
     public bool resetThoughts;
+    [Space(5)]
     public string lastFishingLevel;
     public bool levelRetry; //If StaticVariables.sceneToLoad uses StaticVariables.lastLevel(true) or targetScene(false) 
     //public bool toMenu = false;
+    [Space(5)]
+    public string nightNum;
 
 
     public void StartGame()
@@ -38,6 +42,7 @@ public class TransistionScene : MonoBehaviour
         {
             StaticVariables.sceneToLoad = targetScene; // changes the scene tied to TransitionData
             StaticVariables.lastLevel = lastFishingLevel; // changes lastLevel
+            StaticVariables.nightNum = nightNum;
         }
         StartCoroutine(StartLoad());
     }

@@ -8,4 +8,6 @@ public class StaticVariables : MonoBehaviour
     public static string lastLevel;
 
     public static int thoughtNum = 0;
+
+    public static string nightNum;
 }
