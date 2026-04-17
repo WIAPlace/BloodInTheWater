@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 /// 
 /// Author: Marsahll Turner
-/// Created: 2/12/26
-/// Purpose: Sets the Object to Have Dialogue
+/// Created: 4/12/26
+/// Purpose: To trigger either turning on or off a GameObject when interacting with a trigger button and allows dialogue
 /// 
-/// Edited: 2/21/26
-/// Edited By: Weston Tollette
-/// Edit Purpose: implemented the Interactable Interface so that it is usable with the new interact system.
-/// 
+/// Edited: 
+/// Edited By: 
+/// Edit Purpose: 
+///
 public class DialogueObjectTrigger : MonoBehaviour, IInteractable
 {
     [SerializeField] bool firstInteraction = true;

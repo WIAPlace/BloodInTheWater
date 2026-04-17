@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 /// 
 /// Author: Marsahll Turner
-/// Created: 3/4/26
-/// Purpose: To trigger dialogue when entering a trigger object
+/// Created: 4/12/26
+/// Purpose: To trigger either turning on or off a GameObject when entering a trigger zone and allows dialogue
 /// 
 /// Edited: 
 /// Edited By: 
 /// Edit Purpose: 
-/// 
+///  
 public class DialogueZoneTrigger : MonoBehaviour
 {
     public GameObject thePlayer;
