@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -20,6 +21,8 @@ public class GameState : MonoBehaviour
     private float lbsCaught=0f;
     [SerializeField] private GameOver endLoose;
     [SerializeField] private GameObject keeperToSpawn;
+
+    public static event Action<float> OnCatch;
 
 
     private void Awake()
@@ -47,6 +50,12 @@ public class GameState : MonoBehaviour
     public void CaughtFish(float lbs)
     {
         lbsCaught += Mathf.Round(lbs * 10)/10; // 1 decimal
+        OnCatch?.Invoke(.6f);
+    }
+
+    public void CheckCaughtFish()
+    {
+        OnCatch?.Invoke(0f); // run this without updating fish to just show the thing
     }
 
     /// getters
