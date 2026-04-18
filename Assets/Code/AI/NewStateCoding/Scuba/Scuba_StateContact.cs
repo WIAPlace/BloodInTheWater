@@ -12,11 +12,21 @@ using UnityEngine;
 ///
 public class Scuba_StateContact : IBoatStomperState
 {
+    public void DoEnter(Scuba_Controller SC)
+    {
+        SC.SetAnimation(2);
+        SC.scubaData.SendData();
+    }
+
+    public void DoExit(Scuba_Controller SC)
+    {
+        
+    }
+
     public IBoatStomperState DoState(Scuba_Controller SC)
     {
         //Debug.Log("Hit");
-        SC.scubaData.SendData();
-        return null;
+        return this;
     }
 
 }

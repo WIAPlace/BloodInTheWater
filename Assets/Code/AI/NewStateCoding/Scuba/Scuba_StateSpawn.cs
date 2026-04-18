@@ -28,6 +28,13 @@ public class Scuba_StateSpawn : IBoatStomperState
 
     public IBoatStomperState DoState(Scuba_Controller SC)
     {   
+        
+        return  SC.MoveState;
+    }
+
+    public void DoEnter(Scuba_Controller SC)
+    {
+        //throw new System.NotImplementedException();
         if(SC.stun != null) // clean up if he has been here before
         { // stops a corunie if its already playing
             SC.StopCoroutine(SC.stun);
@@ -41,7 +48,10 @@ public class Scuba_StateSpawn : IBoatStomperState
         //SC.gameObject.SetActive(true);
         //Debug.Log("Active");
         //Spawing animation and stuff.
-        return  SC.MoveState;
     }
-    
+
+    public void DoExit(Scuba_Controller SC)
+    {
+        //throw new System.NotImplementedException();
+    }
 }

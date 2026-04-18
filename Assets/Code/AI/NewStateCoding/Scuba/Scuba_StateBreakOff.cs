@@ -11,8 +11,7 @@ using UnityEngine;
 ///
 public class Scuba_StateBreakOff : IBoatStomperState
 {
-    
-    public IBoatStomperState DoState(Scuba_Controller SC)
+    public void DoEnter(Scuba_Controller SC)
     {
         //Debug.Log("begun");
         if(SC.stun != null)
@@ -20,6 +19,16 @@ public class Scuba_StateBreakOff : IBoatStomperState
             SC.StopCoroutine(SC.stun);
         }
         SC.stun = SC.StartCoroutine(StunTimer(SC));
+        SC.SetAnimation(1);
+    }
+
+    public void DoExit(Scuba_Controller SC)
+    {
+        
+    }
+
+    public IBoatStomperState DoState(Scuba_Controller SC)
+    {
         return SC.StunnedState; // or some kind of pause state
     }
     public IEnumerator StunTimer(Scuba_Controller SC)
@@ -29,7 +38,7 @@ public class Scuba_StateBreakOff : IBoatStomperState
         SC.agent.enabled = true;
         SC.rb.isKinematic = true;
         
-        SC.SetCurrentState(SC.MoveState);
+        SC.ChangeState(SC.MoveState);
     }
     
 }

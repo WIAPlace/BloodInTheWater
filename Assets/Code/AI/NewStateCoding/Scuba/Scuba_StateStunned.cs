@@ -12,6 +12,16 @@ using UnityEngine;
 ///
 public class Scuba_StateStunned : IBoatStomperState
 {
+    public void DoEnter(Scuba_Controller SC)
+    {
+        //throw new System.NotImplementedException();
+    }
+
+    public void DoExit(Scuba_Controller SC)
+    {
+        //throw new System.NotImplementedException();
+    }
+
     public IBoatStomperState DoState(Scuba_Controller SC)
     {
         // play some animation for being stunned;
