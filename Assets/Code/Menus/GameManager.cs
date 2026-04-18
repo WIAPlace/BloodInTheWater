@@ -33,6 +33,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private PlayerPrefrenceScript pref;
     public Unlocks unlocks;
     [SerializeField] private GameObject scubaNavMesh;
+    [SerializeField][Tooltip("Array of fish")]
+    FishHolderSO fishHolder;
+    [SerializeField][Tooltip("FishStatsUI")]
+    ShowFishStats fishStatsUI;
 
     private Coroutine running;
     [HideInInspector]public bool hintsEnabled = true;
@@ -53,6 +57,7 @@ public class GameManager : MonoBehaviour
         pauseMenu.SetActive(false); // turn off pause menu and the extra menus it has
         if(howToPlay.activeSelf) howToPlay.SetActive(false);
         if(settingsMenu.activeSelf) settingsMenu.SetActive(false);
+
 
         gameUI.SetActive(true); // make the game ui active
         windUpIndicator.gameObject.SetActive(false);
@@ -234,5 +239,11 @@ public class GameManager : MonoBehaviour
         //scubaNavMesh.SetActive(change);
     }
     
-    
+    /////////////////////////////////////////////////////////////////////////////////////////////////// Present Caught Fish
+    public void PresentFish(int key, float weight)
+    {
+        fishStatsUI.SetLbs(weight, key);
+        fishStatsUI.SetName(fishHolder.GetFish(key).name);
+        fishStatsUI.ActivateUI();
+    }
 }

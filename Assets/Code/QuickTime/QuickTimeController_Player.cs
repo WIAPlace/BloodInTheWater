@@ -37,6 +37,8 @@ public class QuickTimeController_Player : MonoBehaviour
     private Image qtHitMarker;
     [SerializeField]
     private Image qtCompletion;
+    [SerializeField]
+    private Image qtMarkerImage;
 
     [Header("QT Variables")]
     [SerializeField] // size of hitzone
@@ -79,6 +81,7 @@ public class QuickTimeController_Player : MonoBehaviour
     }
     void Start()
     {
+        qtUI.SetActive(false);
         input.UseEventQT += HandelUseQT;
         input.UseEventQTCanelled += HandleUseQTCancelled;
         
@@ -219,6 +222,12 @@ public class QuickTimeController_Player : MonoBehaviour
     {
         // retrive lure as a way to disable the other fish from being interested and interupting.
         // should be switched out for something more elegent later
+
+        if (currentQTData.GetMarker() != null) // error check
+        {
+            qtMarkerImage.sprite = currentQTData.GetMarker(); // set the marker to whatever it is set as in the fish controller.
+        }
+        
 
         useControl.rod.LurePrefab.SetActive(false);
         useControl.rod.RetrieveLure(useControl.rod.LurePrefab.transform.position, useControl.rod.LureRadius); 

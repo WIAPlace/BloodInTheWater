@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using QuickTime;
-using Unity.VisualScripting;
+using UnityEngine.UI;
 /// 
 /// Author: Weston Tollette
 /// Created: 2/12/26
@@ -44,6 +44,10 @@ public abstract class QuickTimeData_Abstract : MonoBehaviour
     protected float winRate=3f;
     [SerializeField] [Tooltip("How quickly the Completion Bar should empty. Will be made negative in code")]
     protected float looseRate=3f;
+
+    [Header("Image")]
+    [SerializeField][Tooltip("Fish Marker Image")]
+    protected Sprite marker;
 
     public QuickTimeData_Abstract(QuickTimeData_Abstract other)
     {
@@ -113,7 +117,11 @@ public abstract class QuickTimeData_Abstract : MonoBehaviour
         newlocal = Mathf.SmoothDamp(location,qtDestin,ref qtSpeed, qtSmoothMotion);
 
         return newlocal;
-    }  
+    } 
+    public Sprite GetMarker()
+    {
+        return marker;
+    } 
 
     /// Status
     public abstract void QTStatus(float amnt);
