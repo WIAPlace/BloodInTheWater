@@ -85,9 +85,9 @@ public class Scuba_Controller : MonoBehaviour, IMonster
     private void OnEnable()
     {
         active = false;
-        agent.isStopped = true; // dont move
         //transform.position = outOfTheWay.transform.position; // dont be in the way
         agent.Warp(outOfTheWay.transform.position);
+        agent.enabled = false;
         body.SetActive(false); // dont be seen
         StartCoroutine(StartSpawnDelay(spawnMin,spawnMax)); // start spawning boy.
         //Debug.Log("Spawned");
@@ -96,9 +96,11 @@ public class Scuba_Controller : MonoBehaviour, IMonster
     void Spawn()
     {
         active = false;
-        agent.isStopped = true; // dont move
         //transform.position = outOfTheWay.transform.position; // dont be in the way
+        
         agent.Warp(outOfTheWay.transform.position);
+        agent.enabled = false;
+        
         body.SetActive(false); // dont be seen
         StartCoroutine(StartSpawnDelay(respawnMin,respawnMax)); // start spawning boy.
         //Debug.Log("Spawned");
@@ -132,10 +134,11 @@ public class Scuba_Controller : MonoBehaviour, IMonster
 
     IEnumerator StartSpawnDelay(float min, float max)
     {
-        float randy = Random.Range(respawnMin,respawnMax);
-        Debug.Log(randy);
+        float randy = Random.Range(min,max);
+        //Debug.Log(randy);
         yield return new WaitForSeconds(randy);
         active = true;
+        agent.enabled = true;
         ChangeState(SpawnState); 
     }
 
