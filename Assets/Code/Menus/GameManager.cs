@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject howToPlay; // how to play.
     [SerializeField] private GameObject settingsMenu; // menu for settings
     [SerializeField] private GameObject gameUI; // ui for the game during play
+    [SerializeField] private GameObject talkPanel; // this is the dialouge thing. make sure it is active on start.
     [SerializeField] private Image windUpIndicator; // will show when u have would up and are ready to release
     [SerializeField] private TextMeshProUGUI text; // ui for temp text
     [SerializeField] PersistantItemSpot itemSpot;
@@ -49,8 +50,14 @@ public class GameManager : MonoBehaviour
     public static event Action OnLatch;
     public static event Action OnLatchCancelled;
 
-    
-    
+
+    void OnEnable()
+    {
+        // this should be active before start. in its own script it desides if it should be on
+        // stuff breaks if this is done incorectly.
+        talkPanel.SetActive(true);
+        
+    }
     void Start()
     {
         pref.ApplySettings();
@@ -60,7 +67,6 @@ public class GameManager : MonoBehaviour
         pauseMenu.SetActive(false); // turn off pause menu and the extra menus it has
         if(howToPlay.activeSelf) howToPlay.SetActive(false);
         if(settingsMenu.activeSelf) settingsMenu.SetActive(false);
-
 
         gameUI.SetActive(true); // make the game ui active
         windUpIndicator.gameObject.SetActive(false);
