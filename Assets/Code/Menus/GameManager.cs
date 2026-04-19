@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Splines;
 using QuickTime;
+using UnityEngine.EventSystems;
 /// 
 /// Author: Weston Tollette
 /// Created: 2/22/26
@@ -21,6 +22,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] public InputReader input; //Input reader
     [SerializeField] private GameObject pauseMenu; // ui for the pause menu
     [SerializeField] private GameObject pauseMainMenu; // default menu for pause menu
+    [SerializeField] private GameObject selectedOption; // on pause what option should be selected
     [SerializeField] private GameObject howToPlay; // how to play.
     [SerializeField] private GameObject settingsMenu; // menu for settings
     [SerializeField] private GameObject gameUI; // ui for the game during play
@@ -82,6 +84,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale=0f;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        SetFirstButton(selectedOption);
     }
     public void HandleResume()
     {
@@ -247,5 +250,10 @@ public class GameManager : MonoBehaviour
         fishStatsUI.SetName(fishHolder.GetFish(key).name);
         fishStatsUI.SetType(type);
         fishStatsUI.ActivateUI();
+    }
+
+    public void SetFirstButton(GameObject selectedOpt)
+    {
+        EventSystem.current.SetSelectedGameObject(selectedOpt);
     }
 }
