@@ -105,7 +105,7 @@ public class QuickTimeData_BasicFish : QuickTimeData_Abstract
             GameObject fakeFish = FSC.waveHandler.GetFishMesh(); // get the correct mesh at its original position
             GameManager.Instance.qtcPlayer.PlayFakeFish(fakeFish, rot, normalRandy); // pretend to catch the fish
 
-            GameManager.Instance.PresentFish(key,fishLbs); // set fish stat screen
+            GameManager.Instance.PresentFish(key,fishLbs,type); // set fish stat screen
             GameManager.Instance.unlocks.SaveFishData(key,fishLbs); // send the fish data to unlocks so it can be saved as a player pref
             
 

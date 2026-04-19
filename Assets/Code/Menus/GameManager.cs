@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI; 
 using TMPro;
 using UnityEngine.Splines;
+using QuickTime;
 /// 
 /// Author: Weston Tollette
 /// Created: 2/22/26
@@ -240,10 +241,11 @@ public class GameManager : MonoBehaviour
     }
     
     /////////////////////////////////////////////////////////////////////////////////////////////////// Present Caught Fish
-    public void PresentFish(int key, float weight)
+    public void PresentFish(int key, float weight,QuickTimeType_Enum type)
     {
         fishStatsUI.SetLbs(weight, key);
         fishStatsUI.SetName(fishHolder.GetFish(key).name);
+        fishStatsUI.SetType(type);
         fishStatsUI.ActivateUI();
     }
 }
