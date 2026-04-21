@@ -45,12 +45,16 @@ public class Scuba_Controller : MonoBehaviour, IMonster
 
     [HideInInspector]
     public bool active = true;
-
-    [SerializeField][Tooltip("How lond to spawn/respawn")]
+    [SerializeField][Tooltip("How long to first spawn")]
+    private float spawnMin;
+    [SerializeField][Tooltip("How long to first spawn max amount of time")]
+    private float spawnMax;
+    [SerializeField][Tooltip("How long to respawn")]
     private float respawnMin;
-    [SerializeField][Tooltip("How lond to spawn/respawn max amount of time")]
+    [SerializeField][Tooltip("How long to respawn max amount of time")]
     private float respawnMax;
-
+    [field: SerializeField][Tooltip("Scuba animator")]
+    public Animator anim;
     Vector3 direction;
 
     // All of the States
@@ -61,6 +65,12 @@ public class Scuba_Controller : MonoBehaviour, IMonster
     public Scuba_StateStunned StunnedState = new Scuba_StateStunned(); // After breaking out of minigame he will go into stunned for a moment
     public Scuba_StateHit HitState = new Scuba_StateHit(); // activated once the mans is hit
 
+    private IBoatStomperState previousState;
+    public string debugCurrentStateName;
+    public string debugPreviousStateName;
+
+    [HideInInspector]
+    public bool contacted=false;
 
 
     private void Start()
@@ -73,24 +83,26 @@ public class Scuba_Controller : MonoBehaviour, IMonster
         // scuba will have to be activated by something outside itself, because the update wont run if it is disabled
 
         GameManager.Instance.unlocks.SaveMonsterData(2);
-        }
+    }
     private void OnEnable()
     {
         active = false;
-        agent.isStopped = true; // dont move
         //transform.position = outOfTheWay.transform.position; // dont be in the way
         agent.Warp(outOfTheWay.transform.position);
+        agent.enabled = false;
         body.SetActive(false); // dont be seen
-        StartCoroutine(StartSpawnDelay(40,60)); // start spawning boy.
+        StartCoroutine(StartSpawnDelay(spawnMin,spawnMax)); // start spawning boy.
         //Debug.Log("Spawned");
     }
 
     void Spawn()
     {
         active = false;
-        agent.isStopped = true; // dont move
         //transform.position = outOfTheWay.transform.position; // dont be in the way
+        
         agent.Warp(outOfTheWay.transform.position);
+        agent.enabled = false;
+        
         body.SetActive(false); // dont be seen
         StartCoroutine(StartSpawnDelay(respawnMin,respawnMax)); // start spawning boy.
         //Debug.Log("Spawned");
@@ -100,16 +112,36 @@ public class Scuba_Controller : MonoBehaviour, IMonster
     {
         if(currentState!=null && active)
         { // set current state to whatever the state tells you to
-            currentState = currentState.DoState(this);
+            IBoatStomperState holder = currentState.DoState(this);
+            if(currentState != holder) 
+            { // using this as a of being able to utilize change state instead of just changing current state dirrectly
+                ChangeState(holder);
+
+                debugCurrentStateName = currentState.GetType().Name; //used for debuging to see name
+                debugPreviousStateName = previousState?.GetType().Name; //used for debuging to see name
+            }
         }
+    }
+    public void ChangeState(IBoatStomperState newState)
+    {
+        //Debug.Log(newState);
+        previousState = currentState;
+        currentState?.DoExit(this); // leave the prevvious state
+        currentState = newState;
+        currentState?.DoEnter(this); // enter the new state   
+        
+        debugCurrentStateName = currentState.GetType().Name; //used for debuging to see name
+        debugPreviousStateName = previousState?.GetType().Name; //used for debuging to see name
     }
 
     IEnumerator StartSpawnDelay(float min, float max)
     {
-        float randy = Random.Range(respawnMin,respawnMax);
+        float randy = Random.Range(min,max);
+        //Debug.Log(randy);
         yield return new WaitForSeconds(randy);
         active = true;
-        currentState = SpawnState; 
+        agent.enabled = true;
+        ChangeState(SpawnState); 
     }
 
     
@@ -129,13 +161,14 @@ public class Scuba_Controller : MonoBehaviour, IMonster
                 {// shoot a ray twoards the player
 
                     //Debug.Log("Gate 3");
-                    if(((1 << hit.collider.gameObject.layer) & playerMask.value) != 0)
+                    if(((1 << hit.collider.gameObject.layer) & playerMask.value) != 0 && !contacted)
                     { // if the thing hit is the wall do not go for it.
                     // we have to do this a second time so that we arnt checking eveyry time the guy is near a wall.
                         //Debug.Log("Gate 4");
-                        currentState = ContactState; // data is being transfered;
-                
+                        ChangeState(ContactState); // data is being transfered;
+                        transform.LookAt(other.transform.position);
                         useControl.ChangeState(useControl.currentItem.UnderAtk);
+                        contacted = true;
                     }
                 }
                 // change player's state to hit
@@ -179,17 +212,36 @@ public class Scuba_Controller : MonoBehaviour, IMonster
     {
         return target;
     }
-    public void SetCurrentState(IBoatStomperState newState) // set state to something else.
-    { // transition used to change state to new state.
-        currentState = newState;
-    }
-
-
 
     // Monster Interface
     public void MonsterHit(Vector3 hitDir) // on hit by harpoon
     {
         this.hitDir = new Vector3(-hitDir.x,1,-hitDir.z);
         currentState = HitState;
+    }
+
+    public void SetAnimation(int key)
+    {
+        anim.ResetTrigger("IsWalking");
+        anim.ResetTrigger("IsHit");
+        anim.ResetTrigger("IsAttacking");
+
+        switch (key)
+        {
+            case 0:
+                anim.SetTrigger("IsWalking");
+                break;
+
+            case 1:
+                anim.SetTrigger("IsHit");
+                break;
+            
+            case 2:
+               anim.SetTrigger("IsAttacking");
+                break;
+
+            default:
+                break;
+        }
     }
 }   

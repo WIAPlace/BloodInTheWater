@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI; 
 using TMPro;
 using UnityEngine.Splines;
+using QuickTime;
+using UnityEngine.EventSystems;
 /// 
 /// Author: Weston Tollette
 /// Created: 2/22/26
@@ -20,9 +22,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] public InputReader input; //Input reader
     [SerializeField] private GameObject pauseMenu; // ui for the pause menu
     [SerializeField] private GameObject pauseMainMenu; // default menu for pause menu
+    [SerializeField] private GameObject selectedOption; // on pause what option should be selected
     [SerializeField] private GameObject howToPlay; // how to play.
     [SerializeField] private GameObject settingsMenu; // menu for settings
     [SerializeField] private GameObject gameUI; // ui for the game during play
+    [SerializeField] private GameObject talkPanel; // this is the dialouge thing. make sure it is active on start.
     [SerializeField] private Image windUpIndicator; // will show when u have would up and are ready to release
     [SerializeField] private TextMeshProUGUI text; // ui for temp text
     [SerializeField] PersistantItemSpot itemSpot;
@@ -33,6 +37,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private PlayerPrefrenceScript pref;
     public Unlocks unlocks;
     [SerializeField] private GameObject scubaNavMesh;
+    [SerializeField][Tooltip("Array of fish")]
+    FishHolderSO fishHolder;
+    [SerializeField][Tooltip("FishStatsUI")]
+    ShowFishStats fishStatsUI;
 
     private Coroutine running;
     [HideInInspector]public bool hintsEnabled = true;
@@ -42,8 +50,14 @@ public class GameManager : MonoBehaviour
     public static event Action OnLatch;
     public static event Action OnLatchCancelled;
 
-    
-    
+
+    void OnEnable()
+    {
+        // this should be active before start. in its own script it desides if it should be on
+        // stuff breaks if this is done incorectly.
+        talkPanel.SetActive(true);
+        
+    }
     void Start()
     {
         pref.ApplySettings();
@@ -76,6 +90,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale=0f;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        SetFirstButton(selectedOption);
     }
     public void HandleResume()
     {
@@ -234,5 +249,17 @@ public class GameManager : MonoBehaviour
         //scubaNavMesh.SetActive(change);
     }
     
-    
+    /////////////////////////////////////////////////////////////////////////////////////////////////// Present Caught Fish
+    public void PresentFish(int key, float weight,QuickTimeType_Enum type)
+    {
+        fishStatsUI.SetLbs(weight, key);
+        fishStatsUI.SetName(fishHolder.GetFish(key).name);
+        fishStatsUI.SetType(type);
+        fishStatsUI.ActivateUI();
+    }
+
+    public void SetFirstButton(GameObject selectedOpt)
+    {
+        EventSystem.current.SetSelectedGameObject(selectedOpt);
+    }
 }

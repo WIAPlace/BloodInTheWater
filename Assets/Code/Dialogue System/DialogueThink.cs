@@ -6,22 +6,30 @@ using UnityEngine;
 /// Created: 1/11/26
 /// Purpose: Player can press "T" to open a dialogue on the spot
 /// 
-/// Edited: 
-/// Edited By: 
-/// Edit Purpose: 
+/// Edited:  4/19
+/// Edited By: weston T
+/// Edit Purpose: Switching this away from old input system to new so stuff stops breaking
 /// 
 public class DialogueThink : MonoBehaviour
 {
     [SerializeField] bool firstInteraction = true;
     [SerializeField] bool noRepeat = true;
     [SerializeField] int repeatStartPosition;
-
+    [SerializeField][Tooltip("Input system")]
+    private InputReader input;
     public string npcName;
     public DialogueAsset[] dialogueAsset;
     public InteractSystem interactSystem;
 
-    
 
+    void Start()
+    {
+        input.ThinkEvent += HandleThink;
+    }
+    void OnDestroy()
+    {
+        input.ThinkEvent -= HandleThink;
+    }
     [HideInInspector]
     public int StartPosition
     {
@@ -45,6 +53,24 @@ public class DialogueThink : MonoBehaviour
 
     void Update()
     {
+        
+
+        /*
+        if (Input.GetKeyDown(KeyCode.Y))
+        {
+            StaticVariables.thoughtNum += 1;
+            Debug.Log("Thought Change +1");
+        }
+        */
+    }
+
+    public void Interact() // Implemented from interface to start the conversation. Uses thoughtNum from StaticVariables.
+    {
+        DialogueBoxController.instance.StartDialogue(dialogueAsset[StaticVariables.thoughtNum].dialogue,dialogueAsset[StaticVariables.thoughtNum].audioclip, StartPosition, dialogueAsset[StaticVariables.thoughtNum].speaker);
+    }
+
+    public void HandleThink()
+    {
         if (Input.GetKeyDown(KeyCode.T))
         {
             if (!interactSystem.inConversation)
@@ -56,17 +82,5 @@ public class DialogueThink : MonoBehaviour
                 Debug.Log("Busy");
             }
         }
-
-        
-        if (Input.GetKeyDown(KeyCode.Y))
-        {
-            StaticVariables.thoughtNum += 1;
-            Debug.Log("Thought Change +1");
-        }
-    }
-
-    public void Interact() // Implemented from interface to start the conversation. Uses thoughtNum from StaticVariables.
-    {
-        DialogueBoxController.instance.StartDialogue(dialogueAsset[StaticVariables.thoughtNum].dialogue,dialogueAsset[StaticVariables.thoughtNum].audioclip, StartPosition, dialogueAsset[StaticVariables.thoughtNum].speaker);
     }
 }

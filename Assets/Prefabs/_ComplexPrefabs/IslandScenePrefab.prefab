@@ -1995,6 +1995,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3276206301205104821}
+  - component: {fileID: 2467985231435219236}
   m_Layer: 0
   m_Name: Audio
   m_TagString: Untagged
@@ -2020,6 +2021,23 @@ Transform:
   - {fileID: 955015200975191730}
   m_Father: {fileID: 2251994286805771922}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2467985231435219236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6336581367238860252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fa4b2460c4b4de4eb96ac52bab772cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSources:
+  - {fileID: 8898800634203181920}
+  - {fileID: 7163915726350925782}
+  - {fileID: 6108082442876567030}
+  fadeDuration: 3
 --- !u!1 &6447520148629952074
 GameObject:
   m_ObjectHideFlags: 0
@@ -16818,6 +16836,7 @@ MonoBehaviour:
   firstInteraction: 1
   noRepeat: 0
   repeatStartPosition: 0
+  input: {fileID: 11400000, guid: 23c146efed111744088e5a06907694b3, type: 2}
   npcName: 
   dialogueAsset:
   - {fileID: 11400000, guid: dffb5f4746538234396dc0055beed9c0, type: 2}

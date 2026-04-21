@@ -12,5 +12,7 @@ using UnityEngine;
 ///
 public interface IBoatStomperState
 {
+    void DoEnter(Scuba_Controller SC);
     IBoatStomperState DoState(Scuba_Controller SC);
+    void DoExit(Scuba_Controller SC);
 }

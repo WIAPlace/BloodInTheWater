@@ -13,12 +13,22 @@ using UnityEngine.AI;
 ///
 public class Scuba_StateMove : IBoatStomperState
 {
-    public IBoatStomperState DoState(Scuba_Controller SC)
-    { 
+    public void DoExit(Scuba_Controller SC)
+    {
+        
+    }
+
+    public void DoEnter(Scuba_Controller SC)
+    {
         if (SC.agent.isStopped)
         {   // this doesnt need to be going off every frame.
             SC.agent.isStopped = false; // turns the man into an able bodied individual
         }
+        SC.SetAnimation(0);
+    }
+
+    public IBoatStomperState DoState(Scuba_Controller SC)
+    { 
         SC.agent.SetDestination(SC.GetTarget().transform.position);
         return SC.MoveState;
     }

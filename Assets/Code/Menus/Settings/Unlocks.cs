@@ -56,7 +56,6 @@ public class Unlocks : ScriptableObject
         //Debug.Log("Locked");
         PlayerPrefs.Save();
     }
-    
     /////////////////////////////////////////////////////////////////////////////////////////////////// Fish
     // Save Fish Data
     public void SaveFishData(int key, float weight)

@@ -154,6 +154,15 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Think"",
+                    ""type"": ""Button"",
+                    ""id"": ""1f4d350a-1632-4d25-87d3-69e068097ff7"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -374,6 +383,28 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Check"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d6b00bce-0b51-4ce5-a786-79bda59d9a59"",
+                    ""path"": ""<Keyboard>/t"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Think"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f514fc90-2cf0-4630-a50b-12f45cbefec8"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Think"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1050,6 +1081,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         m_GamePlay_Interact = m_GamePlay.FindAction("Interact", throwIfNotFound: true);
         m_GamePlay_Place = m_GamePlay.FindAction("Place", throwIfNotFound: true);
         m_GamePlay_Check = m_GamePlay.FindAction("Check", throwIfNotFound: true);
+        m_GamePlay_Think = m_GamePlay.FindAction("Think", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1157,6 +1189,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_GamePlay_Interact;
     private readonly InputAction m_GamePlay_Place;
     private readonly InputAction m_GamePlay_Check;
+    private readonly InputAction m_GamePlay_Think;
     /// <summary>
     /// Provides access to input actions defined in input action map "GamePlay".
     /// </summary>
@@ -1196,6 +1229,10 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "GamePlay/Check".
         /// </summary>
         public InputAction @Check => m_Wrapper.m_GamePlay_Check;
+        /// <summary>
+        /// Provides access to the underlying input action "GamePlay/Think".
+        /// </summary>
+        public InputAction @Think => m_Wrapper.m_GamePlay_Think;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1243,6 +1280,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Check.started += instance.OnCheck;
             @Check.performed += instance.OnCheck;
             @Check.canceled += instance.OnCheck;
+            @Think.started += instance.OnThink;
+            @Think.performed += instance.OnThink;
+            @Think.canceled += instance.OnThink;
         }
 
         /// <summary>
@@ -1275,6 +1315,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Check.started -= instance.OnCheck;
             @Check.performed -= instance.OnCheck;
             @Check.canceled -= instance.OnCheck;
+            @Think.started -= instance.OnThink;
+            @Think.performed -= instance.OnThink;
+            @Think.canceled -= instance.OnThink;
         }
 
         /// <summary>
@@ -1688,6 +1731,13 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnCheck(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Think" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnThink(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

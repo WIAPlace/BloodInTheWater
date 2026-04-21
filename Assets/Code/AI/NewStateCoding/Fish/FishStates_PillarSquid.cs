@@ -159,6 +159,7 @@ public class PS_StateUnique : Abs_StateUnique
     Vector3 ramTarget;
     public override void DoEnter(Fish_Controller FSC)
     {
+        GameManager.Instance.unlocks.SaveMonsterData(4);
         FSC.agent.isStopped = true;
         
         orientation = FSC.waveHandler.UseableMesh;

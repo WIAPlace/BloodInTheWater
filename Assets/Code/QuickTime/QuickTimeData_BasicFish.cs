@@ -105,7 +105,9 @@ public class QuickTimeData_BasicFish : QuickTimeData_Abstract
             GameObject fakeFish = FSC.waveHandler.GetFishMesh(); // get the correct mesh at its original position
             GameManager.Instance.qtcPlayer.PlayFakeFish(fakeFish, rot, normalRandy); // pretend to catch the fish
 
+            GameManager.Instance.PresentFish(key,fishLbs,type); // set fish stat screen
             GameManager.Instance.unlocks.SaveFishData(key,fishLbs); // send the fish data to unlocks so it can be saved as a player pref
+            
 
             // set it to inactive
             FSC.gameObject.SetActive(false);
@@ -115,5 +117,10 @@ public class QuickTimeData_BasicFish : QuickTimeData_Abstract
     public override void QTStatus(float amnt)
     {   //move along the spines
         FSC.MoveAlongSpline(amnt);
+    }
+
+    public override GameObject GetLookLocation()
+    {
+        throw new System.NotImplementedException();
     }
 }

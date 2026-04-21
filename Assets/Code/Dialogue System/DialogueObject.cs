@@ -40,6 +40,9 @@ public class DialogueObject : MonoBehaviour, IInteractable
     }
     public void Interact() // Implemented from interface to start the conversation.
     {
-        DialogueBoxController.instance.StartDialogue(dialogueAsset.dialogue,dialogueAsset.audioclip, StartPosition, dialogueAsset.speaker);
+        if(dialogueAsset != null)
+        {
+            DialogueBoxController.instance.StartDialogue(dialogueAsset.dialogue,dialogueAsset.audioclip, StartPosition, dialogueAsset.speaker);
+        }
     }
 }

@@ -19,10 +19,14 @@ public class TimeKeeper : MonoBehaviour
 
     [SerializeField] [Tooltip("Time Between Each checkign of the timer")]
     float waitInterval=5f; // we are doing it like this because we dont need to have this update every frame.
+    [SerializeField] FlickerLights flickerLights;
+    [SerializeField,Tooltip("lights will start flickering at: secondsAllocated - secondsAllocated/flickerPercent")]
+    private float flickerPercent = 0;
 
     private float sceneTime = 0;
     private float timePassed=0;
     private float penaltyTime=0;
+    
 
     void Start()
     {
@@ -31,6 +35,7 @@ public class TimeKeeper : MonoBehaviour
         {
             StartCoroutine(TickTock());
             //GameManager.BoatHit += AddPenaltyTime;
+            
         }
         GameManager.BoatHit += AddPenaltyTime;
     }
@@ -41,13 +46,21 @@ public class TimeKeeper : MonoBehaviour
     void Update()
     {
         sceneTime += Time.deltaTime;
+        
     }
 
     IEnumerator TickTock()
     {
+        bool lightChecked = false;
+        float flickerSec = secondsAllocated - secondsAllocated/flickerPercent;
         while(timePassed<secondsAllocated){
             yield return new WaitForSeconds(waitInterval);
             timePassed = sceneTime + penaltyTime;
+            if(timePassed > flickerSec && !lightChecked)
+            {
+                lightChecked=true;
+                flickerLights.BeginFlickering();
+            }
             //GameState.Instance.ChangeTime(GetTimeLeft());
             //Debug.Log(timePassed);
         }

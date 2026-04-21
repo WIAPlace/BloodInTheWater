@@ -71,6 +71,7 @@ public class InputReader : ScriptableObject, GameInput.IGamePlayActions, GameInp
     public event Action PlaceCancelledEvent;
     public event Action CheckEvent;
     public event Action CheckCancelledEvent;
+    public event Action ThinkEvent;
 
     public event Action UseEventQT; // quick time click
     public event Action UseEventQTCanelled;
@@ -158,6 +159,13 @@ public class InputReader : ScriptableObject, GameInput.IGamePlayActions, GameInp
         if (context.phase == InputActionPhase.Canceled)
         {
             PlaceCancelledEvent?.Invoke();
+        }
+    }
+    public void OnThink(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            ThinkEvent?.Invoke();
         }
     }
 

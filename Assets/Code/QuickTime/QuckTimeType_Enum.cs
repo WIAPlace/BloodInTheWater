@@ -7,7 +7,12 @@ namespace QuickTime // this is a name space so it can be shared between multiple
     public enum QuickTimeType_Enum
     {
         BasicFish, // just one bar and at a teady rate.
-        SeaAngel
-        
+        SeaAngel,
+        Sunlit,
+        Twilight,
+        Midnight,
+        Abbysal,
+        Eldritch,
+        Scuba
     }
 }

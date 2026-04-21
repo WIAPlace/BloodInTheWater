@@ -5,6 +5,7 @@ using QuickTime;
 using UnityEngine.UI;
 using Unity.VisualScripting;
 using UnityEngine.ProBuilder;
+using Unity.Cinemachine;
 //using System;
 /// 
 /// Author: Weston Tollette
@@ -37,6 +38,8 @@ public class QuickTimeController_Player : MonoBehaviour
     private Image qtHitMarker;
     [SerializeField]
     private Image qtCompletion;
+    [SerializeField]
+    private Image qtMarkerImage;
 
     [Header("QT Variables")]
     [SerializeField] // size of hitzone
@@ -48,6 +51,15 @@ public class QuickTimeController_Player : MonoBehaviour
     private float changeSmooth;
     private float currentHitSpeed=0;
     private float _hitVelocity = 0f;
+
+    [Header("Camera Stuff")]
+    [SerializeField, Tooltip("cinemachine")]
+    CinemachineInputAxisController LookCamController;
+    [SerializeField, Tooltip("cinemachine")]
+    CinemachinePanTilt LookCamPanTilt;
+
+
+    private GameObject lookLocation;
 
     private float currentHitSpot = 0; // will be used to check where the hit zone is at any given time
     private float hitMarker =0; // will be used to check hit marker position at any time
@@ -79,6 +91,7 @@ public class QuickTimeController_Player : MonoBehaviour
     }
     void Start()
     {
+        qtUI.SetActive(false);
         input.UseEventQT += HandelUseQT;
         input.UseEventQTCanelled += HandleUseQTCancelled;
         
@@ -136,7 +149,7 @@ public class QuickTimeController_Player : MonoBehaviour
             }
             else if(completionAmnt <= 0) //lose
             {
-                if(currentQTData.type == QuickTimeType_Enum.BasicFish) EndQTEAll(false);
+                if(currentQTData.type != QuickTimeType_Enum.SeaAngel) EndQTEAll(false);
             }
             
         }
@@ -220,6 +233,24 @@ public class QuickTimeController_Player : MonoBehaviour
         // retrive lure as a way to disable the other fish from being interested and interupting.
         // should be switched out for something more elegent later
 
+        if (currentQTData.GetMarker() != null) // error check
+        {
+            qtMarkerImage.sprite = currentQTData.GetMarker(); // set the marker to whatever it is set as in the fish controller.
+        }
+
+        /*
+        if(currentQTData.type == QuickTimeType_Enum.Scuba)
+        {
+            lookLocation = currentQTData.GetLookLocation();
+            LookCamController.enabled =false;
+            Vector3 direction = lookLocation.transform.localPosition - transform.localPosition;
+            Quaternion rotation = Quaternion.LookRotation(direction);
+            Vector3 eulerAngles = rotation.eulerAngles;
+            LookCamPanTilt.PanAxis.Value = eulerAngles.y;
+            LookCamPanTilt.TiltAxis.Value = eulerAngles.x; 
+        }
+        */
+
         useControl.rod.LurePrefab.SetActive(false);
         useControl.rod.RetrieveLure(useControl.rod.LurePrefab.transform.position, useControl.rod.LureRadius); 
 
@@ -272,8 +303,15 @@ public class QuickTimeController_Player : MonoBehaviour
     }
     private IEnumerator EndQTE(float x) // turns off the qte after a number of seconds.
     {
+        /*
         //useControl.ChangeState(useControl.currentItem.Readying);
+        if(currentQTData.type == QuickTimeType_Enum.Scuba)
+        {
+            LookCamController.enabled =true;
+        }
+        */
         yield return new WaitForSeconds(x);
+        
         qtUI.SetActive(false);
         input.SetGameplay();
         
