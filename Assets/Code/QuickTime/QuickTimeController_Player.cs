@@ -54,9 +54,14 @@ public class QuickTimeController_Player : MonoBehaviour
 
     [Header("Camera Stuff")]
     [SerializeField, Tooltip("cinemachine")]
-    CinemachineInputAxisController LookCamController;
+    CinemachineInputAxisController playerCamController;
     [SerializeField, Tooltip("cinemachine")]
     CinemachinePanTilt LookCamPanTilt;
+
+    [SerializeField, Tooltip("cinemachine")]
+    CinemachineCamera playerCam;
+    [SerializeField, Tooltip("cinemachine")]
+    CinemachineCamera lookCam;
 
 
     private GameObject lookLocation;
@@ -238,18 +243,16 @@ public class QuickTimeController_Player : MonoBehaviour
             qtMarkerImage.sprite = currentQTData.GetMarker(); // set the marker to whatever it is set as in the fish controller.
         }
 
-        /*
+        
         if(currentQTData.type == QuickTimeType_Enum.Scuba)
         {
+            playerCamController.enabled =false;
             lookLocation = currentQTData.GetLookLocation();
-            LookCamController.enabled =false;
-            Vector3 direction = lookLocation.transform.localPosition - transform.localPosition;
-            Quaternion rotation = Quaternion.LookRotation(direction);
-            Vector3 eulerAngles = rotation.eulerAngles;
-            LookCamPanTilt.PanAxis.Value = eulerAngles.y;
-            LookCamPanTilt.TiltAxis.Value = eulerAngles.x; 
+            lookCam.LookAt = lookLocation.transform;
+            lookCam.Priority=2; 
+            
         }
-        */
+        
 
         useControl.rod.LurePrefab.SetActive(false);
         useControl.rod.RetrieveLure(useControl.rod.LurePrefab.transform.position, useControl.rod.LureRadius); 
@@ -292,6 +295,11 @@ public class QuickTimeController_Player : MonoBehaviour
 
     private void EndQTEAll(bool status)
     {
+        if(currentQTData.type == QuickTimeType_Enum.Scuba)
+        {
+            lookCam.Priority=0;
+            playerCamController.enabled =true;
+        }
         if(useControl.currentItem == useControl.rod)
         {
             useControl.rod.RodTriggerAnimator(useControl,0);
@@ -303,13 +311,10 @@ public class QuickTimeController_Player : MonoBehaviour
     }
     private IEnumerator EndQTE(float x) // turns off the qte after a number of seconds.
     {
-        /*
+        
         //useControl.ChangeState(useControl.currentItem.Readying);
-        if(currentQTData.type == QuickTimeType_Enum.Scuba)
-        {
-            LookCamController.enabled =true;
-        }
-        */
+        
+        
         yield return new WaitForSeconds(x);
         
         qtUI.SetActive(false);
