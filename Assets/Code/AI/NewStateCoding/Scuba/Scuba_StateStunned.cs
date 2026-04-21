@@ -20,6 +20,7 @@ public class Scuba_StateStunned : IBoatStomperState
     public void DoExit(Scuba_Controller SC)
     {
         //throw new System.NotImplementedException();
+        SC.contacted = false;
     }
 
     public IBoatStomperState DoState(Scuba_Controller SC)

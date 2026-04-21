@@ -28,6 +28,11 @@ public class QuickTimeData_DeepAngel_Latch : QuickTimeData_Abstract
         }
     }
 
+    public override GameObject GetLookLocation()
+    {
+        throw new System.NotImplementedException();
+    }
+
     public override void OnHit()
     {
         //throw new System.NotImplementedException();

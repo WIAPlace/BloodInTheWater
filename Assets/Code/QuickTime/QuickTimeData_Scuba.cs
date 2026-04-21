@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class QuickTimeData_Scuba : QuickTimeData_Abstract
 {
+    [SerializeField] private GameObject lookLocation;
     private Scuba_Controller controller;
     void Start()
     {
@@ -48,5 +49,10 @@ public class QuickTimeData_Scuba : QuickTimeData_Abstract
     public override void QTStatus(float amnt)
     {
         //throw new System.NotImplementedException();
+    }
+
+    public override GameObject GetLookLocation()
+    {
+        return lookLocation;
     }
 }

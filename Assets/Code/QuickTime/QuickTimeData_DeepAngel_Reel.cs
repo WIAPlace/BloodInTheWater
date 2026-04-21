@@ -25,6 +25,7 @@ public class QuickTimeData_DeepAngel_Reel : QuickTimeData_BasicFish
     }
     public override void ExitQuickTimeEvent(bool status)
     {
+        GameManager.Instance.unlocks.SaveMonsterData(4);
         if (!status) // if the player failed
         {
             FSC.ChangeState(FSC.SC.Fear); // scare the fish off if you loose the mini game

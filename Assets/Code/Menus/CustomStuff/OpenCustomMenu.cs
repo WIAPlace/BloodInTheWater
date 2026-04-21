@@ -9,7 +9,8 @@ public class OpenCustomMenu : MonoBehaviour, IInteractable
     private InputReader input;
     [SerializeField]
     private GameObject CustomMenu;
-
+    [SerializeField]
+    private SetMenuButtonOnActive smboa;
 
     void Start()
     {
@@ -31,6 +32,7 @@ public class OpenCustomMenu : MonoBehaviour, IInteractable
         Time.timeScale=0f;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        smboa.SetFirstButton();
     }
 
 

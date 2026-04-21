@@ -20,6 +20,7 @@ public class Scuba_StateBreakOff : IBoatStomperState
         }
         SC.stun = SC.StartCoroutine(StunTimer(SC));
         SC.SetAnimation(1);
+        
     }
 
     public void DoExit(Scuba_Controller SC)

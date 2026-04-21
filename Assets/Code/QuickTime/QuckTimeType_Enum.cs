@@ -8,11 +8,11 @@ namespace QuickTime // this is a name space so it can be shared between multiple
     {
         BasicFish, // just one bar and at a teady rate.
         SeaAngel,
+        Scuba,
         Sunlit,
         Twilight,
         Midnight,
         Abbysal,
         Eldritch
-        
     }
 }

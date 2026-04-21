@@ -127,4 +127,5 @@ public abstract class QuickTimeData_Abstract : MonoBehaviour
     public abstract void QTStatus(float amnt);
     public abstract void EnterQTEvent(); // enter the quick time event and change any things you need to while in it
     public abstract void ExitQuickTimeEvent(bool status); // status for if they have won or lost
+    public abstract GameObject GetLookLocation();
 }

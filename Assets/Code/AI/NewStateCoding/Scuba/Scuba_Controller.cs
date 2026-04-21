@@ -69,6 +69,8 @@ public class Scuba_Controller : MonoBehaviour, IMonster
     public string debugCurrentStateName;
     public string debugPreviousStateName;
 
+    [HideInInspector]
+    public bool contacted=false;
 
 
     private void Start()
@@ -159,13 +161,14 @@ public class Scuba_Controller : MonoBehaviour, IMonster
                 {// shoot a ray twoards the player
 
                     //Debug.Log("Gate 3");
-                    if(((1 << hit.collider.gameObject.layer) & playerMask.value) != 0)
+                    if(((1 << hit.collider.gameObject.layer) & playerMask.value) != 0 && !contacted)
                     { // if the thing hit is the wall do not go for it.
                     // we have to do this a second time so that we arnt checking eveyry time the guy is near a wall.
                         //Debug.Log("Gate 4");
                         ChangeState(ContactState); // data is being transfered;
-                
+                        transform.LookAt(other.transform.position);
                         useControl.ChangeState(useControl.currentItem.UnderAtk);
+                        contacted = true;
                     }
                 }
                 // change player's state to hit

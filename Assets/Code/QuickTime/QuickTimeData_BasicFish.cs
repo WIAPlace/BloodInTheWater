@@ -118,4 +118,9 @@ public class QuickTimeData_BasicFish : QuickTimeData_Abstract
     {   //move along the spines
         FSC.MoveAlongSpline(amnt);
     }
+
+    public override GameObject GetLookLocation()
+    {
+        throw new System.NotImplementedException();
+    }
 }
