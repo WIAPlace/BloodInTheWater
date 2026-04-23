@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UIElements;
 
 public class ScaleUI : MonoBehaviour
@@ -20,8 +21,17 @@ public class ScaleUI : MonoBehaviour
     [SerializeField][Tooltip("Curve for animations")]
     private AnimationCurve curve;
 
+    [SerializeField][Tooltip("Scale Object")]
+    private Renderer scaleRenderer;
+    [SerializeField][Tooltip("Marker Object")]
+    private Renderer markerRenderer;
+    [SerializeField][Tooltip("CompleteMaterial")]
+    private Material fullMat;
+
     private float neededAmnt;
     private float amntJustCaught;
+    private bool full;
+    private Coroutine running;
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +41,7 @@ public class ScaleUI : MonoBehaviour
         marker.SetActive(true);
         minMarker.gameObject.SetActive(false);
         maxMarker.gameObject.SetActive(false);
+        full = false;
 
 
         GameState.OnCatch += HandleCatch;
@@ -51,7 +62,16 @@ public class ScaleUI : MonoBehaviour
     
     public void HandleCatch(float firstWait)
     {
-        StartCoroutine(ShowScale(firstWait));
+        if(running != null)
+        {
+            StopCoroutine(running);
+        }
+        running = StartCoroutine(ShowScale(firstWait));
+        if (!full && scaleAmnt >= neededAmnt)
+        {
+            scaleRenderer.material = fullMat;
+            markerRenderer.material = fullMat;
+        }
     }
 
     IEnumerator ShowScale(float firstWait)

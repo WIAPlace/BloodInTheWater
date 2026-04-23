@@ -22,14 +22,7 @@ public class DialogueThink : MonoBehaviour
     public InteractSystem interactSystem;
 
 
-    void Start()
-    {
-        input.ThinkEvent += HandleThink;
-    }
-    void OnDestroy()
-    {
-        input.ThinkEvent -= HandleThink;
-    }
+    
     [HideInInspector]
     public int StartPosition
     {

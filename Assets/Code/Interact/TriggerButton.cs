@@ -14,6 +14,7 @@ public class TriggerButton : MonoBehaviour, IInteractable
 {
     public GameObject obj;
     public bool turnOn;
+    public bool oneTime;
 
     void Start()
     {
@@ -32,6 +33,10 @@ public class TriggerButton : MonoBehaviour, IInteractable
         else
         {
             obj.SetActive(false);
+        }
+        if (oneTime)
+        {
+            gameObject.layer = LayerMask.NameToLayer("Default");
         }
     }
 }
