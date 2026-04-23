@@ -79,7 +79,7 @@ MonoBehaviour:
       Curvature: {x: 2, y: 11}
       BarrelClipping: 0.25
       Anamorphism: 0
-  BlendHint: 0
+  BlendHint: 8
 --- !u!114 &7684746819948556234
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1556,6 +1556,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e51d416b7755e8f459a91e032316ae8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerCam: {fileID: 2731786197146299445}
+  lookCam: {fileID: 134498657090388809}
   inputController: {fileID: 675565885198925557}
   mouseSensitivityX: 1
   mouseSensitivityY: -1
@@ -1633,6 +1635,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   input: {fileID: 11400000, guid: 23c146efed111744088e5a06907694b3, type: 2}
   useControl: {fileID: 2460994001563903028}
+  playerLook: {fileID: 7790548922990212591}
   qte: {fileID: 11400000, guid: f2e9601c6ba308b43a2a58e1f874297d, type: 2}
   qtUI: {fileID: 4161332892993758480}
   hitZone: {fileID: 5834567383476249520}
@@ -1642,10 +1645,6 @@ MonoBehaviour:
   hitArea: 100
   maxHitSpeed: 400
   changeSmooth: 0.8
-  playerCamController: {fileID: 675565885198925557}
-  LookCamPanTilt: {fileID: 600830269239791369}
-  playerCam: {fileID: 2731786197146299445}
-  lookCam: {fileID: 134498657090388809}
 --- !u!114 &2460994001563903028
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1893,6 +1892,9 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  scaleRenderer: {fileID: 8451490909574618274}
+  markerRenderer: {fileID: 7104243975401954342}
+  fullMat: {fileID: 2100000, guid: 99e3241a3fad4f94db140674c5889429, type: 2}
 --- !u!1 &3897063493741312562
 GameObject:
   m_ObjectHideFlags: 0
@@ -4020,6 +4022,18 @@ GameObject:
 --- !u!4 &5533167019064934957 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d3a591f86f3b99541a0382d2c8f666a2,
+    type: 3}
+  m_PrefabInstance: {fileID: 5423314075792221638}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &7104243975401954342 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -6209299320937481760, guid: d3a591f86f3b99541a0382d2c8f666a2,
+    type: 3}
+  m_PrefabInstance: {fileID: 5423314075792221638}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &8451490909574618274 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 4470598195216120164, guid: d3a591f86f3b99541a0382d2c8f666a2,
     type: 3}
   m_PrefabInstance: {fileID: 5423314075792221638}
   m_PrefabAsset: {fileID: 0}

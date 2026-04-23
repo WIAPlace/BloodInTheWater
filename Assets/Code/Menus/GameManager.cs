@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject settingsMenu; // menu for settings
     [SerializeField] private GameObject gameUI; // ui for the game during play
     [SerializeField] private GameObject talkPanel; // this is the dialouge thing. make sure it is active on start.
+    [SerializeField] private GameObject TransitionScreen;
     [SerializeField] private Image windUpIndicator; // will show when u have would up and are ready to release
     [SerializeField] private TextMeshProUGUI text; // ui for temp text
     [SerializeField] PersistantItemSpot itemSpot;
@@ -56,6 +57,7 @@ public class GameManager : MonoBehaviour
         // this should be active before start. in its own script it desides if it should be on
         // stuff breaks if this is done incorectly.
         talkPanel.SetActive(true);
+        TransitionScreen.SetActive(true);
         
     }
     void Start()

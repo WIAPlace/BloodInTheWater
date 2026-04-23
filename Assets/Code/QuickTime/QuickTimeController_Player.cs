@@ -26,6 +26,8 @@ public class QuickTimeController_Player : MonoBehaviour
     private InputReader input;
     [SerializeField] [Tooltip("Refrence to the Fishing Rod Script")]
     private Useable_Controller useControl;
+    [SerializeField,Tooltip("Player look controller")]
+    private PlayerLook playerLook;
     [SerializeField] [Tooltip("Quick Time Event")]
     QuickTimeEvent_Basic qte;
     [SerializeField] [Tooltip("The quick time mini game bar")]
@@ -52,19 +54,10 @@ public class QuickTimeController_Player : MonoBehaviour
     private float currentHitSpeed=0;
     private float _hitVelocity = 0f;
 
-    [Header("Camera Stuff")]
-    [SerializeField, Tooltip("cinemachine")]
-    CinemachineInputAxisController playerCamController;
-    [SerializeField, Tooltip("cinemachine")]
-    CinemachinePanTilt LookCamPanTilt;
-
-    [SerializeField, Tooltip("cinemachine")]
-    CinemachineCamera playerCam;
-    [SerializeField, Tooltip("cinemachine")]
-    CinemachineCamera lookCam;
+    
 
 
-    private GameObject lookLocation;
+   
 
     private float currentHitSpot = 0; // will be used to check where the hit zone is at any given time
     private float hitMarker =0; // will be used to check hit marker position at any time
@@ -246,11 +239,7 @@ public class QuickTimeController_Player : MonoBehaviour
         
         if(currentQTData.type == QuickTimeType_Enum.Scuba)
         {
-            playerCamController.enabled =false;
-            lookLocation = currentQTData.GetLookLocation();
-            lookCam.LookAt = lookLocation.transform;
-            lookCam.Priority=2; 
-            
+            playerLook.LookAtTarget(currentQTData.GetLookLocation());
         }
         
 
@@ -297,8 +286,7 @@ public class QuickTimeController_Player : MonoBehaviour
     {
         if(currentQTData.type == QuickTimeType_Enum.Scuba)
         {
-            lookCam.Priority=0;
-            playerCamController.enabled =true;
+            playerLook.EnableFreeLook();
         }
         if(useControl.currentItem == useControl.rod)
         {
