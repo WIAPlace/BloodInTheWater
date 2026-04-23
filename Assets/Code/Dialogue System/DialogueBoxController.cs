@@ -126,13 +126,14 @@ public class DialogueBoxController : MonoBehaviour
             }
 
             // look
-            if(lookLocations != null&&i<lookLocations.Length) // if the array is full
+            if(lookLocations != null&& i<lookLocations.Length && lookLocations[i]!=null) // if the array is full
             {
-                if(lookLocations[i]!=null && lookLocations[i].transform != playerLook.GetLookLocation())
-                { // if this isnt 
-                    playerLook.LookAtTarget(lookLocations[i]);
-                }
+                if(lookLocations[i].transform != playerLook.GetLookLocation())
+                {   // dont change the camera position if its changing to the same position, just stay there
+                    playerLook.LookAtTarget(lookLocations[i]);  
+                } 
             }
+            else playerLook.EnableFreeLook(); // if all of that 
 
             typing = StartCoroutine(TypeTextUncapped(dialogueText.text));
 
