@@ -1713,6 +1713,11 @@ PrefabInstance:
       propertyPath: transistion
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8897921507211697356, guid: c50591be7240d2247bb8a5c60af68ecd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8914337215438405396, guid: c50591be7240d2247bb8a5c60af68ecd,
         type: 3}
       propertyPath: m_IsActive
@@ -1812,6 +1817,12 @@ Transform:
 --- !u!4 &776849368 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8754987611433829411, guid: c50591be7240d2247bb8a5c60af68ecd,
+    type: 3}
+  m_PrefabInstance: {fileID: 776849365}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &776849369 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 818368973976305675, guid: c50591be7240d2247bb8a5c60af68ecd,
     type: 3}
   m_PrefabInstance: {fileID: 776849365}
   m_PrefabAsset: {fileID: 0}
@@ -1997,11 +2008,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6aaa80f4fdd5b1c4aa8b50acac89022e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thePlayer: {fileID: 0}
+  thePlayer: {fileID: 776849369}
   firstInteraction: 1
   noRepeat: 1
   repeatStartPosition: 10
-  dialogueAsset: {fileID: 11400000, guid: f664eaa24edd5d340be356489b01e00e, type: 2}
+  dialogueAsset: {fileID: 11400000, guid: d3138616e47f8c247a32f1057dc9e4f2, type: 2}
 --- !u!65 &921212585
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2920,7 +2931,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b206b1499b768945a060a9ed18398dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  customPivot: {fileID: 0}
+  customPivot: {fileID: 776849368}
 --- !u!64 &1474573953
 MeshCollider:
   m_ObjectHideFlags: 0
