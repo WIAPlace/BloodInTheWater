@@ -27,7 +27,7 @@ public class GameState : MonoBehaviour
     private int[] weightEventPercentages;
     */
     public static event Action<float> OnCatch;
-    public static event Action<float> WeightEvent;
+    public static event Action<float> WeightEvent; 
 
     private void Awake()
     { // makes sure this is the only instance of this system.
@@ -56,7 +56,7 @@ public class GameState : MonoBehaviour
         lbsCaught += Mathf.Round(lbs * 10)/10; // 1 decimal
         lbsPercent = lbsCaught/totalLbs * 100;
         OnCatch?.Invoke(.6f);
-        WeightEvent?.Invoke(lbsPercent);
+        WeightEvent?.Invoke(lbsPercent); // if subscriber is attached to this and weight is met it will go off.
     }
 
     public void CheckCaughtFish()

@@ -225,6 +225,7 @@ public class Scuba_Controller : MonoBehaviour, IMonster
         anim.ResetTrigger("IsWalking");
         anim.ResetTrigger("IsHit");
         anim.ResetTrigger("IsAttacking");
+        anim.ResetTrigger("Arnold");
 
         switch (key)
         {
@@ -239,7 +240,10 @@ public class Scuba_Controller : MonoBehaviour, IMonster
             case 2:
                anim.SetTrigger("IsAttacking");
                 break;
-
+                
+            case 3:
+                anim.SetTrigger("Arnold");
+                break;
             default:
                 break;
         }

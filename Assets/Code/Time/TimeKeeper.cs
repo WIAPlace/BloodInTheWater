@@ -56,7 +56,7 @@ public class TimeKeeper : MonoBehaviour
         while(timePassed<secondsAllocated){
             yield return new WaitForSeconds(waitInterval);
             timePassed = sceneTime + penaltyTime;
-            if(timePassed > flickerSec && !lightChecked)
+            if(timePassed > flickerSec && !lightChecked) 
             {
                 lightChecked=true;
                 flickerLights.BeginFlickering();
