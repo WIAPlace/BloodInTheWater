@@ -113,7 +113,7 @@ public class UseableItem_Rod : UseableItem_Abstract
     {
         // Instantiate the prefab at the specified position with no rotation
         ParticleSystem ps = Instantiate(part, position, Quaternion.Euler(Vector3.right*-90));
-        Destroy(ps,ps.main.duration);
+        Destroy(ps.gameObject,ps.main.duration);
     }
     public void RodTriggerAnimator(Useable_Controller controller,int key)
     {

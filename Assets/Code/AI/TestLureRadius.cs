@@ -13,8 +13,12 @@ using UnityEngine.Splines;
 ///
 public class TestLureRadius : MonoBehaviour
 {
+    [SerializeField]private float secondsRipple;
+    [SerializeField]private GameObject ripplePrefab;
+    //GameObject rippleHolder;
     void Start()
     {
+        StartCoroutine(Ripple());
         //Debug.Log("enabled");
         SphereCollider lureZone = GetComponent<SphereCollider>(); // the sphere collider trigger
         Transform bobberCenter = GetComponent<Transform>(); // Center of bobber 
@@ -57,5 +61,14 @@ public class TestLureRadius : MonoBehaviour
         }
         // Close the spline
         spline.Closed = true;
+    }
+    IEnumerator Ripple()
+    {
+        while (true)
+        {
+            GameObject rippleHolder = Instantiate(ripplePrefab,transform.position,Quaternion.identity);
+            yield return new WaitForSeconds(secondsRipple);
+            Destroy(rippleHolder);
+        }
     }
 }

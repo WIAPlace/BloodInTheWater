@@ -25,7 +25,7 @@ public class FadeInOnStart : MonoBehaviour
 
     IEnumerator FadeIn()
     {
-        Debug.Log("Fading in");
+        //Debug.Log("Fading in");
         float currentTime = 0;
 
         while (currentTime < fadeDuration)
