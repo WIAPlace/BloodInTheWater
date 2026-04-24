@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-4985860385738681442
+--- !u!114 &-5174590092513171295
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,8 +20,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BarrelFogFadeOut
-  m_Shader: {fileID: -6465566751694194690, guid: 293a69af6c70b224a9cf65660d34a3b5,
+  m_Name: ScubaFogClip
+  m_Shader: {fileID: -6465566751694194690, guid: f1c7d0d614089bc4c9a9e0c2a69ffb10,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -55,9 +55,17 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _CellSize: 0.1
-    - _MaxDistance: 19
+    - _CellSize: 0.05
+    - _ClipThreashold: 0
+    - _DitherOffset: 1
+    - _DitherRange: 1
+    - _Float: 0
+    - _MaxDistance: 70
+    - _MinDistance: 7.26
     - _QueueControl: 0
     - _QueueOffset: 0
-    m_Colors: []
+    - _ditherSize: 0
+    m_Colors:
+    - _BaseColor: {r: 0, g: 0, b: 0, a: 0}
+    - _Color: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
