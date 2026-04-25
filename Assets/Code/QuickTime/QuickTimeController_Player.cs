@@ -393,6 +393,7 @@ public class QuickTimeController_Player : MonoBehaviour
         yield return new WaitForSeconds(.1f);
         currentQTData = data; 
         Hooked();
+        //ees
     }
     
 }   
