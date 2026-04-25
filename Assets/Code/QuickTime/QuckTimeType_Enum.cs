@@ -13,6 +13,7 @@ namespace QuickTime // this is a name space so it can be shared between multiple
         Midnight,
         Abbysal,
         Eldritch,
-        Scuba
+        Scuba,
+        Tutorial
     }
 }

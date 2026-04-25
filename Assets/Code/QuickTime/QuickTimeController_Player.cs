@@ -53,6 +53,8 @@ public class QuickTimeController_Player : MonoBehaviour
     private float changeSmooth;
     private float currentHitSpeed=0;
     private float _hitVelocity = 0f;
+    [SerializeField,Tooltip("TutorialScreen")]
+    GameObject fishingTutorial;
 
     
 
@@ -107,14 +109,19 @@ public class QuickTimeController_Player : MonoBehaviour
     {
         if (inProgress)
         {
+            float timmy =0;
+
+            if(currentQTData.type != QuickTimeType_Enum.Tutorial) timmy = Time.deltaTime;
+            else timmy = Time.unscaledDeltaTime;
+
             //Set QT Point
-            float location = currentQTData.GetQTMove(Time.deltaTime);
+            float location = currentQTData.GetQTMove(timmy);
             hitMarker = (hitMarker + location + 360) % 360;
             
             qtHitMarker.transform.rotation = Quaternion.Euler(Vector3.forward * hitMarker);
             
             //Set Player Hit Zone
-            RotateHitZone();
+            RotateHitZone(timmy);
 
             //Debug.Log("currentHitSpot: " + currentHitSpot);
             //Debug.Log("ExtendedHitSpot: " + (currentHitSpot+hitArea));
@@ -134,7 +141,7 @@ public class QuickTimeController_Player : MonoBehaviour
             }
             
             // completion amount and change of grace time
-            completionAmnt += currentQTData.GetCompletionRate(inHit)*Time.deltaTime; // will add the rate of change overtime to completion amount
+            completionAmnt += currentQTData.GetCompletionRate(inHit)*timmy; // will add the rate of change overtime to completion amount
             completionAmnt = Mathf.Clamp(completionAmnt,0,1);
 
             // change reticle to know how complete it is.
@@ -147,15 +154,22 @@ public class QuickTimeController_Player : MonoBehaviour
             }
             else if(completionAmnt <= 0) //lose
             {
-                if(currentQTData.type != QuickTimeType_Enum.SeaAngel) EndQTEAll(false);
+                if(currentQTData.type != QuickTimeType_Enum.SeaAngel || currentQTData.type != QuickTimeType_Enum.Tutorial) 
+                EndQTEAll(false);
+            }
+
+            if(currentQTData.type == QuickTimeType_Enum.Tutorial && !fishingTutorial.activeSelf)
+            {   // when tutorial is exited end it;
+                EndQTEAll(true); 
             }
             
         }
     }
 
     // Rotate Hit Zone //////////////////////////////////////////////////////////////////////////////////////
-    private void RotateHitZone()
+    private void RotateHitZone(float timmy)
     { // rotates the players hit zone. wether the key is down the spinner will move clockwise or counter
+        
         float chosenHitSpeed;
         if (counterClockwise)
         { // if QT use key is down
@@ -166,9 +180,9 @@ public class QuickTimeController_Player : MonoBehaviour
             chosenHitSpeed = -maxHitSpeed;
         }
         // Smoothly damp the current speed towards the target speed
-        currentHitSpeed = Mathf.SmoothDamp(currentHitSpeed, chosenHitSpeed, ref _hitVelocity, changeSmooth);
+        currentHitSpeed = Mathf.SmoothDamp(currentHitSpeed, chosenHitSpeed, ref _hitVelocity, changeSmooth,maxHitSpeed,timmy);
 
-        currentHitSpot = (currentHitSpot + (currentHitSpeed * Time.deltaTime)+360) % 360 ;//% 360; // move the hit spot with the current speed over time.
+        currentHitSpot = (currentHitSpot + (currentHitSpeed * timmy)+360) % 360 ;//% 360; // move the hit spot with the current speed over time.
         
 
         hitZone.transform.rotation = Quaternion.Euler(Vector3.forward* currentHitSpot);
@@ -201,30 +215,29 @@ public class QuickTimeController_Player : MonoBehaviour
     // Set Data //////////////////////////////////////////////////////////////////////////////////////
     public void SetData(QuickTimeData_Abstract data) // Abstract
     {
-        currentQTData = data; 
-        HookTutor();
-    } 
+        if (GameManager.Instance.hintsEnabled && data.type != QuickTimeType_Enum.Tutorial)
+        { // if hints are enabled play the hint
+            //Time.timeScale = 0f;
+            TutorialManager.Instance.TriggerTutorial(2,0); // Hold Release
+            StartCoroutine(WaitToExitTutorial(data)); // will pause this operation until the tutorial is active
+        }
+        else
+        {
+            currentQTData = data;
+            Hooked();
+        }
+    }
+    /* 
     public void SetData(QuickTimeData_BasicFish data)// Basic Fish Type
     {
-        currentQTData = data; 
-        HookTutor();
+        SetData(data);
     }
     public void SetData(QuickTimeData_Scuba data)
     {
         currentQTData = data; 
         HookTutor();
     }
-
-
-    private void HookTutor()
-    {
-        if (GameManager.Instance.hintsEnabled)
-        { // if hints are enabled play the hint
-            //Time.timeScale = 0f;
-            TutorialManager.Instance.TriggerTutorial(2,0); // Hold Release
-        }
-        Hooked();
-    }
+    */
     // On Hook ////////////////////////////////////////////////////////////////////////////////////////////////////
     private void Hooked() // activated when the fish is hooked.
     {
@@ -295,7 +308,8 @@ public class QuickTimeController_Player : MonoBehaviour
         input.InteractEventQT -= NextHint;
         inProgress = false;
         currentQTData.ExitQuickTimeEvent(status);
-        StartCoroutine(EndQTE(.4f));
+        if(currentQTData.type != QuickTimeType_Enum.Tutorial) StartCoroutine(EndQTE(.4f));
+        else StartCoroutine(EndQTE(0f));
     }
     private IEnumerator EndQTE(float x) // turns off the qte after a number of seconds.
     {
@@ -367,6 +381,18 @@ public class QuickTimeController_Player : MonoBehaviour
     public void changeHitSmooth(float newSmooth)
     {
         changeSmooth = newSmooth;
+    }
+
+    IEnumerator WaitToExitTutorial(QuickTimeData_Abstract data)
+    {
+        yield return new WaitForEndOfFrame();
+        while (fishingTutorial.activeSelf)
+        {
+            yield return null;
+        }
+        yield return new WaitForSeconds(.1f);
+        currentQTData = data; 
+        Hooked();
     }
     
 }   

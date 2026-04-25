@@ -8,7 +8,7 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] private HintArray hintArray;
     [SerializeField] private InputReader input;
     [SerializeField] private GameObject hintUI;
-    
+    [SerializeField] private QuickTimeData_Abstract QTtutorial;
 
     //////// singleton stuff ////////////////////////////////////
     public static TutorialManager Instance // accesor for the game manager singleton
@@ -75,9 +75,16 @@ public class TutorialManager : MonoBehaviour
     {
         //Debug.Log("Showing: " + id);
         if(hintUI != null && GameManager.Instance.hintsEnabled){
+            if(type == 2 && hint == 0)
+            {
+                QTtutorial.SendData();
+                // send data of the tutorial
+            }
+            
             Time.timeScale = 0;
             hintUI.SetActive(true);
             hintArray.ShowHint(type,hint);
+            
             input.InteractEvent += CloseHint; // allow player to close out the hint menu
             input.InteractEventQT += CloseHint;
         }
