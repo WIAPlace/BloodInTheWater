@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.AI;
+using Unity.VisualScripting;
 /// 
 /// Author: Weston Tollette
 /// Created: 2/24/26
@@ -20,6 +21,9 @@ public class Scuba_Controller : MonoBehaviour, IMonster
     private GameObject target; // should be the player
     [field: SerializeField][Tooltip("Dat body")]
     public GameObject body;
+    [field: SerializeField, Tooltip("Audio SFXs")]
+    public SoundEffectSO[] SFX_SO;
+
     private IBoatStomperState currentState;
     [SerializeField][Tooltip("Player layer")]
     private LayerMask playerMask;
@@ -73,6 +77,8 @@ public class Scuba_Controller : MonoBehaviour, IMonster
 
     [HideInInspector]
     public bool contacted=false;
+    [field:SerializeField]
+    public AudioSource BreathingSourse;
 
 
     private void Start()
@@ -144,6 +150,7 @@ public class Scuba_Controller : MonoBehaviour, IMonster
         active = true;
         agent.enabled = true;
         ChangeState(SpawnState); 
+        StartCoroutine(Breaths());
     }
 
     
@@ -218,8 +225,9 @@ public class Scuba_Controller : MonoBehaviour, IMonster
     // Monster Interface
     public void MonsterHit(Vector3 hitDir) // on hit by harpoon
     {
-        this.hitDir = new Vector3(-hitDir.x,1,-hitDir.z);
+        this.hitDir = new Vector3(-hitDir.x,.8f,-hitDir.z);
         currentState = HitState;
+        SFX_SO[1].Play(BreathingSourse);
     }
 
     public void SetAnimation(int key)
@@ -260,6 +268,18 @@ public class Scuba_Controller : MonoBehaviour, IMonster
             SetAnimation(4);
             yield return new WaitForSeconds(getUpTime);
             ChangeState(MoveState);
+        }
+    }
+
+    public IEnumerator Breaths() // Using Audio SFX SO index = 0
+    {
+        int sfxSOLength = SFX_SO[0].clips.Length;
+
+        while (body.activeSelf)
+        {
+            int randoIndex = Random.Range(0, sfxSOLength);
+            SFX_SO[0].Play(BreathingSourse);
+            yield return new WaitForSeconds(SFX_SO[0].clips[randoIndex].length + .3f);
         }
     }
 }   

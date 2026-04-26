@@ -78,7 +78,12 @@ public class TimeKeeper : MonoBehaviour
             //GameState.Instance.ChangeTime(GetTimeLeft());
             //Debug.Log(timePassed);
         }
-       StartCoroutine(FogRollsIn());
+        if(fogObject!=null){ // if the fog object doesnt exist this wont matter.
+            StartCoroutine(FogRollsIn());
+        }
+        else GameState.Instance.LooseState();
+        // temp to account for any error on level setup
+        
     }
 
     public void AddPenaltyTime(float seconds)

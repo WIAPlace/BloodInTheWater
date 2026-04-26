@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
 
         gameUI.SetActive(true); // make the game ui active
         windUpIndicator.gameObject.SetActive(false);
-        text.gameObject.SetActive(false);
+        //text.gameObject.SetActive(false);
 
     }
 
@@ -88,7 +88,7 @@ public class GameManager : MonoBehaviour
         pauseMenu.SetActive(true);
         if(!pauseMainMenu.activeSelf) pauseMainMenu.SetActive(true);
         windUpIndicator.gameObject.SetActive(false);
-        text.gameObject.SetActive(false);
+        //text.gameObject.SetActive(false);
         Time.timeScale=0f;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
