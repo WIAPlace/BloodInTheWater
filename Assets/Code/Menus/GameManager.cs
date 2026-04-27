@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine.Splines;
 using QuickTime;
 using UnityEngine.EventSystems;
+using UnityEngine.AI;
 /// 
 /// Author: Weston Tollette
 /// Created: 2/22/26
@@ -51,6 +52,10 @@ public class GameManager : MonoBehaviour
     public static event Action OnLatch;
     public static event Action OnLatchCancelled;
 
+    [Header("Turn Off UI")]
+    [SerializeField]
+    private bool HideUI = false;
+
 
     void OnEnable()
     {
@@ -66,12 +71,14 @@ public class GameManager : MonoBehaviour
         input.PauseEvent += HandlePause;
         input.ResumeEvent += HandleResume;
         //input.CheckEvent += HandleCheck;
+        
         pauseMenu.SetActive(false); // turn off pause menu and the extra menus it has
         if(howToPlay.activeSelf) howToPlay.SetActive(false);
         if(settingsMenu.activeSelf) settingsMenu.SetActive(false);
-
-        gameUI.SetActive(true); // make the game ui active
         windUpIndicator.gameObject.SetActive(false);
+        if(!HideUI){
+            gameUI.SetActive(true); // make the game ui active
+        }
         //text.gameObject.SetActive(false);
 
     }
@@ -84,10 +91,13 @@ public class GameManager : MonoBehaviour
     }
     public void HandlePause()
     {
-        gameUI.SetActive(false);
-        pauseMenu.SetActive(true);
-        if(!pauseMainMenu.activeSelf) pauseMainMenu.SetActive(true);
         windUpIndicator.gameObject.SetActive(false);
+        gameUI.SetActive(false);
+        if(!HideUI)
+        {
+            pauseMenu.SetActive(true);
+            if(!pauseMainMenu.activeSelf) pauseMainMenu.SetActive(true);
+        }
         //text.gameObject.SetActive(false);
         Time.timeScale=0f;
         Cursor.lockState = CursorLockMode.None;
@@ -97,7 +107,10 @@ public class GameManager : MonoBehaviour
     public void HandleResume()
     {
         pref.LoadUIStates();
-        gameUI.SetActive(true);
+        if(!HideUI)
+        {
+            gameUI.SetActive(true);
+        }
         if(pauseMenu.activeSelf) pauseMenu.SetActive(false);
         if(howToPlay.activeSelf) howToPlay.SetActive(false);
         if(settingsMenu.activeSelf) settingsMenu.SetActive(false);
