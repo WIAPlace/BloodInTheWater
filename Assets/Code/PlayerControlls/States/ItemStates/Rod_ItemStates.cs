@@ -226,8 +226,14 @@ public class Rod_StateItemUse : Abs_StateItemUse
             //---by Kennedy
             //controller.anim.SetTrigger("RodCast");
             controller.rod.RodTriggerAnimator(controller,0);
-            rod.SFX_SO[3].Play(controller.audioSource);
+
+            // Game Feel for casting
+            rod.impSour.GenerateImpulse();
+
+            rod.SFX_SO[3].Play(controller.audioSource); // trigger audio effects
             rod.SFX_SO[4].Play(controller.audioSource);
+
+            // set lure active
             rod.CastSpotPrefab.SetActive(false);
             CastLure();
             rod.SetIfFishing(true);
