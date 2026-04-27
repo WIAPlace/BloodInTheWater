@@ -20,6 +20,7 @@ public class DialogueObjectTrigger : MonoBehaviour, IInteractable
     [Space(5)]
     public GameObject obj;
     public bool turnOn;
+    [SerializeField] GameObject[] lookLocations;
 
     [HideInInspector]
 
@@ -61,6 +62,6 @@ public class DialogueObjectTrigger : MonoBehaviour, IInteractable
             obj.SetActive(false);
         }
 
-        DialogueBoxController.instance.StartDialogue(dialogueAsset.dialogue,dialogueAsset.audioclip, StartPosition, dialogueAsset.speaker);
+        DialogueBoxController.instance.StartDialogue(dialogueAsset.dialogue,dialogueAsset.audioclip, StartPosition, dialogueAsset.speaker,lookLocations);
     }
 }

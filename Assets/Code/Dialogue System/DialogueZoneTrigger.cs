@@ -23,6 +23,7 @@ public class DialogueZoneTrigger : MonoBehaviour
     public GameObject obj;
     public bool turnOn;
 
+    [SerializeField] GameObject[] lookLocations;
     void Start()
     {
         if (turnOn)
@@ -62,6 +63,6 @@ public class DialogueZoneTrigger : MonoBehaviour
             obj.SetActive(false);
         }
 
-        DialogueBoxController.instance.StartDialogue(dialogueAsset.dialogue, dialogueAsset.audioclip, StartPosition, dialogueAsset.speaker);
+        DialogueBoxController.instance.StartDialogue(dialogueAsset.dialogue, dialogueAsset.audioclip, StartPosition, dialogueAsset.speaker,lookLocations);
     }
 }

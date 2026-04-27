@@ -18,6 +18,8 @@ public class DialogueObject : MonoBehaviour, IInteractable
 
     public DialogueAsset dialogueAsset;
 
+    [SerializeField] GameObject[] lookLocations;
+
     [HideInInspector]
     public int StartPosition
     {
@@ -42,7 +44,7 @@ public class DialogueObject : MonoBehaviour, IInteractable
     {
         if(dialogueAsset != null)
         {
-            DialogueBoxController.instance.StartDialogue(dialogueAsset.dialogue,dialogueAsset.audioclip, StartPosition, dialogueAsset.speaker);
+            DialogueBoxController.instance.StartDialogue(dialogueAsset.dialogue,dialogueAsset.audioclip, StartPosition, dialogueAsset.speaker,lookLocations);
         }
     }
 }
