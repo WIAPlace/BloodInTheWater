@@ -18,6 +18,7 @@ public class Useable_Controller : MonoBehaviour
     [SerializeField] [Tooltip("Insert the Scriptable Object Input Reader.")]
     private InputReader input;
     public AudioSource audioSource; // sound player
+    public AudioSource reelingSource; // sfx for reeling;
     public GameObject FPCamera;
     public GameObject fakeFish; // fake fish to hold on stick
     private TestReelLine TRL;

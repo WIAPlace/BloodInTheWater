@@ -72,10 +72,11 @@ public class Rod_StateItemReadying : Abs_StateItemReadying
             controller.ChangeState(controller.currentItem.Idle);
             return;
         }
-        if(!controller.rod.CheckIfFishing())
+        if(!controller.rod.CheckIfFishing()) // if not fishing
         { // only do this if not fishing
             controller.StartWaitToChange(controller.currentItem.IsReady, controller.readyTime);
             controller.WindUpOn(controller.readyTime); // turns on the wind up indicator
+            controller.currentItem.SFX_SO[2].Play(controller.audioSource); // play audio ready sfx
             //---By Kennedy
             //controller.anim.SetTrigger("RodReady");
             controller.rod.RodTriggerAnimator(controller,1);
@@ -86,6 +87,7 @@ public class Rod_StateItemReadying : Abs_StateItemReadying
         { // if fishing just reel in reel quick
             //controller.anim.ResetTrigger("")
             //controller.anim.SetTrigger("RodReelingOut");
+            //controller.audioSource.Stop();
             controller.rod.RodTriggerAnimator(controller,3);
             //controller.ChangeState(controller.currentItem.IsReady);
         }
@@ -94,12 +96,17 @@ public class Rod_StateItemReadying : Abs_StateItemReadying
     public override void DoExit(Useable_Controller controller)
     {
         controller.StopCo(controller.running);
+        controller.reelingSource.Stop();
     }
 
     public override IUseableState DoState(Useable_Controller controller)
     {
         if(controller.rod.CheckIfFishing() && controller.rod.LurePrefab.activeSelf)
         {
+            if (!controller.reelingSource.isPlaying)
+            {
+                controller.reelingSource.Play();
+            }
             //Debug.Log("Readying");
             Vector3 lookDir = new Vector3( // look at the fishing rod mesh
                 controller.rod.useableMesh.transform.position.x, 
@@ -142,7 +149,7 @@ public class Rod_StateItemIsReady : Abs_StateItemIsReady
         {
             // indicator that the fish is ready to be caught.
             
-            controller.audioSource.PlayOneShot(rod.fishHookIndicator);
+            rod.SFX_SO[5].Play(controller.audioSource);
             rod.SpawnEffectAtPosition(rod.LurePrefab.transform.position, rod.SmallSplash);
         }
         
@@ -219,6 +226,8 @@ public class Rod_StateItemUse : Abs_StateItemUse
             //---by Kennedy
             //controller.anim.SetTrigger("RodCast");
             controller.rod.RodTriggerAnimator(controller,0);
+            rod.SFX_SO[3].Play(controller.audioSource);
+            rod.SFX_SO[4].Play(controller.audioSource);
             rod.CastSpotPrefab.SetActive(false);
             CastLure();
             rod.SetIfFishing(true);
@@ -287,6 +296,7 @@ public class Rod_StateItemPlace : Abs_StateItemPlace
     private UseableItem_Rod rod;
     public override void DoEnter(Useable_Controller controller)
     {
+        controller.currentItem.SFX_SO[1].Play(controller.audioSource);
         rod = controller.rod;
         // start animation to place or pickup something
         controller.currentItem.useableMesh.SetActive(false); // turn of the game object 
