@@ -1052,6 +1052,26 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 797947561299783535, guid: c50591be7240d2247bb8a5c60af68ecd,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.37803352
+      objectReference: {fileID: 0}
+    - target: {fileID: 797947561299783535, guid: c50591be7240d2247bb8a5c60af68ecd,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.2424666
+      objectReference: {fileID: 0}
+    - target: {fileID: 797947561299783535, guid: c50591be7240d2247bb8a5c60af68ecd,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7520752
+      objectReference: {fileID: 0}
+    - target: {fileID: 797947561299783535, guid: c50591be7240d2247bb8a5c60af68ecd,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.48237285
+      objectReference: {fileID: 0}
     - target: {fileID: 1359473485322141335, guid: c50591be7240d2247bb8a5c60af68ecd,
         type: 3}
       propertyPath: m_Layer
@@ -1172,6 +1192,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3363159450847628753, guid: c50591be7240d2247bb8a5c60af68ecd,
+        type: 3}
+      propertyPath: DefaultBlend.Time
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3363159450847628753, guid: c50591be7240d2247bb8a5c60af68ecd,
+        type: 3}
+      propertyPath: DefaultBlend.Style
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3522662819197475127, guid: c50591be7240d2247bb8a5c60af68ecd,
         type: 3}
@@ -1351,6 +1381,11 @@ PrefabInstance:
     - target: {fileID: 5964613417120666341, guid: c50591be7240d2247bb8a5c60af68ecd,
         type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6109449962850407224, guid: c50591be7240d2247bb8a5c60af68ecd,
+        type: 3}
+      propertyPath: Damping
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6226390250710925599, guid: c50591be7240d2247bb8a5c60af68ecd,
@@ -1681,6 +1716,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e51d416b7755e8f459a91e032316ae8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &807322697 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4939012056242929691, guid: c50591be7240d2247bb8a5c60af68ecd,
+    type: 3}
+  m_PrefabInstance: {fileID: 807322695}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &809693135
 Mesh:
   m_ObjectHideFlags: 0
@@ -1883,6 +1924,9 @@ MonoBehaviour:
   noRepeat: 1
   repeatStartPosition: 10
   dialogueAsset: {fileID: 11400000, guid: bb8768f5152804342973b9f0fd1f2e8b, type: 2}
+  lookLocations:
+  - {fileID: 807322697}
+  - {fileID: 807322697}
 --- !u!65 &1117048169
 BoxCollider:
   m_ObjectHideFlags: 0
