@@ -23,7 +23,7 @@ RenderSettings:
   m_AmbientSkyColor: {r: 0.1649385, g: 0.1649385, b: 0.1649385, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
-  m_AmbientIntensity: 5
+  m_AmbientIntensity: 6
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.3584906, g: 0.3584906, b: 0.3584906, a: 1}
   m_SkyboxMaterial: {fileID: 2100000, guid: ff0d51dd3863a0040ac944fdcfb10a69, type: 2}
@@ -5595,6 +5595,11 @@ PrefabInstance:
       objectReference: {fileID: 172571851}
     - target: {fileID: 33352206358687302, guid: c50591be7240d2247bb8a5c60af68ecd,
         type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 172571852}
+    - target: {fileID: 33352206358687302, guid: c50591be7240d2247bb8a5c60af68ecd,
+        type: 3}
       propertyPath: startDialogue
       value: 
       objectReference: {fileID: 11400000, guid: fdf57a6a63cad364b9fa2f452828f929,
@@ -5851,6 +5856,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: add31431a3761804fa9b6ac1705b2dab,
         type: 2}
+    - target: {fileID: 5757854929911457047, guid: c50591be7240d2247bb8a5c60af68ecd,
+        type: 3}
+      propertyPath: m_Volume
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 5954172783160204158, guid: c50591be7240d2247bb8a5c60af68ecd,
         type: 3}
       propertyPath: m_IsActive
@@ -5884,7 +5894,7 @@ PrefabInstance:
     - target: {fileID: 6226390250710925599, guid: c50591be7240d2247bb8a5c60af68ecd,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.61523116
+      value: 0.6562678
       objectReference: {fileID: 0}
     - target: {fileID: 6226390250710925599, guid: c50591be7240d2247bb8a5c60af68ecd,
         type: 3}
@@ -5894,7 +5904,7 @@ PrefabInstance:
     - target: {fileID: 6226390250710925599, guid: c50591be7240d2247bb8a5c60af68ecd,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.78834677
+      value: 0.7545281
       objectReference: {fileID: 0}
     - target: {fileID: 6226390250710925599, guid: c50591be7240d2247bb8a5c60af68ecd,
         type: 3}
@@ -5904,7 +5914,7 @@ PrefabInstance:
     - target: {fileID: 6226390250710925599, guid: c50591be7240d2247bb8a5c60af68ecd,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 104.063
+      value: 97.968
       objectReference: {fileID: 0}
     - target: {fileID: 6576737587267090688, guid: c50591be7240d2247bb8a5c60af68ecd,
         type: 3}
@@ -6029,7 +6039,7 @@ PrefabInstance:
     - target: {fileID: 8502812491424400242, guid: c50591be7240d2247bb8a5c60af68ecd,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.61523116
+      value: 0.6562678
       objectReference: {fileID: 0}
     - target: {fileID: 8502812491424400242, guid: c50591be7240d2247bb8a5c60af68ecd,
         type: 3}
@@ -6039,7 +6049,7 @@ PrefabInstance:
     - target: {fileID: 8502812491424400242, guid: c50591be7240d2247bb8a5c60af68ecd,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.78834677
+      value: 0.7545281
       objectReference: {fileID: 0}
     - target: {fileID: 8502812491424400242, guid: c50591be7240d2247bb8a5c60af68ecd,
         type: 3}
@@ -6217,6 +6227,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e51d416b7755e8f459a91e032316ae8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!82 &172571852 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 7993902268590484714, guid: c50591be7240d2247bb8a5c60af68ecd,
+    type: 3}
+  m_PrefabInstance: {fileID: 172571847}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &173518591
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17582,7 +17598,7 @@ MonoBehaviour:
   firstInteraction: 1
   noRepeat: 1
   repeatStartPosition: 10
-  dialogueAsset: {fileID: 11400000, guid: ee1641e8982a31d4892055c970a906f9, type: 2}
+  dialogueAsset: {fileID: 11400000, guid: 7b78022014218664c9b87f8da4759b35, type: 2}
   lookLocations: []
 --- !u!1001 &471528667
 PrefabInstance:
@@ -74662,7 +74678,7 @@ PrefabInstance:
     - target: {fileID: 3114050536772968415, guid: e4a8ef964cf11d44bb411646899ec7f3,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 38
+      value: 100.5
       objectReference: {fileID: 0}
     - target: {fileID: 3114050536772968415, guid: e4a8ef964cf11d44bb411646899ec7f3,
         type: 3}
@@ -74713,6 +74729,11 @@ PrefabInstance:
         type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
       value: 250
+      objectReference: {fileID: 0}
+    - target: {fileID: 6174558331599390736, guid: e4a8ef964cf11d44bb411646899ec7f3,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7385189707087964497, guid: e4a8ef964cf11d44bb411646899ec7f3,
         type: 3}

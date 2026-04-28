@@ -13,8 +13,9 @@ public class BarrelOfBirds : MonoBehaviour
     [SerializeField] GameObject emptyBird;
     [SerializeField] SplineAnimate emptyAnim;
 
-    
 
+    public GameObject removeObj;
+    public GameObject addObj;
     public event Action pickUpReached;
 
     // Start is called before the first frame update
@@ -50,7 +51,9 @@ public class BarrelOfBirds : MonoBehaviour
 
         //if less than needed do nothing
         if(gullPicked < gullsNeeded) return;
-        pickUpReached.Invoke(); 
+        pickUpReached.Invoke();
+        removeObj.SetActive(false);
+        addObj.SetActive(true);
         // activate the event when gull picked up is reached.
     }
 }
