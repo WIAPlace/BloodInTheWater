@@ -40,6 +40,9 @@ public class BoatCreeking : MonoBehaviour
     }
     public void HandleBoatHit(float notUsed)
     {
-        BoatHit.Play(soundMaker);
+        if (BoatHit != null)
+        {
+            BoatHit.Play(soundMaker);
+        }
     }
 }

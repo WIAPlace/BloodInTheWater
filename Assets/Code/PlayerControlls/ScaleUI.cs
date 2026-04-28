@@ -31,7 +31,7 @@ public class ScaleUI : MonoBehaviour
     private float neededAmnt;
     private float amntJustCaught;
     private bool full;
-    private Coroutine running;
+    private Coroutine running; 
 
     // Start is called before the first frame update
     void Start()
@@ -69,6 +69,7 @@ public class ScaleUI : MonoBehaviour
         running = StartCoroutine(ShowScale(firstWait));
         if (!full && scaleAmnt >= neededAmnt)
         {
+            full = true;
             scaleRenderer.material = fullMat;
             markerRenderer.material = fullMat;
         }
