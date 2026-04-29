@@ -43,8 +43,8 @@ public class DialogueBoxController : MonoBehaviour
         if (OnStart)
         {
             StartCoroutine(LateStart());
-            
-            //StartDialogue(startDialogue.dialogue,startDialogue.audioclip, 0, startName);
+
+            //StartDialogue(startDialogue.dialogue,startDialogue.audioclip, 0, startDialogue.speaker);
         }
         else
         {
@@ -66,7 +66,7 @@ public class DialogueBoxController : MonoBehaviour
     IEnumerator LateStart()
     {
         //GameManager.Instance.SetPause(false);
-        yield return new WaitForSeconds(.4f);
+        yield return new WaitForSeconds(1f);
         //GameManager.Instance.input.SetUI();
         StartDialogue(startDialogue.dialogue,startDialogue.audioclip, 0, startDialogue.speaker);
     }
