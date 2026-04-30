@@ -19,11 +19,15 @@ public class GameState : MonoBehaviour
     [SerializeField][Tooltip("How many fish to catch till win")]
     private float totalLbs = 20f;
     private float lbsCaught=0f;
+    private float lbsPercent;
     [SerializeField] private GameOver endLoose;
     [SerializeField] private GameObject keeperToSpawn;
-
+    /*
+    [SerializeField,Tooltip("Events will occur when the element in the array has reached its indexed range (percentage based)"),Range(0,100)]
+    private int[] weightEventPercentages;
+    */
     public static event Action<float> OnCatch;
-
+    public static event Action<float> WeightEvent; 
 
     private void Awake()
     { // makes sure this is the only instance of this system.
@@ -50,7 +54,9 @@ public class GameState : MonoBehaviour
     public void CaughtFish(float lbs)
     {
         lbsCaught += Mathf.Round(lbs * 10)/10; // 1 decimal
+        lbsPercent = lbsCaught/totalLbs * 100;
         OnCatch?.Invoke(.6f);
+        WeightEvent?.Invoke(lbsPercent); // if subscriber is attached to this and weight is met it will go off.
     }
 
     public void CheckCaughtFish()
@@ -74,6 +80,7 @@ public class GameState : MonoBehaviour
     {
         return totalLbs;
     }
+    
 
     public void LooseState()
     {

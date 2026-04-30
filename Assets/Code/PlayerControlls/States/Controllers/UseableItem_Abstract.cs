@@ -1,3 +1,4 @@
+using Unity.Cinemachine;
 using UnityEngine;
 /// 
 /// Author: Weston Tollette
@@ -12,6 +13,9 @@ public abstract class UseableItem_Abstract : MonoBehaviour
 {
     [Tooltip("Game Object of the thing being used")]
     public GameObject useableMesh;
+    public CinemachineImpulseSource impSour;
+    [Tooltip("0 = use\n")]
+    public SoundEffectSO[] SFX_SO;
     //public AudioSource audioSource;
 
     // States:

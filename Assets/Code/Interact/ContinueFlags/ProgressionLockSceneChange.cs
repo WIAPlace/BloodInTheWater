@@ -18,6 +18,7 @@ public class ProgressionLockSceneChange : MonoBehaviour, IInteractable
     [SerializeField] [Tooltip("Warning message to throw")] DialogueAsset dialogueAsset; 
     //[SerializeField] private bool toMenu=false;
     [SerializeField]private ProgressionBlock_Abs progress;
+    //[SerializeField] private GameObject[] lookLocations;
 
     public void Interact()
     {
@@ -28,7 +29,7 @@ public class ProgressionLockSceneChange : MonoBehaviour, IInteractable
             }
             else
             {
-                DialogueBoxController.instance.StartDialogue(dialogueAsset.dialogue,dialogueAsset.audioclip, 0);
+                DialogueBoxController.instance.StartDialogue(dialogueAsset, 0);
             }
         }
         else

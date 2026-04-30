@@ -8,16 +8,18 @@ public class FadeInOnStart : MonoBehaviour
     public float fadeDuration = 2.0f; // Time in seconds to reach full volume
     private float[] targetVolume; // Max volume to reach
 
-    void Start()
+    void OnEnable()
     {
         targetVolume = new float[audioSources.Length];
         for(int i = 0; i<audioSources.Length;i++)
         {
-            targetVolume[i] = audioSources[i].volume;
+            if(audioSources[i]!=null && audioSources[i].isActiveAndEnabled){
+                targetVolume[i] = audioSources[i].volume;
 
-            // Ensure volume starts at 0 and play the audio
-            audioSources[i].volume = 0;
-            audioSources[i].Play();
+                // Ensure volume starts at 0 and play the audio
+                audioSources[i].volume = 0;
+                audioSources[i].Play();
+            }
         }
         // Start the fading process
         StartCoroutine(FadeIn());
@@ -25,7 +27,7 @@ public class FadeInOnStart : MonoBehaviour
 
     IEnumerator FadeIn()
     {
-        Debug.Log("Fading in");
+        //Debug.Log("Fading in");
         float currentTime = 0;
 
         while (currentTime < fadeDuration)
@@ -34,13 +36,17 @@ public class FadeInOnStart : MonoBehaviour
             // Linearly interpolate volume from 0 to target over the duration
             for(int i = 0; i<audioSources.Length;i++)
             {
-                audioSources[i].volume = Mathf.Lerp(0, targetVolume[i], currentTime / fadeDuration);
+                if(audioSources[i]!=null && audioSources[i].isActiveAndEnabled){
+                    audioSources[i].volume = Mathf.Lerp(0, targetVolume[i], currentTime / fadeDuration);
+                }
             }
             yield return null;
         }
         for(int i = 0; i<audioSources.Length;i++)
-        {
-            audioSources[i].volume = targetVolume[i];
+        {   
+            if(audioSources[i]!=null && audioSources[i].isActiveAndEnabled){
+                audioSources[i].volume = targetVolume[i];
+            }
         }
     }
 }

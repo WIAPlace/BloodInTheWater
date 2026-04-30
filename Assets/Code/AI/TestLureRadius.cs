@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Splines;
 /// 
@@ -13,14 +14,20 @@ using UnityEngine.Splines;
 ///
 public class TestLureRadius : MonoBehaviour
 {
+    [SerializeField]private float secondsRipple;
+    [SerializeField]private GameObject ripplePrefab;
+    private Coroutine running;
+    //GameObject rippleHolder;
+    //GameObject rippleHolder;
     void Start()
     {
+        
         //Debug.Log("enabled");
         SphereCollider lureZone = GetComponent<SphereCollider>(); // the sphere collider trigger
         Transform bobberCenter = GetComponent<Transform>(); // Center of bobber 
         float lureRadius = lureZone.radius; // Get the radius of the Lure Zone 
 
-
+        /*
         // Create a new GameObject to hold the spline
         GameObject splineGO = new GameObject("RingSpline");
         splineGO.transform.position = bobberCenter.position;
@@ -57,5 +64,40 @@ public class TestLureRadius : MonoBehaviour
         }
         // Close the spline
         spline.Closed = true;
+        */
+    }
+    private void OnEnable()
+    {
+        running = StartCoroutine(Ripple());
+    }
+    private void OnDisable()
+    {
+        if(running != null)
+        {
+            StopCoroutine(running);
+        }
+    }
+    IEnumerator Ripple()
+    {
+        yield return new WaitForEndOfFrame();
+        GameObject rippleHolder = null;
+        try
+        {
+            while (true)
+            {
+                rippleHolder = Instantiate(ripplePrefab, transform.position, Quaternion.identity);
+                yield return new WaitForSeconds(secondsRipple);
+                Destroy(rippleHolder);
+                rippleHolder = null; // Clear reference after successful destruction
+            }
+        }
+        finally
+        {
+            // This runs even if StopCoroutine() is called while waiting
+            if (rippleHolder != null)
+            {
+                Destroy(rippleHolder);
+            }
+        }
     }
 }

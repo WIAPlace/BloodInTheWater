@@ -23,6 +23,8 @@ public class PrimativeStarFish : MonoBehaviour
     private SoundEffectSO fall;
     [SerializeField][Tooltip("SFX SO for StarFish arriving")]
     private SoundEffectSO start;
+    [SerializeField]
+    private SoundEffectSO remain;
 
     [SerializeField][Tooltip("Max Number of hits to get this man out of here.")]
     private int maxHP = 3;
@@ -34,12 +36,14 @@ public class PrimativeStarFish : MonoBehaviour
     private float intervals = 1f;
     private bool onBoat = false;
     private Coroutine hurtingBoat;
+    private Coroutine scratching;
 
     [SerializeField][Tooltip("Min Seconds Before this guy is allowed to spawn")]
     private float min = 0;
     [SerializeField][Tooltip("Max Seconds Before this guy is allowed to spawn")]
     private float max = 10;
     
+    private int position;
     void OnEnable()
     {
         body.SetActive(false);
@@ -50,13 +54,15 @@ public class PrimativeStarFish : MonoBehaviour
     // trigger on spawinging this man. //////////////////////////
     public void Spawn()
     {
+        
         impSour.GenerateImpulse(); // make the player feel the rumble
-        body.SetActive(true); // set the body as see able
-        SpawnInRandomLocation(); // spawin at one of the spawn points
         start.Play(soundMaker); // make sound on start
         onBoat = true; // boi is on boat
         currentHP = maxHP; // set current hp = max hp
         hurtingBoat = StartCoroutine(HurtBoat()); // start hurting
+        scratching = StartCoroutine(ScratchBoat());
+        
+        
     }
 
     // triggers when hp is 0 ///////////////////////////////////
@@ -67,6 +73,7 @@ public class PrimativeStarFish : MonoBehaviour
         if (hurtingBoat != null)
         { // if hurting boat stop
             StopCoroutine(hurtingBoat);
+            if(scratching != null) StopCoroutine(scratching);
         }
 
         body.SetActive(false); // go invis
@@ -80,11 +87,15 @@ public class PrimativeStarFish : MonoBehaviour
         
         if(currentHP <= 0)
         { // if hp is bellow zero despawn.
-            Despawn();
+            //Despawn();
+            //ChangeAnimation(5);
+            ChangeAnimation(4);
+            StartCoroutine(WaitToDespawn());
         }
         else
         {   // we have a sound that plays specificly if it dies.
             hit.Play(soundMaker);
+            ChangeAnimation(4);
         }
     }
 
@@ -98,37 +109,96 @@ public class PrimativeStarFish : MonoBehaviour
             }
         }
     }
+    private IEnumerator ScratchBoat() /////////////////////////////////////
+    {
+        int sfxSOLength = remain.clips.Length;
+        while(true){
+            int randoIndex = Random.Range(0, sfxSOLength);
+            remain.Play(soundMaker);
+            yield return new WaitForSeconds(remain.clips[randoIndex].length + .1f);
+        }
+    }
     private IEnumerator ChanceSpawn() ////////////////////////////////// Spawn Chance
     {
         float rando = Random.Range(min,max);
         yield return new WaitForSeconds(rando);
+
+        body.SetActive(true); // set the body as see able
+        position = Random.Range(0,spawnSpots.Length); // set position to random location
+        transform.SetPositionAndRotation(spawnSpots[position].position,spawnSpots[position].rotation);
+        ChangeAnimation(6);
+        // physicaly set to new position
+
+        yield return new WaitForSeconds(.01f);
+        ChangeAnimation(position); // spawin at one of the spawn points
         Spawn();
     }
-
-    public void SpawnInRandomLocation() ///////////////////////////////// Spawn location
+    
+    public void ChangeAnimation(int key)
     {
-        int rando = Random.Range(0,spawnSpots.Length);
-        transform.SetPositionAndRotation(spawnSpots[rando].position,spawnSpots[rando].rotation);
+        anim.ResetTrigger("LeftSideGrab");
+        anim.ResetTrigger("RightSideGrab");
+        anim.ResetTrigger("BackGrab");
+        anim.ResetTrigger("FrontGrab");
+        anim.ResetTrigger("Flail");
+        anim.ResetTrigger("Death");
+        anim.ResetTrigger("Spawn");
 
-        switch (rando)
+        switch (key)
         {
             case 0:
                 anim.SetTrigger("LeftSideGrab");
+                
+                Debug.Log("LeftSide");
                 break;
             case 1:
                 anim.SetTrigger("RightSideGrab");
+                
+                Debug.Log("rightSide");
                 break;
             case 2:
                 anim.SetTrigger("BackGrab");
+                
+                Debug.Log("backSide");
                 break;
             case 3:
                 anim.SetTrigger("FrontGrab");
+                
+                Debug.Log("frontSide");
+                break;
+            case 4:
+                anim.SetTrigger("Flail");
+                StartCoroutine(WaitToChange());
+                
+                // dont scratch while flailing
+
+                Debug.Log("flail");
+                break;
+            case 5:
+                anim.SetTrigger("Death");
+                
+                Debug.Log("Death");
+                break;
+            case 6:
+                anim.SetTrigger("Spawn");
+                
+                Debug.Log("Death");
                 break;
 
             default:
                 
                 break;
         }
+    }
+    IEnumerator WaitToChange()
+    {
+        yield return new WaitForSeconds(.01f);
+        ChangeAnimation(position);
+    }
+    IEnumerator WaitToDespawn()
+    {
+        yield return new WaitForSeconds(1f);
+        Despawn();
     }
 
 

@@ -106,6 +106,8 @@ public class Harp_StateItemUse : Abs_StateItemUse
         returnable = this;
         //TryToHit();
         controller.StartCoroutine(Swing(controller));
+        controller.currentItem.impSour.GenerateImpulse();
+        controller.currentItem.SFX_SO[0].Play(controller.audioSource);
     }
 
     public override void DoExit(Useable_Controller controller)

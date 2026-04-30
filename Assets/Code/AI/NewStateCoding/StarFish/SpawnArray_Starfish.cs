@@ -23,7 +23,7 @@ public class SpawnArray_Starfish : MonoBehaviour
     {
         int rando = Random.Range(0,spawnSpots.Length);
         transform.SetPositionAndRotation(spawnSpots[rando].position,spawnSpots[rando].rotation);
-
+        
         switch (rando)
         {
             case 0:
@@ -38,6 +38,7 @@ public class SpawnArray_Starfish : MonoBehaviour
             case 3:
                 anim.SetTrigger("FrontGrab");
                 break;
+            
 
             default:
                 

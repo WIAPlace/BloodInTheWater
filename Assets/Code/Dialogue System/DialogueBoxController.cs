@@ -20,7 +20,7 @@ using UnityEngine.UI;
 public class DialogueBoxController : MonoBehaviour
 {
     public static DialogueBoxController instance;
-
+    [SerializeField] PlayerLook playerLook;
     [SerializeField] TextMeshProUGUI dialogueText;
     [SerializeField] TextMeshProUGUI nameText;
     [SerializeField] CanvasGroup dialogueBox;
@@ -43,14 +43,13 @@ public class DialogueBoxController : MonoBehaviour
         if (OnStart)
         {
             StartCoroutine(LateStart());
-            
-            //StartDialogue(startDialogue.dialogue,startDialogue.audioclip, 0, startName);
+
+            //StartDialogue(startDialogue.dialogue,startDialogue.audioclip, 0, startDialogue.speaker);
         }
         else
         {
             dialogueBox.gameObject.SetActive(false);
         }
-        
     }
 
     private void Awake()
@@ -67,32 +66,42 @@ public class DialogueBoxController : MonoBehaviour
     IEnumerator LateStart()
     {
         //GameManager.Instance.SetPause(false);
-        yield return new WaitForSeconds(.4f);
+        yield return new WaitForSeconds(1f);
         //GameManager.Instance.input.SetUI();
         StartDialogue(startDialogue.dialogue,startDialogue.audioclip, 0, startDialogue.speaker);
     }
 
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Dialouge
     // The dialogue
-    public void StartDialogue(string[] dialogue,AudioClip[] audioclip, int startPosition, string[] speaker)
+    public void StartDialogue(string[] dialogue,AudioClip[] audioclip, int startPosition, string[] speaker,GameObject[] lookLocations)
     {
         GameManager.Instance.HandleDial(false); // turn stuff off
         dialogueBox.gameObject.SetActive(true);
         StopAllCoroutines();
-        StartCoroutine(RunDialogue(dialogue,audioclip, startPosition, speaker));
+        StartCoroutine(RunDialogue(dialogue,audioclip, startPosition, speaker,lookLocations));
     }
 
-    public void StartDialogue(string[] dialogue,AudioClip[] audioclip, int startPosition) // Overload for less stuff
-    { // this will be used for system stuff/
-        //Debug.Log("Hit");
-        //GameManager.Instance.HandleDial(false); // turn stuff off
-        //string[] speakerName = ""; // no name
-        //dialogueBox.gameObject.SetActive(true);
-        //StopAllCoroutines();
-        //StartCoroutine(RunDialogue(dialogue,audioclip, startPosition, speakerName));
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Overloads
+    // Overload Function for grandfathering in old scripts
+    public void StartDialogue(string[] dialogue,AudioClip[] audioclip, int startPosition, string[] speaker)
+    {
+        StartDialogue(dialogue,audioclip,startPosition,speaker,null);
+    }
+    // overload function that should be used going forward
+    public void StartDialogue(DialogueAsset dialAsset,int startPosition) // Overload for less stuff without look locations
+    { 
+        StartDialogue(dialAsset.dialogue, dialAsset.audioclip, startPosition, dialAsset.speaker, null);
     }
 
+    // overload function that should be used going forward if look locations are needed
+    public void StartDialogue(DialogueAsset dialAsset,int startPosition,GameObject[] lookLocations) // Overload for less stuff
+    { 
+        StartDialogue(dialAsset.dialogue, dialAsset.audioclip, startPosition, dialAsset.speaker, lookLocations);
+    }
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// run Dialouge
     //Prints the lines
-    IEnumerator RunDialogue(string[] dialogue,AudioClip[] audioclip, int startPosition, string[] speaker)
+    IEnumerator RunDialogue(string[] dialogue,AudioClip[] audioclip, int startPosition, string[] speaker,GameObject[] lookLocations)
     {
         skipLineTriggered = false;
         OnDialogueStarted?.Invoke();
@@ -100,10 +109,32 @@ public class DialogueBoxController : MonoBehaviour
 
         for (int i = startPosition; i < dialogue.Length; i++)
         {
-
+            
             nameText.text = speaker[i];
             //Text
-            dialogueText.text = dialogue[i];
+            // italics checker
+            if(!string.IsNullOrEmpty(dialogue[i]) && dialogue[i][0] == '*')
+            {// italics
+                // if not italics already set it to italics
+                if(dialogueText.fontStyle != FontStyles.Italic) dialogueText.fontStyle = FontStyles.Italic;
+                dialogueText.text = dialogue[i].Substring(1); // set text to what it should be minus the '*' at the start
+            }
+            else
+            {// normal text
+                if(dialogueText.fontStyle != FontStyles.Bold) dialogueText.fontStyle = FontStyles.Bold;
+                dialogueText.text = dialogue[i]; 
+            }
+
+            // look
+            if(lookLocations != null&& i<lookLocations.Length && lookLocations[i]!=null) // if the array is full
+            {
+                if(lookLocations[i].transform != playerLook.GetLookLocation())
+                {   // dont change the camera position if its changing to the same position, just stay there
+                    playerLook.LookAtTarget(lookLocations[i]);  
+                } 
+            }
+            else playerLook.EnableFreeLook(); // if all of that 
+
             typing = StartCoroutine(TypeTextUncapped(dialogueText.text));
 
             //Audio
@@ -124,6 +155,7 @@ public class DialogueBoxController : MonoBehaviour
         OnDialogueEnded?.Invoke();
         dialogueBox.gameObject.SetActive(false); //Hides box once done
         GameManager.Instance.HandleDial(true); // set stuff back on.
+        playerLook.EnableFreeLook();
     }
 
     public void SkipLine()
@@ -159,4 +191,5 @@ public class DialogueBoxController : MonoBehaviour
             }
         }
     }
+    
 }

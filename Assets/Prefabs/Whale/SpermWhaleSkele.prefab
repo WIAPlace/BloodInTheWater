@@ -11,52 +11,52 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: de03aabef0169e34fba9c84ea72515f2,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 31.01
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: de03aabef0169e34fba9c84ea72515f2,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1.7
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: de03aabef0169e34fba9c84ea72515f2,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 30.28
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: de03aabef0169e34fba9c84ea72515f2,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.8549055
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: de03aabef0169e34fba9c84ea72515f2,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0.023927335
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: de03aabef0169e34fba9c84ea72515f2,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0.516667
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: de03aabef0169e34fba9c84ea72515f2,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0.0402402
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: de03aabef0169e34fba9c84ea72515f2,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: -4.732
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: de03aabef0169e34fba9c84ea72515f2,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -62.189
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: de03aabef0169e34fba9c84ea72515f2,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: -2.535
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: de03aabef0169e34fba9c84ea72515f2,
         type: 3}
@@ -68,6 +68,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpermWhaleSkele
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: de03aabef0169e34fba9c84ea72515f2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -76,6 +81,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1826683306453626992}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: de03aabef0169e34fba9c84ea72515f2,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 83585347232087554}
   m_SourcePrefab: {fileID: 100100000, guid: de03aabef0169e34fba9c84ea72515f2, type: 3}
 --- !u!1 &1116699328079254815 stripped
 GameObject:
@@ -105,3 +114,20 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -7183730130503400792, guid: de03aabef0169e34fba9c84ea72515f2, type: 3}
+--- !u!114 &83585347232087554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1116699328079254815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91ba47435bc07644080a4d4b141a3c5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firstInteraction: 1
+  noRepeat: 1
+  repeatStartPosition: 10
+  dialogueAsset: {fileID: 11400000, guid: 7c4e0c753b5135c48b2e54998d12165d, type: 2}
+  lookLocations: []

@@ -20,6 +20,7 @@ public class DialogueZone : MonoBehaviour
 
     public DialogueAsset dialogueAsset;
 
+    [SerializeField] GameObject[] lookLocations;
 
     public int StartPosition
     {
@@ -43,6 +44,6 @@ public class DialogueZone : MonoBehaviour
 
     private void OnTriggerEnter(Collider thePlayer)
     {
-        DialogueBoxController.instance.StartDialogue(dialogueAsset.dialogue, dialogueAsset.audioclip, StartPosition, dialogueAsset.speaker);
+        DialogueBoxController.instance.StartDialogue(dialogueAsset.dialogue, dialogueAsset.audioclip, StartPosition, dialogueAsset.speaker,lookLocations);
     }
 }

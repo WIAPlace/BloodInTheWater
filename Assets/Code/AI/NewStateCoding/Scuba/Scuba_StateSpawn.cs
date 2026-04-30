@@ -29,7 +29,7 @@ public class Scuba_StateSpawn : IBoatStomperState
     public IBoatStomperState DoState(Scuba_Controller SC)
     {   
         
-        return  SC.MoveState;
+        return  this;
     }
 
     public void DoEnter(Scuba_Controller SC)
@@ -48,10 +48,12 @@ public class Scuba_StateSpawn : IBoatStomperState
         //SC.gameObject.SetActive(true);
         //Debug.Log("Active");
         //Spawing animation and stuff.
+        SC.SetAnimation(3);
     }
 
     public void DoExit(Scuba_Controller SC)
     {
         //throw new System.NotImplementedException();
+        SC.SetAnimation(4);
     }
 }

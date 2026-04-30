@@ -20,12 +20,23 @@ using System.Security.Cryptography.X509Certificates;
 /// 
 public class PlayerLook : MonoBehaviour
 {
+    [Header("Camera Stuff")]
+    [SerializeField, Tooltip("cinemachine")]
+    CinemachineCamera playerCam;
+    [SerializeField, Tooltip("cinemachine")]
+    CinemachineCamera lookCam;
+
     [SerializeField][Tooltip("Cinamachine Camera")]
     private CinemachineInputAxisController inputController;
+    private GameObject lookLocation;
+
+    [Header("Sensitivity")]
     [SerializeField][Tooltip("X sensitivity")]
     private float mouseSensitivityX = 1.0f;
     [SerializeField][Tooltip("Y sensitivity")]
     private float mouseSensitivityY = -1.0f;
+
+    
 
     void Start()
     {
@@ -62,5 +73,30 @@ public class PlayerLook : MonoBehaviour
             mouseSensitivityY = -value;
         }
         UpdateSensitivity();
+    }
+    // look at target
+    public void LookAtTarget(GameObject LookObj)
+    {
+        inputController.enabled =false;
+        lookLocation = LookObj;
+        lookCam.LookAt = lookLocation.transform;
+        lookCam.Priority=2; 
+    }
+    // go back to free look
+    public void EnableFreeLook()
+    {
+        if (lookCam.Priority > playerCam.Priority)
+        {
+            lookCam.Priority=0;
+            inputController.enabled = true;
+        }
+    }
+    public Transform GetLookLocation()
+    {
+        if (lookCam.Priority > playerCam.Priority)
+        {
+            return lookCam.LookAt;
+        }
+        else return transform;//send your ow transform just so its a no
     }
 }

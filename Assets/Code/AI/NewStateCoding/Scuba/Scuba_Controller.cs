@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.AI;
+using Unity.VisualScripting;
 /// 
 /// Author: Weston Tollette
 /// Created: 2/24/26
@@ -20,6 +21,9 @@ public class Scuba_Controller : MonoBehaviour, IMonster
     private GameObject target; // should be the player
     [field: SerializeField][Tooltip("Dat body")]
     public GameObject body;
+    [field: SerializeField, Tooltip("Audio SFXs")]
+    public SoundEffectSO[] SFX_SO;
+
     private IBoatStomperState currentState;
     [SerializeField][Tooltip("Player layer")]
     private LayerMask playerMask;
@@ -55,6 +59,8 @@ public class Scuba_Controller : MonoBehaviour, IMonster
     private float respawnMax;
     [field: SerializeField][Tooltip("Scuba animator")]
     public Animator anim;
+    [field: SerializeField][Tooltip("how long before scuba gets up")]
+    public float getUpTime;
     Vector3 direction;
 
     // All of the States
@@ -71,6 +77,8 @@ public class Scuba_Controller : MonoBehaviour, IMonster
 
     [HideInInspector]
     public bool contacted=false;
+    [field:SerializeField]
+    public AudioSource BreathingSourse;
 
 
     private void Start()
@@ -142,6 +150,7 @@ public class Scuba_Controller : MonoBehaviour, IMonster
         active = true;
         agent.enabled = true;
         ChangeState(SpawnState); 
+        StartCoroutine(Breaths());
     }
 
     
@@ -150,7 +159,7 @@ public class Scuba_Controller : MonoBehaviour, IMonster
         if(((1 << other.gameObject.layer) & playerMask.value) != 0 && active)
         {
             //Debug.Log("Gate 1");
-            if(currentState != StunnedState)
+            if(currentState != StunnedState&&currentState!=SpawnState)
             {
                 //Debug.Log("Gate 2");
                 Vector3 heading = other.transform.position - transform.position;
@@ -216,8 +225,9 @@ public class Scuba_Controller : MonoBehaviour, IMonster
     // Monster Interface
     public void MonsterHit(Vector3 hitDir) // on hit by harpoon
     {
-        this.hitDir = new Vector3(-hitDir.x,1,-hitDir.z);
+        this.hitDir = new Vector3(-hitDir.x,.8f,-hitDir.z);
         currentState = HitState;
+        SFX_SO[1].Play(BreathingSourse);
     }
 
     public void SetAnimation(int key)
@@ -225,6 +235,8 @@ public class Scuba_Controller : MonoBehaviour, IMonster
         anim.ResetTrigger("IsWalking");
         anim.ResetTrigger("IsHit");
         anim.ResetTrigger("IsAttacking");
+        anim.ResetTrigger("Arnold");
+        anim.ResetTrigger("GetUp");
 
         switch (key)
         {
@@ -240,8 +252,34 @@ public class Scuba_Controller : MonoBehaviour, IMonster
                anim.SetTrigger("IsAttacking");
                 break;
 
+            case 3:
+                anim.SetTrigger("Arnold");
+                StartCoroutine(getUp());
+                break;
+            case 4:
+                anim.SetTrigger("GetUp");
+                break;
             default:
                 break;
+        }
+        IEnumerator getUp()
+        {
+            yield return new WaitForSeconds(getUpTime);
+            SetAnimation(4);
+            yield return new WaitForSeconds(getUpTime);
+            ChangeState(MoveState);
+        }
+    }
+
+    public IEnumerator Breaths() // Using Audio SFX SO index = 0
+    {
+        int sfxSOLength = SFX_SO[0].clips.Length;
+
+        while (body.activeSelf)
+        {
+            int randoIndex = Random.Range(0, sfxSOLength);
+            SFX_SO[0].Play(BreathingSourse);
+            yield return new WaitForSeconds(SFX_SO[0].clips[randoIndex].length + .3f);
         }
     }
 }   
