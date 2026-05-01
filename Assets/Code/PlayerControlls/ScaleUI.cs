@@ -27,11 +27,11 @@ public class ScaleUI : MonoBehaviour
     private Renderer markerRenderer;
     [SerializeField][Tooltip("CompleteMaterial")]
     private Material fullMat;
-    [SerializeField] GameObject nonGlowScale;
-    [SerializeField] GameObject glowScale;
+    //[SerializeField] GameObject nonGlowScale;
+    //[SerializeField] GameObject glowScale;
 
     private float neededAmnt;
-    private float amntJustCaught;
+    //private float amntJustCaught;
     private bool full = false;
     private Coroutine running; 
 
@@ -41,12 +41,14 @@ public class ScaleUI : MonoBehaviour
         // make sure stuff is strting in correct active states
         scale.SetActive(false);
         marker.SetActive(true);
-        nonGlowScale.SetActive(true);
-        glowScale.SetActive(false);
+        //nonGlowScale.SetActive(true);
+        //glowScale.SetActive(false);
         minMarker.gameObject.SetActive(false);
         maxMarker.gameObject.SetActive(false);
         full = false;
 
+
+        GameState.WeightEvent += ScaleFilled;
         GameState.OnCatch += HandleCatch;
         neededAmnt = GameState.Instance.CheckLbsNeeded();
         scaleAmnt = 0;
@@ -54,6 +56,7 @@ public class ScaleUI : MonoBehaviour
     }
     void OnDestroy()
     {
+        GameState.WeightEvent -= ScaleFilled;
         GameState.OnCatch -= HandleCatch;
     }
 
@@ -70,15 +73,6 @@ public class ScaleUI : MonoBehaviour
             StopCoroutine(running);
         }
         running = StartCoroutine(ShowScale(firstWait));
-        if (!full && scaleAmnt >= neededAmnt)
-        {
-            full = true;
-            //scaleRenderer.material = fullMat;
-            //markerRenderer.material = fullMat;
-            nonGlowScale.SetActive(false);
-            marker.SetActive(false);
-            glowScale.SetActive(true);
-        }
     }
 
     IEnumerator ShowScale(float firstWait)
@@ -105,5 +99,18 @@ public class ScaleUI : MonoBehaviour
 
         yield return new WaitForSeconds(.6f); // wait a beat before disapearing
         scale.SetActive(false);
+    }
+
+    private void ScaleFilled(float fillAmnt)
+    {
+        if(!full && fillAmnt >= 100)
+        {
+            full = true;
+            scaleRenderer.material = fullMat;
+            markerRenderer.material = fullMat;
+            //nonGlowScale.SetActive(false);
+            //marker.SetActive(false);
+            //glowScale.SetActive(true);
+        }
     }
 }
