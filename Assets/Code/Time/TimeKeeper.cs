@@ -78,8 +78,9 @@ public class TimeKeeper : MonoBehaviour
             //GameState.Instance.ChangeTime(GetTimeLeft());
             //Debug.Log(timePassed);
         }
+        
         if(fogObject!=null){ // if the fog object doesnt exist this wont matter.
-            StartCoroutine(FogRollsIn());
+        StartCoroutine(FogRollsIn());
         }
         else GameState.Instance.LooseState();
         // temp to account for any error on level setup
@@ -130,6 +131,7 @@ public class TimeKeeper : MonoBehaviour
         fogObject.SetActive(true);
         sceneTime = 0;
         penaltyTime = 0;
+        timePassed = 0;
         while(timePassed < fogTime)
         {
             yield return new WaitForSeconds(0.01f);

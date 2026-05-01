@@ -81,7 +81,6 @@ public class GameState : MonoBehaviour
         return totalLbs;
     }
     
-
     public void LooseState()
     {
         Time.timeScale=1f;
@@ -89,8 +88,4 @@ public class GameState : MonoBehaviour
         Cursor.visible = true;
         endLoose.GameEnd();
     }
-
-    
-
-
 }

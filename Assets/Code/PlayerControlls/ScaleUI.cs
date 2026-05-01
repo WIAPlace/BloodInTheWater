@@ -27,10 +27,12 @@ public class ScaleUI : MonoBehaviour
     private Renderer markerRenderer;
     [SerializeField][Tooltip("CompleteMaterial")]
     private Material fullMat;
+    [SerializeField] GameObject nonGlowScale;
+    [SerializeField] GameObject glowScale;
 
     private float neededAmnt;
     private float amntJustCaught;
-    private bool full;
+    private bool full = false;
     private Coroutine running; 
 
     // Start is called before the first frame update
@@ -39,10 +41,11 @@ public class ScaleUI : MonoBehaviour
         // make sure stuff is strting in correct active states
         scale.SetActive(false);
         marker.SetActive(true);
+        nonGlowScale.SetActive(true);
+        glowScale.SetActive(false);
         minMarker.gameObject.SetActive(false);
         maxMarker.gameObject.SetActive(false);
         full = false;
-
 
         GameState.OnCatch += HandleCatch;
         neededAmnt = GameState.Instance.CheckLbsNeeded();
@@ -70,8 +73,11 @@ public class ScaleUI : MonoBehaviour
         if (!full && scaleAmnt >= neededAmnt)
         {
             full = true;
-            scaleRenderer.material = fullMat;
-            markerRenderer.material = fullMat;
+            //scaleRenderer.material = fullMat;
+            //markerRenderer.material = fullMat;
+            nonGlowScale.SetActive(false);
+            marker.SetActive(false);
+            glowScale.SetActive(true);
         }
     }
 
