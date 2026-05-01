@@ -109,8 +109,9 @@ public class QuickTimeController_Player : MonoBehaviour
     {
         if (inProgress)
         {
-            float timmy =0;
+            float timmy =0; // time variable
 
+            // in tutorial mode time will be paused so make it unscaled.
             if(currentQTData.type != QuickTimeType_Enum.Tutorial) timmy = Time.deltaTime;
             else timmy = Time.unscaledDeltaTime;
 
