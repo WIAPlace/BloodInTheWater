@@ -177,22 +177,22 @@ public class PrimativeStarFish : MonoBehaviour
             case 0:
                 anim.SetTrigger("LeftSideGrab");
                 
-                Debug.Log("LeftSide");
+                //Debug.Log("LeftSide");
                 break;
             case 1:
                 anim.SetTrigger("RightSideGrab");
                 
-                Debug.Log("rightSide");
+                //Debug.Log("rightSide");
                 break;
             case 2:
                 anim.SetTrigger("BackGrab");
                 
-                Debug.Log("backSide");
+                //Debug.Log("backSide");
                 break;
             case 3:
                 anim.SetTrigger("FrontGrab");
                 
-                Debug.Log("frontSide");
+                //Debug.Log("frontSide");
                 break;
             case 4:
                 anim.SetTrigger("Flail");
@@ -200,17 +200,17 @@ public class PrimativeStarFish : MonoBehaviour
                 
                 // dont scratch while flailing
 
-                Debug.Log("flail");
+                //Debug.Log("flail");
                 break;
             case 5:
                 anim.SetTrigger("Death");
                 
-                Debug.Log("Death");
+                //Debug.Log("Death");
                 break;
             case 6:
                 anim.SetTrigger("Spawn");
                 
-                Debug.Log("Death");
+                //Debug.Log("Death");
                 break;
 
             default:
