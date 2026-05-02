@@ -67,6 +67,8 @@ public class Useable_Controller : MonoBehaviour
     [HideInInspector]
     public bool showingFish=false;
 
+    [SerializeField] private FishOnBarrel barrelFish;
+
     //public Animator mAnimator;
 
     // States:
@@ -232,6 +234,8 @@ public class Useable_Controller : MonoBehaviour
         if (showingFish)
         {
             StopShowingFish(); // turn off the fish and destroy its children
+            barrelFish.SetFishDown(); // Set the fish onto the barel
+            GameManager.Instance.StopPresentFish(); // stop showing the UI screen
         }
 
         if(currentItem == null)

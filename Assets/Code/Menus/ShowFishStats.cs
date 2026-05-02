@@ -43,6 +43,10 @@ public class ShowFishStats : MonoBehaviour
         {
             StopCoroutine(running);
         }
+        if (infoBox.activeSelf)
+        {
+            infoBox.SetActive(false);
+        }
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////// Set Lbs
@@ -113,8 +117,6 @@ public class ShowFishStats : MonoBehaviour
     {
         yield return new WaitForSeconds(delayTime);
         infoBox.SetActive(true); // set active
-        yield return new WaitForSeconds(stayTime);
-        infoBox.SetActive(false); // set inactive
     }
 
 }
