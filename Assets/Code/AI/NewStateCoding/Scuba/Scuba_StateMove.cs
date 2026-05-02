@@ -20,7 +20,7 @@ public class Scuba_StateMove : IBoatStomperState
 
     public void DoEnter(Scuba_Controller SC)
     {
-        if (SC.agent.isStopped)
+        if (SC.agent.isActiveAndEnabled && SC.agent.isStopped)
         {   // this doesnt need to be going off every frame.
             SC.agent.isStopped = false; // turns the man into an able bodied individual
         }
@@ -29,7 +29,7 @@ public class Scuba_StateMove : IBoatStomperState
 
     public IBoatStomperState DoState(Scuba_Controller SC)
     { 
-        SC.agent.SetDestination(SC.GetTarget().transform.position);
+        if(SC.agent.isActiveAndEnabled)SC.agent.SetDestination(SC.GetTarget().transform.position);
         return SC.MoveState;
     }
 }

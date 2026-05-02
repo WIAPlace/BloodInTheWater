@@ -49,6 +49,7 @@ public class Scuba_StateSpawn : IBoatStomperState
         //Debug.Log("Active");
         //Spawing animation and stuff.
         SC.SetAnimation(3);
+        SC.runningFade = SC.StartCoroutine(SC.FadeInAndOut(0,1,SC.fadeInSpeed));
     }
 
     public void DoExit(Scuba_Controller SC)
