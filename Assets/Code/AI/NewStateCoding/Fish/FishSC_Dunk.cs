@@ -111,7 +111,7 @@ public class FishSC_Dunk : FishSC_Abstact
             StartCoroutine(CollisionShock(FSC));
             BoatHit.Play(soundMaker);
             impSour.GenerateImpulse();
-            boatHitSplash.Play();
+            if(boatHitSplash!=null) boatHitSplash.Play();
         }
     }
     private IEnumerator CollisionShock(Fish_Controller FSC)
