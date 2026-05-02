@@ -155,11 +155,11 @@ public class QuickTimeController_Player : MonoBehaviour
             }
             else if(completionAmnt <= 0) //lose
             {
-                if(currentQTData.type != QuickTimeType_Enum.SeaAngel || currentQTData.type != QuickTimeType_Enum.Tutorial) 
+                if(currentQTData.type != QuickTimeType_Enum.SeaAngel && currentQTData.type != QuickTimeType_Enum.Tutorial) 
                 EndQTEAll(false);
             }
 
-            if(currentQTData.type == QuickTimeType_Enum.Tutorial && !fishingTutorial.activeSelf)
+            if(currentQTData.type == QuickTimeType_Enum.Tutorial && !fishingTutorial.activeSelf) // is this suposed to be an and?
             {   // when tutorial is exited end it;
                 EndQTEAll(true); 
             }

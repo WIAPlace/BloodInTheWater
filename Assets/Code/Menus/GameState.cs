@@ -84,12 +84,12 @@ public class GameState : MonoBehaviour
         return totalLbs;
     }
     
-    public void LooseState()
+    public void LooseState(string scene)
     {
         Time.timeScale=1f;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        endLoose.GameEnd();
+        endLoose.GameEnd(scene);
     }
 
     public void OnBoard(bool isOn)

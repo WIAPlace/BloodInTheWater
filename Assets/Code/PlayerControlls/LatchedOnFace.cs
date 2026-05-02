@@ -40,7 +40,7 @@ public class LatchedOnFace : MonoBehaviour
         if(((1 << other.gameObject.layer) & edgeMask.value) != 0)
         {
             //Debug.Log("Trogged");
-            GameState.Instance.LooseState();
+            GameState.Instance.LooseState("Lose_Angel");
         }
     }
 

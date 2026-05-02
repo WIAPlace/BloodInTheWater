@@ -82,7 +82,7 @@ public class TimeKeeper : MonoBehaviour
         if(fogObject!=null){ // if the fog object doesnt exist this wont matter.
         StartCoroutine(FogRollsIn());
         }
-        else GameState.Instance.LooseState();
+        else GameState.Instance.LooseState("LooseScreen");
         // temp to account for any error on level setup
         
     }
@@ -152,6 +152,6 @@ public class TimeKeeper : MonoBehaviour
             // move the fog inwards as dictated by the new magnitude.
         }
         yield return new WaitForSeconds(10f);
-        GameState.Instance.LooseState();
+        GameState.Instance.LooseState("LooseScreen");
     }
 }
