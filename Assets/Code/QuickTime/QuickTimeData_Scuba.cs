@@ -38,7 +38,7 @@ public class QuickTimeData_Scuba : QuickTimeData_Abstract
     {
         if (!status)
         {
-            GameState.Instance.LooseState();
+            GameState.Instance.LooseState("Lose_Scuba");
         }
         else
         {

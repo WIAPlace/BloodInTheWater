@@ -47,6 +47,14 @@ public class TransistionScene : MonoBehaviour
         StartCoroutine(StartLoad());
     }
 
+    // function for utilizing the same transition screne script with diffrent scenes. Made to be used by death screen.
+    public void StartGameScene(string scene)
+    {
+        targetScene = scene;
+        transitionType = scene;
+        StartGame();
+    }
+
     IEnumerator StartLoad()
     {
         if (resetThoughts)

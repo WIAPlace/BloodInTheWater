@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour
     FishHolderSO fishHolder;
     [SerializeField][Tooltip("FishStatsUI")]
     ShowFishStats fishStatsUI;
+    [SerializeField] FishOnBarrel barrelFish;
 
     private Coroutine running;
     [HideInInspector]public bool hintsEnabled = true;
@@ -267,10 +268,15 @@ public class GameManager : MonoBehaviour
     /////////////////////////////////////////////////////////////////////////////////////////////////// Present Caught Fish
     public void PresentFish(int key, float weight,QuickTimeType_Enum type)
     {
+        barrelFish.ChangeKey(key); // set fish on the barrel key.
         fishStatsUI.SetLbs(weight, key);
         fishStatsUI.SetName(fishHolder.GetFish(key).name);
         fishStatsUI.SetType(type);
         fishStatsUI.ActivateUI();
+    }
+    public void StopPresentFish()
+    {
+        fishStatsUI.ForceDeactivateUI();
     }
 
     public void SetFirstButton(GameObject selectedOpt)

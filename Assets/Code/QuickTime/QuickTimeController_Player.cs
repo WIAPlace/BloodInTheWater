@@ -109,8 +109,9 @@ public class QuickTimeController_Player : MonoBehaviour
     {
         if (inProgress)
         {
-            float timmy =0;
+            float timmy =0; // time variable
 
+            // in tutorial mode time will be paused so make it unscaled.
             if(currentQTData.type != QuickTimeType_Enum.Tutorial) timmy = Time.deltaTime;
             else timmy = Time.unscaledDeltaTime;
 
@@ -154,11 +155,11 @@ public class QuickTimeController_Player : MonoBehaviour
             }
             else if(completionAmnt <= 0) //lose
             {
-                if(currentQTData.type != QuickTimeType_Enum.SeaAngel || currentQTData.type != QuickTimeType_Enum.Tutorial) 
+                if(currentQTData.type != QuickTimeType_Enum.SeaAngel && currentQTData.type != QuickTimeType_Enum.Tutorial) 
                 EndQTEAll(false);
             }
 
-            if(currentQTData.type == QuickTimeType_Enum.Tutorial && !fishingTutorial.activeSelf)
+            if(currentQTData.type == QuickTimeType_Enum.Tutorial && !fishingTutorial.activeSelf) // is this suposed to be an and?
             {   // when tutorial is exited end it;
                 EndQTEAll(true); 
             }

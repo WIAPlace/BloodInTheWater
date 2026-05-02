@@ -50,7 +50,13 @@ public class PrimativeStarFish : MonoBehaviour
         StartCoroutine(ChanceSpawn());
 
     }
-
+    private void OnDisable()
+    {
+        if (onBoat)
+        {
+            GameState.Instance.OnBoard(false);
+        }
+    }
     // trigger on spawinging this man. //////////////////////////
     public void Spawn()
     {
@@ -58,9 +64,11 @@ public class PrimativeStarFish : MonoBehaviour
         impSour.GenerateImpulse(); // make the player feel the rumble
         start.Play(soundMaker); // make sound on start
         onBoat = true; // boi is on boat
+        GameState.Instance.OnBoard(true);// boi is on boat
         currentHP = maxHP; // set current hp = max hp
         hurtingBoat = StartCoroutine(HurtBoat()); // start hurting
         scratching = StartCoroutine(ScratchBoat());
+
         
         
     }
@@ -69,6 +77,7 @@ public class PrimativeStarFish : MonoBehaviour
     private void Despawn()
     {
         onBoat = false; // off boat so stop hurting
+        GameState.Instance.OnBoard(false); // boi fall off boat
         fall.Play(soundMaker); // play sfx
         if (hurtingBoat != null)
         { // if hurting boat stop

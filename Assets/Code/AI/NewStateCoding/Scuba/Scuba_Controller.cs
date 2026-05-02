@@ -102,6 +102,13 @@ public class Scuba_Controller : MonoBehaviour, IMonster
         StartCoroutine(StartSpawnDelay(spawnMin,spawnMax)); // start spawning boy.
         //Debug.Log("Spawned");
     }
+    private void OnDisable()
+    {
+        if (active)
+        {
+            GameState.Instance.OnBoard(false);
+        }
+    }
 
     void Spawn()
     {
@@ -149,6 +156,8 @@ public class Scuba_Controller : MonoBehaviour, IMonster
         yield return new WaitForSeconds(randy);
         active = true;
         agent.enabled = true;
+
+        GameState.Instance.OnBoard(true); // set on board
         ChangeState(SpawnState); 
         StartCoroutine(Breaths());
     }
@@ -199,6 +208,7 @@ public class Scuba_Controller : MonoBehaviour, IMonster
         if(((1 << collision.gameObject.layer) & edgeMask.value) != 0 && currentState == StunnedState)
         {
             //currentState = SpawnState;
+            GameState.Instance.OnBoard(false); // off board
             Spawn();
         }
         if(((1 << collision.gameObject.layer) & playerMask.value) != 0 && currentState == StunnedState){

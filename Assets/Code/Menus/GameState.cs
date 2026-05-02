@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 /// 
@@ -22,6 +23,7 @@ public class GameState : MonoBehaviour
     private float lbsPercent;
     [SerializeField] private GameOver endLoose;
     [SerializeField] private GameObject keeperToSpawn;
+    private int visitors = 0;
     /*
     [SerializeField,Tooltip("Events will occur when the element in the array has reached its indexed range (percentage based)"),Range(0,100)]
     private int[] weightEventPercentages;
@@ -42,6 +44,7 @@ public class GameState : MonoBehaviour
         if(keeperToSpawn!=null){
             keeperToSpawn.SetActive(false);
         }
+        visitors = 0;
     }
     
 
@@ -81,16 +84,30 @@ public class GameState : MonoBehaviour
         return totalLbs;
     }
     
-
-    public void LooseState()
+    public void LooseState(string scene)
     {
         Time.timeScale=1f;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        endLoose.GameEnd();
+        endLoose.GameEnd(scene);
     }
 
-    
+    public void OnBoard(bool isOn)
+    {   
+        if (isOn)
+        {
+            visitors +=1;
+        }
+        else visitors -= 1;
 
-
+        if(visitors < 0) visitors = 0;
+    }
+    public bool CheckOnBoard()
+    {   // if there is something on board return true;
+        if(visitors > 0)
+        {
+            return false;
+        }
+        else return true;
+    }
 }
