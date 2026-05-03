@@ -52,8 +52,8 @@ public class FishIndex : MonoBehaviour
         
         int pageIndex = page*2;
 
-        Debug.Log(currentPage);
-        Debug.Log(pageIndex);
+        //Debug.Log(currentPage);
+        //Debug.Log(pageIndex);
 
         // left side
         if(unlocks.LoadFishData(pageIndex)!=0){ 
