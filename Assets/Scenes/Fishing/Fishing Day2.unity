@@ -248,6 +248,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GiantSquid_Rig
       objectReference: {fileID: 0}
+    - target: {fileID: 4236465151695047556, guid: 06e5c52d6265ddf4c9e69efb6db60d28,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f36333e967486b7428fc8135112a3589, type: 2}
     - target: {fileID: 4303652781426168392, guid: 06e5c52d6265ddf4c9e69efb6db60d28,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -321,7 +326,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3527010975930058994, guid: 06e5c52d6265ddf4c9e69efb6db60d28,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1355711408}
   m_SourcePrefab: {fileID: 100100000, guid: 06e5c52d6265ddf4c9e69efb6db60d28, type: 3}
 --- !u!4 &66973143 stripped
 Transform:
@@ -5203,6 +5212,28 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06b47cb0b77235d4bbbb707a7ff7a14a, type: 3}
+--- !u!1 &1355711407 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3527010975930058994, guid: 06e5c52d6265ddf4c9e69efb6db60d28,
+    type: 3}
+  m_PrefabInstance: {fileID: 66291436}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1355711408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1355711407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e8ded9223332b241b09f3330778843d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UseableMesh: {fileID: 729194910}
+  onWaves: 1
+  displacement: 6
+  originalPosition: {x: 0, y: 0, z: 0}
 --- !u!1001 &1372517167
 PrefabInstance:
   m_ObjectHideFlags: 0
