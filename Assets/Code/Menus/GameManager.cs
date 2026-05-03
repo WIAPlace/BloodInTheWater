@@ -286,4 +286,9 @@ public class GameManager : MonoBehaviour
     {
         EventSystem.current.SetSelectedGameObject(selectedOpt);
     }
+    public void ChangeEscape()
+    {
+        input.PauseEvent -= HandlePause;
+        input.ResumeEvent -= HandleResume;
+    }
 }

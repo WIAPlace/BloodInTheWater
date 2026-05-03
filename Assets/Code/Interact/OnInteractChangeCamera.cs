@@ -2,25 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Cinemachine;
 using Unity.VisualScripting;
+using UnityEditorInternal;
 using UnityEngine;
 
 public class OnInteractChangeCamera : MonoBehaviour, IInteractable
 {
     [SerializeField] CinemachineCamera cam;
     [SerializeField] CinemachineSplineDolly dollyCam;
+    [SerializeField] CinemachineCamera finalCam;
 
     [SerializeField] private float splineTime;
+
+    [SerializeField] GameObject OldOcean;
+    [SerializeField] GameObject newOcean;
+
+    [SerializeField] TransistionScene transistion;
 
     public void Interact()
     {
         cam.Priority=20;
         StartCoroutine(MoveAlongSpline());
+        OldOcean.SetActive(false);
+        newOcean.SetActive(true);
+        GameManager.Instance.HandleDial(false);
     }
 
     // Start is called before the first frame update
     void Start()
-    {
-        
+    {   
+        cam.Priority =0;
+        finalCam.Priority = 0;
+        newOcean.SetActive(false);
     }
 
     // Update is called once per frame
@@ -31,13 +43,16 @@ public class OnInteractChangeCamera : MonoBehaviour, IInteractable
     IEnumerator MoveAlongSpline()
     {
         float currentPosition = 0;
-        while(currentPosition <= 131)
+        while(currentPosition <= 120)
         {
             currentPosition+=Time.deltaTime*splineTime;
             dollyCam.CameraPosition = currentPosition;
             yield return null;
         }
+        cam.Priority =0;
+        finalCam.Priority = 20;
+
+        yield return new WaitForSeconds(8f);
+        transistion.StartGame(); 
     }
-
-
 }
