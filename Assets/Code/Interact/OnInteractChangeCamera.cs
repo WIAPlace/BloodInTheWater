@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Cinemachine;
-using Unity.VisualScripting;
-using UnityEditorInternal;
 using UnityEngine;
 
 public class OnInteractChangeCamera : MonoBehaviour, IInteractable
@@ -43,7 +41,7 @@ public class OnInteractChangeCamera : MonoBehaviour, IInteractable
     IEnumerator MoveAlongSpline()
     {
         float currentPosition = 0;
-        while(currentPosition <= 120)
+        while(currentPosition <= 130)
         {
             currentPosition+=Time.deltaTime*splineTime;
             dollyCam.CameraPosition = currentPosition;
