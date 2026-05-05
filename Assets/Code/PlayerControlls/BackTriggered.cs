@@ -20,5 +20,6 @@ public class BackTriggered : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         LOF.Triggered(other);
+        //Debug.Log("Back Off");
     }
 }

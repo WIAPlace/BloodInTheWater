@@ -37,10 +37,14 @@ public class LatchedOnFace : MonoBehaviour
 
     public void Triggered(Collider other)
     {
+        Debug.Log(other.gameObject.layer);
+
         if(((1 << other.gameObject.layer) & edgeMask.value) != 0)
         {
+            Debug.Log("Triggered");
             //Debug.Log("Trogged");
             GameState.Instance.LooseState("Lose_Angel");
+
         }
     }
 
