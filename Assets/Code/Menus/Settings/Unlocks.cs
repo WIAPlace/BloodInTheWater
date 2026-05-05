@@ -31,6 +31,7 @@ public class Unlocks : ScriptableObject
         }
         // unlock levels?
         PlayerPrefs.SetInt(levelKeys[1],100);
+        PlayerPrefs.SetInt(levelKeys[0],8);
         PlayerPrefs.Save();
     }
 
