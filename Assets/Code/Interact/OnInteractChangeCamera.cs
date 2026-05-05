@@ -23,6 +23,7 @@ public class OnInteractChangeCamera : MonoBehaviour, IInteractable
         OldOcean.SetActive(false);
         newOcean.SetActive(true);
         GameManager.Instance.HandleDial(false);
+        GameManager.Instance.unlocks.SaveLevelData(0,8);
     }
 
     // Start is called before the first frame update
