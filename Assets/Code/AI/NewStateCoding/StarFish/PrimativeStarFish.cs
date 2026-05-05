@@ -42,13 +42,31 @@ public class PrimativeStarFish : MonoBehaviour
     private float min = 0;
     [SerializeField][Tooltip("Max Seconds Before this guy is allowed to spawn")]
     private float max = 10;
+
+    // renderer stuff for messing with the star mat.
+    [SerializeField]
+    private Renderer rend;
+    private Material starMat;
+
+    public Coroutine runningFade;
+    
+    int fadeID; // id for the fade property
+    public float fadeOutSpeed;
     
     private int position;
+
+    void Awake()
+    {
+        starMat = rend.material;
+
+        fadeID = Shader.PropertyToID("_FadeIn");
+        
+    }
     void OnEnable()
     {
         body.SetActive(false);
+        starMat.SetFloat(fadeID,1);
         StartCoroutine(ChanceSpawn());
-
     }
     private void OnDisable()
     {
@@ -60,7 +78,7 @@ public class PrimativeStarFish : MonoBehaviour
     // trigger on spawinging this man. //////////////////////////
     public void Spawn()
     {
-        
+        starMat.SetFloat(fadeID,1);
         impSour.GenerateImpulse(); // make the player feel the rumble
         start.Play(soundMaker); // make sound on start
         onBoat = true; // boi is on boat
@@ -99,7 +117,7 @@ public class PrimativeStarFish : MonoBehaviour
             //Despawn();
             //ChangeAnimation(5);
             ChangeAnimation(4);
-            StartCoroutine(WaitToDespawn());
+            StartCoroutine(FadeOut());
         }
         else
         {   // we have a sound that plays specificly if it dies.
@@ -133,7 +151,8 @@ public class PrimativeStarFish : MonoBehaviour
         yield return new WaitForSeconds(rando);
 
         body.SetActive(true); // set the body as see able
-        position = Random.Range(0,spawnSpots.Length); // set position to random location
+        if(position == 3) position = 2; // if previous position was from it becomes back, elese there will be weird clipping
+        else position = Random.Range(0,spawnSpots.Length); // set position to random location
         transform.SetPositionAndRotation(spawnSpots[position].position,spawnSpots[position].rotation);
         ChangeAnimation(6);
         // physicaly set to new position
@@ -158,22 +177,22 @@ public class PrimativeStarFish : MonoBehaviour
             case 0:
                 anim.SetTrigger("LeftSideGrab");
                 
-                Debug.Log("LeftSide");
+                //Debug.Log("LeftSide");
                 break;
             case 1:
                 anim.SetTrigger("RightSideGrab");
                 
-                Debug.Log("rightSide");
+                //Debug.Log("rightSide");
                 break;
             case 2:
                 anim.SetTrigger("BackGrab");
                 
-                Debug.Log("backSide");
+                //Debug.Log("backSide");
                 break;
             case 3:
                 anim.SetTrigger("FrontGrab");
                 
-                Debug.Log("frontSide");
+                //Debug.Log("frontSide");
                 break;
             case 4:
                 anim.SetTrigger("Flail");
@@ -181,17 +200,17 @@ public class PrimativeStarFish : MonoBehaviour
                 
                 // dont scratch while flailing
 
-                Debug.Log("flail");
+                //Debug.Log("flail");
                 break;
             case 5:
                 anim.SetTrigger("Death");
                 
-                Debug.Log("Death");
+                //Debug.Log("Death");
                 break;
             case 6:
                 anim.SetTrigger("Spawn");
                 
-                Debug.Log("Death");
+                //Debug.Log("Death");
                 break;
 
             default:
@@ -204,9 +223,23 @@ public class PrimativeStarFish : MonoBehaviour
         yield return new WaitForSeconds(.01f);
         ChangeAnimation(position);
     }
-    IEnumerator WaitToDespawn()
+    
+
+    IEnumerator FadeOut()
     {
-        yield return new WaitForSeconds(1f);
+        float current = 1;
+        starMat.SetFloat(fadeID,1);
+        float timeKept = 0;
+
+        while(current > 0)
+        {
+            timeKept += Time.deltaTime*fadeOutSpeed;
+            current = Mathf.Lerp(1,0,timeKept);
+            starMat.SetFloat(fadeID,current);
+            yield return null;
+        }
+        starMat.SetFloat(fadeID,0);
+        yield return new WaitForSeconds(.01f);
         Despawn();
     }
 

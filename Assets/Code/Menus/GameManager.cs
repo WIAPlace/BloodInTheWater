@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject pauseMainMenu; // default menu for pause menu
     [SerializeField] private GameObject selectedOption; // on pause what option should be selected
     [SerializeField] private GameObject howToPlay; // how to play.
+    [SerializeField] private GameObject indexOfFish; // index of fish
     [SerializeField] private GameObject settingsMenu; // menu for settings
     [SerializeField] private GameObject gameUI; // ui for the game during play
     [SerializeField] private GameObject talkPanel; // this is the dialouge thing. make sure it is active on start.
@@ -76,6 +77,7 @@ public class GameManager : MonoBehaviour
         pauseMenu.SetActive(false); // turn off pause menu and the extra menus it has
         if(howToPlay.activeSelf) howToPlay.SetActive(false);
         if(settingsMenu.activeSelf) settingsMenu.SetActive(false);
+        if(indexOfFish.activeSelf) indexOfFish.SetActive(false);
         windUpIndicator.gameObject.SetActive(false);
         if(!HideUI){
             gameUI.SetActive(true); // make the game ui active
@@ -115,6 +117,7 @@ public class GameManager : MonoBehaviour
         if(pauseMenu.activeSelf) pauseMenu.SetActive(false);
         if(howToPlay.activeSelf) howToPlay.SetActive(false);
         if(settingsMenu.activeSelf) settingsMenu.SetActive(false);
+        if(indexOfFish.activeSelf) indexOfFish.SetActive(false);
         windUpIndicator.gameObject.SetActive(false);
         Time.timeScale=1f;
         Cursor.lockState = CursorLockMode.Locked;
@@ -282,5 +285,10 @@ public class GameManager : MonoBehaviour
     public void SetFirstButton(GameObject selectedOpt)
     {
         EventSystem.current.SetSelectedGameObject(selectedOpt);
+    }
+    public void ChangeEscape()
+    {
+        input.PauseEvent -= HandlePause;
+        input.ResumeEvent -= HandleResume;
     }
 }

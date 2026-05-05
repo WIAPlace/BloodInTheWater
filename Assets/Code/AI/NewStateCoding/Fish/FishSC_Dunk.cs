@@ -5,6 +5,7 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Splines;
 using Unity.Cinemachine;
+using Unity.VisualScripting;
 //using JetBrains.Annotations;
 
 public class FishSC_Dunk : FishSC_Abstact
@@ -18,9 +19,12 @@ public class FishSC_Dunk : FishSC_Abstact
     public AudioSource soundMaker;
     [SerializeField]
     CinemachineImpulseSource impSour;
+    
 
     [SerializeField] [Tooltip("In seconds")]
     private float Damage=5;
+
+    [SerializeField] private ParticleSystem boatHitSplash;
 
     //[SerializeField] GameObject debugPosition;
     
@@ -107,6 +111,7 @@ public class FishSC_Dunk : FishSC_Abstact
             StartCoroutine(CollisionShock(FSC));
             BoatHit.Play(soundMaker);
             impSour.GenerateImpulse();
+            if(boatHitSplash!=null) boatHitSplash.Play();
         }
     }
     private IEnumerator CollisionShock(Fish_Controller FSC)

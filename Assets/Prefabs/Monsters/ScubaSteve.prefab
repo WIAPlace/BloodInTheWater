@@ -180,11 +180,15 @@ MonoBehaviour:
   respawnMin: 100
   respawnMax: 300
   anim: {fileID: 8017898069497073876}
-  getUpTime: 0
+  getUpTime: 5
   debugCurrentStateName: 
   debugPreviousStateName: 
   contacted: 0
   BreathingSourse: {fileID: 6093269956075565971}
+  rend: {fileID: 4174481616613786061}
+  scubaMat: {fileID: 0}
+  fadeInSpeed: 0.45
+  fadeOutSpeed: 2
 --- !u!114 &4333093923188571945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -400,6 +404,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -21.212872
       objectReference: {fileID: 0}
+    - target: {fileID: 937818780546334996, guid: 2e4bc0d081e716345842a0f5cb106049,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 344979ea0b413c440b4fec61cb203cac, type: 2}
     - target: {fileID: 946386240647367950, guid: 2e4bc0d081e716345842a0f5cb106049,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1057,6 +1066,12 @@ MonoBehaviour:
 --- !u!4 &4153839501431802542 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 957040051632097911, guid: 2e4bc0d081e716345842a0f5cb106049,
+    type: 3}
+  m_PrefabInstance: {fileID: 3813829666231173337}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &4174481616613786061 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 937818780546334996, guid: 2e4bc0d081e716345842a0f5cb106049,
     type: 3}
   m_PrefabInstance: {fileID: 3813829666231173337}
   m_PrefabAsset: {fileID: 0}

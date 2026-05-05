@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+
 /// 
 /// Author: Marshall Turner
 /// Created: 2/25/26
@@ -18,6 +18,7 @@ public class LoadInFade : MonoBehaviour
 
     void Start()
     {
+        loadingScreen.SetActive(true);
         StartCoroutine(StartFade());
     }
 

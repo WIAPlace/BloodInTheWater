@@ -63,6 +63,8 @@ public class Scuba_Controller : MonoBehaviour, IMonster
     public float getUpTime;
     Vector3 direction;
 
+    
+
     // All of the States
     public Scuba_StateSpawn SpawnState = new Scuba_StateSpawn(); // when called spawn at a random spot out of avalible ones
     public Scuba_StateMove MoveState = new Scuba_StateMove(); // move twoards player
@@ -80,15 +82,29 @@ public class Scuba_Controller : MonoBehaviour, IMonster
     [field:SerializeField]
     public AudioSource BreathingSourse;
 
+    // renderer stuff for messing with the scubas mat.
+    [SerializeField]
+    private Renderer rend;
+    [HideInInspector]
+    public Material scubaMat;
 
-    private void Start()
+    public Coroutine runningFade;
+    
+    int fadeID; // id for the fade property
+    public float fadeInSpeed;
+    public float fadeOutSpeed;
+
+    private void Awake()
     {
-        
+        scubaMat = rend.material; 
         agent = GetComponent<NavMeshAgent>(); // set agent to this part of the component.
         scubaData = GetComponent<QuickTimeData_Scuba>();
         rb = GetComponent<Rigidbody>(); // rigid body for the scuba being hit
         //gameObject.SetActive(false); // start out false because he will be activated in spawn state.
         // scuba will have to be activated by something outside itself, because the update wont run if it is disabled
+
+        fadeID = Shader.PropertyToID("_FadeIn");
+        
 
         GameManager.Instance.unlocks.SaveMonsterData(2);
     }
@@ -151,6 +167,7 @@ public class Scuba_Controller : MonoBehaviour, IMonster
 
     IEnumerator StartSpawnDelay(float min, float max)
     {
+        scubaMat.SetFloat(fadeID,0f); // make syre he starts off invisible
         float randy = Random.Range(min,max);
         //Debug.Log(randy);
         yield return new WaitForSeconds(randy);
@@ -209,7 +226,7 @@ public class Scuba_Controller : MonoBehaviour, IMonster
         {
             //currentState = SpawnState;
             GameState.Instance.OnBoard(false); // off board
-            Spawn();
+            StartCoroutine(FadeOutOnCollision());
         }
         if(((1 << collision.gameObject.layer) & playerMask.value) != 0 && currentState == StunnedState){
             rb.isKinematic = true;
@@ -291,5 +308,38 @@ public class Scuba_Controller : MonoBehaviour, IMonster
             SFX_SO[0].Play(BreathingSourse);
             yield return new WaitForSeconds(SFX_SO[0].clips[randoIndex].length + .3f);
         }
+    }
+
+    public IEnumerator FadeInAndOut(float start, float end, float speed)
+    {
+        float current = start;
+        scubaMat.SetFloat(fadeID,start);
+        float timeKept = 0;
+
+        while(current != end)
+        {
+            timeKept += Time.deltaTime*speed;
+            current = Mathf.Lerp(start,end,timeKept);
+            scubaMat.SetFloat(fadeID,current);
+            yield return null;
+        }
+        scubaMat.SetFloat(fadeID,end);
+
+        if(runningFade != null)
+        {   // set null
+            runningFade = null;
+        }
+    }
+
+    IEnumerator FadeOutOnCollision()
+    {
+        runningFade = StartCoroutine(FadeInAndOut(1,0,fadeOutSpeed));
+        rb.constraints = RigidbodyConstraints.FreezeAll; // freeze him mid air
+        while(runningFade != null)
+        {
+            yield return new WaitForSeconds(1f);
+        }
+        rb.constraints = RigidbodyConstraints.FreezeRotation; // go back to base
+        Spawn();
     }
 }   

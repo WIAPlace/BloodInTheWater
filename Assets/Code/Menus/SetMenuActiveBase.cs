@@ -29,7 +29,7 @@ public class SetMenuActiveBase : MonoBehaviour
                     menu[i].SetActive(false);
                 }
             }
-            Debug.Log(option);
+            //Debug.Log(option);
             menu[option].SetActive(true); // set chosen menu to active.
             SetFirstButton(selectedOption[option]); // set the selected button to associated key
         }
