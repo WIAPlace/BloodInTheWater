@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject talkPanel; // this is the dialouge thing. make sure it is active on start.
     [SerializeField] private GameObject TransitionScreen;
     [SerializeField] private Image windUpIndicator; // will show when u have would up and are ready to release
-    [SerializeField] private TextMeshProUGUI text; // ui for temp text
+    //[SerializeField] private TextMeshProUGUI text; // ui for temp text
     [SerializeField] PersistantItemSpot itemSpot;
     [field: SerializeField] public QuickTimeController_Player qtcPlayer;
     [field: SerializeField] public SplineContainer reelSpline;
@@ -159,6 +159,7 @@ public class GameManager : MonoBehaviour
     }
 
     //////// Show a UI thing for measure stuff
+    /*
     public IEnumerator ShowFishLbs(string lbsText)
     {
         text.gameObject.SetActive(true); // see the text (love the text)
@@ -177,7 +178,7 @@ public class GameManager : MonoBehaviour
         }
         running = StartCoroutine(ShowFishLbs(txt));
     }
-
+    */
     //////// singleton stuff ////////////////////////////////////
     public static GameManager Instance // accesor for the game manager singleton
     {

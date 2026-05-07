@@ -812,6 +812,17 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""eb447349-4b15-4c13-9d9f-77efbb29af44"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""InteractUI"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""807fe0ea-b7f1-4068-8767-e8aa87390d47"",
                     ""path"": ""*/{Submit}"",
                     ""interactions"": """",

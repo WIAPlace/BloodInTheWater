@@ -167,6 +167,7 @@ public class PS_StateUnique : Abs_StateUnique
         //woundUp = false; 
         orientation.localRotation = Quaternion.Euler(0, 0, 0);
         FSC.running = FSC.StartCoroutine(Rotate90Degrees(FSC));
+        TutorialManager.Instance.TriggerTutorial(1,5);
     }
 
     public override void DoExit(Fish_Controller FSC)

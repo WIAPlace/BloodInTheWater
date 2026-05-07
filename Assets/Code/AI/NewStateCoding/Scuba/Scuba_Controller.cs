@@ -200,6 +200,7 @@ public class Scuba_Controller : MonoBehaviour, IMonster
                     { // if the thing hit is the wall do not go for it.
                     // we have to do this a second time so that we arnt checking eveyry time the guy is near a wall.
                         //Debug.Log("Gate 4");
+                        TutorialManager.Instance.TriggerTutorial(1,7);
                         ChangeState(ContactState); // data is being transfered;
                         transform.LookAt(other.transform.position);
                         useControl.ChangeState(useControl.currentItem.UnderAtk);

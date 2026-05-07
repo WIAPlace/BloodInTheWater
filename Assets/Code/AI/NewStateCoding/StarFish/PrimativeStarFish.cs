@@ -86,6 +86,7 @@ public class PrimativeStarFish : MonoBehaviour
         currentHP = maxHP; // set current hp = max hp
         hurtingBoat = StartCoroutine(HurtBoat()); // start hurting
         scratching = StartCoroutine(ScratchBoat());
+        TutorialManager.Instance.TriggerTutorial(1,6);
 
         
         

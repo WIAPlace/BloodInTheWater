@@ -42,7 +42,7 @@ public class TimeKeeper : MonoBehaviour
     private float timePassed=0;
     private float penaltyTime=0;
     
-    private int popUp = 4;
+    //private int popUp = 4;
     void Start()
     {
         watchUI.SetActive(false);
