@@ -26,6 +26,6 @@ public class CheckWeight : MonoBehaviour, IInteractable
         {
             lbsText = "A scale.";
         }
-        GameManager.Instance.ShowUIText(lbsText); // well need to figure out how to cancle this if another corutine starts up
+        //GameManager.Instance.ShowUIText(lbsText); // well need to figure out how to cancle this if another corutine starts up
     }   
 }

@@ -41,6 +41,8 @@ public class QuickTimeData_DeepAngel_Reel : QuickTimeData_BasicFish
     }
     IEnumerator Latch()
     {   // after caught latch on and play the much more dangerous game.
+        yield return new WaitForSeconds(.1f);
+        TutorialManager.Instance.TriggerTutorial(1,8);
         yield return new WaitForSeconds(secondsTillLatchOn);
         QTD.SendData();
         
