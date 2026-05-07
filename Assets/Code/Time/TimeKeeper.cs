@@ -1,8 +1,7 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
+
 /// 
 /// Author: Weston Tollette
 /// Created: 2/17/26
@@ -32,15 +31,21 @@ public class TimeKeeper : MonoBehaviour
     [SerializeField] FlickerLights flickerLights;
     [SerializeField,Tooltip("lights will start flickering at: secondsAllocated - secondsAllocated/flickerPercent")]
     private float flickerPercent = 0;
+
+    [SerializeField] private GameObject watchUI;
+    [SerializeField] private float timeUiUp;
+
+    Coroutine showingUI;
     
 
     private float sceneTime = 0;
     private float timePassed=0;
     private float penaltyTime=0;
     
-
+    private int popUp = 4;
     void Start()
     {
+        watchUI.SetActive(false);
         //GameState.Instance.ChangeTime(GetTimeLeft());
         if(fogObject!=null){ // we dont need this in scenes that dont limit time.
             fogObject.SetActive(false);
@@ -67,9 +72,21 @@ public class TimeKeeper : MonoBehaviour
     {
         bool lightChecked = false;
         float flickerSec = secondsAllocated - secondsAllocated/flickerPercent;
+        float popUpTime = secondsAllocated/4;
         while(timePassed<secondsAllocated){
             yield return new WaitForSeconds(waitInterval);
             timePassed = sceneTime + penaltyTime;
+
+            float quarterTime = timePassed%popUpTime;
+            if (quarterTime >= popUpTime - 2)
+            {
+                if(showingUI == null)
+                {
+                    showingUI = StartCoroutine(ShowWatchTimePopUp());
+                }
+            }
+
+
             if(timePassed > flickerSec && !lightChecked) 
             {
                 lightChecked=true;
@@ -153,5 +170,12 @@ public class TimeKeeper : MonoBehaviour
         }
         yield return new WaitForSeconds(10f);
         GameState.Instance.LooseState("LooseScreen");
+    }
+    IEnumerator ShowWatchTimePopUp()
+    {
+        watchUI.SetActive(true);
+        yield return new WaitForSeconds(timeUiUp);
+        watchUI.SetActive(false);
+        showingUI = null;
     }
 }
