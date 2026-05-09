@@ -138,7 +138,7 @@ public class DialogueBoxController : MonoBehaviour
             typing = StartCoroutine(TypeTextUncapped(dialogueText.text));
 
             //Audio
-            if(audioSource != null)
+            if(audioSource != null && i<audioclip.Length)
             {
                 audioSource.clip = audioclip[i];
                 audioSource.Play();
