@@ -861,6 +861,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 662670821}
+    - targetCorrespondingSourceObject: {fileID: 5336964088514840708, guid: ac0d554db825bb64d8eaca0a6f3daa93,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 662670824}
   m_SourcePrefab: {fileID: 100100000, guid: ac0d554db825bb64d8eaca0a6f3daa93, type: 3}
 --- !u!1 &662670817 stripped
 GameObject:
@@ -902,11 +906,32 @@ MeshCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -8888642935237652926, guid: e683b4193341cd243a69536e2a8121e2, type: 3}
+--- !u!135 &662670824
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 662670817}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 1.62
+  m_Center: {x: 0.013124984, y: 1.1380726, z: -0.39140707}
 --- !u!1001 &676166783
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1241,6 +1266,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: IslandScenePrefab
       objectReference: {fileID: 0}
+    - target: {fileID: 8299127850278267878, guid: c50591be7240d2247bb8a5c60af68ecd,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8299127850278267878, guid: c50591be7240d2247bb8a5c60af68ecd,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8299127850278267878, guid: c50591be7240d2247bb8a5c60af68ecd,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8299127850278267878, guid: c50591be7240d2247bb8a5c60af68ecd,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8495987156303577718, guid: c50591be7240d2247bb8a5c60af68ecd,
         type: 3}
       propertyPath: dialogueAsset
@@ -1359,7 +1404,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7453208483823135651, guid: c50591be7240d2247bb8a5c60af68ecd, type: 3}
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 7905099004139220484, guid: c50591be7240d2247bb8a5c60af68ecd, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 8827847293218638280, guid: c50591be7240d2247bb8a5c60af68ecd,

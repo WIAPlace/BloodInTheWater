@@ -82,6 +82,9 @@ public class GameManager : MonoBehaviour
         if(!HideUI){
             gameUI.SetActive(true); // make the game ui active
         }
+        else{
+            gameUI.SetActive(false);
+        }
         //text.gameObject.SetActive(false);
 
     }
