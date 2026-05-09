@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +13,7 @@ public class FishIndex : MonoBehaviour
     [SerializeField] private FishImagesSO fishImages;
     [SerializeField] private TMP_Text[] fishTypes;
     [SerializeField] private TMP_Text[] fishSizes;
+    [SerializeField] private TMP_Text[] lbsLabel;
     [SerializeField] private Image[] images;
     //[SerializeField] private TMP_Text[] largestCaughtText;
 
@@ -49,7 +51,9 @@ public class FishIndex : MonoBehaviour
         currentPage = page;
         
         int pageIndex = page*2;
-
+        
+        lbsLabel[0].text = "Largest Catch:";
+        lbsLabel[1].text = "Largest Catch:";
         //Debug.Log(currentPage);
         //Debug.Log(pageIndex);
 
@@ -87,11 +91,41 @@ public class FishIndex : MonoBehaviour
         }
         else
         {
-            // set the fish names to nothing
-            fishTypes[1].text = "";
-            images[1].sprite = fishImages.GetFishImage(-1);
-            // set size to nothing
-            fishSizes[1].text = "";
+            bool caughtAllFish = true;
+            float total = 0;
+
+            for(int i = 0; i < 19; i++)
+            {
+                float holder = unlocks.LoadFishData(i);
+                if ( holder > 0)
+                {
+                    total += holder;
+                }
+                else
+                {
+                    caughtAllFish = false;
+                    break;
+                }
+            }
+
+
+            if(caughtAllFish){
+                // set the fish names to nothing
+                fishTypes[1].text = "";
+                images[1].sprite = fishImages.GetFishImage(19);
+                lbsLabel[1].text = "Total:";
+                // set size combined
+                fishSizes[1].text = (Mathf.Round(total * 10)/10).ToString()+" Lbs";
+            }
+            else
+            {
+                // set the fish names to nothing
+                fishTypes[1].text = "";
+                images[1].sprite = fishImages.GetFishImage(-1);
+                lbsLabel[1].text = "";
+                // set size combined
+                fishSizes[1].text = "";
+            }
         }
 
 
