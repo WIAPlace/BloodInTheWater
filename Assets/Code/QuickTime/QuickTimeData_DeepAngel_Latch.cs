@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
 // Deep Angel Latched on to the Face.
 public class QuickTimeData_DeepAngel_Latch : QuickTimeData_Abstract
 {
+    [SerializeField] SoundEffectSO ripOff;
+    [SerializeField] AudioSource ass;
     public QuickTimeData_DeepAngel_Latch(QuickTimeData_Abstract other) : base(other)
     {
         
@@ -20,7 +21,7 @@ public class QuickTimeData_DeepAngel_Latch : QuickTimeData_Abstract
         GameManager.Instance.OnLatchActive(false); // end latch onto face
         if (status) // win
         {
-            
+            ripOff.Play(ass);
         }
         else  // lose
         {

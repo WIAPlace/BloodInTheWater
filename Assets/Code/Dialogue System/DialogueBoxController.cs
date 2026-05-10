@@ -103,6 +103,7 @@ public class DialogueBoxController : MonoBehaviour
     //Prints the lines
     IEnumerator RunDialogue(string[] dialogue,AudioClip[] audioclip, int startPosition, string[] speaker,GameObject[] lookLocations)
     {
+        yield return new WaitForEndOfFrame();
         skipLineTriggered = false;
         OnDialogueStarted?.Invoke();
         
