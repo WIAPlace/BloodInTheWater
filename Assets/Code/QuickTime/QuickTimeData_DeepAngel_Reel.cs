@@ -34,9 +34,10 @@ public class QuickTimeData_DeepAngel_Reel : QuickTimeData_BasicFish
         {
             StartCoroutine(Latch());    
             // set it to inactive
-            //FSC.gameObject.SetActive(false);
+            
             FSC.agent.isStopped = true;
             FSC.waveHandler.UseableMesh.gameObject.SetActive(false);
+            //
         }
     }
     IEnumerator Latch()
@@ -45,6 +46,6 @@ public class QuickTimeData_DeepAngel_Reel : QuickTimeData_BasicFish
         TutorialManager.Instance.TriggerTutorial(1,8);
         yield return new WaitForSeconds(secondsTillLatchOn);
         QTD.SendData();
-        
+        FSC.gameObject.SetActive(false);
     }
 }

@@ -219,6 +219,11 @@ public class QuickTimeController_Player : MonoBehaviour
         if (GameManager.Instance.hintsEnabled && data.type != QuickTimeType_Enum.Tutorial)
         { // if hints are enabled play the hint
             //Time.timeScale = 0f;
+            if(data.type == QuickTimeType_Enum.Scuba && currentQTData != null)
+            {   // better to make the player fail than to have shit break i guess.
+                EndQTEAll(false);
+            }
+
             TutorialManager.Instance.TriggerTutorial(2,0); // Hold Release
             StartCoroutine(WaitToExitTutorial(data)); // will pause this operation until the tutorial is active
         }
@@ -322,6 +327,7 @@ public class QuickTimeController_Player : MonoBehaviour
         
         qtUI.SetActive(false);
         input.SetGameplay();
+        currentQTData = null;
         
     }
 
