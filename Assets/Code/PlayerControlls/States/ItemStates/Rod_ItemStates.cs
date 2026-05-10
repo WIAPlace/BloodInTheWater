@@ -305,13 +305,17 @@ public class Rod_StateItemPlace : Abs_StateItemPlace
         controller.currentItem.SFX_SO[1].Play(controller.audioSource);
         rod = controller.rod;
         // start animation to place or pickup something
+
+        controller.anim.Play("Idle",-1,0f); // should reset the animation if it gets broken
+        controller.anim.Update(0); // should reset the animation if it gets broken
+        
         controller.currentItem.useableMesh.SetActive(false); // turn of the game object 
         if (rod != null && rod.LurePrefab.activeSelf)
         {
             //Debug.Log("Hit retrive on place");
-            rod.LurePrefab.SetActive(false); // either it stays out or not.
-            rod.RetrieveLure(rod.LurePrefab.transform.position,rod.LureRadius); // retrive lure
-            rod.SetIfFishing(false);
+            //rod.LurePrefab.SetActive(false); // either it stays out or not.
+            //rod.RetrieveLure(rod.LurePrefab.transform.position,rod.LureRadius); // retrive lure
+            //rod.SetIfFishing(false);
         }
         if (rod != null && rod.CastSpotPrefab.activeSelf)
         { // bring in cast spot
