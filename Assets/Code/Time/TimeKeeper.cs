@@ -34,6 +34,8 @@ public class TimeKeeper : MonoBehaviour
 
     [SerializeField] private GameObject watchUI;
     [SerializeField] private float timeUiUp;
+    [SerializeField] SoundEffectSO tickTocking;
+    [SerializeField] AudioSource playerSourse;
 
     Coroutine showingUI;
     
@@ -83,6 +85,7 @@ public class TimeKeeper : MonoBehaviour
                 if(showingUI == null)
                 {
                     showingUI = StartCoroutine(ShowWatchTimePopUp());
+                    tickTocking.Play(playerSourse);
                 }
             }
 
