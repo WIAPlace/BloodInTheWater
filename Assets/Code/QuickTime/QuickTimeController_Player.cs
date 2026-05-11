@@ -107,7 +107,7 @@ public class QuickTimeController_Player : MonoBehaviour
     // Update //////////////////////////////////////////////////////////////////////////////////////
     void Update()
     {
-        if (inProgress)
+        if (inProgress && currentQTData != null)
         {
             float timmy =0; // time variable
 
@@ -221,7 +221,8 @@ public class QuickTimeController_Player : MonoBehaviour
             //Time.timeScale = 0f;
             if(data.type == QuickTimeType_Enum.Scuba && currentQTData != null)
             {   // better to make the player fail than to have shit break i guess.
-                EndQTEAll(false);
+                currentQTData.ExitQuickTimeEvent(false);
+                completionAmnt = .5f;
             }
 
             TutorialManager.Instance.TriggerTutorial(2,0); // Hold Release
