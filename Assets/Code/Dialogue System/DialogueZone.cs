@@ -17,11 +17,16 @@ public class DialogueZone : MonoBehaviour
     [SerializeField] bool firstInteraction = true;
     [SerializeField] bool noRepeat = true;
     [SerializeField] int repeatStartPosition;
+    [SerializeField] Collider triggerCollider;
 
     public DialogueAsset dialogueAsset;
 
     [SerializeField] GameObject[] lookLocations;
 
+    void Start()
+    {
+        if(triggerCollider == null) TryGetComponent<Collider>(out triggerCollider);
+    }
     public int StartPosition
     {
         get
@@ -32,6 +37,7 @@ public class DialogueZone : MonoBehaviour
                 if (noRepeat)
                 {
                     gameObject.layer = LayerMask.NameToLayer("Default"); //Changes the layer to hide the crosshair hover
+                    if(triggerCollider!= null) triggerCollider.enabled = false;
                 }
                 return 0;
             }
