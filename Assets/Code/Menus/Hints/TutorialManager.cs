@@ -48,6 +48,8 @@ public class TutorialManager : MonoBehaviour
     void OnDestroy()
     {
         input.InteractEvent -= CloseHint;
+        input.InteractUIEvent -= CloseHint;
+        input.InteractEventQT -= CloseHint;
     }
 
     public void TriggerTutorial(int type, int hint)
@@ -87,6 +89,7 @@ public class TutorialManager : MonoBehaviour
             
             input.InteractEvent += CloseHint; // allow player to close out the hint menu
             input.InteractEventQT += CloseHint;
+            input.InteractUIEvent += CloseHint;
         }
     }
     public void CloseHint()
