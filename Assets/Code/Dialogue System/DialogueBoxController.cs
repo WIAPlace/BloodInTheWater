@@ -157,6 +157,9 @@ public class DialogueBoxController : MonoBehaviour
         dialogueBox.gameObject.SetActive(false); //Hides box once done
         GameManager.Instance.HandleDial(true); // set stuff back on.
         playerLook.EnableFreeLook();
+        dialogueText.text = "";
+        nameText.text = "";
+
     }
 
     public void SkipLine()
