@@ -24,6 +24,7 @@ public class PlayerPrefrenceScript : MonoBehaviour
     private float defaultSFX = 1;
     private float defaultMusic = 1;
     private float defaultAmbiance=1;
+    private float defaultVoice = 1;
     
     // toggles
     private int defaultDither = 1;
@@ -38,6 +39,7 @@ public class PlayerPrefrenceScript : MonoBehaviour
     private float tempSFX = 1;
     private float tempMusic =1;
     private float tempAmbiance=1;
+    private float tempVoice = 1;
 
     private int tempDither=1;
     private int tempCamShake=1;
@@ -57,8 +59,8 @@ public class PlayerPrefrenceScript : MonoBehaviour
     private Slider musicSlider;
     [SerializeField][Tooltip("Volume")]
     private Slider ambianceSlider;
-    
-    
+    [SerializeField][Tooltip("Volume")]
+    private Slider voiceSlider;
 
     // toggles
     [SerializeField][Tooltip("Dither Toggle")]
@@ -98,6 +100,7 @@ public class PlayerPrefrenceScript : MonoBehaviour
         sfxSlider.onValueChanged.AddListener(delegate{SliderChange(3);});
         musicSlider.onValueChanged.AddListener(delegate{SliderChange(4);});
         ambianceSlider.onValueChanged.AddListener(delegate{SliderChange(5);});
+        voiceSlider.onValueChanged.AddListener(delegate{SliderChange(6);});
 
         ditherToggle.onValueChanged.AddListener(delegate{ToggleChange(0);});
         camToggle.onValueChanged.AddListener(delegate{ToggleChange(1);});
@@ -125,6 +128,7 @@ public class PlayerPrefrenceScript : MonoBehaviour
         defaultSFX = PlayerPrefs.GetFloat("SFX",1f); // sound effects
         defaultMusic = PlayerPrefs.GetFloat("Music",1f); // music
         defaultAmbiance = PlayerPrefs.GetFloat("Ambiance",1f); // enviroment
+        defaultVoice = PlayerPrefs.GetFloat("Voice",1f); // voice
         //Debug.Log(defaultVol);
 
         defaultDither = PlayerPrefs.GetInt("Dither",1); // default to true;
@@ -140,6 +144,7 @@ public class PlayerPrefrenceScript : MonoBehaviour
         PlayerPrefs.SetFloat("SFX",tempSFX); // sound effects
         PlayerPrefs.SetFloat("Music",tempMusic); // music
         PlayerPrefs.SetFloat("Ambiance",tempAmbiance); // enviroment
+        PlayerPrefs.SetFloat("Voice",tempVoice); // voice
 
         PlayerPrefs.SetInt("Dither",tempDither); // default to true;
         PlayerPrefs.SetInt("CamShake",tempCamShake); // default to true;
@@ -163,6 +168,7 @@ public class PlayerPrefrenceScript : MonoBehaviour
         sfxSlider.onValueChanged.RemoveListener(delegate{SliderChange(3);});
         musicSlider.onValueChanged.RemoveListener(delegate{SliderChange(4);});
         ambianceSlider.onValueChanged.RemoveListener(delegate{SliderChange(5);});
+        voiceSlider.onValueChanged.RemoveListener(delegate{SliderChange(6);});
 
         ditherToggle.onValueChanged.RemoveListener(delegate{ToggleChange(0);});
         camToggle.onValueChanged.RemoveListener(delegate{ToggleChange(1);});
@@ -182,6 +188,7 @@ public class PlayerPrefrenceScript : MonoBehaviour
         PlayerPrefs.DeleteKey("SFX");
         PlayerPrefs.DeleteKey("Music");
         PlayerPrefs.DeleteKey("Ambiance");
+        PlayerPrefs.DeleteKey("Voice");
         PlayerPrefs.DeleteKey("Dither");
         PlayerPrefs.DeleteKey("CamShake");
         PlayerPrefs.DeleteKey("Hints");
@@ -197,6 +204,7 @@ public class PlayerPrefrenceScript : MonoBehaviour
         ChangeVolume("SFXVolume", defaultSFX);
         ChangeVolume("MusicVolume",defaultMusic);
         ChangeVolume("AmbianceVolume",defaultAmbiance);
+        ChangeVolume("VoiceVolume",defaultVoice);
 
         ChangeDither();
         ChangeCamShake();
@@ -213,6 +221,7 @@ public class PlayerPrefrenceScript : MonoBehaviour
         tempSFX = defaultSFX;
         tempMusic = defaultMusic;
         tempAmbiance = defaultAmbiance;
+        tempVoice = defaultVoice;
 
         tempDither = defaultDither;
         tempCamShake = defaultCamShake;
@@ -224,6 +233,7 @@ public class PlayerPrefrenceScript : MonoBehaviour
         sfxSlider.value = defaultSFX;
         musicSlider.value = defaultMusic;
         ambianceSlider.value = defaultAmbiance;
+        voiceSlider.value = defaultVoice;
 
         ditherToggle.isOn = CheckBool(defaultDither);
         camToggle.isOn = CheckBool(defaultCamShake);
@@ -257,6 +267,10 @@ public class PlayerPrefrenceScript : MonoBehaviour
 
             case 5: // enviroment
                 tempAmbiance = ambianceSlider.value;
+                break;
+
+            case 6: // enviroment
+                tempVoice = voiceSlider.value;
                 break;
 
             default:
@@ -320,6 +334,7 @@ public class PlayerPrefrenceScript : MonoBehaviour
         ChangeVolume("SFXVolume", defaultSFX);
         ChangeVolume("MusicVolume",defaultMusic);
         ChangeVolume("AmbianceVolume",defaultAmbiance);
+        ChangeVolume("VoiceVolume",defaultVoice);
 
 
         ChangeDither();

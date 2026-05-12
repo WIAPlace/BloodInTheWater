@@ -161,4 +161,9 @@ public class PlayerMovement : MonoBehaviour
     {
         latchOn = false;
     }
+
+    public void ChangeTerrainIndex(int num)
+    {
+        if(num>=0 && num<5) terrainIndex = num;
+    }
 }

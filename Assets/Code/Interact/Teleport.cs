@@ -10,6 +10,11 @@ public class Teleport : MonoBehaviour, IInteractable
     public CanvasGroup canvasGroup;
     public float time = 0.2f;
 
+    public PlayerMovement pm;
+    public int stepIndex=4;
+    public SoundEffectSO doorCreek;
+    public AudioSource doorSourse;
+
     public void Interact()
     {
         StartCoroutine(StartFade());
@@ -18,13 +23,20 @@ public class Teleport : MonoBehaviour, IInteractable
     IEnumerator StartFade()
     {
         loadingScreen.SetActive(true); //Turns on the fade image
+        if(doorCreek!=null && doorSourse != null)
+        {
+            doorCreek.Play(doorSourse);
+        }
         yield return StartCoroutine(FadeScreen(1, 0.5f)); //The speed of the fade in
         yield return new WaitForSeconds(time);
         thePlayer.transform.position = teleportTarget.transform.position;
         yield return new WaitForSeconds(time);
+        if(pm!= null)
+        {
+            pm.ChangeTerrainIndex(stepIndex);
+        }
         yield return StartCoroutine(FadeScreen(0, 0.5f)); //The speed of the fade in
         loadingScreen.SetActive(false); //Turns off the fade image
-
     }
 
     IEnumerator FadeScreen(float targetValue, float duration)

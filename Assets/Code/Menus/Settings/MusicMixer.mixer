@@ -33,6 +33,20 @@ AudioMixerGroupController:
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
+--- !u!244 &-7216531809698254495
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 882223e3e1d939e4696252f808188e12
+  m_EffectName: Attenuation
+  m_MixLevel: bc699d7ef6656904d81736eb1122ad4b
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!243 &-5659651591400774941
 AudioMixerGroupController:
   m_ObjectHideFlags: 0
@@ -48,6 +62,25 @@ AudioMixerGroupController:
   m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: 7015507265913940786}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
+--- !u!243 &-4968093504202937309
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Voice
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: 2b133ccb7a2f3474992f9f3b360b11f3
+  m_Children: []
+  m_Volume: 9d78d9fd99152b74680702789cf80995
+  m_Pitch: e0b3baafb24de174f8e808dea650ac1a
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: -7216531809698254495}
   m_UserColorIndex: 0
   m_Mute: 0
   m_Solo: 0
@@ -109,12 +142,15 @@ AudioMixerController:
     name: MusicVolume
   - guid: 494645037dff58e4684f49a3776d8612
     name: SFXVolume
+  - guid: 9d78d9fd99152b74680702789cf80995
+    name: VoiceVolume
   m_AudioMixerGroupViews:
   - guids:
     - 9586a0ff737df554da19dcfe5929371b
     - 429ba8ffd61989b4689fe89540d29250
     - b58f24f93263531419cd1a2d3277ca5f
     - c5da2e2573712bb43b8ae3462dcb6ee8
+    - 2b133ccb7a2f3474992f9f3b360b11f3
     name: View
   m_CurrentViewIndex: 0
   m_TargetSnapshot: {fileID: 24500006}
@@ -131,6 +167,7 @@ AudioMixerGroupController:
   - {fileID: -5659651591400774941}
   - {fileID: -8293279177204746417}
   - {fileID: -3547327996056053696}
+  - {fileID: -4968093504202937309}
   m_Volume: 50206dabcafdf9948a8f7edeed83135b
   m_Pitch: ceae096731cf17b439038320c3cebc36
   m_Send: 00000000000000000000000000000000
