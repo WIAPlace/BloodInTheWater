@@ -17,6 +17,6 @@ public class DelayedSpawn : MonoBehaviour
     private IEnumerator delayedSpawnEnemies()
     {
         yield return new WaitForSeconds(afterSeconds);
-        thingToSpawn.SetActive(true);
+        if(thingToSpawn!=null && !thingToSpawn.activeSelf) thingToSpawn.SetActive(true);
     }
 }

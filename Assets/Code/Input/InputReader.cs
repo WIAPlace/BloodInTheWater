@@ -80,6 +80,8 @@ public class InputReader : ScriptableObject, GameInput.IGamePlayActions, GameInp
     public event Action PauseEvent;
     public event Action ResumeEvent;
 
+    public event Action AnyButtonEventUI;
+
 
     ///////////////////////////////////////////////////////////////////////////////////////// OnX Methods 
     /// Called when An input occurs. They should Invoke their related events. 
@@ -246,5 +248,11 @@ public class InputReader : ScriptableObject, GameInput.IGamePlayActions, GameInp
         return gameInput.GamePlay.enabled;  
     }
 
-    
+    public void OnAnyButton(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            AnyButtonEventUI?.Invoke();
+        }
+    }
 }

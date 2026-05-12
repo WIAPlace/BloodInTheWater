@@ -31,7 +31,7 @@ public class Unlocks : ScriptableObject
         }
         // unlock levels?
         PlayerPrefs.SetInt(levelKeys[1],100);
-        PlayerPrefs.SetInt(levelKeys[0],8);
+        PlayerPrefs.SetInt(levelKeys[0],9);
         PlayerPrefs.Save();
     }
 
@@ -47,7 +47,7 @@ public class Unlocks : ScriptableObject
             //PlayerPrefs.SetInt(monsterKeys[i],0);
             PlayerPrefs.DeleteKey(monsterKeys[i]);
         }
-
+        PlayerPrefs.SetInt(levelKeys[0],0);
         // reset levels
         //PlayerPrefs.SetInt(levelKeys[0],0);
         //PlayerPrefs.SetInt(levelKeys[1],0);
@@ -94,11 +94,17 @@ public class Unlocks : ScriptableObject
     ////////////////////////////////////////////////////////////////////////////////////////////////// Levels
     public void SaveLevelData(int key, int lvl)
     {
-        if (key == 1)
+        /*
+        if (key == 1) // 
         {   // if the unlocked level is greater than the current level dont set it to it.
             if(PlayerPrefs.GetInt(levelKeys[0],0)<PlayerPrefs.GetInt(levelKeys[1],0)) return;
         }
-        PlayerPrefs.SetInt(levelKeys[key],lvl);
+        */
+
+        if(PlayerPrefs.GetInt(levelKeys[key],0) < lvl)
+        {
+            PlayerPrefs.SetInt(levelKeys[key], lvl);
+        }
     }
     public int loadLevelData(int key)
     {   // get what level they are are on or have unlocked to.
