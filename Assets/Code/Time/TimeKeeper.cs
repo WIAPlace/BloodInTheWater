@@ -39,6 +39,7 @@ public class TimeKeeper : MonoBehaviour
 
     Coroutine showingUI;
     
+    public static event Action FogTime;
 
     private float sceneTime = 0;
     private float timePassed=0;
@@ -67,7 +68,6 @@ public class TimeKeeper : MonoBehaviour
     void Update()
     {
         sceneTime += Time.deltaTime;
-        
     }
 
     IEnumerator TickTock()
@@ -100,6 +100,7 @@ public class TimeKeeper : MonoBehaviour
         }
         
         if(fogObject!=null){ // if the fog object doesnt exist this wont matter.
+        FogTime.Invoke();
         StartCoroutine(FogRollsIn());
         }
         else GameState.Instance.LooseState("LooseScreen");

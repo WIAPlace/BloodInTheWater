@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditorInternal;
 using UnityEngine;
 
 public class InteractToSkip : MonoBehaviour
@@ -27,5 +26,6 @@ public class InteractToSkip : MonoBehaviour
     void HandelInteract()
     {
         scene.StartGame();
+        input.AnyButtonEventUI -= HandelInteract;
     }
 }

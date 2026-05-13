@@ -22,15 +22,19 @@ public class CheckTIme : MonoBehaviour
     private GameObject watch;
     [SerializeField][Tooltip("Min Hand Of the pocket watch")]
     private GameObject hand;
+    private bool fogTime;
+    //private float fogTimer = 0;
 
     void Start()
     {
+        
         input.CheckEvent += HandleCheck;
         input.CheckCancelledEvent += HandleCheckCancelled;
         watch.SetActive(false);
     }
     void OnDestroy()
     {
+        
         input.CheckEvent -= HandleCheck;
         input.CheckCancelledEvent -= HandleCheckCancelled;
     }
@@ -58,6 +62,5 @@ public class CheckTIme : MonoBehaviour
     private void HandleCheckCancelled()
     {
         watch.SetActive(false);   
-    }
-    
+    }    
 }
